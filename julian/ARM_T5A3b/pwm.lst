@@ -1,0 +1,593 @@
+   1              		.file	"pwm.c"
+   9              	.Ltext0:
+  10              		.global	__gtsf2
+  11              		.global	__divsf3
+  12              		.global	__fixunssfsi
+  13              		.align	2
+  14              		.global	pwm_init
+  16              	pwm_init:
+  17              	.LFB2:
+  18              		.file 1 "pwm.c"
+   1:pwm.c         **** //********************************************************************
+   2:pwm.c         **** // pwm.c										Version 02.04.2012 hpw
+   3:pwm.c         **** //********************************************************************
+   4:pwm.c         **** #include "include/AT91SAM7S64.h"
+   5:pwm.c         **** #include "include/pwm.h"
+   6:pwm.c         **** 
+   7:pwm.c         **** #define	MCK		24000000							// Master Clock
+   8:pwm.c         **** 
+   9:pwm.c         **** //#define CPRE	(0 << 0)							// Channel Pre-scaler
+  10:pwm.c         **** 														//	 0:MCK		 1:MCK/2	 2:MCK/4	 3:MCK/8
+  11:pwm.c         **** 														//	 4:MCK/16	 5:MCK/32	 6:MCK/64	 7:MCK/128
+  12:pwm.c         **** 														//	 8:MCK/256	 9:MCK/512	10:MCK/1024
+  13:pwm.c         **** 														//	11:CLKA		12:CLKB
+  14:pwm.c         **** #define	CPOL	(0 << 9)							// Channel Polarity
+  15:pwm.c         **** 														// 0: The output waveform starts at a low level
+  16:pwm.c         **** 														// 1: The output waveform starts at a high level
+  17:pwm.c         **** #define	CALG	(0 << 8)							// Channel Alignment
+  18:pwm.c         **** 														// 0: The period is left aligned
+  19:pwm.c         **** 														// 1: The period is center aligned
+  20:pwm.c         **** #define	CPD		(0 << 10)							// Channel Update Period
+  21:pwm.c         **** 														// 0: Writing to the PWM_CUPDx will modify the duty cycle at the next period start ev
+  22:pwm.c         **** 														// 1: Writing to the PWM_CUPDx will modify the period at the next period start event
+  23:pwm.c         **** 
+  24:pwm.c         **** //**************************************************************
+  25:pwm.c         **** // pwm_init
+  26:pwm.c         **** // Initialisiert Puls-Weiten-Modulations-Controller-Modul
+  27:pwm.c         **** // Übergabeparameter:  PWM_NR	Channel-Nr. des PWMC 0..3
+  28:pwm.c         **** //                     PORT		Zugehöriger Port-Pin
+  29:pwm.c         **** //                     FRQ		Frequenz 0.36Hz .. 120kHz
+  30:pwm.c         **** // Rückgabeparameter:  PWM_NR	Nr. des initialisierten PWMC
+  31:pwm.c         **** //								im Fehlerfall	PWM_NR:	-1
+  32:pwm.c         **** //												PORT:	-2
+  33:pwm.c         **** //												FRQ:	-3
+  34:pwm.c         **** //**************************************************************
+  35:pwm.c         **** signed char pwm_init (unsigned char PWM_NR, unsigned int PORT, float FRQ){
+  19              	gs = 0, pretend = 0, frame = 44
+  20              		@ frame_needed = 1, uses_anonymous_args = 0
+  21              		mov	ip, sp
+  22 0000 0DC0A0E1 	.LCFI0:
+  23              		stmfd	sp!, {fp, ip, lr, pc}
+  24 0004 00D82DE9 	.LCFI1:
+  25              		sub	fp, ip, #4
+  26 0008 04B04CE2 	.LCFI2:
+  27              		sub	sp, sp, #44
+  28 000c 2CD04DE2 	.LCFI3:
+  29              		mov	r3, r0
+  30 0010 0030A0E1 		str	r1, [fp, #-32]
+  31 0014 20100BE5 		str	r2, [fp, #-36]	@ float
+  32 0018 24200BE5 		strb	r3, [fp, #-28]
+  33 001c 1C304BE5 		.loc 1 40 0
+  36:pwm.c         **** 	AT91S_PWMC_CH *PWM_POINTER;						// Pointer PWM Channel
+  37:pwm.c         **** 	unsigned int CPRE;								// PWM Prescaler
+  38:pwm.c         **** 	unsigned int CPRD;								// PWM Periode
+  39:pwm.c         **** 
+  40:pwm.c         **** 	switch(PWM_NR){									// PWM-Channel auswählen:
+  34              	#-28]	@ zero_extendqisi2
+  35 0020 1C305BE5 		cmp	r3, #3
+  36 0024 030053E3 		ldrls	pc, [pc, r3, asl #2]
+  37 0028 03F19F97 		b	.L2
+  38 002c 800000EA 	.L7:
+  39              		.word	.L3
+  40 0030 40000000 		.word	.L4
+  41 0034 C4000000 		.word	.L5
+  42 0038 48010000 		.word	.L6
+  43 003c CC010000 	.L3:
+  44              		.loc 1 42 0
+  41:pwm.c         **** 		case 0:
+  42:pwm.c         **** 			PWM_POINTER = AT91C_BASE_PWMC_CH0;			// Pointer für PWMC0 zuweisen
+  45              	11968
+  46 0040 CF3BE0E3 		sub	r3, r3, #508
+  47 0044 7F3F43E2 		sub	r3, r3, #3
+  48 0048 033043E2 		str	r3, [fp, #-24]
+  49 004c 18300BE5 		.loc 1 43 0
+  43:pwm.c         **** 			switch(PORT){
+  50              	r2, [fp, #-32]
+  51 0050 20201BE5 		str	r2, [fp, #-44]
+  52 0054 2C200BE5 		ldr	r3, [fp, #-44]
+  53 0058 2C301BE5 		cmp	r3, #2048
+  54 005c 020B53E3 		beq	.L10
+  55 0060 0A00000A 		ldr	r2, [fp, #-44]
+  56 0064 2C201BE5 		cmp	r2, #8388608
+  57 0068 020552E3 		beq	.L11
+  58 006c 0C00000A 		ldr	r3, [fp, #-44]
+  59 0070 2C301BE5 		cmp	r3, #1
+  60 0074 010053E3 		bne	.L35
+  61 0078 0E00001A 	.L9:
+  62              		.loc 1 45 0
+  44:pwm.c         **** 				case AT91C_PA0_PWM0:
+  45:pwm.c         **** 					AT91C_BASE_PIOA->PIO_ASR=PORT;			// PWM-Modul als Pheripherie A auswählen
+  63              	10612736
+  64 007c 0A32A0E3 		mov	r3, r3, asr #19
+  65 0080 C339A0E1 		ldr	r2, [fp, #-32]
+  66 0084 20201BE5 		str	r2, [r3, #112]
+  67 0088 702083E5 		b	.L14
+  68 008c 6B0000EA 	.L10:
+  69              		.loc 1 48 0
+  46:pwm.c         **** 					break;
+  47:pwm.c         **** 				case AT91C_PA11_PWM0:
+  48:pwm.c         **** 					AT91C_BASE_PIOA->PIO_BSR=PORT;			// PWM-Modul als Pheripherie B auswählen
+  70              	, #-1610612736
+  71 0090 0A32A0E3 		mov	r3, r3, asr #19
+  72 0094 C339A0E1 		ldr	r2, [fp, #-32]
+  73 0098 20201BE5 		str	r2, [r3, #116]
+  74 009c 742083E5 		b	.L14
+  75 00a0 660000EA 	.L11:
+  76              		.loc 1 51 0
+  49:pwm.c         **** 					break;
+  50:pwm.c         **** 				case AT91C_PA23_PWM0:
+  51:pwm.c         **** 					AT91C_BASE_PIOA->PIO_BSR=PORT;			// PWM-Modul als Pheripherie B auswählen
+  77              	, #-1610612736
+  78 00a4 0A32A0E3 		mov	r3, r3, asr #19
+  79 00a8 C339A0E1 		ldr	r2, [fp, #-32]
+  80 00ac 20201BE5 		str	r2, [r3, #116]
+  81 00b0 742083E5 		b	.L14
+  82 00b4 610000EA 	.L35:
+  83              		.loc 1 53 0
+  52:pwm.c         **** 					break;
+  53:pwm.c         **** 				default: return -2;}						// Mit Fehler zurück
+  84              	, #254
+  85 00b8 FE20A0E3 		str	r2, [fp, #-40]
+  86 00bc 28200BE5 		b	.L13
+  87 00c0 970000EA 	.L4:
+  88              		.loc 1 56 0
+  54:pwm.c         **** 			break;
+  55:pwm.c         **** 		case 1:
+  56:pwm.c         **** 			PWM_POINTER = AT91C_BASE_PWMC_CH1;			// Pointer für PWMC1 zuweisen
+  89              	r3, #211968
+  90 00c4 CF3BE0E3 		sub	r3, r3, #476
+  91 00c8 773F43E2 		sub	r3, r3, #3
+  92 00cc 033043E2 		str	r3, [fp, #-24]
+  93 00d0 18300BE5 		.loc 1 57 0
+  57:pwm.c         **** 			switch(PORT){
+  94              	r3, [fp, #-32]
+  95 00d4 20301BE5 		str	r3, [fp, #-48]
+  96 00d8 30300BE5 		ldr	r2, [fp, #-48]
+  97 00dc 30201BE5 		cmp	r2, #4096
+  98 00e0 010A52E3 		beq	.L17
+  99 00e4 0A00000A 		ldr	r3, [fp, #-48]
+ 100 00e8 30301BE5 		cmp	r3, #16777216
+ 101 00ec 010453E3 		beq	.L18
+ 102 00f0 0C00000A 		ldr	r2, [fp, #-48]
+ 103 00f4 30201BE5 		cmp	r2, #2
+ 104 00f8 020052E3 		bne	.L36
+ 105 00fc 0E00001A 	.L16:
+ 106              		.loc 1 59 0
+  58:pwm.c         **** 				case AT91C_PA1_PWM1:
+  59:pwm.c         **** 					AT91C_BASE_PIOA->PIO_ASR=PORT;			// PWM-Modul als Pheripherie A auswählen
+ 107              	10612736
+ 108 0100 0A32A0E3 		mov	r3, r3, asr #19
+ 109 0104 C339A0E1 		ldr	r2, [fp, #-32]
+ 110 0108 20201BE5 		str	r2, [r3, #112]
+ 111 010c 702083E5 		b	.L14
+ 112 0110 4A0000EA 	.L17:
+ 113              		.loc 1 62 0
+  60:pwm.c         **** 					break;
+  61:pwm.c         **** 				case AT91C_PA12_PWM1:
+  62:pwm.c         **** 					AT91C_BASE_PIOA->PIO_BSR=PORT;			// PWM-Modul als Pheripherie B auswählen
+ 114              	, #-1610612736
+ 115 0114 0A32A0E3 		mov	r3, r3, asr #19
+ 116 0118 C339A0E1 		ldr	r2, [fp, #-32]
+ 117 011c 20201BE5 		str	r2, [r3, #116]
+ 118 0120 742083E5 		b	.L14
+ 119 0124 450000EA 	.L18:
+ 120              		.loc 1 65 0
+  63:pwm.c         **** 					break;
+  64:pwm.c         **** 				case AT91C_PA24_PWM1:
+  65:pwm.c         **** 					AT91C_BASE_PIOA->PIO_BSR=PORT;			// PWM-Modul als Pheripherie B auswählen
+ 121              	, #-1610612736
+ 122 0128 0A32A0E3 		mov	r3, r3, asr #19
+ 123 012c C339A0E1 		ldr	r2, [fp, #-32]
+ 124 0130 20201BE5 		str	r2, [r3, #116]
+ 125 0134 742083E5 		b	.L14
+ 126 0138 400000EA 	.L36:
+ 127              		.loc 1 67 0
+  66:pwm.c         **** 					break;
+  67:pwm.c         **** 				default: return -2;}						// Mit Fehler zurück
+ 128              	, #254
+ 129 013c FE30A0E3 		str	r3, [fp, #-40]
+ 130 0140 28300BE5 		b	.L13
+ 131 0144 760000EA 	.L5:
+ 132              		.loc 1 70 0
+  68:pwm.c         **** 			break;
+  69:pwm.c         **** 		case 2:
+  70:pwm.c         **** 			PWM_POINTER = AT91C_BASE_PWMC_CH2;			// Pointer für PWMC2 zuweisen
+ 133              	r3, #211968
+ 134 0148 CF3BE0E3 		sub	r3, r3, #444
+ 135 014c 6F3F43E2 		sub	r3, r3, #3
+ 136 0150 033043E2 		str	r3, [fp, #-24]
+ 137 0154 18300BE5 		.loc 1 71 0
+  71:pwm.c         **** 			switch(PORT){
+ 138              	r2, [fp, #-32]
+ 139 0158 20201BE5 		str	r2, [fp, #-52]
+ 140 015c 34200BE5 		ldr	r3, [fp, #-52]
+ 141 0160 34301BE5 		cmp	r3, #8192
+ 142 0164 020A53E3 		beq	.L22
+ 143 0168 0A00000A 		ldr	r2, [fp, #-52]
+ 144 016c 34201BE5 		cmp	r2, #33554432
+ 145 0170 020452E3 		beq	.L23
+ 146 0174 0C00000A 		ldr	r3, [fp, #-52]
+ 147 0178 34301BE5 		cmp	r3, #4
+ 148 017c 040053E3 		bne	.L37
+ 149 0180 0E00001A 	.L21:
+ 150              		.loc 1 73 0
+  72:pwm.c         **** 				case AT91C_PA2_PWM2:
+  73:pwm.c         **** 					AT91C_BASE_PIOA->PIO_ASR=PORT;			// PWM-Modul als Pheripherie A auswählen
+ 151              	10612736
+ 152 0184 0A32A0E3 		mov	r3, r3, asr #19
+ 153 0188 C339A0E1 		ldr	r2, [fp, #-32]
+ 154 018c 20201BE5 		str	r2, [r3, #112]
+ 155 0190 702083E5 		b	.L14
+ 156 0194 290000EA 	.L22:
+ 157              		.loc 1 76 0
+  74:pwm.c         **** 					break;
+  75:pwm.c         **** 				case AT91C_PA13_PWM2:
+  76:pwm.c         **** 					AT91C_BASE_PIOA->PIO_BSR=PORT;			// PWM-Modul als Pheripherie B auswählen
+ 158              	, #-1610612736
+ 159 0198 0A32A0E3 		mov	r3, r3, asr #19
+ 160 019c C339A0E1 		ldr	r2, [fp, #-32]
+ 161 01a0 20201BE5 		str	r2, [r3, #116]
+ 162 01a4 742083E5 		b	.L14
+ 163 01a8 240000EA 	.L23:
+ 164              		.loc 1 79 0
+  77:pwm.c         **** 					break;
+  78:pwm.c         **** 				case AT91C_PA25_PWM2:
+  79:pwm.c         **** 					AT91C_BASE_PIOA->PIO_BSR=PORT;			// PWM-Modul als Pheripherie B auswählen
+ 165              	, #-1610612736
+ 166 01ac 0A32A0E3 		mov	r3, r3, asr #19
+ 167 01b0 C339A0E1 		ldr	r2, [fp, #-32]
+ 168 01b4 20201BE5 		str	r2, [r3, #116]
+ 169 01b8 742083E5 		b	.L14
+ 170 01bc 1F0000EA 	.L37:
+ 171              		.loc 1 81 0
+  80:pwm.c         **** 					break;
+  81:pwm.c         **** 				default: return -2;}						// Mit Fehler zurück
+ 172              	, #254
+ 173 01c0 FE20A0E3 		str	r2, [fp, #-40]
+ 174 01c4 28200BE5 		b	.L13
+ 175 01c8 550000EA 	.L6:
+ 176              		.loc 1 84 0
+  82:pwm.c         **** 			break;
+  83:pwm.c         **** 		case 3:
+  84:pwm.c         **** 			PWM_POINTER = AT91C_BASE_PWMC_CH3;			// Pointer für PWMC3 zuweisen
+ 177              	r3, #211968
+ 178 01cc CF3BE0E3 		sub	r3, r3, #412
+ 179 01d0 673F43E2 		sub	r3, r3, #3
+ 180 01d4 033043E2 		str	r3, [fp, #-24]
+ 181 01d8 18300BE5 		.loc 1 85 0
+  85:pwm.c         **** 			switch(PORT){
+ 182              	r3, [fp, #-32]
+ 183 01dc 20301BE5 		str	r3, [fp, #-56]
+ 184 01e0 38300BE5 		ldr	r2, [fp, #-56]
+ 185 01e4 38201BE5 		cmp	r2, #128
+ 186 01e8 800052E3 		beq	.L26
+ 187 01ec 0300000A 		ldr	r3, [fp, #-56]
+ 188 01f0 38301BE5 		cmp	r3, #16384
+ 189 01f4 010953E3 		beq	.L27
+ 190 01f8 0500000A 		b	.L38
+ 191 01fc 090000EA 	.L26:
+ 192              		.loc 1 87 0
+  86:pwm.c         **** 				case AT91C_PA7_PWM3:
+  87:pwm.c         **** 					AT91C_BASE_PIOA->PIO_BSR=PORT;			// PWM-Modul als Pheripherie B auswählen
+ 193              	1610612736
+ 194 0200 0A32A0E3 		mov	r3, r3, asr #19
+ 195 0204 C339A0E1 		ldr	r2, [fp, #-32]
+ 196 0208 20201BE5 		str	r2, [r3, #116]
+ 197 020c 742083E5 		b	.L14
+ 198 0210 0A0000EA 	.L27:
+ 199              		.loc 1 90 0
+  88:pwm.c         **** 					break;
+  89:pwm.c         **** 				case AT91C_PA14_PWM3:
+  90:pwm.c         **** 					AT91C_BASE_PIOA->PIO_BSR=PORT;			// PWM-Modul als Pheripherie B auswählen
+ 200              	, #-1610612736
+ 201 0214 0A32A0E3 		mov	r3, r3, asr #19
+ 202 0218 C339A0E1 		ldr	r2, [fp, #-32]
+ 203 021c 20201BE5 		str	r2, [r3, #116]
+ 204 0220 742083E5 		b	.L14
+ 205 0224 050000EA 	.L38:
+ 206              		.loc 1 92 0
+  91:pwm.c         **** 					break;
+  92:pwm.c         **** 				default: return -2;}						// Mit Fehler zurück
+ 207              	, #254
+ 208 0228 FE20A0E3 		str	r2, [fp, #-40]
+ 209 022c 28200BE5 		b	.L13
+ 210 0230 3B0000EA 	.L2:
+ 211              		.loc 1 94 0
+  93:pwm.c         **** 			break;
+  94:pwm.c         **** 		default: return -1;}							// Mit Fehler zurück
+ 212              	r3, #255
+ 213 0234 FF30A0E3 		str	r3, [fp, #-40]
+ 214 0238 28300BE5 		b	.L13
+ 215 023c 380000EA 	.L14:
+ 216              		.loc 1 95 0
+  95:pwm.c         **** 	AT91C_BASE_PIOA->PIO_PDR=PORT;					// PIO-Modus auf Pheriperie
+ 217              	r3, #-1610612736
+ 218 0240 0A32A0E3 		mov	r3, r3, asr #19
+ 219 0244 C339A0E1 		ldr	r2, [fp, #-32]
+ 220 0248 20201BE5 		str	r2, [r3, #4]
+ 221 024c 042083E5 		.loc 1 96 0
+  96:pwm.c         **** 	AT91C_BASE_PIOA->PIO_PPUDR=PORT;				// Pull-up-Widerstände aus
+ 222              	r3, #-1610612736
+ 223 0250 0A32A0E3 		mov	r3, r3, asr #19
+ 224 0254 C339A0E1 		ldr	r2, [fp, #-32]
+ 225 0258 20201BE5 		str	r2, [r3, #96]
+ 226 025c 602083E5 		.loc 1 97 0
+  97:pwm.c         **** 	if (FRQ>120000)  return -3;						// Frequenz zu hoch -> mit Fehler zurück
+ 227              	r0, [fp, #-36]	@ float
+ 228 0260 24001BE5 		ldr	r1, .L40	@ float
+ 229 0264 D0109FE5 		bl	__gtsf2
+ 230 0268 FEFFFFEB 		mov	r3, r0
+ 231 026c 0030A0E1 		cmp	r3, #0
+ 232 0270 000053E3 		ble	.L39
+ 233 0274 020000DA 	.L34:
+ 234              		mov	r2, #253
+ 235 0278 FD20A0E3 		str	r2, [fp, #-40]
+ 236 027c 28200BE5 		b	.L13
+ 237 0280 270000EA 	.L39:
+ 238              		.loc 1 99 0
+  98:pwm.c         **** 	else{											// Periode und Prescaler berechnen
+  99:pwm.c         **** 		CPRD = MCK / FRQ;								// Periode = Masterclock / Frequenz
+ 239              	0+4	@ float
+ 240 0284 B4009FE5 		ldr	r1, [fp, #-36]	@ float
+ 241 0288 24101BE5 		bl	__divsf3
+ 242 028c FEFFFFEB 		mov	r3, r0
+ 243 0290 0030A0E1 		mov	r0, r3
+ 244 0294 0300A0E1 		bl	__fixunssfsi
+ 245 0298 FEFFFFEB 		mov	r3, r0
+ 246 029c 0030A0E1 		str	r3, [fp, #-16]
+ 247 02a0 10300BE5 		.loc 1 100 0
+ 100:pwm.c         **** 		CPRE = 0;										// Prescaler auf 0
+ 248              	#0
+ 249 02a4 0030A0E3 		str	r3, [fp, #-20]
+ 250 02a8 14300BE5 		b	.L31
+ 251 02ac 0B0000EA 	.L32:
+ 252              		.loc 1 102 0
+ 101:pwm.c         **** 		while (CPRD & 0xFFFF0000){						// Überprüfung ob Periode > 16Bit
+ 102:pwm.c         **** 			CPRD = CPRD >> 1;							// Periode / 2
+ 253              	r3, [fp, #-16]
+ 254 02b0 10301BE5 		mov	r3, r3, lsr #1
+ 255 02b4 A330A0E1 		str	r3, [fp, #-16]
+ 256 02b8 10300BE5 		.loc 1 103 0
+ 103:pwm.c         **** 			CPRE++;										// Prescaler + 1
+ 257              		r3, [fp, #-20]
+ 258 02bc 14301BE5 		add	r3, r3, #1
+ 259 02c0 013083E2 		str	r3, [fp, #-20]
+ 260 02c4 14300BE5 		.loc 1 104 0
+ 104:pwm.c         **** 			if (CPRE>0x0A) return -3;}}					// Frequenz zu niedrig -> mit Fehler zurück
+ 261              		r3, [fp, #-20]
+ 262 02c8 14301BE5 		cmp	r3, #10
+ 263 02cc 0A0053E3 		bls	.L31
+ 264 02d0 0200009A 		mov	r3, #253
+ 265 02d4 FD30A0E3 		str	r3, [fp, #-40]
+ 266 02d8 28300BE5 		b	.L13
+ 267 02dc 100000EA 	.L31:
+ 268              		.loc 1 101 0
+ 269              		ldr	r3, [fp, #-16]
+ 270 02e0 10301BE5 		mov	r3, r3, lsr #16
+ 271 02e4 2338A0E1 		mov	r3, r3, asl #16
+ 272 02e8 0338A0E1 		cmp	r3, #0
+ 273 02ec 000053E3 		bne	.L32
+ 274 02f0 EEFFFF1A 		.loc 1 105 0
+ 105:pwm.c         **** 	AT91C_BASE_PMC->PMC_PCER = (1<<AT91C_ID_PWMC);	// Clock für PWMC freigeben
+ 275              	7483648
+ 276 02f4 0231A0E3 		mov	r3, r3, asr #21
+ 277 02f8 C33AA0E1 		mov	r2, #1024
+ 278 02fc 012BA0E3 		str	r2, [r3, #16]
+ 279 0300 102083E5 		.loc 1 106 0
+ 106:pwm.c         **** 	PWM_POINTER->PWMC_CMR = (CPD|CPOL|CALG|CPRE);	// Modus einstellen
+ 280              	r2, [fp, #-24]
+ 281 0304 18201BE5 		ldr	r3, [fp, #-20]
+ 282 0308 14301BE5 		str	r3, [r2, #0]
+ 283 030c 003082E5 		.loc 1 107 0
+ 107:pwm.c         **** 	PWM_POINTER->PWMC_CPRDR = CPRD;					// Frequenz einstellen
+ 284              		r2, [fp, #-24]
+ 285 0310 18201BE5 		ldr	r3, [fp, #-16]
+ 286 0314 10301BE5 		str	r3, [r2, #8]
+ 287 0318 083082E5 		.loc 1 108 0
+ 108:pwm.c         **** 	return (signed char) PWM_NR;					// PWMC-Nr. zurück
+ 288              	b	r2, [fp, #-28]	@ zero_extendqisi2
+ 289 031c 1C205BE5 		str	r2, [fp, #-40]
+ 290 0320 28200BE5 	.L13:
+ 291              		ldr	r2, [fp, #-40]
+ 292 0324 28201BE5 		mov	r3, r2, asl #24
+ 293 0328 023CA0E1 		mov	r3, r3, asr #24
+ 294 032c 433CA0E1 		.loc 1 109 0
+ 109:pwm.c         **** }
+ 295              	, r3
+ 296 0330 0300A0E1 		sub	sp, fp, #12
+ 297 0334 0CD04BE2 		ldmfd	sp, {fp, sp, pc}
+ 298 0338 00A89DE8 	.L41:
+ 299              		.align	2
+ 300              	.L40:
+ 301              		.word	1206542336
+ 302 033c 0060EA47 		.word	1270291200
+ 303 0340 001BB74B 	.LFE2:
+ 305              		.align	2
+ 306              		.global	pwm_set_duty
+ 308              	pwm_set_duty:
+ 309              	.LFB3:
+ 310              		.loc 1 119 0
+ 110:pwm.c         **** 
+ 111:pwm.c         **** //**************************************************************
+ 112:pwm.c         **** // pwm_set_duty
+ 113:pwm.c         **** // Stellt Duty des PWM-Channels ein
+ 114:pwm.c         **** // Übergabeparameter:  PWM_NR	Channel-Nr. des PWMC 0..3
+ 115:pwm.c         **** //                     DUTY		'high' in Prozent
+ 116:pwm.c         **** // Rückgabeparameter:  PWM_NR	Nr. des  PWMC
+ 117:pwm.c         **** //								im Fehlerfall:	-1
+ 118:pwm.c         **** //**************************************************************
+ 119:pwm.c         **** signed char pwm_set_duty (unsigned char PWM_NR,unsigned int DUTY){
+ 311              	tend = 0, frame = 24
+ 312              		@ frame_needed = 1, uses_anonymous_args = 0
+ 313              		mov	ip, sp
+ 314 0344 0DC0A0E1 	.LCFI4:
+ 315              		stmfd	sp!, {fp, ip, lr, pc}
+ 316 0348 00D82DE9 	.LCFI5:
+ 317              		sub	fp, ip, #4
+ 318 034c 04B04CE2 	.LCFI6:
+ 319              		sub	sp, sp, #24
+ 320 0350 18D04DE2 	.LCFI7:
+ 321              		mov	r3, r0
+ 322 0354 0030A0E1 		str	r1, [fp, #-32]
+ 323 0358 20100BE5 		strb	r3, [fp, #-28]
+ 324 035c 1C304BE5 		.loc 1 124 0
+ 120:pwm.c         **** 	AT91S_PWMC_CH *PWM_POINTER;						// Pointer PWM Channel
+ 121:pwm.c         **** 	unsigned int CH_ID;								// Channel-ID
+ 122:pwm.c         **** 	unsigned int CPRD;								// PWM Periode
+ 123:pwm.c         **** 
+ 124:pwm.c         **** 	switch(PWM_NR){									// PWM-Channel auswählen:
+ 325              	 #-28]	@ zero_extendqisi2
+ 326 0360 1C305BE5 		cmp	r3, #3
+ 327 0364 030053E3 		ldrls	pc, [pc, r3, asl #2]
+ 328 0368 03F19F97 		b	.L43
+ 329 036c 1F0000EA 	.L48:
+ 330              		.word	.L44
+ 331 0370 80030000 		.word	.L45
+ 332 0374 9C030000 		.word	.L46
+ 333 0378 B8030000 		.word	.L47
+ 334 037c D4030000 	.L44:
+ 335              		.loc 1 126 0
+ 125:pwm.c         **** 		case 0:
+ 126:pwm.c         **** 			PWM_POINTER = AT91C_BASE_PWMC_CH0;			// Pointer für PWMC0 zuweisen
+ 336              	11968
+ 337 0380 CF3BE0E3 		sub	r3, r3, #508
+ 338 0384 7F3F43E2 		sub	r3, r3, #3
+ 339 0388 033043E2 		str	r3, [fp, #-24]
+ 340 038c 18300BE5 		.loc 1 127 0
+ 127:pwm.c         **** 			CH_ID = AT91C_PWMC_CHID0; break;			// Channel-ID-zuweisen
+ 341              	r3, #1
+ 342 0390 0130A0E3 		str	r3, [fp, #-20]
+ 343 0394 14300BE5 		b	.L49
+ 344 0398 170000EA 	.L45:
+ 345              		.loc 1 129 0
+ 128:pwm.c         **** 		case 1:
+ 129:pwm.c         **** 			PWM_POINTER = AT91C_BASE_PWMC_CH1;			// Pointer für PWMC1 zuweisen
+ 346              	r3, #211968
+ 347 039c CF3BE0E3 		sub	r3, r3, #476
+ 348 03a0 773F43E2 		sub	r3, r3, #3
+ 349 03a4 033043E2 		str	r3, [fp, #-24]
+ 350 03a8 18300BE5 		.loc 1 130 0
+ 130:pwm.c         **** 			CH_ID = AT91C_PWMC_CHID1; break;			// Channel-ID-zuweisen
+ 351              	r3, #2
+ 352 03ac 0230A0E3 		str	r3, [fp, #-20]
+ 353 03b0 14300BE5 		b	.L49
+ 354 03b4 100000EA 	.L46:
+ 355              		.loc 1 132 0
+ 131:pwm.c         **** 		case 2:
+ 132:pwm.c         **** 			PWM_POINTER = AT91C_BASE_PWMC_CH2;			// Pointer für PWMC2 zuweisen
+ 356              	r3, #211968
+ 357 03b8 CF3BE0E3 		sub	r3, r3, #444
+ 358 03bc 6F3F43E2 		sub	r3, r3, #3
+ 359 03c0 033043E2 		str	r3, [fp, #-24]
+ 360 03c4 18300BE5 		.loc 1 133 0
+ 133:pwm.c         **** 			CH_ID = AT91C_PWMC_CHID2; break;			// Channel-ID-zuweisen
+ 361              	r3, #4
+ 362 03c8 0430A0E3 		str	r3, [fp, #-20]
+ 363 03cc 14300BE5 		b	.L49
+ 364 03d0 090000EA 	.L47:
+ 365              		.loc 1 135 0
+ 134:pwm.c         **** 		case 3:
+ 135:pwm.c         **** 			PWM_POINTER = AT91C_BASE_PWMC_CH3;			// Pointer für PWMC3 zuweisen
+ 366              	r3, #211968
+ 367 03d4 CF3BE0E3 		sub	r3, r3, #412
+ 368 03d8 673F43E2 		sub	r3, r3, #3
+ 369 03dc 033043E2 		str	r3, [fp, #-24]
+ 370 03e0 18300BE5 		.loc 1 136 0
+ 136:pwm.c         **** 			CH_ID = AT91C_PWMC_CHID3; break;			// Channel-ID-zuweisen
+ 371              	r3, #8
+ 372 03e4 0830A0E3 		str	r3, [fp, #-20]
+ 373 03e8 14300BE5 		b	.L49
+ 374 03ec 020000EA 	.L43:
+ 375              		.loc 1 137 0
+ 137:pwm.c         **** 		default: return -1;}							// Mit Fehler zurück
+ 376              	r1, #255
+ 377 03f0 FF10A0E3 		str	r1, [fp, #-36]
+ 378 03f4 24100BE5 		b	.L50
+ 379 03f8 250000EA 	.L49:
+ 380              		.loc 1 138 0
+ 138:pwm.c         **** 	CPRD = PWM_POINTER->PWMC_CPRDR & 0x0000FFFF;	// aktuelle Periode auslesen
+ 381              	r3, [fp, #-24]
+ 382 03fc 18301BE5 		ldr	r3, [r3, #8]
+ 383 0400 083093E5 		mov	r3, r3, asl #16
+ 384 0404 0338A0E1 		mov	r3, r3, lsr #16
+ 385 0408 2338A0E1 		str	r3, [fp, #-16]
+ 386 040c 10300BE5 		.loc 1 139 0
+ 139:pwm.c         **** 	if (DUTY){										// Duty > 0 ?
+ 387              	3, [fp, #-32]
+ 388 0410 20301BE5 		cmp	r3, #0
+ 389 0414 000053E3 		beq	.L51
+ 390 0418 1700000A 		.loc 1 140 0
+ 140:pwm.c         **** 		DUTY = DUTY%100;								// Duty begrenzen auf unter 100
+ 391              		r1, [fp, #-32]
+ 392 041c 20101BE5 		ldr	r3, .L54
+ 393 0420 84309FE5 		umull	r2, r3, r1, r3
+ 394 0424 912383E0 		mov	r3, r3, lsr #5
+ 395 0428 A332A0E1 		mov	r3, r3, asl #2
+ 396 042c 0331A0E1 		mov	r2, r3, asl #2
+ 397 0430 0321A0E1 		add	r3, r3, r2
+ 398 0434 023083E0 		mov	r2, r3, asl #2
+ 399 0438 0321A0E1 		add	r3, r3, r2
+ 400 043c 023083E0 		rsb	r3, r3, r1
+ 401 0440 013063E0 		str	r3, [fp, #-32]
+ 402 0444 20300BE5 		.loc 1 141 0
+ 141:pwm.c         **** 		PWM_POINTER->PWMC_CUPDR = CPRD*DUTY/100;		// Neue Duty einstellen
+ 403              	, #-16]
+ 404 0448 10201BE5 		ldr	r3, [fp, #-32]
+ 405 044c 20301BE5 		mul	r2, r3, r2
+ 406 0450 930202E0 		ldr	r3, .L54
+ 407 0454 50309FE5 		umull	r1, r3, r2, r3
+ 408 0458 921383E0 		mov	r2, r3, lsr #5
+ 409 045c A322A0E1 		ldr	r3, [fp, #-24]
+ 410 0460 18301BE5 		str	r2, [r3, #16]
+ 411 0464 102083E5 		.loc 1 142 0
+ 142:pwm.c         **** 		AT91C_BASE_PWMC->PWMC_ENA = CH_ID;}				// PWM enabeln
+ 412              	#-1744830464
+ 413 0468 2633A0E3 		mov	r3, r3, asr #13
+ 414 046c C336A0E1 		ldr	r2, [fp, #-20]
+ 415 0470 14201BE5 		str	r2, [r3, #4]
+ 416 0474 042083E5 		b	.L52
+ 417 0478 030000EA 	.L51:
+ 418              		.loc 1 143 0
+ 143:pwm.c         **** 	else AT91C_BASE_PWMC->PWMC_DIS = CH_ID;				// PWM2 disabeln
+ 419              	, #-1744830464
+ 420 047c 2633A0E3 		mov	r3, r3, asr #13
+ 421 0480 C336A0E1 		ldr	r2, [fp, #-20]
+ 422 0484 14201BE5 		str	r2, [r3, #8]
+ 423 0488 082083E5 	.L52:
+ 424              		.loc 1 144 0
+ 144:pwm.c         **** 	return PWM_NR;									// PWMC-Nr. zurück
+ 425              	r2, [fp, #-28]	@ zero_extendqisi2
+ 426 048c 1C205BE5 		str	r2, [fp, #-36]
+ 427 0490 24200BE5 	.L50:
+ 428              		ldr	r1, [fp, #-36]
+ 429 0494 24101BE5 		mov	r3, r1, asl #24
+ 430 0498 013CA0E1 		mov	r3, r3, asr #24
+ 431 049c 433CA0E1 		.loc 1 145 0
+ 145:pwm.c         **** }
+ 432              	, r3
+ 433 04a0 0300A0E1 		sub	sp, fp, #12
+ 434 04a4 0CD04BE2 		ldmfd	sp, {fp, sp, pc}
+ 435 04a8 00A89DE8 	.L55:
+ 436              		.align	2
+ 437              	.L54:
+ 438              		.word	1374389535
+ 439 04ac 1F85EB51 	.LFE3:
+ 441              		.section	.debug_frame,"",%progbits
+ 508              		.section	.debug_loc,"",%progbits
+DEFINED SYMBOLS
+                            *ABS*:00000000 pwm.c
+C:\Users\Aomx\AppData\Local\Temp/ccsqIUxz.s:16     .text:00000000 pwm_init
+C:\Users\Aomx\AppData\Local\Temp/ccsqIUxz.s:22     .text:00000000 $a
+C:\Users\Aomx\AppData\Local\Temp/ccsqIUxz.s:40     .text:00000030 $d
+C:\Users\Aomx\AppData\Local\Temp/ccsqIUxz.s:46     .text:00000040 $a
+C:\Users\Aomx\AppData\Local\Temp/ccsqIUxz.s:302    .text:0000033c $d
+C:\Users\Aomx\AppData\Local\Temp/ccsqIUxz.s:309    .text:00000344 pwm_set_duty
+C:\Users\Aomx\AppData\Local\Temp/ccsqIUxz.s:314    .text:00000344 $a
+C:\Users\Aomx\AppData\Local\Temp/ccsqIUxz.s:331    .text:00000370 $d
+C:\Users\Aomx\AppData\Local\Temp/ccsqIUxz.s:337    .text:00000380 $a
+C:\Users\Aomx\AppData\Local\Temp/ccsqIUxz.s:439    .text:000004ac $d
+
+UNDEFINED SYMBOLS
+__gtsf2
+__divsf3
+__fixunssfsi

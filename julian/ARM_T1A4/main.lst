@@ -1,0 +1,284 @@
+   1              		.file	"main.c"
+   9              	.Ltext0:
+  10              		.align	2
+  11              		.global	delay_ms
+  13              	delay_ms:
+  14              	.LFB2:
+  15              		.file 1 "main.c"
+   1:main.c        **** /*
+   2:main.c        ****  * main.c
+   3:main.c        ****  *
+   4:main.c        ****  *  Created on: 18.04.2016
+   5:main.c        ****  *      Author: Aomx
+   6:main.c        ****  */
+   7:main.c        **** 
+   8:main.c        **** #include "include/AT91SAM7S64.h"							// Register-Deklarationen
+   9:main.c        **** #include "display.h"
+  10:main.c        **** 
+  11:main.c        **** #define BUTTON1 AT91C_PIO_PA1
+  12:main.c        **** #define BUTTON2 AT91C_PIO_PA0
+  13:main.c        **** #define BUTTON3 AT91C_PIO_PA31
+  14:main.c        **** 
+  15:main.c        **** void delay_ms(unsigned int milliseconds){
+  16              	 args = 0, pretend = 0, frame = 8
+  17              		@ frame_needed = 1, uses_anonymous_args = 0
+  18              		mov	ip, sp
+  19 0000 0DC0A0E1 	.LCFI0:
+  20              		stmfd	sp!, {fp, ip, lr, pc}
+  21 0004 00D82DE9 	.LCFI1:
+  22              		sub	fp, ip, #4
+  23 0008 04B04CE2 	.LCFI2:
+  24              		sub	sp, sp, #8
+  25 000c 08D04DE2 	.LCFI3:
+  26              		str	r0, [fp, #-20]
+  27 0010 14000BE5 		b	.L2
+  28 0014 0A0000EA 	.L5:
+  29              		.loc 1 19 0
+  16:main.c        **** 	volatile unsigned int i;
+  17:main.c        **** 
+  18:main.c        **** 	while (milliseconds--)
+  19:main.c        **** 		for (i=0; i<1638; i++);
+  30              	tr	r3, [fp, #-16]
+  31 0018 0030A0E3 		b	.L3
+  32 001c 10300BE5 	.L4:
+  33 0020 020000EA 		ldr	r3, [fp, #-16]
+  34              		add	r3, r3, #1
+  35 0024 10301BE5 		str	r3, [fp, #-16]
+  36 0028 013083E2 	.L3:
+  37 002c 10300BE5 		ldr	r2, [fp, #-16]
+  38              		mov	r3, #1632
+  39 0030 10201BE5 		add	r3, r3, #5
+  40 0034 663EA0E3 		cmp	r2, r3
+  41 0038 053083E2 		bls	.L4
+  42 003c 030052E1 	.L2:
+  43 0040 F7FFFF9A 		.loc 1 18 0
+  44              		ldr	r3, [fp, #-20]
+  45              		cmp	r3, #0
+  46 0044 14301BE5 		moveq	r3, #0
+  47 0048 000053E3 		movne	r3, #1
+  48 004c 0030A003 		and	r2, r3, #255
+  49 0050 0130A013 		ldr	r3, [fp, #-20]
+  50 0054 FF2003E2 		sub	r3, r3, #1
+  51 0058 14301BE5 		str	r3, [fp, #-20]
+  52 005c 013043E2 		cmp	r2, #0
+  53 0060 14300BE5 		bne	.L5
+  54 0064 000052E3 		.loc 1 20 0
+  55 0068 EAFFFF1A 		sub	sp, fp, #12
+  20:main.c        **** }
+  56              	FE2:
+  58 0070 00A89DE8 		.align	2
+  59              		.global	delay_s
+  61              	delay_s:
+  62              	.LFB3:
+  63              		.loc 1 22 0
+  64              		@ args = 0, pretend = 0, frame = 4
+  65              		@ frame_needed = 1, uses_anonymous_args = 0
+  21:main.c        **** 
+  22:main.c        **** void delay_s(unsigned int seconds) {
+  66              	p
+  67              	.LCFI4:
+  68              		stmfd	sp!, {fp, ip, lr, pc}
+  69 0074 0DC0A0E1 	.LCFI5:
+  70              		sub	fp, ip, #4
+  71 0078 00D82DE9 	.LCFI6:
+  72              		sub	sp, sp, #4
+  73 007c 04B04CE2 	.LCFI7:
+  74              		str	r0, [fp, #-16]
+  75 0080 04D04DE2 		.loc 1 23 0
+  76              		ldr	r1, [fp, #-16]
+  77 0084 10000BE5 		mov	r3, r1
+  23:main.c        **** 	delay_ms(1000 * seconds);
+  78              	 asl #2
+  79 0088 10101BE5 		mov	r3, r2, asl #5
+  80 008c 0130A0E1 		rsb	r3, r2, r3
+  81 0090 0321A0E1 		add	r3, r3, r1
+  82 0094 8232A0E1 		mov	r3, r3, asl #3
+  83 0098 033062E0 		mov	r0, r3
+  84 009c 013083E0 		bl	delay_ms
+  85 00a0 8331A0E1 		.loc 1 24 0
+  86 00a4 0300A0E1 		ldmfd	sp, {r3, fp, sp, pc}
+  87 00a8 FEFFFFEB 	.LFE3:
+  24:main.c        **** }
+  88              	ay_s, .-delay_s
+  89 00ac 08A89DE8 		.align	2
+  90              		.global	is_button_pressed
+  92              	is_button_pressed:
+  93              	.LFB4:
+  94              		.loc 1 26 0
+  95              		@ args = 0, pretend = 0, frame = 4
+  96              		@ frame_needed = 1, uses_anonymous_args = 0
+  25:main.c        **** 
+  26:main.c        **** unsigned char is_button_pressed(unsigned int button) {
+  97              	sp
+  98              	.LCFI8:
+  99              		stmfd	sp!, {fp, ip, lr, pc}
+ 100 00b0 0DC0A0E1 	.LCFI9:
+ 101              		sub	fp, ip, #4
+ 102 00b4 00D82DE9 	.LCFI10:
+ 103              		sub	sp, sp, #4
+ 104 00b8 04B04CE2 	.LCFI11:
+ 105              		str	r0, [fp, #-16]
+ 106 00bc 04D04DE2 		.loc 1 27 0
+ 107              		mov	r3, #-1610612736
+ 108 00c0 10000BE5 		mov	r3, r3, asr #19
+  27:main.c        **** 	return !(AT91C_BASE_PIOA->PIO_PDSR & button);
+ 109              	, #60]
+ 110 00c4 0A32A0E3 		ldr	r3, [fp, #-16]
+ 111 00c8 C339A0E1 		and	r3, r2, r3
+ 112 00cc 3C2093E5 		cmp	r3, #0
+ 113 00d0 10301BE5 		movne	r3, #0
+ 114 00d4 033002E0 		moveq	r3, #1
+ 115 00d8 000053E3 		.loc 1 28 0
+ 116 00dc 0030A013 		mov	r0, r3
+ 117 00e0 0130A003 		ldmfd	sp, {r3, fp, sp, pc}
+  28:main.c        **** }
+ 118              	size	is_button_pressed, .-is_button_pressed
+ 119 00e4 0300A0E1 		.align	2
+ 120 00e8 08A89DE8 		.global	get_button_state
+ 122              	get_button_state:
+ 123              	.LFB5:
+ 124              		.loc 1 30 0
+ 125              		@ args = 0, pretend = 0, frame = 4
+ 126              		@ frame_needed = 1, uses_anonymous_args = 0
+ 127              		mov	ip, sp
+  29:main.c        **** 
+  30:main.c        **** unsigned char get_button_state() {
+ 128              	stmfd	sp!, {fp, ip, lr, pc}
+ 129              	.LCFI13:
+ 130              		sub	fp, ip, #4
+ 131 00ec 0DC0A0E1 	.LCFI14:
+ 132              		sub	sp, sp, #4
+ 133 00f0 00D82DE9 	.LCFI15:
+ 134              		.loc 1 31 0
+ 135 00f4 04B04CE2 		mov	r3, #0
+ 136              		strb	r3, [fp, #-13]
+ 137 00f8 04D04DE2 		.loc 1 33 0
+ 138              		mov	r0, #2
+  31:main.c        **** 	unsigned char retValue = 0;
+ 139              	on_pressed
+ 140 00fc 0030A0E3 		mov	r3, r0
+ 141 0100 0D304BE5 		cmp	r3, #0
+  32:main.c        **** 
+  33:main.c        **** 	if (is_button_pressed(BUTTON1)) {
+ 142              	q	.L12
+ 143 0104 0200A0E3 		.loc 1 34 0
+ 144 0108 FEFFFFEB 		ldrb	r3, [fp, #-13]
+ 145 010c 0030A0E1 		add	r3, r3, #1
+ 146 0110 000053E3 		strb	r3, [fp, #-13]
+ 147 0114 0200000A 	.L12:
+  34:main.c        **** 		retValue += 1;
+ 148              	1 37 0
+ 149 0118 0D305BE5 		mov	r0, #1
+ 150 011c 013083E2 		bl	is_button_pressed
+ 151 0120 0D304BE5 		mov	r3, r0
+ 152              		cmp	r3, #0
+  35:main.c        **** 	}
+  36:main.c        **** 
+  37:main.c        **** 	if (is_button_pressed(BUTTON2)) {
+ 153              	.L13
+ 154 0124 0100A0E3 		.loc 1 38 0
+ 155 0128 FEFFFFEB 		ldrb	r3, [fp, #-13]
+ 156 012c 0030A0E1 		add	r3, r3, #2
+ 157 0130 000053E3 		strb	r3, [fp, #-13]
+ 158 0134 0200000A 	.L13:
+  38:main.c        **** 		retValue += 2;
+ 159              	1 41 0
+ 160 0138 0D305BE5 		mov	r0, #-2147483648
+ 161 013c 023083E2 		bl	is_button_pressed
+ 162 0140 0D304BE5 		mov	r3, r0
+ 163              		cmp	r3, #0
+  39:main.c        **** 	}
+  40:main.c        **** 
+  41:main.c        **** 	if (is_button_pressed(BUTTON3)) {
+ 164              	.L14
+ 165 0144 0201A0E3 		.loc 1 42 0
+ 166 0148 FEFFFFEB 		ldrb	r3, [fp, #-13]
+ 167 014c 0030A0E1 		add	r3, r3, #4
+ 168 0150 000053E3 		strb	r3, [fp, #-13]
+ 169 0154 0200000A 	.L14:
+  42:main.c        **** 		retValue += 4;
+ 170              	1 45 0
+ 171 0158 0D305BE5 		ldrb	r3, [fp, #-13]	@ zero_extendqisi2
+ 172 015c 043083E2 		.loc 1 46 0
+ 173 0160 0D304BE5 		mov	r0, r3
+ 174              		ldmfd	sp, {r3, fp, sp, pc}
+  43:main.c        **** 	}
+  44:main.c        **** 
+  45:main.c        **** 	return retValue;
+ 175              	:
+  46:main.c        **** }
+ 177              	section	.rodata
+ 178 0168 0300A0E1 		.align	2
+ 179 016c 08A89DE8 	.LC0:
+ 180              		.ascii	"%d\000"
+ 181              		.text
+ 182              		.align	2
+ 183              		.global	main
+ 185 0000 256400   	main:
+ 186 0003 00       	.LFB6:
+ 187              		.loc 1 49 0
+ 188              		@ args = 0, pretend = 0, frame = 0
+ 189              		@ frame_needed = 1, uses_anonymous_args = 0
+ 190              		mov	ip, sp
+ 191              	.LCFI16:
+  47:main.c        **** 
+  48:main.c        **** 
+  49:main.c        **** int main (void) {
+ 192              	, ip, lr, pc}
+ 193              	.LCFI17:
+ 194              		sub	fp, ip, #4
+ 195 0170 0DC0A0E1 	.LCFI18:
+ 196              		.loc 1 51 0
+ 197 0174 00D82DE9 		bl	display_init
+ 198              		.loc 1 53 0
+ 199 0178 04B04CE2 		mov	r3, #-2147483648
+ 200              		mov	r3, r3, asr #21
+  50:main.c        **** #if 1
+  51:main.c        **** 	display_init();
+ 201              	#4
+ 202 017c FEFFFFEB 		str	r2, [r3, #16]
+  52:main.c        **** 	// pio takt aktivieren
+  53:main.c        **** 	AT91C_BASE_PMC->PMC_PCER = (1<<AT91C_ID_PIOA);
+ 203              	17:
+ 204 0180 0231A0E3 		.loc 1 56 0
+ 205 0184 C33AA0E1 		bl	display_clear
+ 206 0188 0420A0E3 		.loc 1 57 0
+ 207 018c 102083E5 		bl	get_button_state
+ 208              		mov	r3, r0
+  54:main.c        **** 
+  55:main.c        **** 	while (1) {
+  56:main.c        **** 		display_clear();
+ 209              	0, .L19
+ 210 0190 FEFFFFEB 		mov	r1, r3
+  57:main.c        **** 		display_printf("%d", get_button_state());
+ 211              	l	display_printf
+ 212 0194 FEFFFFEB 		.loc 1 58 0
+ 213 0198 0030A0E1 		mov	r0, #200
+ 214 019c 10009FE5 		bl	delay_ms
+ 215 01a0 0310A0E1 		b	.L17
+ 216 01a4 FEFFFFEB 	.L20:
+  58:main.c        **** 		delay_ms(200);
+ 217              	n	2
+ 218 01a8 C800A0E3 	.L19:
+ 219 01ac FEFFFFEB 		.word	.LC0
+ 220 01b0 F6FFFFEA 	.LFE6:
+ 222              		.section	.debug_frame,"",%progbits
+ 223              	.Lframe0:
+ 224 01b4 00000000 		.4byte	.LECIE0-.LSCIE0
+ 225              	.LSCIE0:
+ 226              		.4byte	0xffffffff
+ 368              		.4byte	.LCFI0-.Ltext0
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\Aomx\AppData\Local\Temp/ccwe1SS1.s:13     .text:00000000 delay_ms
+C:\Users\Aomx\AppData\Local\Temp/ccwe1SS1.s:19     .text:00000000 $a
+C:\Users\Aomx\AppData\Local\Temp/ccwe1SS1.s:64     .text:00000074 delay_s
+C:\Users\Aomx\AppData\Local\Temp/ccwe1SS1.s:95     .text:000000b0 is_button_pressed
+C:\Users\Aomx\AppData\Local\Temp/ccwe1SS1.s:126    .text:000000ec get_button_state
+C:\Users\Aomx\AppData\Local\Temp/ccwe1SS1.s:190    .text:00000170 main
+C:\Users\Aomx\AppData\Local\Temp/ccwe1SS1.s:224    .text:000001b4 $d
+
+UNDEFINED SYMBOLS
+display_init
+display_clear
+display_printf

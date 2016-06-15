@@ -1,0 +1,489 @@
+   1              		.file	"main.c"
+   9              	.Ltext0:
+  10              		.global	all_leds
+  11              		.data
+  12              		.align	2
+  15              	all_leds:
+  16 0000 00000040 		.word	1073741824
+  17 0004 04000000 		.word	4
+  18 0008 00000010 		.word	268435456
+  19 000c 00000200 		.word	131072
+  20 0010 00000400 		.word	262144
+  21              		.text
+  22              		.align	2
+  23              		.global	enable_led
+  25              	enable_led:
+  26              	.LFB2:
+  27              		.file 1 "main.c"
+   1:main.c        **** //********************************************************************
+   2:main.c        **** // ARM_T5A3a									Version 02.04.2012 hpw
+   3:main.c        **** //********************************************************************
+   4:main.c        **** #include "include/AT91SAM7S64.h"
+   5:main.c        **** #include "include/pwm.h"
+   6:main.c        **** #include "include/interrupt.h"
+   7:main.c        **** 
+   8:main.c        **** #define LED1 AT91C_PIO_PA30
+   9:main.c        **** #define LED2 AT91C_PIO_PA2
+  10:main.c        **** #define LED3 AT91C_PIO_PA28
+  11:main.c        **** #define LED4 AT91C_PIO_PA17
+  12:main.c        **** #define LED5 AT91C_PIO_PA18
+  13:main.c        **** 
+  14:main.c        **** #define ARRAY_LENGTH(X) (sizeof(X)/sizeof(X[0]))
+  15:main.c        **** #define FREQ 18750
+  16:main.c        **** #define PWM_CHANNEL 2
+  17:main.c        **** 
+  18:main.c        **** typedef unsigned int uint_t;
+  19:main.c        **** 
+  20:main.c        **** uint_t all_leds[] = {
+  21:main.c        **** 	LED1, LED2, LED3, LED4, LED5
+  22:main.c        **** };
+  23:main.c        **** 
+  24:main.c        **** void enable_led(uint_t led) {
+  28              	retend = 0, frame = 4
+  29              		@ frame_needed = 1, uses_anonymous_args = 0
+  30              		mov	ip, sp
+  31 0000 0DC0A0E1 	.LCFI0:
+  32              		stmfd	sp!, {fp, ip, lr, pc}
+  33 0004 00D82DE9 	.LCFI1:
+  34              		sub	fp, ip, #4
+  35 0008 04B04CE2 	.LCFI2:
+  36              		sub	sp, sp, #4
+  37 000c 04D04DE2 	.LCFI3:
+  38              		str	r0, [fp, #-16]
+  39 0010 10000BE5 		.loc 1 25 0
+  25:main.c        **** nt_t;
+  40              	610612736
+  41 0014 0A32A0E3 		mov	r3, r3, asr #19
+  42 0018 C339A0E1 		ldr	r2, [fp, #-16]
+  43 001c 10201BE5 		str	r2, [r3, #16]
+  44 0020 102083E5 		.loc 1 26 0
+  26:main.c        **** X) (sizeof(X)/sizeof(X[0]))
+  45              	r3, #-1610612736
+  46 0024 0A32A0E3 		mov	r3, r3, asr #19
+  47 0028 C339A0E1 		ldr	r2, [fp, #-16]
+  48 002c 10201BE5 		str	r2, [r3, #160]
+  49 0030 A02083E5 		.loc 1 27 0
+  27:main.c        **** fine LED4 AT91C_PIO_PA17
+  50              	r3, #-1610612736
+  51 0034 0A32A0E3 		mov	r3, r3, asr #19
+  52 0038 C339A0E1 		ldr	r2, [fp, #-16]
+  53 003c 10201BE5 		str	r2, [r3, #96]
+  54 0040 602083E5 		.loc 1 28 0
+  28:main.c        **** ne LED1 AT91C_PIO_PA30
+  55              	d	sp, {r3, fp, sp, pc}
+  56 0044 08A89DE8 	.LFE2:
+  58              		.align	2
+  59              		.global	led_on
+  61              	led_on:
+  62              	.LFB3:
+  63              		.loc 1 30 0
+  29:main.c        **** "include/AT91SAM7S64.h"
+  30:main.c        **** #include "include/pwm.h"
+  64              	 0, pretend = 0, frame = 4
+  65              		@ frame_needed = 1, uses_anonymous_args = 0
+  66              		mov	ip, sp
+  67 0048 0DC0A0E1 	.LCFI4:
+  68              		stmfd	sp!, {fp, ip, lr, pc}
+  69 004c 00D82DE9 	.LCFI5:
+  70              		sub	fp, ip, #4
+  71 0050 04B04CE2 	.LCFI6:
+  72              		sub	sp, sp, #4
+  73 0054 04D04DE2 	.LCFI7:
+  74              		str	r0, [fp, #-16]
+  75 0058 10000BE5 		.loc 1 31 0
+  31:main.c        **** *****************************************************
+  76              	610612736
+  77 005c 0A32A0E3 		mov	r3, r3, asr #19
+  78 0060 C339A0E1 		ldr	r2, [fp, #-16]
+  79 0064 10201BE5 		str	r2, [r3, #48]
+  80 0068 302083E5 		.loc 1 32 0
+  32:main.c        **** / ARM_T5A3a									Version 02.04.2012 hpw
+  81              	d	sp, {r3, fp, sp, pc}
+  82 006c 08A89DE8 	.LFE3:
+  84              		.align	2
+  85              		.global	led_off
+  87              	led_off:
+  88              	.LFB4:
+  89              		.loc 1 34 0
+  33:main.c        **** //********************************************************************
+  34:main.c        **** // ARM_T5A3a									Version 02.04.2012 hpw
+  90              	 0, pretend = 0, frame = 4
+  91              		@ frame_needed = 1, uses_anonymous_args = 0
+  92              		mov	ip, sp
+  93 0070 0DC0A0E1 	.LCFI8:
+  94              		stmfd	sp!, {fp, ip, lr, pc}
+  95 0074 00D82DE9 	.LCFI9:
+  96              		sub	fp, ip, #4
+  97 0078 04B04CE2 	.LCFI10:
+  98              		sub	sp, sp, #4
+  99 007c 04D04DE2 	.LCFI11:
+ 100              		str	r0, [fp, #-16]
+ 101 0080 10000BE5 		.loc 1 35 0
+  35:main.c        **** //********************************************************************
+ 102              	610612736
+ 103 0084 0A32A0E3 		mov	r3, r3, asr #19
+ 104 0088 C339A0E1 		ldr	r2, [fp, #-16]
+ 105 008c 10201BE5 		str	r2, [r3, #52]
+ 106 0090 342083E5 		.loc 1 36 0
+  36:main.c        **** //********************************************************************
+ 107              	d	sp, {r3, fp, sp, pc}
+ 108 0094 08A89DE8 	.LFE4:
+ 110              		.align	2
+ 112              	invert_pio:
+ 113              	.LFB5:
+ 114              		.loc 1 38 0
+  37:main.c        **** //********************************************************************
+  38:main.c        **** // ARM_T5A3a									Version 02.04.2012 hpw
+ 115              	= 0, pretend = 0, frame = 8
+ 116              		@ frame_needed = 1, uses_anonymous_args = 0
+ 117              		mov	ip, sp
+ 118 0098 0DC0A0E1 	.LCFI12:
+ 119              		stmfd	sp!, {fp, ip, lr, pc}
+ 120 009c 00D82DE9 	.LCFI13:
+ 121              		sub	fp, ip, #4
+ 122 00a0 04B04CE2 	.LCFI14:
+ 123              		sub	sp, sp, #8
+ 124 00a4 08D04DE2 	.LCFI15:
+ 125              		str	r0, [fp, #-20]
+ 126 00a8 14000BE5 		.loc 1 39 0
+  39:main.c        **** //********************************************************************
+ 127              	610612736
+ 128 00ac 0A32A0E3 		mov	r3, r3, asr #19
+ 129 00b0 C339A0E1 		ldr	r2, [r3, #56]
+ 130 00b4 382093E5 		ldr	r3, [fp, #-20]
+ 131 00b8 14301BE5 		and	r3, r2, r3
+ 132 00bc 033002E0 		str	r3, [fp, #-16]
+ 133 00c0 10300BE5 		.loc 1 41 0
+  40:main.c        **** //********************************************************************
+  41:main.c        **** // ARM_T5A3a									Version 02.04.2012 hpw
+ 134              	, [fp, #-16]
+ 135 00c4 10301BE5 		cmp	r3, #0
+ 136 00c8 000053E3 		beq	.L8
+ 137 00cc 0900000A 		.loc 1 42 0
+  42:main.c        **** //********************************************************************
+ 138              		r2, #-1610612736
+ 139 00d0 0A22A0E3 		mov	r2, r2, asr #19
+ 140 00d4 C229A0E1 		mov	r3, #-1610612736
+ 141 00d8 0A32A0E3 		mov	r3, r3, asr #19
+ 142 00dc C339A0E1 		ldr	r1, [r3, #56]
+ 143 00e0 381093E5 		ldr	r3, [fp, #-20]
+ 144 00e4 14301BE5 		mvn	r3, r3
+ 145 00e8 0330E0E1 		and	r3, r1, r3
+ 146 00ec 033001E0 		str	r3, [r2, #56]
+ 147 00f0 383082E5 		b	.L10
+ 148 00f4 070000EA 	.L8:
+ 149              		.loc 1 45 0
+  43:main.c        **** //********************************************************************
+  44:main.c        **** // ARM_T5A3a									Version 02.04.2012 hpw
+  45:main.c        **** //********************************************************************
+ 150              	610612736
+ 151 00f8 0A22A0E3 		mov	r2, r2, asr #19
+ 152 00fc C229A0E1 		mov	r3, #-1610612736
+ 153 0100 0A32A0E3 		mov	r3, r3, asr #19
+ 154 0104 C339A0E1 		ldr	r1, [r3, #56]
+ 155 0108 381093E5 		ldr	r3, [fp, #-20]
+ 156 010c 14301BE5 		orr	r3, r1, r3
+ 157 0110 033081E1 		str	r3, [r2, #56]
+ 158 0114 383082E5 	.L10:
+ 159              		.loc 1 48 0
+  46:main.c        **** / ARM_T5A3a									Version 02.04.2012 hpw
+  47:main.c        **** //********************************************************************
+  48:main.c        **** #include "include/AT91SAM7S64.h"
+ 160              	p, #12
+ 161 0118 0CD04BE2 		ldmfd	sp, {fp, sp, pc}
+ 162 011c 00A89DE8 	.LFE5:
+ 164              		.bss
+ 165              		.align	2
+ 166              	counter.1725:
+ 167              		.space	4
+ 168 0000 00000000 		.text
+ 169              		.align	2
+ 170              		.global	timer0_isr
+ 172              	timer0_isr:
+ 173              	.LFB6:
+ 174              		.loc 1 51 0
+  49:main.c        **** 2012 hpw
+  50:main.c        **** //********************************************************************
+  51:main.c        **** #include "include/AT91SAM7S64.h"
+ 175              	etend = 0, frame = 4
+ 176              		@ frame_needed = 1, uses_anonymous_args = 0
+ 177              		mov	ip, sp
+ 178 0120 0DC0A0E1 	.LCFI16:
+ 179              		stmfd	sp!, {fp, ip, lr, pc}
+ 180 0124 00D82DE9 	.LCFI17:
+ 181              		sub	fp, ip, #4
+ 182 0128 04B04CE2 	.LCFI18:
+ 183              		sub	sp, sp, #4
+ 184 012c 04D04DE2 	.LCFI19:
+ 185              		.loc 1 66 0
+  52:main.c        **** 2012 hpw
+  53:main.c        **** //********************************************************************
+  54:main.c        **** #include "include/AT91SAM7S64.h"
+  55:main.c        **** #include "include/pwm.h"
+  56:main.c        **** #include "include/interrupt.h"
+  57:main.c        **** 
+  58:main.c        **** #define LED1 AT91C_PIO_PA30
+  59:main.c        **** #define LED2 AT91C_PIO_PA2
+  60:main.c        **** #define LED3 AT91C_PIO_PA28
+  61:main.c        **** #define LED4 AT91C_PIO_PA17
+  62:main.c        **** #define LED5 AT91C_PIO_PA18
+  63:main.c        **** 
+  64:main.c        **** #define ARRAY_LENGTH(X) (sizeof(X)/sizeof(X[0]))
+  65:main.c        **** #define FREQ 18750
+  66:main.c        **** #define PWM_CHANNEL 2
+ 186              	
+ 187 0130 0400A0E3 		bl	invert_pio
+ 188 0134 D7FFFFEB 		.loc 1 68 0
+  67:main.c        **** _PIO_PA18
+  68:main.c        **** 
+ 189              	dr	r3, .L13
+ 190 0138 30309FE5 		ldr	r3, [r3, #0]
+ 191 013c 003093E5 		add	r2, r3, #1
+ 192 0140 012083E2 		ldr	r3, .L13
+ 193 0144 24309FE5 		str	r2, [r3, #0]
+ 194 0148 002083E5 		.loc 1 70 0
+  69:main.c        **** LED2 AT91C_PIO_PA2
+  70:main.c        **** #define LED3 AT91C_PIO_PA28
+ 195              	3, #-1610612736
+ 196 014c 0A32A0E3 		mov	r3, r3, asr #12
+ 197 0150 4336A0E1 		mov	r2, #4
+ 198 0154 0420A0E3 		str	r2, [r3, #0]
+ 199 0158 002083E5 		.loc 1 71 0
+  71:main.c        ****  "include/interrupt.h"
+ 200              	r3, #-1610612736
+ 201 015c 0A32A0E3 		mov	r3, r3, asr #12
+ 202 0160 4336A0E1 		ldr	r3, [r3, #32]
+ 203 0164 203093E5 		str	r3, [fp, #-16]
+ 204 0168 10300BE5 		.loc 1 72 0
+  72:main.c        **** *********************
+ 205              	d	sp, {r3, fp, sp, pc}
+ 206 016c 08A89DE8 	.L14:
+ 207              		.align	2
+ 208              	.L13:
+ 209              		.word	counter.1725
+ 210 0170 00000000 	.LFE6:
+ 212              		.align	2
+ 213              		.global	get_bitfield_for_leds
+ 215              	get_bitfield_for_leds:
+ 216              	.LFB7:
+ 217              		.loc 1 74 0
+  73:main.c        **** / ARM_T5A3a									Version 02.04.2012 hpw
+  74:main.c        **** //********************************************************************
+ 218              	pretend = 0, frame = 16
+ 219              		@ frame_needed = 1, uses_anonymous_args = 0
+ 220              		mov	ip, sp
+ 221 0174 0DC0A0E1 	.LCFI20:
+ 222              		stmfd	sp!, {fp, ip, lr, pc}
+ 223 0178 00D82DE9 	.LCFI21:
+ 224              		sub	fp, ip, #4
+ 225 017c 04B04CE2 	.LCFI22:
+ 226              		sub	sp, sp, #16
+ 227 0180 10D04DE2 	.LCFI23:
+ 228              		str	r0, [fp, #-24]
+ 229 0184 18000BE5 		str	r1, [fp, #-28]
+ 230 0188 1C100BE5 		.loc 1 75 0
+  75:main.c        **** / ARM_T5A3a									Version 02.04.2012 hpw
+ 231              	str	r3, [fp, #-20]
+ 232 018c 0030A0E3 	.LBB2:
+ 233 0190 14300BE5 		.loc 1 77 0
+ 234              		mov	r3, #0
+  76:main.c        **** //********************************************************************
+  77:main.c        **** // ARM_T5A3a									Version 02.04.2012 hpw
+ 235              		r3, [fp, #-16]
+ 236 0194 0030A0E3 		b	.L16
+ 237 0198 10300BE5 	.L17:
+ 238 019c 0A0000EA 		.loc 1 78 0
+ 239              		ldr	r3, [fp, #-16]
+  78:main.c        **** //********************************************************************
+ 240              	r2, r3, asl #2
+ 241 01a0 10301BE5 		ldr	r3, [fp, #-24]
+ 242 01a4 0321A0E1 		add	r3, r3, r2
+ 243 01a8 18301BE5 		ldr	r2, [r3, #0]
+ 244 01ac 023083E0 		ldr	r3, [fp, #-20]
+ 245 01b0 002093E5 		orr	r3, r3, r2
+ 246 01b4 14301BE5 		str	r3, [fp, #-20]
+ 247 01b8 023083E1 		.loc 1 77 0
+ 248 01bc 14300BE5 		ldr	r3, [fp, #-16]
+ 249              		add	r3, r3, #1
+ 250 01c0 10301BE5 		str	r3, [fp, #-16]
+ 251 01c4 013083E2 	.L16:
+ 252 01c8 10300BE5 		ldr	r2, [fp, #-16]
+ 253              		ldr	r3, [fp, #-28]
+ 254 01cc 10201BE5 		cmp	r2, r3
+ 255 01d0 1C301BE5 		bcc	.L17
+ 256 01d4 030052E1 	.LBE2:
+ 257 01d8 F0FFFF3A 		.loc 1 81 0
+ 258              		ldr	r3, [fp, #-20]
+  79:main.c        **** //********************************************************************
+  80:main.c        **** // ARM_T5A3a									Version 02.04.2012 hpw
+  81:main.c        **** //********************************************************************
+ 259              	0, r3
+ 260 01dc 14301BE5 		sub	sp, fp, #12
+  82:main.c        **** / ARM_T5A3a									Version 02.04.2012 hpw
+ 261              	dmfd	sp, {fp, sp, pc}
+ 262 01e0 0300A0E1 	.LFE7:
+ 264 01e8 00A89DE8 		.align	2
+ 265              		.global	main
+ 267              	main:
+ 268              	.LFB8:
+ 269              		.loc 1 87 0
+ 270              		@ args = 0, pretend = 0, frame = 8
+ 271              		@ frame_needed = 1, uses_anonymous_args = 0
+  83:main.c        **** //********************************************************************
+  84:main.c        **** // ARM_T5A3a									Version 02.04.2012 hpw
+  85:main.c        **** //********************************************************************
+  86:main.c        **** #include "include/AT91SAM7S64.h"
+  87:main.c        **** #include "include/pwm.h"
+ 272              	
+ 273              	.LCFI24:
+ 274              		stmfd	sp!, {fp, ip, lr, pc}
+ 275 01ec 0DC0A0E1 	.LCFI25:
+ 276              		sub	fp, ip, #4
+ 277 01f0 00D82DE9 	.LCFI26:
+ 278              		sub	sp, sp, #8
+ 279 01f4 04B04CE2 	.LCFI27:
+ 280              	.LBB3:
+ 281 01f8 08D04DE2 		.loc 1 88 0
+ 282              		mov	r3, #0
+ 283              		str	r3, [fp, #-16]
+  88:main.c        **** *****************************************************
+ 284              	1:
+ 285 01fc 0030A0E3 		.loc 1 89 0
+ 286 0200 10300BE5 		ldr	r2, [fp, #-16]
+ 287 0204 0C0000EA 		ldr	r3, .L27
+ 288              		ldr	r3, [r3, r2, asl #2]
+  89:main.c        **** / ARM_T5A3a									Version 02.04.2012 hpw
+ 289              	r0, r3
+ 290 0208 10201BE5 		bl	enable_led
+ 291 020c E8309FE5 		.loc 1 90 0
+ 292 0210 023193E7 		ldr	r2, [fp, #-16]
+ 293 0214 0300A0E1 		ldr	r3, .L27
+ 294 0218 FEFFFFEB 		ldr	r3, [r3, r2, asl #2]
+  90:main.c        **** //********************************************************************
+ 295              	0, r3
+ 296 021c 10201BE5 		bl	led_off
+ 297 0220 D4309FE5 		.loc 1 88 0
+ 298 0224 023193E7 		ldr	r3, [fp, #-16]
+ 299 0228 0300A0E1 		add	r3, r3, #1
+ 300 022c FEFFFFEB 		str	r3, [fp, #-16]
+ 301              	.L20:
+ 302 0230 10301BE5 		ldr	r3, [fp, #-16]
+ 303 0234 013083E2 		cmp	r3, #4
+ 304 0238 10300BE5 		bls	.L21
+ 305              	.LBE3:
+ 306 023c 10301BE5 		.loc 1 93 0
+ 307 0240 040053E3 		mov	r0, #262144
+ 308 0244 EFFFFF9A 		bl	led_on
+ 309              		.loc 1 100 0
+  91:main.c        **** //********************************************************************
+  92:main.c        **** // ARM_T5A3a									Version 02.04.2012 hpw
+  93:main.c        **** //********************************************************************
+ 310              	v	r1, #4
+ 311 0248 0107A0E3 		ldr	r2, .L27+4	@ float
+ 312 024c FEFFFFEB 		bl	pwm_init
+  94:main.c        **** / ARM_T5A3a									Version 02.04.2012 hpw
+  95:main.c        **** //********************************************************************
+  96:main.c        **** #include "include/AT91SAM7S64.h"
+  97:main.c        **** #include "include/pwm.h"
+  98:main.c        **** #include "include/interrupt.h"
+  99:main.c        **** 
+ 100:main.c        **** #define LED1 AT91C_PIO_PA30
+ 313              	v	r3, r0
+ 314 0250 0200A0E3 		and	r3, r3, #255
+ 315 0254 0410A0E3 		strb	r3, [fp, #-17]
+ 316 0258 A0209FE5 		.loc 1 101 0
+ 317 025c FEFFFFEB 		ldrsb	r3, [fp, #-17]
+ 318 0260 0030A0E1 		cmp	r3, #0
+ 319 0264 FF3003E2 		beq	.L22
+ 320 0268 11304BE5 		.loc 1 102 0
+ 101:main.c        **** "include/AT91SAM7S64.h"
+ 321              	3, [fp, #-17]
+ 322 026c D1315BE1 		cmn	r3, #1
+ 323 0270 000053E3 		bne	.L23
+ 324 0274 1000000A 		.loc 1 103 0
+ 102:main.c        **** 2012 hpw
+ 325              		r0, #1073741824
+ 326 0278 D1315BE1 		bl	led_on
+ 327 027c 010073E3 		b	.L22
+ 328 0280 0200001A 	.L23:
+ 103:main.c        **** //********************************************************************
+ 329              	c 1 104 0
+ 330 0284 0101A0E3 		ldrsb	r3, [fp, #-17]
+ 331 0288 FEFFFFEB 		cmn	r3, #2
+ 332 028c 0A0000EA 		bne	.L24
+ 333              		.loc 1 105 0
+ 104:main.c        **** //********************************************************************
+ 334              	r0, #1073741828
+ 335 0290 D1315BE1 		bl	led_on
+ 336 0294 020073E3 		b	.L22
+ 337 0298 0200001A 	.L24:
+ 105:main.c        **** //********************************************************************
+ 338              	c 1 106 0
+ 339 029c 1101A0E3 		ldrsb	r3, [fp, #-17]
+ 340 02a0 FEFFFFEB 		cmn	r3, #3
+ 341 02a4 040000EA 		bne	.L22
+ 342              		.loc 1 107 0
+ 106:main.c        **** //********************************************************************
+ 343              	r0, #1342177284
+ 344 02a8 D1315BE1 		bl	led_on
+ 345 02ac 030073E3 	.L22:
+ 346 02b0 0100001A 		.loc 1 111 0
+ 107:main.c        **** //********************************************************************
+ 347              		r0, #2
+ 348 02b4 4502A0E3 		mov	r1, #1
+ 349 02b8 FEFFFFEB 		bl	pwm_set_duty
+ 350              		mov	r3, r0
+ 108:main.c        **** //********************************************************************
+ 109:main.c        **** // ARM_T5A3a									Version 02.04.2012 hpw
+ 110:main.c        **** //********************************************************************
+ 111:main.c        **** #include "include/AT91SAM7S64.h"
+ 351              		r3, r3, #255
+ 352 02bc 0200A0E3 		strb	r3, [fp, #-17]
+ 353 02c0 0110A0E3 		.loc 1 112 0
+ 354 02c4 FEFFFFEB 		ldrsb	r3, [fp, #-17]
+ 355 02c8 0030A0E1 		cmn	r3, #1
+ 356 02cc FF3003E2 		bne	.L25
+ 357 02d0 11304BE5 		.loc 1 113 0
+ 112:main.c        **** 2012 hpw
+ 358              	, .L27
+ 359 02d4 D1315BE1 		mov	r1, #5
+ 360 02d8 010073E3 		bl	get_bitfield_for_leds
+ 361 02dc 0500001A 		mov	r3, r0
+ 113:main.c        **** //********************************************************************
+ 362              		r0, r3
+ 363 02e0 14009FE5 		bl	led_on
+ 364 02e4 0510A0E3 	.L25:
+ 365 02e8 FEFFFFEB 		b	.L25
+ 366 02ec 0030A0E1 	.L28:
+ 367 02f0 0300A0E1 		.align	2
+ 368 02f4 FEFFFFEB 	.L27:
+ 369              		.word	all_leds
+ 370 02f8 FEFFFFEA 		.word	1065353216
+ 371              	.LFE8:
+ 373              		.section	.debug_frame,"",%progbits
+ 374 02fc 00000000 	.Lframe0:
+ 375 0300 0000803F 		.4byte	.LECIE0-.LSCIE0
+ 376              	.LSCIE0:
+ 377              		.4byte	0xffffffff
+ 569              		.4byte	.LCFI0-.Ltext0
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\Aomx\AppData\Local\Temp/ccF1AL9S.s:15     .data:00000000 all_leds
+C:\Users\Aomx\AppData\Local\Temp/ccF1AL9S.s:16     .data:00000000 $d
+C:\Users\Aomx\AppData\Local\Temp/ccF1AL9S.s:25     .text:00000000 enable_led
+C:\Users\Aomx\AppData\Local\Temp/ccF1AL9S.s:31     .text:00000000 $a
+C:\Users\Aomx\AppData\Local\Temp/ccF1AL9S.s:62     .text:00000048 led_on
+C:\Users\Aomx\AppData\Local\Temp/ccF1AL9S.s:88     .text:00000070 led_off
+C:\Users\Aomx\AppData\Local\Temp/ccF1AL9S.s:113    .text:00000098 invert_pio
+                             .bss:00000000 $d
+C:\Users\Aomx\AppData\Local\Temp/ccF1AL9S.s:167    .bss:00000000 counter.1725
+C:\Users\Aomx\AppData\Local\Temp/ccF1AL9S.s:173    .text:00000120 timer0_isr
+C:\Users\Aomx\AppData\Local\Temp/ccF1AL9S.s:210    .text:00000170 $d
+C:\Users\Aomx\AppData\Local\Temp/ccF1AL9S.s:216    .text:00000174 get_bitfield_for_leds
+C:\Users\Aomx\AppData\Local\Temp/ccF1AL9S.s:221    .text:00000174 $a
+C:\Users\Aomx\AppData\Local\Temp/ccF1AL9S.s:270    .text:000001ec main
+C:\Users\Aomx\AppData\Local\Temp/ccF1AL9S.s:374    .text:000002fc $d
+
+UNDEFINED SYMBOLS
+pwm_init
+pwm_set_duty

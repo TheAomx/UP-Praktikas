@@ -1,0 +1,368 @@
+   1              		.file	"main.c"
+   9              	.Ltext0:
+  10              		.align	2
+  11              		.global	delay_ms
+  13              	delay_ms:
+  14              	.LFB2:
+  15              		.file 1 "main.c"
+   1:main.c        **** //********************************************************************
+   2:main.c        **** // ARM_T5A3c									Version 02.04.2012 hpw
+   3:main.c        **** //********************************************************************
+   4:main.c        **** #include	"include/AT91SAM7S64.h"			// Definition von ARM7 typischen Registern etc.
+   5:main.c        **** #include	"include/serial.h"
+   6:main.c        **** #include	"include/display.h"
+   7:main.c        **** #include    "include/interrupt.h"
+   8:main.c        **** 
+   9:main.c        **** #define		BUTTON1	AT91C_PIO_PA1
+  10:main.c        **** #define		BUTTON2	AT91C_PIO_PA0
+  11:main.c        **** #define		BUTTON3	AT91C_PIO_PA31
+  12:main.c        **** 
+  13:main.c        **** void delay_ms(unsigned int uiK){
+  16              	 args = 0, pretend = 0, frame = 8
+  17              		@ frame_needed = 1, uses_anonymous_args = 0
+  18              		mov	ip, sp
+  19 0000 0DC0A0E1 	.LCFI0:
+  20              		stmfd	sp!, {fp, ip, lr, pc}
+  21 0004 00D82DE9 	.LCFI1:
+  22              		sub	fp, ip, #4
+  23 0008 04B04CE2 	.LCFI2:
+  24              		sub	sp, sp, #8
+  25 000c 08D04DE2 	.LCFI3:
+  26              		str	r0, [fp, #-20]
+  27 0010 14000BE5 		b	.L2
+  28 0014 0A0000EA 	.L5:
+  29              		.loc 1 17 0
+  14:main.c        **** ON2	AT91C_PIO_PA0
+  15:main.c        **** #define		BUTTON3	AT91C_PIO_PA31
+  16:main.c        **** 
+  17:main.c        **** void delay_ms(unsigned int uiK){
+  30              	tr	r3, [fp, #-16]
+  31 0018 0030A0E3 		b	.L3
+  32 001c 10300BE5 	.L4:
+  33 0020 020000EA 		ldr	r3, [fp, #-16]
+  34              		add	r3, r3, #1
+  35 0024 10301BE5 		str	r3, [fp, #-16]
+  36 0028 013083E2 	.L3:
+  37 002c 10300BE5 		ldr	r2, [fp, #-16]
+  38              		mov	r3, #1632
+  39 0030 10201BE5 		add	r3, r3, #5
+  40 0034 663EA0E3 		cmp	r2, r3
+  41 0038 053083E2 		bls	.L4
+  42 003c 030052E1 	.L2:
+  43 0040 F7FFFF9A 		.loc 1 16 0
+  44              		ldr	r3, [fp, #-20]
+  45              		cmp	r3, #0
+  46 0044 14301BE5 		moveq	r3, #0
+  47 0048 000053E3 		movne	r3, #1
+  48 004c 0030A003 		and	r2, r3, #255
+  49 0050 0130A013 		ldr	r3, [fp, #-20]
+  50 0054 FF2003E2 		sub	r3, r3, #1
+  51 0058 14301BE5 		str	r3, [fp, #-20]
+  52 005c 013043E2 		cmp	r2, #0
+  53 0060 14300BE5 		bne	.L5
+  54 0064 000052E3 		.loc 1 19 0
+  55 0068 EAFFFF1A 		sub	sp, fp, #12
+  18:main.c        **** ON2	AT91C_PIO_PA0
+  19:main.c        **** #define		BUTTON3	AT91C_PIO_PA31
+  56              	FE2:
+  58 0070 00A89DE8 		.align	2
+  59              		.global	is_button_pressed
+  61              	is_button_pressed:
+  62              	.LFB3:
+  63              		.loc 1 21 0
+  64              		@ args = 0, pretend = 0, frame = 4
+  65              		@ frame_needed = 1, uses_anonymous_args = 0
+  20:main.c        **** 	BUTTON1	AT91C_PIO_PA1
+  21:main.c        **** #define		BUTTON2	AT91C_PIO_PA0
+  66              	p
+  67              	.LCFI4:
+  68              		stmfd	sp!, {fp, ip, lr, pc}
+  69 0074 0DC0A0E1 	.LCFI5:
+  70              		sub	fp, ip, #4
+  71 0078 00D82DE9 	.LCFI6:
+  72              		sub	sp, sp, #4
+  73 007c 04B04CE2 	.LCFI7:
+  74              		str	r0, [fp, #-16]
+  75 0080 04D04DE2 		.loc 1 22 0
+  76              		mov	r3, #-1610612736
+  77 0084 10000BE5 		mov	r3, r3, asr #19
+  22:main.c        ****   "include/interrupt.h"
+  78              	, #60]
+  79 0088 0A32A0E3 		ldr	r3, [fp, #-16]
+  80 008c C339A0E1 		and	r3, r2, r3
+  81 0090 3C2093E5 		cmp	r3, #0
+  82 0094 10301BE5 		movne	r3, #0
+  83 0098 033002E0 		moveq	r3, #1
+  84 009c 000053E3 		.loc 1 23 0
+  85 00a0 0030A013 		mov	r0, r3
+  86 00a4 0130A003 		ldmfd	sp, {r3, fp, sp, pc}
+  23:main.c        **** include	"include/serial.h"
+  87              	size	is_button_pressed, .-is_button_pressed
+  88 00a8 0300A0E1 		.align	2
+  89 00ac 08A89DE8 		.global	get_button_state
+  91              	get_button_state:
+  92              	.LFB4:
+  93              		.loc 1 24 0
+  94              		@ args = 0, pretend = 0, frame = 4
+  95              		@ frame_needed = 1, uses_anonymous_args = 0
+  96              		mov	ip, sp
+  24:main.c        **** T91SAM7S64.h"			// Definition von ARM7 typischen Registern etc.
+  97              	tmfd	sp!, {fp, ip, lr, pc}
+  98              	.LCFI9:
+  99              		sub	fp, ip, #4
+ 100 00b0 0DC0A0E1 	.LCFI10:
+ 101              		sub	sp, sp, #4
+ 102 00b4 00D82DE9 	.LCFI11:
+ 103              		.loc 1 25 0
+ 104 00b8 04B04CE2 		mov	r3, #0
+ 105              		strb	r3, [fp, #-13]
+ 106 00bc 04D04DE2 		.loc 1 27 0
+ 107              		mov	r0, #2
+  25:main.c        **** *********
+ 108              	on_pressed
+ 109 00c0 0030A0E3 		mov	r3, r0
+ 110 00c4 0D304BE5 		cmp	r3, #0
+  26:main.c        **** Version 02.04.2012 hpw
+  27:main.c        **** //********************************************************************
+ 111              	q	.L10
+ 112 00c8 0200A0E3 		.loc 1 28 0
+ 113 00cc FEFFFFEB 		ldrb	r3, [fp, #-13]
+ 114 00d0 0030A0E1 		add	r3, r3, #1
+ 115 00d4 000053E3 		strb	r3, [fp, #-13]
+ 116 00d8 0200000A 	.L10:
+  28:main.c        **** Version 02.04.2012 hpw
+ 117              	1 31 0
+ 118 00dc 0D305BE5 		mov	r0, #1
+ 119 00e0 013083E2 		bl	is_button_pressed
+ 120 00e4 0D304BE5 		mov	r3, r0
+ 121              		cmp	r3, #0
+  29:main.c        **** **************************************************
+  30:main.c        **** // ARM_T5A3c									Version 02.04.2012 hpw
+  31:main.c        **** //********************************************************************
+ 122              	.L11
+ 123 00e8 0100A0E3 		.loc 1 32 0
+ 124 00ec FEFFFFEB 		ldrb	r3, [fp, #-13]
+ 125 00f0 0030A0E1 		add	r3, r3, #2
+ 126 00f4 000053E3 		strb	r3, [fp, #-13]
+ 127 00f8 0200000A 	.L11:
+  32:main.c        **** Version 02.04.2012 hpw
+ 128              	1 35 0
+ 129 00fc 0D305BE5 		mov	r0, #-2147483648
+ 130 0100 023083E2 		bl	is_button_pressed
+ 131 0104 0D304BE5 		mov	r3, r0
+ 132              		cmp	r3, #0
+  33:main.c        **** **************************************************
+  34:main.c        **** // ARM_T5A3c									Version 02.04.2012 hpw
+  35:main.c        **** //********************************************************************
+ 133              	.L12
+ 134 0108 0201A0E3 		.loc 1 36 0
+ 135 010c FEFFFFEB 		ldrb	r3, [fp, #-13]
+ 136 0110 0030A0E1 		add	r3, r3, #4
+ 137 0114 000053E3 		strb	r3, [fp, #-13]
+ 138 0118 0200000A 	.L12:
+  36:main.c        **** Version 02.04.2012 hpw
+ 139              	1 39 0
+ 140 011c 0D305BE5 		ldrb	r3, [fp, #-13]	@ zero_extendqisi2
+ 141 0120 043083E2 		.loc 1 40 0
+ 142 0124 0D304BE5 		mov	r0, r3
+ 143              		ldmfd	sp, {r3, fp, sp, pc}
+  37:main.c        **** **************************************************
+  38:main.c        **** // ARM_T5A3c									Version 02.04.2012 hpw
+  39:main.c        **** //********************************************************************
+ 144              	:
+  40:main.c        **** Version 02.04.2012 hpw
+ 146              	section	.rodata
+ 147 012c 0300A0E1 		.align	2
+ 148 0130 08A89DE8 	.LC0:
+ 149              		.ascii	"button 1 pressed\012\000"
+ 150              		.align	2
+ 151              	.LC1:
+ 152              		.ascii	"button 2 pressed\012\000"
+ 153              		.align	2
+ 154 0000 62757474 	.LC2:
+ 154      6F6E2031 
+ 154      20707265 
+ 154      73736564 
+ 154      0A00
+ 155 0012 0000     		.ascii	"button 3 pressed\012\000"
+ 156              		.text
+ 157 0014 62757474 		.align	2
+ 157      6F6E2032 
+ 157      20707265 
+ 157      73736564 
+ 157      0A00
+ 158 0026 0000     		.global	pioa_isr
+ 160 0028 62757474 	pioa_isr:
+ 160      6F6E2033 
+ 160      20707265 
+ 160      73736564 
+ 160      0A00
+ 161 003a 0000     	.LFB5:
+ 162              		.loc 1 42 0
+ 163              		@ args = 0, pretend = 0, frame = 8
+ 164              		@ frame_needed = 1, uses_anonymous_args = 0
+ 165              		mov	ip, sp
+ 166              	.LCFI12:
+  41:main.c        **** **************************************************
+  42:main.c        **** // ARM_T5A3c									Version 02.04.2012 hpw
+ 167              	lr, pc}
+ 168              	.LCFI13:
+ 169              		sub	fp, ip, #4
+ 170 0134 0DC0A0E1 	.LCFI14:
+ 171              		sub	sp, sp, #8
+ 172 0138 00D82DE9 	.LCFI15:
+ 173              		.loc 1 46 0
+ 174 013c 04B04CE2 		bl	get_button_state
+ 175              		mov	r3, r0
+ 176 0140 08D04DE2 		strb	r3, [fp, #-13]
+ 177              		.loc 1 48 0
+  43:main.c        **** **************************************************
+  44:main.c        **** // ARM_T5A3c									Version 02.04.2012 hpw
+  45:main.c        **** //********************************************************************
+  46:main.c        **** #include	"include/AT91SAM7S64.h"			// Definition von ARM7 typischen Registern etc.
+ 178              	fp, #-13]	@ zero_extendqisi2
+ 179 0144 FEFFFFEB 		sub	r3, r3, #1
+ 180 0148 0030A0E1 		cmp	r3, #3
+ 181 014c 0D304BE5 		ldrls	pc, [pc, r3, asl #2]
+  47:main.c        **** *********
+  48:main.c        **** #include	"include/AT91SAM7S64.h"			// Definition von ARM7 typischen Registern etc.
+ 182              	L15
+ 183 0150 0D305BE5 	.L20:
+ 184 0154 013043E2 		.word	.L16
+ 185 0158 030053E3 		.word	.L17
+ 186 015c 03F19F97 		.word	.L15
+ 187 0160 0B0000EA 		.word	.L19
+ 188              	.L16:
+ 189 0164 74010000 		.loc 1 50 0
+ 190 0168 80010000 		ldr	r0, .L22
+ 191 016c 94010000 		bl	usart0_puts
+ 192 0170 8C010000 		b	.L15
+ 193              	.L17:
+  49:main.c        **** *********
+  50:main.c        **** #include	"include/AT91SAM7S64.h"			// Definition von ARM7 typischen Registern etc.
+ 194              	
+ 195 0174 30009FE5 		ldr	r0, .L22+4
+ 196 0178 FEFFFFEB 		bl	usart0_puts
+ 197 017c 040000EA 		b	.L15
+ 198              	.L19:
+  51:main.c        **** *********
+  52:main.c        **** #include	"include/AT91SAM7S64.h"			// Definition von ARM7 typischen Registern etc.
+  53:main.c        **** #include	"include/serial.h"
+ 199              	c 1 58 0
+ 200 0180 28009FE5 		ldr	r0, .L22+8
+ 201 0184 FEFFFFEB 		bl	usart0_puts
+ 202 0188 010000EA 	.L15:
+ 203              		.loc 1 65 0
+  54:main.c        **** T91SAM7S64.h"			// Definition von ARM7 typischen Registern etc.
+  55:main.c        **** #include	"include/serial.h"
+  56:main.c        **** #include	"include/display.h"
+  57:main.c        **** #include    "include/interrupt.h"
+  58:main.c        **** 
+ 204              	r3, #-1610612736
+ 205 018c 20009FE5 		mov	r3, r3, asr #19
+ 206 0190 FEFFFFEB 		ldr	r3, [r3, #76]
+ 207              		str	r3, [fp, #-20]
+  59:main.c        **** clude	"include/serial.h"
+  60:main.c        **** #include	"include/display.h"
+  61:main.c        **** #include    "include/interrupt.h"
+  62:main.c        **** 
+  63:main.c        **** #define		BUTTON1	AT91C_PIO_PA1
+  64:main.c        **** #define		BUTTON2	AT91C_PIO_PA0
+  65:main.c        **** #define		BUTTON3	AT91C_PIO_PA31
+ 208              	c 1 66 0
+ 209 0194 0A32A0E3 		sub	sp, fp, #12
+ 210 0198 C339A0E1 		ldmfd	sp, {fp, sp, pc}
+ 211 019c 4C3093E5 	.L23:
+ 212 01a0 14300BE5 		.align	2
+  66:main.c        **** 	BUTTON1	AT91C_PIO_PA1
+ 213              	
+ 214 01a4 0CD04BE2 		.word	.LC0
+ 215 01a8 00A89DE8 		.word	.LC1
+ 216              		.word	.LC2
+ 217              	.LFE5:
+ 219 01ac 00000000 		.align	2
+ 220 01b0 14000000 		.global	main
+ 222              	main:
+ 223              	.LFB6:
+ 224              		.loc 1 71 0
+ 225              		@ args = 0, pretend = 0, frame = 0
+ 226              		@ frame_needed = 1, uses_anonymous_args = 0
+ 227              		mov	ip, sp
+ 228              	.LCFI16:
+  67:main.c        **** e	"include/display.h"
+  68:main.c        **** #include    "include/interrupt.h"
+  69:main.c        **** 
+  70:main.c        **** #define		BUTTON1	AT91C_PIO_PA1
+  71:main.c        **** #define		BUTTON2	AT91C_PIO_PA0
+ 229              	, ip, lr, pc}
+ 230              	.LCFI17:
+ 231              		sub	fp, ip, #4
+ 232 01b8 0DC0A0E1 	.LCFI18:
+ 233              		.loc 1 72 0
+ 234 01bc 00D82DE9 		mov	r3, #-2147483648
+ 235              		mov	r3, r3, asr #21
+ 236 01c0 04B04CE2 		mov	r2, #4
+ 237              		str	r2, [r3, #16]
+  72:main.c        ****   "include/interrupt.h"
+ 238              	5 0
+ 239 01c4 0231A0E3 		bl	usart0_init
+ 240 01c8 C33AA0E1 		.loc 1 76 0
+ 241 01cc 0420A0E3 		bl	display_init
+ 242 01d0 102083E5 		.loc 1 78 0
+  73:main.c        **** include	"include/serial.h"
+  74:main.c        **** #include	"include/display.h"
+  75:main.c        **** #include    "include/interrupt.h"
+ 243              	r0, #2
+ 244 01d4 FEFFFFEB 		mov	r1, #4
+  76:main.c        **** include	"include/serial.h"
+ 245              	ov	r2, #3
+ 246 01d8 FEFFFFEB 		ldr	r3, .L27
+  77:main.c        **** T91SAM7S64.h"			// Definition von ARM7 typischen Registern etc.
+  78:main.c        **** #include	"include/serial.h"
+ 247              	l	pioa_ir_init
+ 248 01dc 0200A0E3 		.loc 1 79 0
+ 249 01e0 0410A0E3 		mov	r0, #1
+ 250 01e4 0320A0E3 		mov	r1, #4
+ 251 01e8 2C309FE5 		mov	r2, #3
+ 252 01ec FEFFFFEB 		ldr	r3, .L27
+  79:main.c        **** T91SAM7S64.h"			// Definition von ARM7 typischen Registern etc.
+ 253              	oa_ir_init
+ 254 01f0 0100A0E3 		.loc 1 80 0
+ 255 01f4 0410A0E3 		mov	r0, #-2147483648
+ 256 01f8 0320A0E3 		mov	r1, #4
+ 257 01fc 18309FE5 		mov	r2, #3
+ 258 0200 FEFFFFEB 		ldr	r3, .L27
+  80:main.c        **** *********
+ 259              	oa_ir_init
+ 260 0204 0201A0E3 	.L25:
+ 261 0208 0410A0E3 		b	.L25
+ 262 020c 0320A0E3 	.L28:
+ 263 0210 04309FE5 		.align	2
+ 264 0214 FEFFFFEB 	.L27:
+ 265              		.word	pioa_isr
+ 266 0218 FEFFFFEA 	.LFE6:
+ 268              		.section	.debug_frame,"",%progbits
+ 269              	.Lframe0:
+ 270 021c 00000000 		.4byte	.LECIE0-.LSCIE0
+ 271              	.LSCIE0:
+ 272              		.4byte	0xffffffff
+ 414              		.4byte	.LCFI0-.Ltext0
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\Aomx\AppData\Local\Temp/ccLFIKAC.s:13     .text:00000000 delay_ms
+C:\Users\Aomx\AppData\Local\Temp/ccLFIKAC.s:19     .text:00000000 $a
+C:\Users\Aomx\AppData\Local\Temp/ccLFIKAC.s:64     .text:00000074 is_button_pressed
+C:\Users\Aomx\AppData\Local\Temp/ccLFIKAC.s:95     .text:000000b0 get_button_state
+C:\Users\Aomx\AppData\Local\Temp/ccLFIKAC.s:165    .text:00000134 pioa_isr
+C:\Users\Aomx\AppData\Local\Temp/ccLFIKAC.s:189    .text:00000164 $d
+C:\Users\Aomx\AppData\Local\Temp/ccLFIKAC.s:195    .text:00000174 $a
+C:\Users\Aomx\AppData\Local\Temp/ccLFIKAC.s:219    .text:000001ac $d
+C:\Users\Aomx\AppData\Local\Temp/ccLFIKAC.s:227    .text:000001b8 main
+C:\Users\Aomx\AppData\Local\Temp/ccLFIKAC.s:232    .text:000001b8 $a
+C:\Users\Aomx\AppData\Local\Temp/ccLFIKAC.s:270    .text:0000021c $d
+
+UNDEFINED SYMBOLS
+usart0_puts
+usart0_init
+display_init
+pioa_ir_init

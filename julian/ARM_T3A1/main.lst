@@ -1,0 +1,830 @@
+   1              		.file	"main.c"
+   9              	.Ltext0:
+  10              		.align	2
+  11              		.global	delay_ms
+  13              	delay_ms:
+  14              	.LFB2:
+  15              		.file 1 "main.c"
+   1:main.c        **** //********************************************************************
+   2:main.c        **** // ARM_T3A1										Version 02.04.2012 hpw
+   3:main.c        **** //********************************************************************
+   4:main.c        **** 
+   5:main.c        **** #include	"include/AT91SAM7S64.h"
+   6:main.c        **** #include	"include/display.h"
+   7:main.c        **** #include	"include/i2c_tools.h"
+   8:main.c        **** 
+   9:main.c        **** typedef unsigned char uchar_t;
+  10:main.c        **** 
+  11:main.c        **** #define ACK_CONSTANT  0
+  12:main.c        **** #define NACK_CONSTANT 1
+  13:main.c        **** 
+  14:main.c        **** #define		PH2			AT91C_PIO_PA23				// Alle Ports die für den Motor verwendet werden
+  15:main.c        **** #define		PH1			AT91C_PIO_PA13
+  16:main.c        **** #define		I21			AT91C_PIO_PA20
+  17:main.c        **** #define		I11			AT91C_PIO_PA14
+  18:main.c        **** #define		I20			AT91C_PIO_PA16
+  19:main.c        **** #define		I10			AT91C_PIO_PA15
+  20:main.c        **** #define		MOTOR_MASK	(PH2|PH1|I21|I11|I20|I10)
+  21:main.c        **** 
+  22:main.c        **** 
+  23:main.c        **** void delay_ms(unsigned int uiK){
+  16              	 args = 0, pretend = 0, frame = 8
+  17              		@ frame_needed = 1, uses_anonymous_args = 0
+  18              		mov	ip, sp
+  19 0000 0DC0A0E1 	.LCFI0:
+  20              		stmfd	sp!, {fp, ip, lr, pc}
+  21 0004 00D82DE9 	.LCFI1:
+  22              		sub	fp, ip, #4
+  23 0008 04B04CE2 	.LCFI2:
+  24              		sub	sp, sp, #8
+  25 000c 08D04DE2 	.LCFI3:
+  26              		str	r0, [fp, #-20]
+  27 0010 14000BE5 		b	.L2
+  28 0014 0A0000EA 	.L5:
+  29              		.loc 1 27 0
+  24:main.c        **** 	volatile unsigned int uiI;
+  25:main.c        **** 
+  26:main.c        **** 	while (uiK--)
+  27:main.c        **** 		for (uiI=0; uiI<1638; uiI++);
+  30              	tr	r3, [fp, #-16]
+  31 0018 0030A0E3 		b	.L3
+  32 001c 10300BE5 	.L4:
+  33 0020 020000EA 		ldr	r3, [fp, #-16]
+  34              		add	r3, r3, #1
+  35 0024 10301BE5 		str	r3, [fp, #-16]
+  36 0028 013083E2 	.L3:
+  37 002c 10300BE5 		ldr	r2, [fp, #-16]
+  38              		mov	r3, #1632
+  39 0030 10201BE5 		add	r3, r3, #5
+  40 0034 663EA0E3 		cmp	r2, r3
+  41 0038 053083E2 		bls	.L4
+  42 003c 030052E1 	.L2:
+  43 0040 F7FFFF9A 		.loc 1 26 0
+  44              		ldr	r3, [fp, #-20]
+  45              		cmp	r3, #0
+  46 0044 14301BE5 		moveq	r3, #0
+  47 0048 000053E3 		movne	r3, #1
+  48 004c 0030A003 		and	r2, r3, #255
+  49 0050 0130A013 		ldr	r3, [fp, #-20]
+  50 0054 FF2003E2 		sub	r3, r3, #1
+  51 0058 14301BE5 		str	r3, [fp, #-20]
+  52 005c 013043E2 		cmp	r2, #0
+  53 0060 14300BE5 		bne	.L5
+  54 0064 000052E3 		.loc 1 29 0
+  55 0068 EAFFFF1A 		sub	sp, fp, #12
+  28:main.c        **** 
+  29:main.c        **** }
+  56              	FE2:
+  58 0070 00A89DE8 		.align	2
+  59              		.global	tempwert
+  61              	tempwert:
+  62              	.LFB3:
+  63              		.loc 1 31 0
+  64              		@ args = 0, pretend = 0, frame = 12
+  65              		@ frame_needed = 1, uses_anonymous_args = 0
+  30:main.c        **** 
+  31:main.c        **** signed int tempwert(unsigned char MSByte, unsigned char LSByte){
+  66              	p
+  67              	.LCFI4:
+  68              		stmfd	sp!, {fp, ip, lr, pc}
+  69 0074 0DC0A0E1 	.LCFI5:
+  70              		sub	fp, ip, #4
+  71 0078 00D82DE9 	.LCFI6:
+  72              		sub	sp, sp, #12
+  73 007c 04B04CE2 	.LCFI7:
+  74              		mov	r3, r0
+  75 0080 0CD04DE2 		mov	r2, r1
+  76              		strb	r3, [fp, #-20]
+  77 0084 0030A0E1 		mov	r3, r2
+  78 0088 0120A0E1 		strb	r3, [fp, #-24]
+  79 008c 14304BE5 		.loc 1 34 0
+  80 0090 0230A0E1 		ldrb	r3, [fp, #-20]	@ zero_extendqisi2
+  81 0094 18304BE5 		mov	r2, r3, asl #24
+  32:main.c        **** 	signed int siTemp;
+  33:main.c        **** 
+  34:main.c        **** 	siTemp = ((MSByte<<24)+(LSByte<<16))>>23;
+  82              	-24]	@ zero_extendqisi2
+  83 0098 14305BE5 		mov	r3, r3, asl #16
+  84 009c 032CA0E1 		add	r3, r2, r3
+  85 00a0 18305BE5 		mov	r3, r3, asr #23
+  86 00a4 0338A0E1 		str	r3, [fp, #-16]
+  87 00a8 033082E0 		.loc 1 35 0
+  88 00ac C33BA0E1 		ldr	r3, [fp, #-16]
+  89 00b0 10300BE5 		.loc 1 36 0
+  35:main.c        **** 	return siTemp;
+  90              	 r3
+  91 00b4 10301BE5 		sub	sp, fp, #12
+  36:main.c        **** }
+  92              	dmfd	sp, {fp, sp, pc}
+  93 00b8 0300A0E1 	.LFE3:
+  95 00c0 00A89DE8 		.section	.rodata
+  96              		.align	2
+  97              	.LC0:
+  98              		.ascii	"%d\000"
+  99              		.text
+ 100              		.align	2
+ 101 0000 256400   		.global	print_temp
+ 103              	print_temp:
+ 104              	.LFB4:
+ 105              		.loc 1 50 0
+ 106              		@ args = 0, pretend = 0, frame = 8
+ 107              		@ frame_needed = 1, uses_anonymous_args = 0
+  37:main.c        **** 
+  38:main.c        **** //*Alternativ
+  39:main.c        **** //	union{
+  40:main.c        **** //		signed int si;
+  41:main.c        **** //		unsigned char uc[4];
+  42:main.c        **** //	} DATA;
+  43:main.c        **** //
+  44:main.c        **** //	DATA.uc[2] = LSByte;
+  45:main.c        **** //	DATA.uc[3] = MSByte;
+  46:main.c        **** //	return (DATA.si>>23);
+  47:main.c        **** //}
+  48:main.c        **** 
+  49:main.c        **** 
+  50:main.c        **** void print_temp(signed int cTemp){			// Funktion zur Ausgabe des Temperaturwertes
+ 108              	I8:
+ 109              		stmfd	sp!, {fp, ip, lr, pc}
+ 110              	.LCFI9:
+ 111 00c4 0DC0A0E1 		sub	fp, ip, #4
+ 112              	.LCFI10:
+ 113 00c8 00D82DE9 		sub	sp, sp, #8
+ 114              	.LCFI11:
+ 115 00cc 04B04CE2 		str	r0, [fp, #-20]
+ 116              		.loc 1 53 0
+ 117 00d0 08D04DE2 		ldr	r3, [fp, #-20]
+ 118              		cmp	r3, #0
+ 119 00d4 14000BE5 		bge	.L10
+  51:main.c        **** 	unsigned int ucL;
+  52:main.c        **** 
+  53:main.c        **** 	if(cTemp < 0){							// Fallunterscheidung cTemp=negativ?
+ 120              	
+ 121 00d8 14301BE5 		mov	r0, #45
+ 122 00dc 000053E3 		bl	display_putchar
+ 123 00e0 050000AA 		.loc 1 55 0
+  54:main.c        **** 		display_putchar('-');
+ 124              	r	r3, [fp, #-20]
+ 125 00e4 2D00A0E3 		rsb	r3, r3, #0
+ 126 00e8 FEFFFFEB 		str	r3, [fp, #-16]
+  55:main.c        **** 		ucL = (unsigned int) -cTemp;}
+ 127              	.L11
+ 128 00ec 14301BE5 	.L10:
+ 129 00f0 003063E2 		.loc 1 57 0
+ 130 00f4 10300BE5 		mov	r0, #43
+ 131 00f8 030000EA 		bl	display_putchar
+ 132              		.loc 1 58 0
+  56:main.c        **** 	else{
+  57:main.c        **** 		display_putchar('+');
+ 133              	3, [fp, #-20]
+ 134 00fc 2B00A0E3 		str	r3, [fp, #-16]
+ 135 0100 FEFFFFEB 	.L11:
+  58:main.c        **** 		ucL = (unsigned int) cTemp;}
+ 136              	oc 1 60 0
+ 137 0104 14301BE5 		ldr	r3, [fp, #-16]
+ 138 0108 10300BE5 		mov	r3, r3, lsr #1
+ 139              		cmp	r3, #9
+  59:main.c        **** 
+  60:main.c        **** 	if((ucL>>1)<10)display_putchar(' ');	// Formartierte Ausgabe
+ 140              		.L12
+ 141 010c 10301BE5 		mov	r0, #32
+ 142 0110 A330A0E1 		bl	display_putchar
+ 143 0114 090053E3 	.L12:
+ 144 0118 0100008A 		.loc 1 61 0
+ 145 011c 2000A0E3 		ldr	r3, [fp, #-16]
+ 146 0120 FEFFFFEB 		mov	r3, r3, lsr #1
+ 147              		ldr	r0, .L16
+  61:main.c        **** 	display_printf("%d",ucL>>1);			// Ausgabe als unsigned int
+ 148              	 r3
+ 149 0124 10301BE5 		bl	display_printf
+ 150 0128 A330A0E1 		.loc 1 62 0
+ 151 012c 4C009FE5 		mov	r0, #44
+ 152 0130 0310A0E1 		bl	display_putchar
+ 153 0134 FEFFFFEB 		.loc 1 63 0
+  62:main.c        **** 	display_putchar(',');
+ 154              	3, [fp, #-20]
+ 155 0138 2C00A0E3 		and	r3, r3, #1
+ 156 013c FEFFFFEB 		and	r3, r3, #255
+  63:main.c        **** 	if (cTemp & 1) display_putchar('5');	// Ausgabe der Nachkommastelle
+ 157              	p	r3, #0
+ 158 0140 14301BE5 		beq	.L13
+ 159 0144 013003E2 		mov	r0, #53
+ 160 0148 FF3003E2 		bl	display_putchar
+ 161 014c 000053E3 		b	.L14
+ 162 0150 0200000A 	.L13:
+ 163 0154 3500A0E3 		.loc 1 64 0
+ 164 0158 FEFFFFEB 		mov	r0, #48
+ 165 015c 010000EA 		bl	display_putchar
+ 166              	.L14:
+  64:main.c        **** 	else display_putchar('0');
+ 167              	 0
+ 168 0160 3000A0E3 		mov	r0, #223
+ 169 0164 FEFFFFEB 		bl	display_putchar
+ 170              		.loc 1 66 0
+  65:main.c        **** 	display_putchar(0xDF);					// Ausgabe der Massangabe
+ 171              		r0, #67
+ 172 0168 DF00A0E3 		bl	display_putchar
+ 173 016c FEFFFFEB 		.loc 1 67 0
+  66:main.c        **** 	display_putchar('C');
+ 174              	b	sp, fp, #12
+ 175 0170 4300A0E3 		ldmfd	sp, {fp, sp, pc}
+ 176 0174 FEFFFFEB 	.L17:
+  67:main.c        **** }
+ 177              	lign	2
+ 178 0178 0CD04BE2 	.L16:
+ 179 017c 00A89DE8 		.word	.LC0
+ 180              	.LFE4:
+ 182              		.align	2
+ 183 0180 00000000 		.global	read_current_temperature
+ 185              	read_current_temperature:
+ 186              	.LFB5:
+ 187              		.loc 1 69 0
+ 188              		@ args = 0, pretend = 0, frame = 8
+ 189              		@ frame_needed = 1, uses_anonymous_args = 0
+ 190              		mov	ip, sp
+  68:main.c        **** 
+  69:main.c        **** signed int read_current_temperature () {
+ 191              	d	sp!, {fp, ip, lr, pc}
+ 192              	.LCFI13:
+ 193              		sub	fp, ip, #4
+ 194 0184 0DC0A0E1 	.LCFI14:
+ 195              		sub	sp, sp, #8
+ 196 0188 00D82DE9 	.LCFI15:
+ 197              		.loc 1 71 0
+ 198 018c 04B04CE2 		mvn	r3, #96
+ 199              		strb	r3, [fp, #-18]
+ 200 0190 08D04DE2 		.loc 1 73 0
+ 201              		mvn	r3, #0
+  70:main.c        **** 	uchar_t ucTemp1, ucTemp2;
+  71:main.c        **** 	uchar_t slave_address = 0x9F;		// binary coded: 1001 1111
+ 202              	p, #-16]
+ 203 0194 6030E0E3 		.loc 1 75 0
+ 204 0198 12304BE5 		ldrb	r3, [fp, #-18]	@ zero_extendqisi2
+  72:main.c        **** 	uchar_t ret;
+  73:main.c        **** 	signed int temperature = -1;
+ 205              	v	r0, r3
+ 206 019c 0030E0E3 		bl	i2c_start
+ 207 01a0 10300BE5 		mov	r3, r0
+  74:main.c        **** 
+  75:main.c        **** 	ret = i2c_start(slave_address);
+ 208              	rb	r3, [fp, #-17]
+ 209 01a4 12305BE5 		.loc 1 77 0
+ 210 01a8 0300A0E1 		ldrb	r3, [fp, #-17]	@ zero_extendqisi2
+ 211 01ac FEFFFFEB 		cmp	r3, #0
+ 212 01b0 0030A0E1 		bne	.L19
+ 213 01b4 11304BE5 		.loc 1 78 0
+  76:main.c        **** 
+  77:main.c        **** 	if (ret == 0) {
+ 214              	0, #0
+ 215 01b8 11305BE5 		bl	i2c_rbyte
+ 216 01bc 000053E3 		mov	r3, r0
+ 217 01c0 0F00001A 		strb	r3, [fp, #-20]
+  78:main.c        **** 		ucTemp1 = i2c_rbyte(ACK_CONSTANT);  // Erstes Byte einlesen
+ 218              	c 1 79 0
+ 219 01c4 0000A0E3 		mov	r0, #1
+ 220 01c8 FEFFFFEB 		bl	i2c_rbyte
+ 221 01cc 0030A0E1 		mov	r3, r0
+ 222 01d0 14304BE5 		strb	r3, [fp, #-19]
+  79:main.c        **** 		ucTemp2 = i2c_rbyte(NACK_CONSTANT); // Zweites Byte einlesen
+ 223              	 1 80 0
+ 224 01d4 0100A0E3 		ldrb	r3, [fp, #-20]	@ zero_extendqisi2
+ 225 01d8 FEFFFFEB 		ldrb	r2, [fp, #-19]	@ zero_extendqisi2
+ 226 01dc 0030A0E1 		mov	r0, r3
+ 227 01e0 13304BE5 		mov	r1, r2
+  80:main.c        **** 		temperature = tempwert(ucTemp1, ucTemp2);
+ 228              	empwert
+ 229 01e4 14305BE5 		mov	r3, r0
+ 230 01e8 13205BE5 		str	r3, [fp, #-16]
+ 231 01ec 0300A0E1 		.loc 1 81 0
+ 232 01f0 0210A0E1 		bl	i2c_stop
+ 233 01f4 FEFFFFEB 	.L19:
+ 234 01f8 0030A0E1 		.loc 1 84 0
+ 235 01fc 10300BE5 		ldr	r3, [fp, #-16]
+  81:main.c        **** 		i2c_stop();
+ 236              	85 0
+ 237 0200 FEFFFFEB 		mov	r0, r3
+ 238              		sub	sp, fp, #12
+  82:main.c        **** 	}
+  83:main.c        **** 
+  84:main.c        **** 	return temperature;
+ 239              	mfd	sp, {fp, sp, pc}
+ 240 0204 10301BE5 	.LFE5:
+  85:main.c        **** }
+ 241              	size	read_current_temperature, .-read_current_temperature
+ 242 0208 0300A0E1 		.section	.rodata
+ 243 020c 0CD04BE2 		.align	2
+ 244 0210 00A89DE8 	.LC1:
+ 245              		.ascii	"start failed!\000"
+ 246              		.text
+ 247              		.align	2
+ 248 0003 00       		.global	read_temperatures
+ 250 0004 73746172 	read_temperatures:
+ 250      74206661 
+ 250      696C6564 
+ 250      2100
+ 251              	.LFB6:
+ 252              		.loc 1 89 0
+ 253              		@ args = 0, pretend = 0, frame = 24
+ 254              		@ frame_needed = 1, uses_anonymous_args = 0
+ 255              		mov	ip, sp
+ 256              	.LCFI16:
+  86:main.c        **** 
+  87:main.c        **** typedef void (*read_callback) (signed int current_temperature);
+  88:main.c        **** 
+  89:main.c        **** void read_temperatures (signed int *buffer, signed int num_elements, unsigned int delay, read_callb
+ 257              	 fp, ip, lr, pc}
+ 258              	.LCFI17:
+ 259              		sub	fp, ip, #4
+ 260 0214 0DC0A0E1 	.LCFI18:
+ 261              		sub	sp, sp, #24
+ 262 0218 10D82DE9 	.LCFI19:
+ 263              		str	r0, [fp, #-28]
+ 264 021c 04B04CE2 		str	r1, [fp, #-32]
+ 265              		str	r2, [fp, #-36]
+ 266 0220 18D04DE2 		str	r3, [fp, #-40]
+ 267              		.loc 1 90 0
+ 268 0224 1C000BE5 		mvn	r3, #96
+ 269 0228 20100BE5 		strb	r3, [fp, #-23]
+ 270 022c 24200BE5 	.LBB2:
+ 271 0230 28300BE5 		.loc 1 93 0
+  90:main.c        **** 	uchar_t slave_address = 0x9F;		// binary coded: 1001 1111
+ 272              	r	r3, [fp, #-20]
+ 273 0234 6030E0E3 		b	.L22
+ 274 0238 17304BE5 	.L24:
+ 275              		.loc 1 95 0
+  91:main.c        **** 	uchar_t ucTemp1, ucTemp2;
+  92:main.c        **** 
+  93:main.c        **** 	for (signed int i = 0; i < num_elements; i++) {
+ 276              	display_clear
+ 277 023c 0030A0E3 		.loc 1 96 0
+ 278 0240 14300BE5 		ldr	r0, .L27
+ 279 0244 2B0000EA 		bl	display_putstr
+ 280              		.loc 1 97 0
+  94:main.c        **** 		while (i2c_start(slave_address) == 1) {
+  95:main.c        **** 			display_clear();
+ 281              	r0, #500
+ 282 0248 FEFFFFEB 		bl	delay_ms
+  96:main.c        **** 			display_putstr("start failed!");
+ 283              	23:
+ 284 024c C0009FE5 		.loc 1 94 0
+ 285 0250 FEFFFFEB 		ldrb	r3, [fp, #-23]	@ zero_extendqisi2
+  97:main.c        **** 			delay_ms(500);
+ 286              	v	r0, r3
+ 287 0254 7D0FA0E3 		bl	i2c_start
+ 288 0258 FEFFFFEB 		mov	r3, r0
+ 289              		cmp	r3, #1
+ 290              		beq	.L24
+ 291 025c 17305BE5 		.loc 1 100 0
+ 292 0260 0300A0E1 		mov	r0, #0
+ 293 0264 FEFFFFEB 		bl	i2c_rbyte
+ 294 0268 0030A0E1 		mov	r3, r0
+ 295 026c 010053E3 		strb	r3, [fp, #-22]
+ 296 0270 F4FFFF0A 		.loc 1 101 0
+  98:main.c        **** 		}
+  99:main.c        **** 
+ 100:main.c        **** 		ucTemp1 = i2c_rbyte(ACK_CONSTANT);  // Erstes Byte einlesen
+ 297              	
+ 298 0274 0000A0E3 		bl	i2c_rbyte
+ 299 0278 FEFFFFEB 		mov	r3, r0
+ 300 027c 0030A0E1 		strb	r3, [fp, #-21]
+ 301 0280 16304BE5 		.loc 1 102 0
+ 101:main.c        **** 		ucTemp2 = i2c_rbyte(NACK_CONSTANT); // Zweites Byte einlesen
+ 302              		r3, [fp, #-20]
+ 303 0284 0100A0E3 		mov	r2, r3, asl #2
+ 304 0288 FEFFFFEB 		ldr	r3, [fp, #-28]
+ 305 028c 0030A0E1 		add	r4, r3, r2
+ 306 0290 15304BE5 		ldrb	r3, [fp, #-22]	@ zero_extendqisi2
+ 102:main.c        **** 		buffer[i] = tempwert(ucTemp1, ucTemp2);
+ 307              		r2, [fp, #-21]	@ zero_extendqisi2
+ 308 0294 14301BE5 		mov	r0, r3
+ 309 0298 0321A0E1 		mov	r1, r2
+ 310 029c 1C301BE5 		bl	tempwert
+ 311 02a0 024083E0 		mov	r3, r0
+ 312 02a4 16305BE5 		str	r3, [r4, #0]
+ 313 02a8 15205BE5 		.loc 1 103 0
+ 314 02ac 0300A0E1 		ldr	r3, [fp, #-20]
+ 315 02b0 0210A0E1 		mov	r2, r3, asl #2
+ 316 02b4 FEFFFFEB 		ldr	r3, [fp, #-28]
+ 317 02b8 0030A0E1 		add	r3, r3, r2
+ 318 02bc 003084E5 		ldr	r3, [r3, #0]
+ 103:main.c        **** 		cb(buffer[i]);
+ 319              	, #-40]
+ 320 02c0 14301BE5 		mov	r0, r3
+ 321 02c4 0321A0E1 		mov	lr, pc
+ 322 02c8 1C301BE5 		bx	r2
+ 323 02cc 023083E0 		.loc 1 107 0
+ 324 02d0 003093E5 		ldr	r0, [fp, #-36]
+ 325 02d4 28201BE5 		bl	delay_ms
+ 326 02d8 0300A0E1 		.loc 1 93 0
+ 327 02dc 0FE0A0E1 		ldr	r3, [fp, #-20]
+ 328 02e0 12FF2FE1 		add	r3, r3, #1
+ 104:main.c        **** #ifndef USE_TWI
+ 105:main.c        **** 		i2c_stop();
+ 106:main.c        **** #endif
+ 107:main.c        **** 		delay_ms(delay);
+ 329              	fp, #-20]
+ 330 02e4 24001BE5 	.L22:
+ 331 02e8 FEFFFFEB 		ldr	r2, [fp, #-20]
+ 332              		ldr	r3, [fp, #-32]
+ 333 02ec 14301BE5 		cmp	r2, r3
+ 334 02f0 013083E2 		blt	.L23
+ 335 02f4 14300BE5 	.LBE2:
+ 336              		.loc 1 110 0
+ 337 02f8 14201BE5 		bl	i2c_stop
+ 338 02fc 20301BE5 		.loc 1 112 0
+ 339 0300 030052E1 		sub	sp, fp, #16
+ 340 0304 D4FFFFBA 		ldmfd	sp, {r4, fp, sp, pc}
+ 341              	.L28:
+ 108:main.c        **** 	}
+ 109:main.c        **** #ifdef USE_TWI
+ 110:main.c        **** 	i2c_stop();
+ 342              	7:
+ 343 0308 FEFFFFEB 		.word	.LC1
+ 111:main.c        **** #endif
+ 112:main.c        **** }
+ 344              	FE6:
+ 346 0310 10A89DE8 		.align	2
+ 347              		.global	print_current_temperature
+ 349              	print_current_temperature:
+ 350 0314 04000000 	.LFB7:
+ 351              		.loc 1 114 0
+ 352              		@ args = 0, pretend = 0, frame = 4
+ 353              		@ frame_needed = 1, uses_anonymous_args = 0
+ 354              		mov	ip, sp
+ 355              	.LCFI20:
+ 356              		stmfd	sp!, {fp, ip, lr, pc}
+ 357              	.LCFI21:
+ 113:main.c        **** 
+ 114:main.c        **** void print_current_temperature (signed int current_temperature) {
+ 358              	4
+ 359              	.LCFI22:
+ 360              		sub	sp, sp, #4
+ 361 0318 0DC0A0E1 	.LCFI23:
+ 362              		str	r0, [fp, #-16]
+ 363 031c 00D82DE9 		.loc 1 115 0
+ 364              		mov	r0, #0
+ 365 0320 04B04CE2 		mov	r1, #0
+ 366              		bl	display_set_cursor
+ 367 0324 04D04DE2 		.loc 1 116 0
+ 368              		ldr	r0, [fp, #-16]
+ 369 0328 10000BE5 		bl	print_temp
+ 115:main.c        **** 	display_set_cursor(0,0);
+ 370              	0
+ 371 032c 0000A0E3 		ldmfd	sp, {r3, fp, sp, pc}
+ 372 0330 0010A0E3 	.LFE7:
+ 116:main.c        **** 	print_temp(current_temperature);
+ 374              	ign	2
+ 375 0338 10001BE5 		.global	calc_mean_temperature
+ 117:main.c        **** }
+ 377              	c_mean_temperature:
+ 378 0340 08A89DE8 	.LFB8:
+ 379              		.loc 1 121 0
+ 380              		@ args = 0, pretend = 0, frame = 16
+ 381              		@ frame_needed = 1, uses_anonymous_args = 0
+ 382              		mov	ip, sp
+ 383              	.LCFI24:
+ 384              		stmfd	sp!, {fp, ip, lr, pc}
+ 385              	.LCFI25:
+ 118:main.c        **** 
+ 119:main.c        **** #define NUM_TEMP_VALUES 64
+ 120:main.c        **** 
+ 121:main.c        **** signed int calc_mean_temperature(signed int *measurements, signed int num_measurements) {
+ 386              	ip, #4
+ 387              	.LCFI26:
+ 388              		sub	sp, sp, #16
+ 389 0344 0DC0A0E1 	.LCFI27:
+ 390              		str	r0, [fp, #-24]
+ 391 0348 00D82DE9 		str	r1, [fp, #-28]
+ 392              		.loc 1 122 0
+ 393 034c 04B04CE2 		mov	r3, #0
+ 394              		str	r3, [fp, #-20]
+ 395 0350 10D04DE2 	.LBB3:
+ 396              		.loc 1 124 0
+ 397 0354 18000BE5 		mov	r3, #0
+ 398 0358 1C100BE5 		str	r3, [fp, #-16]
+ 122:main.c        **** 	signed int mean_temperature = 0;
+ 399              	
+ 400 035c 0030A0E3 		.loc 1 125 0
+ 401 0360 14300BE5 		ldr	r3, [fp, #-16]
+ 402              		mov	r2, r3, asl #2
+ 123:main.c        **** 
+ 124:main.c        **** 	for (signed int i = 0; i < num_measurements; i++) {
+ 403              	r	r3, [fp, #-24]
+ 404 0364 0030A0E3 		add	r3, r3, r2
+ 405 0368 10300BE5 		ldr	r2, [r3, #0]
+ 406 036c 0A0000EA 		ldr	r3, [fp, #-20]
+ 407              		add	r3, r3, r2
+ 125:main.c        **** 		mean_temperature += measurements[i];
+ 408              	r3, [fp, #-20]
+ 409 0370 10301BE5 		.loc 1 124 0
+ 410 0374 0321A0E1 		ldr	r3, [fp, #-16]
+ 411 0378 18301BE5 		add	r3, r3, #1
+ 412 037c 023083E0 		str	r3, [fp, #-16]
+ 413 0380 002093E5 	.L32:
+ 414 0384 14301BE5 		ldr	r2, [fp, #-16]
+ 415 0388 023083E0 		ldr	r3, [fp, #-28]
+ 416 038c 14300BE5 		cmp	r2, r3
+ 417              		blt	.L33
+ 418 0390 10301BE5 	.LBE3:
+ 419 0394 013083E2 		.loc 1 128 0
+ 420 0398 10300BE5 		ldr	r3, [fp, #-20]
+ 421              		mov	r3, r3, asr #6
+ 422 039c 10201BE5 		str	r3, [fp, #-20]
+ 423 03a0 1C301BE5 		.loc 1 129 0
+ 424 03a4 030052E1 		ldr	r3, [fp, #-20]
+ 425 03a8 F0FFFFBA 		.loc 1 130 0
+ 426              		mov	r0, r3
+ 126:main.c        **** 	}
+ 127:main.c        **** 
+ 128:main.c        **** 	mean_temperature = mean_temperature >> 6;
+ 427              	dmfd	sp, {fp, sp, pc}
+ 428 03ac 14301BE5 	.LFE8:
+ 430 03b4 14300BE5 		.align	2
+ 129:main.c        **** 	return mean_temperature;
+ 431              	obal	versuch_3
+ 130:main.c        **** }
+ 433              	rsuch_3:
+ 434 03bc 0300A0E1 	.LFB9:
+ 435 03c0 0CD04BE2 		.loc 1 132 0
+ 436 03c4 00A89DE8 		@ args = 0, pretend = 0, frame = 8
+ 437              		@ frame_needed = 1, uses_anonymous_args = 0
+ 438              		mov	ip, sp
+ 439              	.LCFI28:
+ 440              		stmfd	sp!, {fp, ip, lr, pc}
+ 441              	.LCFI29:
+ 442              		sub	fp, ip, #4
+ 443              	.LCFI30:
+ 131:main.c        **** 
+ 132:main.c        **** void versuch_3 () {
+ 444              	, #8
+ 445              	.LCFI31:
+ 446              	.L37:
+ 447 03c8 0DC0A0E1 		.loc 1 136 0
+ 448              		bl	display_clear
+ 449 03cc 00D82DE9 		.loc 1 137 0
+ 450              		bl	read_current_temperature
+ 451 03d0 04B04CE2 		mov	r3, r0
+ 452              		str	r3, [fp, #-20]
+ 453 03d4 08D04DE2 		.loc 1 138 0
+ 454              		sub	r3, fp, #20
+ 455              		mov	r0, r3
+ 133:main.c        **** 	signed int temperature, mean_temperature;
+ 134:main.c        **** 
+ 135:main.c        **** 	while (1) {
+ 136:main.c        **** 		display_clear();
+ 456              		bl	calc_mean_temperature
+ 457 03d8 FEFFFFEB 		mov	r3, r0
+ 137:main.c        **** 		temperature = read_current_temperature();
+ 458              	tr	r3, [fp, #-16]
+ 459 03dc FEFFFFEB 		.loc 1 139 0
+ 460 03e0 0030A0E1 		ldr	r3, [fp, #-20]
+ 461 03e4 14300BE5 		mov	r0, r3
+ 138:main.c        **** 		mean_temperature = calc_mean_temperature(&temperature, 1);
+ 462              	print_temp
+ 463 03e8 14304BE2 		.loc 1 140 0
+ 464 03ec 0300A0E1 		mov	r0, #0
+ 465 03f0 0110A0E3 		mov	r1, #1
+ 466 03f4 FEFFFFEB 		bl	display_set_cursor
+ 467 03f8 0030A0E1 		.loc 1 141 0
+ 468 03fc 10300BE5 		ldr	r3, [fp, #-16]
+ 139:main.c        **** 		print_temp(temperature);
+ 469              	, #0
+ 470 0400 14301BE5 		beq	.L36
+ 471 0404 0300A0E1 		.loc 1 142 0
+ 472 0408 FEFFFFEB 		ldr	r0, [fp, #-16]
+ 140:main.c        **** 		display_set_cursor(0, 1);
+ 473              	print_temp
+ 474 040c 0000A0E3 	.L36:
+ 475 0410 0110A0E3 		.loc 1 144 0
+ 476 0414 FEFFFFEB 		mov	r0, #500
+ 141:main.c        **** 		if (mean_temperature != 0) {
+ 477              	delay_ms
+ 478 0418 10301BE5 		b	.L37
+ 479 041c 000053E3 	.LFE9:
+ 142:main.c        **** 			print_temp(mean_temperature);
+ 481              	ign	2
+ 482 0424 10001BE5 		.global	versuch_4
+ 484              	versuch_4:
+ 143:main.c        **** 		}
+ 144:main.c        **** 		delay_ms(500);
+ 485              	10:
+ 486 042c 7D0FA0E3 		.loc 1 148 0
+ 487 0430 FEFFFFEB 		@ args = 0, pretend = 0, frame = 264
+ 488 0434 E7FFFFEA 		@ frame_needed = 1, uses_anonymous_args = 0
+ 489              		mov	ip, sp
+ 490              	.LCFI32:
+ 491              		stmfd	sp!, {fp, ip, lr, pc}
+ 492              	.LCFI33:
+ 493              		sub	fp, ip, #4
+ 494              	.LCFI34:
+ 495              		sub	sp, sp, #264
+ 145:main.c        **** 	}
+ 146:main.c        **** }
+ 147:main.c        **** 
+ 148:main.c        **** void versuch_4 () {
+ 496              	loc 1 149 0
+ 497              		mov	r3, #100
+ 498              		str	r3, [fp, #-20]
+ 499 0438 0DC0A0E1 	.L41:
+ 500              		.loc 1 154 0
+ 501 043c 00D82DE9 		bl	display_clear
+ 502              		.loc 1 155 0
+ 503 0440 04B04CE2 		sub	r3, fp, #276
+ 504              		mov	r0, r3
+ 505 0444 42DF4DE2 		mov	r1, #64
+ 506              		ldr	r2, [fp, #-20]
+ 149:main.c        **** 	unsigned int delay = 100;
+ 507              	43
+ 508 0448 6430A0E3 		bl	read_temperatures
+ 509 044c 14300BE5 		.loc 1 156 0
+ 510              		sub	r3, fp, #276
+ 150:main.c        **** 	signed int mean_temperature;
+ 151:main.c        **** 	signed int temperatures [NUM_TEMP_VALUES];
+ 152:main.c        **** 
+ 153:main.c        **** 	while (1) {
+ 154:main.c        **** 			display_clear();
+ 511              		r0, r3
+ 512 0450 FEFFFFEB 		mov	r1, #64
+ 155:main.c        **** 			read_temperatures(temperatures, NUM_TEMP_VALUES, delay, print_current_temperature);
+ 513              	l	calc_mean_temperature
+ 514 0454 453F4BE2 		mov	r3, r0
+ 515 0458 0300A0E1 		str	r3, [fp, #-16]
+ 516 045c 4010A0E3 		.loc 1 157 0
+ 517 0460 14201BE5 		ldr	r3, [fp, #-276]
+ 518 0464 48309FE5 		mov	r0, r3
+ 519 0468 FEFFFFEB 		bl	print_temp
+ 156:main.c        **** 			mean_temperature = calc_mean_temperature(temperatures, NUM_TEMP_VALUES);
+ 520              	 158 0
+ 521 046c 453F4BE2 		mov	r0, #0
+ 522 0470 0300A0E1 		mov	r1, #1
+ 523 0474 4010A0E3 		bl	display_set_cursor
+ 524 0478 FEFFFFEB 		.loc 1 159 0
+ 525 047c 0030A0E1 		ldr	r3, [fp, #-16]
+ 526 0480 10300BE5 		cmp	r3, #0
+ 157:main.c        **** 			print_temp(temperatures[0]);
+ 527              	41
+ 528 0484 14311BE5 		.loc 1 160 0
+ 529 0488 0300A0E1 		ldr	r0, [fp, #-16]
+ 530 048c FEFFFFEB 		bl	print_temp
+ 158:main.c        **** 			display_set_cursor(0, 1);
+ 531              	L41
+ 532 0490 0000A0E3 	.L44:
+ 533 0494 0110A0E3 		.align	2
+ 534 0498 FEFFFFEB 	.L43:
+ 159:main.c        **** 			if (mean_temperature != 0) {
+ 535              	rd	print_current_temperature
+ 536 049c 10301BE5 	.LFE10:
+ 538 04a4 E9FFFF0A 		.align	2
+ 160:main.c        **** 				print_temp(mean_temperature);
+ 539              	obal	versuch_5
+ 541 04ac FEFFFFEB 	versuch_5:
+ 542 04b0 E6FFFFEA 	.LFB11:
+ 543              		.loc 1 165 0
+ 544              		@ args = 0, pretend = 0, frame = 4
+ 545              		@ frame_needed = 1, uses_anonymous_args = 0
+ 546 04b4 00000000 		mov	ip, sp
+ 547              	.LCFI36:
+ 548              		stmfd	sp!, {fp, ip, lr, pc}
+ 549              	.LCFI37:
+ 550              		sub	fp, ip, #4
+ 551              	.LCFI38:
+ 552              		sub	sp, sp, #4
+ 553              	.LCFI39:
+ 161:main.c        **** 			}
+ 162:main.c        **** 	}
+ 163:main.c        **** }
+ 164:main.c        **** 
+ 165:main.c        **** void versuch_5 () {
+ 554              	mvn	r3, #96
+ 555              		strb	r3, [fp, #-13]
+ 556              		.loc 1 168 0
+ 557 04b8 0DC0A0E1 		ldrb	r3, [fp, #-13]	@ zero_extendqisi2
+ 558              		mov	r0, r3
+ 559 04bc 00D82DE9 		bl	i2c_start
+ 560              		.loc 1 169 0
+ 561 04c0 04B04CE2 		ldmfd	sp, {r3, fp, sp, pc}
+ 562              	.LFE11:
+ 564              		.section	.rodata
+ 166:main.c        **** 	uchar_t slave_address = 0x9F;		// binary coded: 1001 1111
+ 565              	LC2:
+ 566 04c8 6030E0E3 		.ascii	"using twi\000"
+ 567 04cc 0D304BE5 		.align	2
+ 167:main.c        **** 
+ 168:main.c        **** 	i2c_start(slave_address);
+ 568              	3:
+ 569 04d0 0D305BE5 		.ascii	"%x\000"
+ 570 04d4 0300A0E1 		.text
+ 571 04d8 FEFFFFEB 		.align	2
+ 169:main.c        **** }
+ 572              	obal	main
+ 574              	main:
+ 575              	.LFB12:
+ 576              		.loc 1 171 0
+ 577 0012 0000     		@ args = 0, pretend = 0, frame = 0
+ 578              		@ frame_needed = 1, uses_anonymous_args = 0
+ 579 0014 7573696E 		mov	ip, sp
+ 579      67207477 
+ 579      6900
+ 580 001e 0000     	.LCFI40:
+ 581              		stmfd	sp!, {fp, ip, lr, pc}
+ 582 0020 257800   	.LCFI41:
+ 583 0023 00       		sub	fp, ip, #4
+ 584              	.LCFI42:
+ 585              		.loc 1 172 0
+ 586              		bl	display_init
+ 587              		.loc 1 176 0
+ 588              		bl	twi_init
+ 170:main.c        **** 
+ 171:main.c        **** int main(){
+ 589              	r	r0, .L50
+ 590              		bl	display_putstr
+ 591              		.loc 1 185 0
+ 592 04e0 0DC0A0E1 		mov	r0, #1000
+ 593              		bl	delay_ms
+ 594 04e4 00D82DE9 		.loc 1 198 0
+ 595              		ldr	r0, .L50+4
+ 596 04e8 04B04CE2 		mov	r1, #9502720
+ 597              		add	r1, r1, #57344
+ 172:main.c        **** 	display_init();
+ 598              	ay_printf
+ 599 04ec FEFFFFEB 	.L48:
+ 173:main.c        **** 
+ 174:main.c        **** 
+ 175:main.c        **** #ifdef USE_TWI
+ 176:main.c        **** 	twi_init();
+ 600              		.L48
+ 601 04f0 FEFFFFEB 	.L51:
+ 177:main.c        **** #endif
+ 178:main.c        **** 
+ 179:main.c        **** #ifdef USE_TWI
+ 180:main.c        **** 	display_putstr("using twi");
+ 602              	align	2
+ 603 04f4 1C009FE5 	.L50:
+ 604 04f8 FEFFFFEB 		.word	.LC2
+ 181:main.c        **** #else
+ 182:main.c        **** 	display_putstr("not using twi");
+ 183:main.c        **** #endif
+ 184:main.c        **** 
+ 185:main.c        **** 	delay_ms(1000);
+ 605              	ord	.LC3
+ 606 04fc FA0FA0E3 	.LFE12:
+ 186:main.c        **** 
+ 187:main.c        **** #if 0
+ 188:main.c        **** 	versuch_3();
+ 189:main.c        **** #endif
+ 190:main.c        **** #if 0
+ 191:main.c        **** 	versuch_4();
+ 192:main.c        **** #endif
+ 193:main.c        **** #if 0
+ 194:main.c        **** 	versuch_5();
+ 195:main.c        **** #endif
+ 196:main.c        **** 
+ 197:main.c        **** 
+ 198:main.c        **** 	display_printf("%x", MOTOR_MASK);
+ 608              	ection	.debug_frame,"",%progbits
+ 609 0504 10009FE5 	.Lframe0:
+ 610 0508 9118A0E3 		.4byte	.LECIE0-.LSCIE0
+ 611 050c 0E1A81E2 	.LSCIE0:
+ 612 0510 FEFFFFEB 		.4byte	0xffffffff
+ 613              		.byte	0x1
+ 614 0514 FEFFFFEA 		.ascii	"\000"
+ 615              		.uleb128 0x1
+ 616              		.sleb128 -4
+ 617              		.byte	0xe
+ 618 0518 14000000 		.byte	0xc
+ 619 051c 20000000 		.uleb128 0xd
+ 620              		.uleb128 0x0
+ 621              		.align	2
+ 915              		.2byte	0x2
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\Aomx\AppData\Local\Temp/cch3asdd.s:13     .text:00000000 delay_ms
+C:\Users\Aomx\AppData\Local\Temp/cch3asdd.s:19     .text:00000000 $a
+C:\Users\Aomx\AppData\Local\Temp/cch3asdd.s:64     .text:00000074 tempwert
+C:\Users\Aomx\AppData\Local\Temp/cch3asdd.s:106    .text:000000c4 print_temp
+C:\Users\Aomx\AppData\Local\Temp/cch3asdd.s:183    .text:00000180 $d
+C:\Users\Aomx\AppData\Local\Temp/cch3asdd.s:189    .text:00000184 read_current_temperature
+C:\Users\Aomx\AppData\Local\Temp/cch3asdd.s:194    .text:00000184 $a
+C:\Users\Aomx\AppData\Local\Temp/cch3asdd.s:255    .text:00000214 read_temperatures
+C:\Users\Aomx\AppData\Local\Temp/cch3asdd.s:350    .text:00000314 $d
+C:\Users\Aomx\AppData\Local\Temp/cch3asdd.s:356    .text:00000318 print_current_temperature
+C:\Users\Aomx\AppData\Local\Temp/cch3asdd.s:361    .text:00000318 $a
+C:\Users\Aomx\AppData\Local\Temp/cch3asdd.s:384    .text:00000344 calc_mean_temperature
+C:\Users\Aomx\AppData\Local\Temp/cch3asdd.s:442    .text:000003c8 versuch_3
+C:\Users\Aomx\AppData\Local\Temp/cch3asdd.s:494    .text:00000438 versuch_4
+C:\Users\Aomx\AppData\Local\Temp/cch3asdd.s:546    .text:000004b4 $d
+C:\Users\Aomx\AppData\Local\Temp/cch3asdd.s:552    .text:000004b8 versuch_5
+C:\Users\Aomx\AppData\Local\Temp/cch3asdd.s:557    .text:000004b8 $a
+C:\Users\Aomx\AppData\Local\Temp/cch3asdd.s:587    .text:000004e0 main
+C:\Users\Aomx\AppData\Local\Temp/cch3asdd.s:618    .text:00000518 $d
+
+UNDEFINED SYMBOLS
+display_putchar
+display_printf
+i2c_start
+i2c_rbyte
+i2c_stop
+display_clear
+display_putstr
+display_set_cursor
+display_init
+twi_init

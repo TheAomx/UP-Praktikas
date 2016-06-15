@@ -1,0 +1,829 @@
+   1              		.file	"main.c"
+   9              	.Ltext0:
+  10              		.global	MOTOR_STEPS
+  11              		.section	.rodata
+  12              		.align	2
+  15              	MOTOR_STEPS:
+  16 0000 00C08000 		.word	8437760
+  17 0004 00008000 		.word	8388608
+  18 0008 00001100 		.word	1114112
+  19 000c 00000000 		.word	0
+  20 0010 00E00000 		.word	57344
+  21 0014 00200000 		.word	8192
+  22 0018 00209100 		.word	9510912
+  23 001c 00208000 		.word	8396800
+  24              		.global	direction
+  25              		.data
+  26              		.align	2
+  29              	direction:
+  30 0000 01000000 		.word	1
+  31              		.text
+  32              		.align	2
+  33              		.global	delay_ms
+  35              	delay_ms:
+  36              	.LFB2:
+  37              		.file 1 "main.c"
+   1:main.c        **** //********************************************************************
+   2:main.c        **** // ARM_T4A4										Version 02.04.2012 hpw
+   3:main.c        **** //********************************************************************
+   4:main.c        **** #include	"include/AT91SAM7S64.h"			// Definition von ARM7 typischen Registern etc.
+   5:main.c        **** #include	"include/interrupt.h"			// IR-Routinen
+   6:main.c        **** #include "display.h"
+   7:main.c        **** 
+   8:main.c        **** #define		PH2			AT91C_PIO_PA23		// Alle Ports die für den Motor verwendet werden
+   9:main.c        **** #define		PH1			AT91C_PIO_PA13
+  10:main.c        **** #define		I21			AT91C_PIO_PA20
+  11:main.c        **** #define		I11			AT91C_PIO_PA14
+  12:main.c        **** #define		I20			AT91C_PIO_PA16
+  13:main.c        **** #define		I10			AT91C_PIO_PA15
+  14:main.c        **** #define		MOTOR_MASK	(PH2|PH1|I21|I11|I20|I10)
+  15:main.c        **** 
+  16:main.c        **** typedef unsigned int uint_t;
+  17:main.c        **** 
+  18:main.c        **** #define BUTTON1 AT91C_PIO_PA1
+  19:main.c        **** #define BUTTON2 AT91C_PIO_PA0
+  20:main.c        **** #define BUTTON3 AT91C_PIO_PA31
+  21:main.c        **** 
+  22:main.c        **** 
+  23:main.c        **** #define MIN_SPEED 250
+  24:main.c        **** #define MAX_SPEED 8000
+  25:main.c        **** #define SPEED_STEPS 50
+  26:main.c        **** #define DELTA_SPEED (MAX_SPEED-MIN_SPEED) / SPEED_STEPS
+  27:main.c        **** #define INITIAL_SPEED 469
+  28:main.c        **** 
+  29:main.c        **** enum Direction {
+  30:main.c        **** 	LEFT = -1, RIGHT = 1
+  31:main.c        **** };
+  32:main.c        **** 
+  33:main.c        **** uint_t const MOTOR_STEPS[8] = {
+  34:main.c        **** 	// Tabelle für Halbschrittbetrieb
+  35:main.c        **** 	0x0080C000,										// Schritt 1
+  36:main.c        **** 	0x00800000,										// Schritt 2
+  37:main.c        **** 	0x00110000,										// Schritt 3
+  38:main.c        **** 	0x00000000,										// Schritt 4
+  39:main.c        **** 	0x0000E000,										// Schritt 5
+  40:main.c        **** 	0x00002000,										// Schritt 6
+  41:main.c        **** 	0x00912000,										// Schritt 7
+  42:main.c        **** 	0x00802000,										// Schritt 8
+  43:main.c        **** };
+  44:main.c        **** 
+  45:main.c        **** enum Direction direction = RIGHT;
+  46:main.c        **** 
+  47:main.c        **** #define ARRAY_LENGTH(X) (sizeof(X)/sizeof(X[0]))
+  48:main.c        **** 
+  49:main.c        **** 
+  50:main.c        **** //**************************************************************
+  51:main.c        **** // delay5ms(uiK) verzögert um ca. uiK * 5ms
+  52:main.c        **** //**************************************************************
+  53:main.c        **** void delay_ms(unsigned int uiK) {
+  38              	, frame = 8
+  39              		@ frame_needed = 1, uses_anonymous_args = 0
+  40              		mov	ip, sp
+  41 0000 0DC0A0E1 	.LCFI0:
+  42              		stmfd	sp!, {fp, ip, lr, pc}
+  43 0004 00D82DE9 	.LCFI1:
+  44              		sub	fp, ip, #4
+  45 0008 04B04CE2 	.LCFI2:
+  46              		sub	sp, sp, #8
+  47 000c 08D04DE2 	.LCFI3:
+  48              		str	r0, [fp, #-20]
+  49 0010 14000BE5 		b	.L2
+  50 0014 0A0000EA 	.L5:
+  51              		.loc 1 57 0
+  54:main.c        **** gende for-Schleife wird uiK-mal aufgerufen
+  55:main.c        **** 		for (uiI = 0; uiI < 1600; uiI++)
+  56:main.c        **** 			;		//  for-Schleife wird 1600-mal durchlaufen. Dies
+  57:main.c        **** 					//  verursacht eine Zeitverzögerung von ca. 1ms.
+  52              	tr	r3, [fp, #-16]
+  53 0018 0030A0E3 		b	.L3
+  54 001c 10300BE5 	.L4:
+  55 0020 020000EA 		ldr	r3, [fp, #-16]
+  56              		add	r3, r3, #1
+  57 0024 10301BE5 		str	r3, [fp, #-16]
+  58 0028 013083E2 	.L3:
+  59 002c 10300BE5 		ldr	r2, [fp, #-16]
+  60              		mov	r3, #1584
+  61 0030 10201BE5 		add	r3, r3, #15
+  62 0034 633EA0E3 		cmp	r2, r3
+  63 0038 0F3083E2 		bls	.L4
+  64 003c 030052E1 	.L2:
+  65 0040 F7FFFF9A 		.loc 1 56 0
+  66              		ldr	r3, [fp, #-20]
+  67              		cmp	r3, #0
+  68 0044 14301BE5 		moveq	r3, #0
+  69 0048 000053E3 		movne	r3, #1
+  70 004c 0030A003 		and	r2, r3, #255
+  71 0050 0130A013 		ldr	r3, [fp, #-20]
+  72 0054 FF2003E2 		sub	r3, r3, #1
+  73 0058 14301BE5 		str	r3, [fp, #-20]
+  74 005c 013043E2 		cmp	r2, #0
+  75 0060 14300BE5 		bne	.L5
+  76 0064 000052E3 		.loc 1 60 0
+  77 0068 EAFFFF1A 		sub	sp, fp, #12
+  58:main.c        ****  = 0; uiI < 1600; uiI++)
+  59:main.c        **** 			;		//  for-Schleife wird 1600-mal durchlaufen. Dies
+  60:main.c        **** 					//  verursacht eine Zeitverzögerung von ca. 1ms.
+  78              	FE2:
+  80 0070 00A89DE8 		.data
+  81              		.align	2
+  84              	motor_speed.1717:
+  85              		.word	469
+  86              		.text
+  87              		.align	2
+  88 0004 D5010000 		.global	get_motor_speed
+  90              	get_motor_speed:
+  91              	.LFB3:
+  92              		.loc 1 62 0
+  93              		@ args = 0, pretend = 0, frame = 8
+  94              		@ frame_needed = 1, uses_anonymous_args = 0
+  61:main.c        ****  = 0; uiI < 1600; uiI++)
+  62:main.c        **** 			;		//  for-Schleife wird 1600-mal durchlaufen. Dies
+  95              	4:
+  96              		stmfd	sp!, {fp, ip, lr, pc}
+  97              	.LCFI5:
+  98 0074 0DC0A0E1 		sub	fp, ip, #4
+  99              	.LCFI6:
+ 100 0078 00D82DE9 		sub	sp, sp, #8
+ 101              	.LCFI7:
+ 102 007c 04B04CE2 		str	r0, [fp, #-20]
+ 103              		.loc 1 64 0
+ 104 0080 08D04DE2 		ldr	r3, .L12
+ 105              		ldr	r2, [r3, #0]
+ 106 0084 14000BE5 		ldr	r3, [fp, #-20]
+  63:main.c        **** olgende for-Schleife wird uiK-mal aufgerufen
+  64:main.c        **** 		for (uiI = 0; uiI < 1600; uiI++)
+ 107              	 r3
+ 108 0088 64309FE5 		str	r3, [fp, #-16]
+ 109 008c 002093E5 		.loc 1 65 0
+ 110 0090 14301BE5 		ldr	r3, [fp, #-16]
+ 111 0094 033082E0 		cmp	r3, #249
+ 112 0098 10300BE5 		bgt	.L8
+  65:main.c        **** K) {
+ 113              	1 66 0
+ 114 009c 10301BE5 		ldr	r2, .L12
+ 115 00a0 F90053E3 		mov	r3, #250
+ 116 00a4 030000CA 		str	r3, [r2, #0]
+  66:main.c        **** delay5ms(uiK) verzögert um ca. uiK * 5ms
+ 117              	L9
+ 118 00a8 44209FE5 	.L8:
+ 119 00ac FA30A0E3 		.loc 1 67 0
+ 120 00b0 003082E5 		ldr	r3, [fp, #-16]
+ 121 00b4 090000EA 		cmp	r3, #8000
+ 122              		ble	.L10
+  67:main.c        **** TH(X) (sizeof(X)/sizeof(X[0]))
+ 123              	1 68 0
+ 124 00b8 10301BE5 		ldr	r2, .L12
+ 125 00bc 7D0D53E3 		mov	r3, #8000
+ 126 00c0 030000DA 		str	r3, [r2, #0]
+  68:main.c        **** 
+ 127              	L9
+ 128 00c4 28209FE5 	.L10:
+ 129 00c8 7D3DA0E3 		.loc 1 70 0
+ 130 00cc 003082E5 		ldr	r2, .L12
+ 131 00d0 020000EA 		ldr	r3, [fp, #-16]
+ 132              		str	r3, [r2, #0]
+  69:main.c        **** //**************************************************************
+  70:main.c        **** // delay5ms(uiK) verzögert um ca. uiK * 5ms
+ 133              	.loc 1 72 0
+ 134 00d4 18209FE5 		ldr	r3, .L12
+ 135 00d8 10301BE5 		ldr	r3, [r3, #0]
+ 136 00dc 003082E5 		.loc 1 73 0
+ 137              		mov	r0, r3
+  71:main.c        **** **************************************************************
+  72:main.c        **** void delay_ms(unsigned int uiK) {
+ 138              	sp, fp, #12
+ 139 00e0 0C309FE5 		ldmfd	sp, {fp, sp, pc}
+ 140 00e4 003093E5 	.L13:
+  73:main.c        **** delay5ms(uiK) verzögert um ca. uiK * 5ms
+ 141              	lign	2
+ 142 00e8 0300A0E1 	.L12:
+ 143 00ec 0CD04BE2 		.word	motor_speed.1717
+ 144 00f0 00A89DE8 	.LFE3:
+ 146              		.align	2
+ 147              		.global	is_button_pressed
+ 149              	is_button_pressed:
+ 150              	.LFB4:
+ 151              		.loc 1 75 0
+ 152              		@ args = 0, pretend = 0, frame = 4
+ 153              		@ frame_needed = 1, uses_anonymous_args = 0
+ 154              		mov	ip, sp
+ 155              	.LCFI8:
+  74:main.c        **** TH(X) (sizeof(X)/sizeof(X[0]))
+  75:main.c        **** 
+ 156              	, ip, lr, pc}
+ 157              	.LCFI9:
+ 158              		sub	fp, ip, #4
+ 159 00f8 0DC0A0E1 	.LCFI10:
+ 160              		sub	sp, sp, #4
+ 161 00fc 00D82DE9 	.LCFI11:
+ 162              		str	r0, [fp, #-16]
+ 163 0100 04B04CE2 		.loc 1 76 0
+ 164              		mov	r3, #-1610612736
+ 165 0104 04D04DE2 		mov	r3, r3, asr #19
+ 166              		ldr	r2, [r3, #60]
+ 167 0108 10000BE5 		ldr	r3, [fp, #-16]
+  76:main.c        **** /**************************************************************
+ 168              	 r3
+ 169 010c 0A32A0E3 		cmp	r3, #0
+ 170 0110 C339A0E1 		movne	r3, #0
+ 171 0114 3C2093E5 		moveq	r3, #1
+ 172 0118 10301BE5 		.loc 1 77 0
+ 173 011c 033002E0 		mov	r0, r3
+ 174 0120 000053E3 		ldmfd	sp, {r3, fp, sp, pc}
+ 175 0124 0030A013 	.LFE4:
+  77:main.c        **** / delay5ms(uiK) verzögert um ca. uiK * 5ms
+ 177              	
+ 178 012c 0300A0E1 		.global	get_button_state
+ 180              	get_button_state:
+ 181              	.LFB5:
+ 182              		.loc 1 78 0
+ 183              		@ args = 0, pretend = 0, frame = 4
+ 184              		@ frame_needed = 1, uses_anonymous_args = 0
+ 185              		mov	ip, sp
+ 186              	.LCFI12:
+  78:main.c        **** TH(X) (sizeof(X)/sizeof(X[0]))
+ 187              	!, {fp, ip, lr, pc}
+ 188              	.LCFI13:
+ 189              		sub	fp, ip, #4
+ 190 0134 0DC0A0E1 	.LCFI14:
+ 191              		sub	sp, sp, #4
+ 192 0138 00D82DE9 	.LCFI15:
+ 193              		.loc 1 79 0
+ 194 013c 04B04CE2 		mov	r3, #0
+ 195              		strb	r3, [fp, #-13]
+ 196 0140 04D04DE2 		.loc 1 81 0
+ 197              		mov	r0, #2
+  79:main.c        **** 
+ 198              	on_pressed
+ 199 0144 0030A0E3 		mov	r3, r0
+ 200 0148 0D304BE5 		cmp	r3, #0
+  80:main.c        **** //**************************************************************
+  81:main.c        **** // delay5ms(uiK) verzögert um ca. uiK * 5ms
+ 201              	q	.L17
+ 202 014c 0200A0E3 		.loc 1 82 0
+ 203 0150 FEFFFFEB 		ldrb	r3, [fp, #-13]
+ 204 0154 0030A0E1 		add	r3, r3, #1
+ 205 0158 000053E3 		strb	r3, [fp, #-13]
+ 206 015c 0200000A 	.L17:
+  82:main.c        **** **************************************************************
+ 207              	1 85 0
+ 208 0160 0D305BE5 		mov	r0, #1
+ 209 0164 013083E2 		bl	is_button_pressed
+ 210 0168 0D304BE5 		mov	r3, r0
+ 211              		cmp	r3, #0
+  83:main.c        **** *******************************
+  84:main.c        **** // delay5ms(uiK) verzögert um ca. uiK * 5ms
+  85:main.c        **** //**************************************************************
+ 212              	.L18
+ 213 016c 0100A0E3 		.loc 1 86 0
+ 214 0170 FEFFFFEB 		ldrb	r3, [fp, #-13]
+ 215 0174 0030A0E1 		add	r3, r3, #2
+ 216 0178 000053E3 		strb	r3, [fp, #-13]
+ 217 017c 0200000A 	.L18:
+  86:main.c        **** d delay_ms(unsigned int uiK) {
+ 218              	1 89 0
+ 219 0180 0D305BE5 		mov	r0, #-2147483648
+ 220 0184 023083E2 		bl	is_button_pressed
+ 221 0188 0D304BE5 		mov	r3, r0
+ 222              		cmp	r3, #0
+  87:main.c        **** delay5ms(uiK) verzögert um ca. uiK * 5ms
+  88:main.c        **** //**************************************************************
+  89:main.c        **** void delay_ms(unsigned int uiK) {
+ 223              	.L19
+ 224 018c 0201A0E3 		.loc 1 90 0
+ 225 0190 FEFFFFEB 		ldrb	r3, [fp, #-13]
+ 226 0194 0030A0E1 		add	r3, r3, #4
+ 227 0198 000053E3 		strb	r3, [fp, #-13]
+ 228 019c 0200000A 	.L19:
+  90:main.c        **** delay5ms(uiK) verzögert um ca. uiK * 5ms
+ 229              	1 93 0
+ 230 01a0 0D305BE5 		ldrb	r3, [fp, #-13]	@ zero_extendqisi2
+ 231 01a4 043083E2 		.loc 1 94 0
+ 232 01a8 0D304BE5 		mov	r0, r3
+ 233              		ldmfd	sp, {r3, fp, sp, pc}
+  91:main.c        **** TH(X) (sizeof(X)/sizeof(X[0]))
+  92:main.c        **** 
+  93:main.c        **** 
+ 234              	:
+  94:main.c        **** *************************************************************
+ 236              	bss
+ 237 01b0 0300A0E1 	on.1754:
+ 238 01b4 08A89DE8 		.space	1
+ 239              		.text
+ 240              		.align	2
+ 241              		.global	pioa_isr
+ 243 0000 00       	pioa_isr:
+ 244              	.LFB6:
+ 245              		.loc 1 100 0
+ 246              		@ args = 0, pretend = 0, frame = 8
+ 247              		@ frame_needed = 1, uses_anonymous_args = 0
+ 248              		mov	ip, sp
+ 249              	.LCFI16:
+  95:main.c        **** / delay5ms(uiK) verzögert um ca. uiK * 5ms
+  96:main.c        **** //**************************************************************
+  97:main.c        **** void delay_ms(unsigned int uiK) {
+  98:main.c        **** 	volatile unsigned int uiI;
+  99:main.c        **** 
+ 100:main.c        **** 	while (uiK--)				// folgende for-Schleife wird uiK-mal aufgerufen
+ 250              	4, fp, ip, lr, pc}
+ 251              	.LCFI17:
+ 252              		sub	fp, ip, #4
+ 253 01b8 0DC0A0E1 	.LCFI18:
+ 254              		sub	sp, sp, #8
+ 255 01bc 10D82DE9 	.LCFI19:
+ 256              		.loc 1 104 0
+ 257 01c0 04B04CE2 		bl	get_button_state
+ 258              		mov	r3, r0
+ 259 01c4 08D04DE2 		strb	r3, [fp, #-17]
+ 260              		.loc 1 106 0
+ 101:main.c        **** ******
+ 102:main.c        **** void delay_ms(unsigned int uiK) {
+ 103:main.c        **** 	volatile unsigned int uiI;
+ 104:main.c        **** 
+ 261              	fp, #-17]	@ zero_extendqisi2
+ 262 01c8 FEFFFFEB 		sub	r3, r3, #1
+ 263 01cc 0030A0E1 		cmp	r3, #5
+ 264 01d0 11304BE5 		ldrls	pc, [pc, r3, asl #2]
+ 105:main.c        **** uiK * 5ms
+ 106:main.c        **** //**************************************************************
+ 265              	L22
+ 266 01d4 11305BE5 	.L28:
+ 267 01d8 013043E2 		.word	.L23
+ 268 01dc 050053E3 		.word	.L24
+ 269 01e0 03F19F97 		.word	.L25
+ 270 01e4 370000EA 		.word	.L26
+ 271              		.word	.L22
+ 272 01e8 00020000 		.word	.L27
+ 273 01ec 20020000 	.L23:
+ 274 01f0 8C020000 		.loc 1 108 0
+ 275 01f4 9C020000 		mov	r4, #-16777216
+ 276 01f8 C8020000 		add	r4, r4, #16384000
+ 277 01fc BC020000 		add	r4, r4, #64
+ 278              		mov	r0, #155
+ 107:main.c        **** *******************************
+ 108:main.c        **** // delay5ms(uiK) verzögert um ca. uiK * 5ms
+ 279              	speed
+ 280 0200 FF44A0E3 		mov	r3, r0
+ 281 0204 FA4884E2 		str	r3, [r4, #28]
+ 282 0208 404084E2 		b	.L22
+ 283 020c 9B00A0E3 	.L24:
+ 284 0210 FEFFFFEB 		.loc 1 111 0
+ 285 0214 0030A0E1 		ldr	r3, .L32
+ 286 0218 1C3084E5 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 287 021c 290000EA 		cmp	r3, #0
+ 288              		beq	.L29
+ 109:main.c        **** **************************************************************
+ 110:main.c        **** void delay_ms(unsigned int uiK) {
+ 111:main.c        **** 	volatile unsigned int uiI;
+ 289              	2 0
+ 290 0220 B8309FE5 		mov	r3, #-16777216
+ 291 0224 0030D3E5 		add	r3, r3, #16384000
+ 292 0228 000053E3 		add	r3, r3, #64
+ 293 022c 0800000A 		mov	r2, #2
+ 112:main.c        **** . uiK * 5ms
+ 294              	r2, [r3, #0]
+ 295 0230 FF34A0E3 		.loc 1 113 0
+ 296 0234 FA3883E2 		ldr	r2, .L32
+ 297 0238 403083E2 		mov	r3, #0
+ 298 023c 0220A0E3 		strb	r3, [r2, #0]
+ 299 0240 002083E5 		b	.L22
+ 113:main.c        **** TH(X) (sizeof(X)/sizeof(X[0]))
+ 300              		.loc 1 115 0
+ 301 0244 94209FE5 		mov	r3, #-16777216
+ 302 0248 0030A0E3 		add	r3, r3, #16384000
+ 303 024c 0030C2E5 		add	r3, r3, #64
+ 304 0250 1C0000EA 		mov	r2, #1
+ 305              		str	r2, [r3, #0]
+ 114:main.c        **** 
+ 115:main.c        **** //**************************************************************
+ 306              	1 116 0
+ 307 0254 FF34A0E3 		mov	r3, #-16777216
+ 308 0258 FA3883E2 		add	r3, r3, #16384000
+ 309 025c 403083E2 		add	r3, r3, #64
+ 310 0260 0120A0E3 		mov	r2, #4
+ 311 0264 002083E5 		str	r2, [r3, #0]
+ 116:main.c        **** / delay5ms(uiK) verzögert um ca. uiK * 5ms
+ 312              	1 117 0
+ 313 0268 FF34A0E3 		ldr	r2, .L32
+ 314 026c FA3883E2 		mov	r3, #1
+ 315 0270 403083E2 		strb	r3, [r2, #0]
+ 316 0274 0420A0E3 		b	.L22
+ 317 0278 002083E5 	.L25:
+ 117:main.c        **** TH(X) (sizeof(X)/sizeof(X[0]))
+ 318              	1 121 0
+ 319 027c 5C209FE5 		ldr	r2, .L32+4
+ 320 0280 0130A0E3 		mvn	r3, #0
+ 321 0284 0030C2E5 		str	r3, [r2, #0]
+ 322 0288 0E0000EA 		b	.L22
+ 323              	.L26:
+ 118:main.c        **** 
+ 119:main.c        **** //**************************************************************
+ 120:main.c        **** // delay5ms(uiK) verzögert um ca. uiK * 5ms
+ 121:main.c        **** //**************************************************************
+ 324              	1 124 0
+ 325 028c 50209FE5 		mov	r4, #-16777216
+ 326 0290 0030E0E3 		add	r4, r4, #16384000
+ 327 0294 003082E5 		add	r4, r4, #64
+ 328 0298 0A0000EA 		mvn	r0, #154
+ 329              		bl	get_motor_speed
+ 122:main.c        **** d delay_ms(unsigned int uiK) {
+ 123:main.c        **** 	volatile unsigned int uiI;
+ 124:main.c        **** 
+ 330              	3, r0
+ 331 029c FF44A0E3 		str	r3, [r4, #28]
+ 332 02a0 FA4884E2 		b	.L22
+ 333 02a4 404084E2 	.L27:
+ 334 02a8 9A00E0E3 		.loc 1 127 0
+ 335 02ac FEFFFFEB 		ldr	r2, .L32+4
+ 336 02b0 0030A0E1 		mov	r3, #1
+ 337 02b4 1C3084E5 		str	r3, [r2, #0]
+ 338 02b8 020000EA 	.L22:
+ 339              		.loc 1 130 0
+ 125:main.c        **** uiK * 5ms
+ 126:main.c        **** //**************************************************************
+ 127:main.c        **** void delay_ms(unsigned int uiK) {
+ 340              	-1610612736
+ 341 02bc 20209FE5 		mov	r3, r3, asr #19
+ 342 02c0 0130A0E3 		ldr	r3, [r3, #76]
+ 343 02c4 003082E5 		str	r3, [fp, #-24]
+ 344              		.loc 1 131 0
+ 128:main.c        **** delay5ms(uiK) verzögert um ca. uiK * 5ms
+ 129:main.c        **** //**************************************************************
+ 130:main.c        **** void delay_ms(unsigned int uiK) {
+ 345              	sp, fp, #16
+ 346 02c8 0A32A0E3 		ldmfd	sp, {r4, fp, sp, pc}
+ 347 02cc C339A0E1 	.L33:
+ 348 02d0 4C3093E5 		.align	2
+ 349 02d4 18300BE5 	.L32:
+ 131:main.c        **** delay5ms(uiK) verzögert um ca. uiK * 5ms
+ 350              	d	on.1754
+ 351 02d8 10D04BE2 		.word	direction
+ 352 02dc 10A89DE8 	.LFE6:
+ 354              		.bss
+ 355              		.align	2
+ 356 02e0 00000000 	index.1783:
+ 357 02e4 00000000 		.space	4
+ 358              		.text
+ 359              		.align	2
+ 360              		.global	motor_move
+ 362              	motor_move:
+ 363 0004 00000000 	.LFB7:
+ 364              		.loc 1 133 0
+ 365              		@ args = 0, pretend = 0, frame = 20
+ 366              		@ frame_needed = 1, uses_anonymous_args = 0
+ 367              		mov	ip, sp
+ 368              	.LCFI20:
+ 369              		stmfd	sp!, {fp, ip, lr, pc}
+ 132:main.c        **** TH(X) (sizeof(X)/sizeof(X[0]))
+ 133:main.c        **** 
+ 370              	, #4
+ 371              	.LCFI22:
+ 372              		sub	sp, sp, #20
+ 373 02e8 0DC0A0E1 	.LCFI23:
+ 374              		str	r0, [fp, #-32]
+ 375 02ec 00D82DE9 		.loc 1 136 0
+ 376              		ldr	r3, .L39
+ 377 02f0 04B04CE2 		ldr	r2, [r3, #0]
+ 378              		ldr	r3, [fp, #-32]
+ 379 02f4 14D04DE2 		add	r3, r2, r3
+ 380              		str	r3, [fp, #-28]
+ 381 02f8 20000BE5 		.loc 1 137 0
+ 134:main.c        **** /**************************************************************
+ 135:main.c        **** // delay5ms(uiK) verzögert um ca. uiK * 5ms
+ 136:main.c        **** //**************************************************************
+ 382              	, #-28]
+ 383 02fc B0309FE5 		cmp	r3, #0
+ 384 0300 002093E5 		bge	.L35
+ 385 0304 20301BE5 		.loc 1 138 0
+ 386 0308 033082E0 		ldr	r2, .L39
+ 387 030c 1C300BE5 		mov	r3, #7
+ 137:main.c        **** d delay_ms(unsigned int uiK) {
+ 388              	3, [r2, #0]
+ 389 0310 1C301BE5 		b	.L36
+ 390 0314 000053E3 	.L35:
+ 391 0318 030000AA 		.loc 1 139 0
+ 138:main.c        **** delay5ms(uiK) verzögert um ca. uiK * 5ms
+ 392              		r3, [fp, #-28]
+ 393 031c 90209FE5 		cmp	r3, #7
+ 394 0320 0730A0E3 		bls	.L37
+ 395 0324 003082E5 		.loc 1 140 0
+ 396 0328 090000EA 		ldr	r2, .L39
+ 397              		mov	r3, #0
+ 139:main.c        **** TH(X) (sizeof(X)/sizeof(X[0]))
+ 398              	3, [r2, #0]
+ 399 032c 1C301BE5 		b	.L36
+ 400 0330 070053E3 	.L37:
+ 401 0334 0300009A 		.loc 1 142 0
+ 140:main.c        **** 
+ 402              		r2, .L39
+ 403 0338 74209FE5 		ldr	r3, [fp, #-28]
+ 404 033c 0030A0E3 		str	r3, [r2, #0]
+ 405 0340 003082E5 	.L36:
+ 406 0344 020000EA 		.loc 1 145 0
+ 407              		mov	r3, #-1610612736
+ 141:main.c        **** //**************************************************************
+ 142:main.c        **** // delay5ms(uiK) verzögert um ca. uiK * 5ms
+ 408              	3, r3, asr #19
+ 409 0348 64209FE5 		ldr	r3, [r3, #56]
+ 410 034c 1C301BE5 		str	r3, [fp, #-24]
+ 411 0350 003082E5 		.loc 1 147 0
+ 412              		mvn	r3, #9502720
+ 143:main.c        **** **************************************************************
+ 144:main.c        **** void delay_ms(unsigned int uiK) {
+ 145:main.c        **** 	volatile unsigned int uiI;
+ 413              	r3, r3, #57344
+ 414 0354 0A32A0E3 		str	r3, [fp, #-20]
+ 415 0358 C339A0E1 		.loc 1 148 0
+ 416 035c 383093E5 		ldr	r2, [fp, #-24]
+ 417 0360 18300BE5 		ldr	r3, [fp, #-20]
+ 146:main.c        **** . uiK * 5ms
+ 147:main.c        **** //**************************************************************
+ 418              	r3, r2, r3
+ 419 0364 9138E0E3 		str	r3, [fp, #-16]
+ 420 0368 0E3A43E2 		.loc 1 149 0
+ 421 036c 14300BE5 		ldr	r3, .L39
+ 148:main.c        **** *******************************
+ 422              		r2, [r3, #0]
+ 423 0370 18201BE5 		ldr	r3, .L39+4
+ 424 0374 14301BE5 		ldr	r2, [r3, r2, asl #2]
+ 425 0378 033002E0 		ldr	r3, [fp, #-16]
+ 426 037c 10300BE5 		orr	r3, r3, r2
+ 149:main.c        **** / delay5ms(uiK) verzögert um ca. uiK * 5ms
+ 427              	r3, [fp, #-16]
+ 428 0380 2C309FE5 		.loc 1 150 0
+ 429 0384 002093E5 		mov	r3, #-1610612736
+ 430 0388 28309FE5 		mov	r3, r3, asr #19
+ 431 038c 022193E7 		ldr	r2, [fp, #-16]
+ 432 0390 10301BE5 		str	r2, [r3, #56]
+ 433 0394 023083E1 		.loc 1 151 0
+ 434 0398 10300BE5 		sub	sp, fp, #12
+ 150:main.c        **** TH(X) (sizeof(X)/sizeof(X[0]))
+ 435              	p, {fp, sp, pc}
+ 436 039c 0A32A0E3 	.L40:
+ 437 03a0 C339A0E1 		.align	2
+ 438 03a4 10201BE5 	.L39:
+ 439 03a8 382083E5 		.word	index.1783
+ 151:main.c        **** 
+ 440              	d	MOTOR_STEPS
+ 441 03ac 0CD04BE2 	.LFE7:
+ 443              		.align	2
+ 444              		.global	timer1_isr
+ 446 03b4 04000000 	timer1_isr:
+ 447 03b8 00000000 	.LFB8:
+ 448              		.loc 1 157 0
+ 449              		@ args = 0, pretend = 0, frame = 4
+ 450              		@ frame_needed = 1, uses_anonymous_args = 0
+ 451              		mov	ip, sp
+ 452              	.LCFI24:
+ 453              		stmfd	sp!, {fp, ip, lr, pc}
+ 454              	.LCFI25:
+ 152:main.c        **** //**************************************************************
+ 153:main.c        **** // delay5ms(uiK) verzögert um ca. uiK * 5ms
+ 154:main.c        **** //**************************************************************
+ 155:main.c        **** void delay_ms(unsigned int uiK) {
+ 156:main.c        **** 	volatile unsigned int uiI;
+ 157:main.c        **** 
+ 455              	
+ 456              	.LCFI26:
+ 457              		sub	sp, sp, #4
+ 458 03bc 0DC0A0E1 	.LCFI27:
+ 459              		.loc 1 160 0
+ 460 03c0 00D82DE9 		ldr	r3, .L43
+ 461              		ldr	r3, [r3, #0]
+ 462 03c4 04B04CE2 		mov	r0, r3
+ 463              		bl	motor_move
+ 464 03c8 04D04DE2 		.loc 1 162 0
+ 465              		mov	r3, #-16777216
+ 158:main.c        ****  (uiK--)				// folgende for-Schleife wird uiK-mal aufgerufen
+ 159:main.c        **** 		for (uiI = 0; uiI < 1600; uiI++)
+ 160:main.c        **** 			;		//  for-Schleife wird 1600-mal durchlaufen. Dies
+ 466              	3, #16384000
+ 467 03cc 34309FE5 		add	r3, r3, #64
+ 468 03d0 003093E5 		mov	r2, #4
+ 469 03d4 0300A0E1 		str	r2, [r3, #0]
+ 470 03d8 FEFFFFEB 		.loc 1 163 0
+ 161:main.c        **** olgende for-Schleife wird uiK-mal aufgerufen
+ 162:main.c        **** 		for (uiI = 0; uiI < 1600; uiI++)
+ 471              	r3, #-16777216
+ 472 03dc FF34A0E3 		add	r3, r3, #16384000
+ 473 03e0 FA3883E2 		add	r3, r3, #64
+ 474 03e4 403083E2 		ldr	r3, [r3, #32]
+ 475 03e8 0420A0E3 		str	r3, [fp, #-16]
+ 476 03ec 002083E5 		.loc 1 164 0
+ 163:main.c        **** K) {
+ 477              		sp, {r3, fp, sp, pc}
+ 478 03f0 FF34A0E3 	.L44:
+ 479 03f4 FA3883E2 		.align	2
+ 480 03f8 403083E2 	.L43:
+ 481 03fc 203093E5 		.word	direction
+ 482 0400 10300BE5 	.LFE8:
+ 164:main.c        **** delay5ms(uiK) verzögert um ca. uiK * 5ms
+ 483              		timer1_isr, .-timer1_isr
+ 484 0404 08A89DE8 		.section	.rodata
+ 485              		.align	2
+ 486              	.LC0:
+ 487              		.ascii	"Speed: %d\000"
+ 488 0408 00000000 		.align	2
+ 489              	.LC1:
+ 490              		.ascii	"LEFT\000"
+ 491              		.align	2
+ 492              	.LC2:
+ 493              		.ascii	"RIGHT\000"
+ 494 0020 53706565 		.text
+ 494      643A2025 
+ 494      6400
+ 495 002a 0000     		.align	2
+ 496              		.global	main
+ 498 0031 000000   	main:
+ 499              	.LFB9:
+ 500 0034 52494748 		.loc 1 169 0
+ 500      5400
+ 501 003a 0000     		@ args = 0, pretend = 0, frame = 4
+ 502              		@ frame_needed = 1, uses_anonymous_args = 0
+ 503              		mov	ip, sp
+ 504              	.LCFI28:
+ 505              		stmfd	sp!, {r4, fp, ip, lr, pc}
+ 506              	.LCFI29:
+ 165:main.c        **** TH(X) (sizeof(X)/sizeof(X[0]))
+ 166:main.c        **** 
+ 167:main.c        **** 
+ 168:main.c        **** //**************************************************************
+ 169:main.c        **** // delay5ms(uiK) verzögert um ca. uiK * 5ms
+ 507              	
+ 508              		sub	sp, sp, #4
+ 509              	.LCFI31:
+ 510 040c 0DC0A0E1 		.loc 1 170 0
+ 511              		mov	r3, #-2147483648
+ 512 0410 10D82DE9 		mov	r3, r3, asr #21
+ 513              		mov	r2, #4
+ 514 0414 04B04CE2 		str	r2, [r3, #16]
+ 515              		.loc 1 171 0
+ 516 0418 04D04DE2 		mov	r2, #-1610612736
+ 517              		mov	r2, r2, asr #19
+ 170:main.c        **** ***********************************************************
+ 518              	9502720
+ 519 041c 0231A0E3 		add	r3, r3, #57344
+ 520 0420 C33AA0E1 		str	r3, [r2, #16]
+ 521 0424 0420A0E3 		.loc 1 172 0
+ 522 0428 102083E5 		mov	r2, #-1610612736
+ 171:main.c        **** *******************************
+ 523              	r2, r2, asr #19
+ 524 042c 0A22A0E3 		mov	r3, #9502720
+ 525 0430 C229A0E1 		add	r3, r3, #57344
+ 526 0434 9138A0E3 		str	r3, [r2, #160]
+ 527 0438 0E3A83E2 		.loc 1 175 0
+ 528 043c 103082E5 		mov	r2, #-1610612736
+ 172:main.c        **** / delay5ms(uiK) verzögert um ca. uiK * 5ms
+ 529              	2, r2, asr #19
+ 530 0440 0A22A0E3 		mov	r3, #9502720
+ 531 0444 C229A0E1 		add	r3, r3, #57344
+ 532 0448 9138A0E3 		str	r3, [r2, #96]
+ 533 044c 0E3A83E2 		.loc 1 177 0
+ 534 0450 A03082E5 		mov	r0, #1
+ 173:main.c        **** TH(X) (sizeof(X)/sizeof(X[0]))
+ 174:main.c        **** 
+ 175:main.c        **** 
+ 535              	1, #4
+ 536 0454 0A22A0E3 		mov	r2, #3
+ 537 0458 C229A0E1 		ldr	r3, .L50
+ 538 045c 9138A0E3 		bl	timer_ir_init
+ 539 0460 0E3A83E2 		.loc 1 178 0
+ 540 0464 603082E5 		mov	r4, #-16777216
+ 176:main.c        **** *************************************************************
+ 177:main.c        **** // delay5ms(uiK) verzögert um ca. uiK * 5ms
+ 541              	4, r4, #16384000
+ 542 0468 0100A0E3 		add	r4, r4, #64
+ 543 046c 0410A0E3 		mov	r0, #0
+ 544 0470 0320A0E3 		bl	get_motor_speed
+ 545 0474 D0309FE5 		mov	r3, r0
+ 546 0478 FEFFFFEB 		str	r3, [r4, #28]
+ 178:main.c        **** **************************************************************
+ 547              	1 179 0
+ 548 047c FF44A0E3 		mov	r3, #-16777216
+ 549 0480 FA4884E2 		add	r3, r3, #16384000
+ 550 0484 404084E2 		add	r3, r3, #64
+ 551 0488 0000A0E3 		mov	r2, #4
+ 552 048c FEFFFFEB 		str	r2, [r3, #0]
+ 553 0490 0030A0E1 		.loc 1 181 0
+ 554 0494 1C3084E5 		mov	r0, #2
+ 179:main.c        **** *******************************
+ 555              	 #4
+ 556 0498 FF34A0E3 		mov	r2, #3
+ 557 049c FA3883E2 		ldr	r3, .L50+4
+ 558 04a0 403083E2 		bl	pioa_ir_init
+ 559 04a4 0420A0E3 		.loc 1 182 0
+ 560 04a8 002083E5 		mov	r0, #1
+ 180:main.c        **** / delay5ms(uiK) verzögert um ca. uiK * 5ms
+ 181:main.c        **** //**************************************************************
+ 561              	1, #4
+ 562 04ac 0200A0E3 		mov	r2, #3
+ 563 04b0 0410A0E3 		ldr	r3, .L50+4
+ 564 04b4 0320A0E3 		bl	pioa_ir_init
+ 565 04b8 90309FE5 		.loc 1 183 0
+ 566 04bc FEFFFFEB 		mov	r0, #-2147483648
+ 182:main.c        **** *******************************
+ 567              	1, #4
+ 568 04c0 0100A0E3 		mov	r2, #3
+ 569 04c4 0410A0E3 		ldr	r3, .L50+4
+ 570 04c8 0320A0E3 		bl	pioa_ir_init
+ 571 04cc 7C309FE5 		.loc 1 184 0
+ 572 04d0 FEFFFFEB 		bl	display_init
+ 183:main.c        **** / delay5ms(uiK) verzögert um ca. uiK * 5ms
+ 573              		.loc 1 187 0
+ 574 04d4 0201A0E3 		mov	r0, #0
+ 575 04d8 0410A0E3 		bl	get_motor_speed
+ 576 04dc 0320A0E3 		mov	r3, r0
+ 577 04e0 68309FE5 		ldr	r0, .L50+8
+ 578 04e4 FEFFFFEB 		mov	r1, r3
+ 184:main.c        **** TH(X) (sizeof(X)/sizeof(X[0]))
+ 579              	splay_printf
+ 580 04e8 FEFFFFEB 		.loc 1 188 0
+ 581              		mov	r0, #0
+ 185:main.c        **** 
+ 186:main.c        **** //**************************************************************
+ 187:main.c        **** // delay5ms(uiK) verzögert um ca. uiK * 5ms
+ 582              	v	r1, #1
+ 583 04ec 0000A0E3 		bl	display_set_cursor
+ 584 04f0 FEFFFFEB 		.loc 1 189 0
+ 585 04f4 0030A0E1 		ldr	r3, .L50+12
+ 586 04f8 54009FE5 		ldr	r3, [r3, #0]
+ 587 04fc 0310A0E1 		cmn	r3, #1
+ 588 0500 FEFFFFEB 		bne	.L46
+ 188:main.c        **** **************************************************************
+ 589              	, .L50+16
+ 590 0504 0000A0E3 		str	r3, [fp, #-20]
+ 591 0508 0110A0E3 		b	.L47
+ 592 050c FEFFFFEB 	.L46:
+ 189:main.c        **** *******************************
+ 593              		r3, .L50+20
+ 594 0510 40309FE5 		str	r3, [fp, #-20]
+ 595 0514 003093E5 	.L47:
+ 596 0518 010073E3 		ldr	r0, [fp, #-20]
+ 597 051c 0200001A 		bl	display_putstr
+ 598 0520 34309FE5 		.loc 1 190 0
+ 599 0524 14300BE5 		mov	r0, #50
+ 600 0528 010000EA 		bl	delay_ms
+ 601              		.loc 1 191 0
+ 602 052c 2C309FE5 		bl	display_clear
+ 603 0530 14300BE5 		b	.L48
+ 604              	.L51:
+ 605 0534 14001BE5 		.align	2
+ 606 0538 FEFFFFEB 	.L50:
+ 190:main.c        **** / delay5ms(uiK) verzögert um ca. uiK * 5ms
+ 607              	isr
+ 608 053c 3200A0E3 		.word	pioa_isr
+ 609 0540 FEFFFFEB 		.word	.LC0
+ 191:main.c        **** TH(X) (sizeof(X)/sizeof(X[0]))
+ 610              	ord	direction
+ 611 0544 FEFFFFEB 		.word	.LC1
+ 612 0548 E7FFFFEA 		.word	.LC2
+ 613              	.LFE9:
+ 615              		.section	.debug_frame,"",%progbits
+ 616 054c 00000000 	.Lframe0:
+ 617 0550 00000000 		.4byte	.LECIE0-.LSCIE0
+ 618 0554 20000000 	.LSCIE0:
+ 619 0558 00000000 		.4byte	0xffffffff
+ 620 055c 2C000000 		.byte	0x1
+ 621 0560 34000000 		.ascii	"\000"
+ 622              		.uleb128 0x1
+ 623              		.sleb128 -4
+ 844              		.4byte	.LCFI2-.Ltext0
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\Aomx\AppData\Local\Temp/ccmoeEVi.s:15     .rodata:00000000 MOTOR_STEPS
+C:\Users\Aomx\AppData\Local\Temp/ccmoeEVi.s:16     .rodata:00000000 $d
+C:\Users\Aomx\AppData\Local\Temp/ccmoeEVi.s:29     .data:00000000 direction
+C:\Users\Aomx\AppData\Local\Temp/ccmoeEVi.s:30     .data:00000000 $d
+C:\Users\Aomx\AppData\Local\Temp/ccmoeEVi.s:35     .text:00000000 delay_ms
+C:\Users\Aomx\AppData\Local\Temp/ccmoeEVi.s:41     .text:00000000 $a
+C:\Users\Aomx\AppData\Local\Temp/ccmoeEVi.s:87     .data:00000004 motor_speed.1717
+C:\Users\Aomx\AppData\Local\Temp/ccmoeEVi.s:93     .text:00000074 get_motor_speed
+C:\Users\Aomx\AppData\Local\Temp/ccmoeEVi.s:148    .text:000000f4 $d
+C:\Users\Aomx\AppData\Local\Temp/ccmoeEVi.s:154    .text:000000f8 is_button_pressed
+C:\Users\Aomx\AppData\Local\Temp/ccmoeEVi.s:159    .text:000000f8 $a
+C:\Users\Aomx\AppData\Local\Temp/ccmoeEVi.s:185    .text:00000134 get_button_state
+                             .bss:00000000 $d
+C:\Users\Aomx\AppData\Local\Temp/ccmoeEVi.s:242    .bss:00000000 on.1754
+C:\Users\Aomx\AppData\Local\Temp/ccmoeEVi.s:248    .text:000001b8 pioa_isr
+C:\Users\Aomx\AppData\Local\Temp/ccmoeEVi.s:272    .text:000001e8 $d
+C:\Users\Aomx\AppData\Local\Temp/ccmoeEVi.s:280    .text:00000200 $a
+C:\Users\Aomx\AppData\Local\Temp/ccmoeEVi.s:356    .text:000002e0 $d
+C:\Users\Aomx\AppData\Local\Temp/ccmoeEVi.s:362    .bss:00000004 index.1783
+C:\Users\Aomx\AppData\Local\Temp/ccmoeEVi.s:368    .text:000002e8 motor_move
+C:\Users\Aomx\AppData\Local\Temp/ccmoeEVi.s:373    .text:000002e8 $a
+C:\Users\Aomx\AppData\Local\Temp/ccmoeEVi.s:446    .text:000003b4 $d
+C:\Users\Aomx\AppData\Local\Temp/ccmoeEVi.s:453    .text:000003bc timer1_isr
+C:\Users\Aomx\AppData\Local\Temp/ccmoeEVi.s:458    .text:000003bc $a
+C:\Users\Aomx\AppData\Local\Temp/ccmoeEVi.s:488    .text:00000408 $d
+C:\Users\Aomx\AppData\Local\Temp/ccmoeEVi.s:505    .text:0000040c main
+C:\Users\Aomx\AppData\Local\Temp/ccmoeEVi.s:510    .text:0000040c $a
+C:\Users\Aomx\AppData\Local\Temp/ccmoeEVi.s:616    .text:0000054c $d
+
+UNDEFINED SYMBOLS
+timer_ir_init
+pioa_ir_init
+display_init
+display_printf
+display_set_cursor
+display_putstr
+display_clear

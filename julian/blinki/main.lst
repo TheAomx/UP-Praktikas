@@ -1,0 +1,1260 @@
+   1              		.file	"main.c"
+   9              	.Ltext0:
+  10              		.global	all_leds
+  11              		.data
+  12              		.align	2
+  15              	all_leds:
+  16 0000 00000040 		.word	1073741824
+  17 0004 04000000 		.word	4
+  18 0008 00000010 		.word	268435456
+  19 000c 00000200 		.word	131072
+  20 0010 00000400 		.word	262144
+  21              		.global	blinker_modes
+  22              		.section	.rodata
+  23              		.align	2
+  24              	.LC0:
+  25 0000 416C6C20 		.ascii	"All blinker\000"
+  25      626C696E 
+  25      6B657200 
+  26              		.align	2
+  27              	.LC1:
+  28 000c 4F646420 		.ascii	"Odd even blinker\000"
+  28      6576656E 
+  28      20626C69 
+  28      6E6B6572 
+  28      00
+  29 001d 000000   		.align	2
+  30              	.LC2:
+  31 0020 4F646420 		.ascii	"Odd even blinker direct\000"
+  31      6576656E 
+  31      20626C69 
+  31      6E6B6572 
+  31      20646972 
+  32              		.align	2
+  33              	.LC3:
+  34 0038 666F7277 		.ascii	"forward blinker\000"
+  34      61726420 
+  34      626C696E 
+  34      6B657200 
+  35              		.align	2
+  36              	.LC4:
+  37 0048 6261636B 		.ascii	"backward blinker\000"
+  37      77617264 
+  37      20626C69 
+  37      6E6B6572 
+  37      00
+  38              		.data
+  39              		.align	2
+  42              	blinker_modes:
+  43 0014 00000000 		.word	.LC0
+  44 0018 00000000 		.word	all_led_blinker_mode
+  45 001c 0C000000 		.word	.LC1
+  46 0020 00000000 		.word	odd_even_blinker_mode
+  47 0024 20000000 		.word	.LC2
+  48 0028 00000000 		.word	odd_even_blinker_direct_mode
+  49 002c 38000000 		.word	.LC3
+  50 0030 00000000 		.word	line_blinker_mode_forward
+  51 0034 48000000 		.word	.LC4
+  52 0038 00000000 		.word	line_blinker_mode_backward
+  53              		.global	current_blink_mode
+  54              		.bss
+  55              		.align	2
+  58              	current_blink_mode:
+  59 0000 00000000 		.space	4
+  60              		.text
+  61              		.align	2
+  62              		.global	is_button_pressed
+  64              	is_button_pressed:
+  65              	.LFB2:
+  66              		.file 1 "main.c"
+   1:main.c        **** #include "include/AT91SAM7S64.h"							// Register-Deklarationen
+   2:main.c        **** #include "cToolMod.h"
+   3:main.c        **** #include "display.h"
+   4:main.c        **** #define TYPICAL
+   5:main.c        **** //#define POINTER
+   6:main.c        **** // #define DIRECT
+   7:main.c        **** 
+   8:main.c        **** #define LED1 AT91C_PIO_PA30
+   9:main.c        **** #define LED2 AT91C_PIO_PA2
+  10:main.c        **** #define LED3 AT91C_PIO_PA28
+  11:main.c        **** #define LED4 AT91C_PIO_PA17
+  12:main.c        **** #define LED5 AT91C_PIO_PA18
+  13:main.c        **** 
+  14:main.c        **** #define BUTTON1 AT91C_PIO_PA1
+  15:main.c        **** #define BUTTON2 AT91C_PIO_PA0
+  16:main.c        **** #define BUTTON3 AT91C_PIO_PA31
+  17:main.c        **** 
+  18:main.c        **** #define ARRAY_LENGTH(X) (sizeof(X)/sizeof(X[0]))
+  19:main.c        **** typedef unsigned int uint_t;
+  20:main.c        **** typedef void (*blinker_mode_callback_t) (void);
+  21:main.c        **** 
+  22:main.c        **** struct blinker_mode_t {
+  23:main.c        **** 	char *name;
+  24:main.c        **** 	blinker_mode_callback_t function;
+  25:main.c        **** };
+  26:main.c        **** 
+  27:main.c        **** typedef struct blinker_mode_t blinker_mode_t;
+  28:main.c        **** 
+  29:main.c        **** uint_t all_leds[] = {
+  30:main.c        **** 	LED1, LED2, LED3, LED4, LED5
+  31:main.c        **** };
+  32:main.c        **** 
+  33:main.c        **** void all_led_blinker_mode();
+  34:main.c        **** void odd_even_blinker_mode();
+  35:main.c        **** 
+  36:main.c        **** void odd_even_blinker_direct_mode();
+  37:main.c        **** void line_blinker_mode_forward();
+  38:main.c        **** void line_blinker_mode_backward();
+  39:main.c        **** 
+  40:main.c        **** blinker_mode_t blinker_modes [] = {
+  41:main.c        **** 			{"All blinker", all_led_blinker_mode},
+  42:main.c        **** 			{"Odd even blinker", odd_even_blinker_mode},
+  43:main.c        **** 			{"Odd even blinker direct", odd_even_blinker_direct_mode},
+  44:main.c        **** 			{"forward blinker", line_blinker_mode_forward},
+  45:main.c        **** 			{"backward blinker", line_blinker_mode_backward},
+  46:main.c        **** };
+  47:main.c        **** 
+  48:main.c        **** uint_t current_blink_mode = 0;
+  49:main.c        **** 
+  50:main.c        **** unsigned char is_button_pressed(unsigned int button) {
+  67              	 1, uses_anonymous_args = 0
+  68              		mov	ip, sp
+  69              	.LCFI0:
+  70 0000 0DC0A0E1 		stmfd	sp!, {fp, ip, lr, pc}
+  71              	.LCFI1:
+  72 0004 00D82DE9 		sub	fp, ip, #4
+  73              	.LCFI2:
+  74 0008 04B04CE2 		sub	sp, sp, #4
+  75              	.LCFI3:
+  76 000c 04D04DE2 		str	r0, [fp, #-16]
+  77              		.loc 1 51 0
+  78 0010 10000BE5 		mov	r3, #-1610612736
+  51:main.c        **** 	return !(AT91C_BASE_PIOA->PIO_PDSR & button);
+  79              	 asr #19
+  80 0014 0A32A0E3 		ldr	r2, [r3, #60]
+  81 0018 C339A0E1 		ldr	r3, [fp, #-16]
+  82 001c 3C2093E5 		and	r3, r2, r3
+  83 0020 10301BE5 		cmp	r3, #0
+  84 0024 033002E0 		movne	r3, #0
+  85 0028 000053E3 		moveq	r3, #1
+  86 002c 0030A013 		.loc 1 52 0
+  87 0030 0130A003 		mov	r0, r3
+  52:main.c        **** }
+  88              	, {r3, fp, sp, pc}
+  89 0034 0300A0E1 	.LFE2:
+  91              		.align	2
+  92              		.global	pioa_ir_init
+  94              	pioa_ir_init:
+  95              	.LFB3:
+  96              		.loc 1 65 0
+  97              		@ args = 0, pretend = 0, frame = 16
+  53:main.c        **** 
+  54:main.c        **** //**************************************************************
+  55:main.c        **** // pioa_ir_init
+  56:main.c        **** // Initialisiert Interrupts des PIOA-Controllers
+  57:main.c        **** // Übergabeparameter:  PORT     Auswahl des(r) Pins
+  58:main.c        **** //                     PRIOR    Priorität   0 (niedrigste) .. 7 (höchste)
+  59:main.c        **** //                     SRCTYPE  Sensivität  0  Low-Level
+  60:main.c        **** //                                          1  Fallende Flanke
+  61:main.c        **** //                                          2  High-Level
+  62:main.c        **** //                                          3  Steigende Flanke
+  63:main.c        **** //                     ADR_ISR  Adresse der ISR-Routine
+  64:main.c        **** //**************************************************************
+  65:main.c        **** void pioa_ir_init (unsigned int PORT, unsigned int PRIOR, unsigned int SRCTYPE, void (*ADR_ISR) (vo
+  98              	eeded = 1, uses_anonymous_args = 0
+  99              		mov	ip, sp
+ 100              	.LCFI4:
+ 101 003c 0DC0A0E1 		stmfd	sp!, {fp, ip, lr, pc}
+ 102              	.LCFI5:
+ 103 0040 00D82DE9 		sub	fp, ip, #4
+ 104              	.LCFI6:
+ 105 0044 04B04CE2 		sub	sp, sp, #16
+ 106              	.LCFI7:
+ 107 0048 10D04DE2 		str	r0, [fp, #-16]
+ 108              		str	r1, [fp, #-20]
+ 109 004c 10000BE5 		str	r2, [fp, #-24]
+ 110 0050 14100BE5 		str	r3, [fp, #-28]
+ 111 0054 18200BE5 		.loc 1 67 0
+ 112 0058 1C300BE5 		mov	r3, #-2147483648
+  66:main.c        **** 																// Konfiguration Advanced Interrupt Controllers (AIC):
+  67:main.c        **** 	AT91C_BASE_AIC->AIC_IDCR = (1<<AT91C_ID_PIOA);					// PIOA-Interrupts sperren
+ 113              	r #19
+ 114 005c 0231A0E3 		mov	r2, #4
+ 115 0060 C339A0E1 		str	r2, [r3, #292]
+ 116 0064 0420A0E3 		.loc 1 68 0
+ 117 0068 242183E5 		mov	r3, #-2147483648
+  68:main.c        **** 	AT91C_BASE_AIC->AIC_SVR[AT91C_ID_PIOA]= (unsigned int) ADR_ISR;	// Adresse der ISR zuweisen
+ 118              	r3, r3, asr #19
+ 119 006c 0231A0E3 		ldr	r2, [fp, #-28]
+ 120 0070 C339A0E1 		str	r2, [r3, #136]
+ 121 0074 1C201BE5 		.loc 1 69 0
+ 122 0078 882083E5 		mov	r2, #-2147483648
+  69:main.c        **** 	AT91C_BASE_AIC->AIC_SMR[AT91C_ID_PIOA]= (SRCTYPE<<5)|PRIOR;		// Type und Priorität auswählen
+ 123              	r2, r2, asr #19
+ 124 007c 0221A0E3 		ldr	r3, [fp, #-24]
+ 125 0080 C229A0E1 		mov	r1, r3, asl #5
+ 126 0084 18301BE5 		ldr	r3, [fp, #-20]
+ 127 0088 8312A0E1 		orr	r3, r1, r3
+ 128 008c 14301BE5 		str	r3, [r2, #8]
+ 129 0090 033081E1 		.loc 1 70 0
+ 130 0094 083082E5 		mov	r3, #-2147483648
+  70:main.c        **** 	AT91C_BASE_AIC->AIC_ICCR = (1<<AT91C_ID_PIOA);					// ev. IR-Flag löschen
+ 131              	 r3, asr #19
+ 132 0098 0231A0E3 		mov	r2, #4
+ 133 009c C339A0E1 		str	r2, [r3, #296]
+ 134 00a0 0420A0E3 		.loc 1 71 0
+ 135 00a4 282183E5 		mov	r3, #-2147483648
+  71:main.c        **** 	AT91C_BASE_AIC->AIC_IECR = (1<<AT91C_ID_PIOA);					// PIOA-Interrupts freigeben
+ 136              	r3, r3, asr #19
+ 137 00a8 0231A0E3 		mov	r2, #4
+ 138 00ac C339A0E1 		str	r2, [r3, #288]
+ 139 00b0 0420A0E3 		.loc 1 73 0
+ 140 00b4 202183E5 		mov	r3, #-1610612736
+  72:main.c        **** 
+  73:main.c        **** 	AT91C_BASE_PIOA->PIO_IER = PORT;							// PIO-Pin(s) für Interrupts freigeben
+ 141              	r3, r3, asr #19
+ 142 00b8 0A32A0E3 		ldr	r2, [fp, #-16]
+ 143 00bc C339A0E1 		str	r2, [r3, #64]
+ 144 00c0 10201BE5 		.loc 1 74 0
+ 145 00c4 402083E5 		sub	sp, fp, #12
+  74:main.c        **** }
+ 146              	d	sp, {fp, sp, pc}
+ 147 00c8 0CD04BE2 	.LFE3:
+ 149              		.align	2
+ 150              		.global	pioa_isr
+ 152              	pioa_isr:
+ 153              	.LFB4:
+ 154              		.loc 1 79 0
+ 155              		@ args = 0, pretend = 0, frame = 8
+  75:main.c        **** 
+  76:main.c        **** //**************************************************************
+  77:main.c        **** // Interrupt-Service-Routine PIOA
+  78:main.c        **** //**************************************************************
+  79:main.c        **** __attribute__ ((used)) void pioa_isr (void){
+ 156              	eeded = 1, uses_anonymous_args = 0
+ 157              		mov	ip, sp
+ 158              	.LCFI8:
+ 159 00d0 0DC0A0E1 		stmfd	sp!, {fp, ip, lr, pc}
+ 160              	.LCFI9:
+ 161 00d4 00D82DE9 		sub	fp, ip, #4
+ 162              	.LCFI10:
+ 163 00d8 04B04CE2 		sub	sp, sp, #8
+ 164              	.LCFI11:
+ 165 00dc 08D04DE2 		.loc 1 83 0
+ 166              		mov	r0, #2
+  80:main.c        **** 
+  81:main.c        **** 	volatile unsigned int dummy;			// Lokale dummy-Variable als volatile deklariert
+  82:main.c        **** 
+  83:main.c        **** 	if (is_button_pressed(BUTTON1)) {
+ 167              	on_pressed
+ 168 00e0 0200A0E3 		mov	r3, r0
+ 169 00e4 FEFFFFEB 		cmp	r3, #0
+ 170 00e8 0030A0E1 		beq	.L6
+ 171 00ec 000053E3 		.loc 1 84 0
+ 172 00f0 0F00000A 		ldr	r3, .L8
+  84:main.c        **** 		current_blink_mode = (current_blink_mode + 1) % ARRAY_LENGTH(blinker_modes);
+ 173              	3, [r3, #0]
+ 174 00f4 50309FE5 		add	r2, r3, #1
+ 175 00f8 003093E5 		ldr	r3, .L8+4
+ 176 00fc 012083E2 		umull	r1, r3, r2, r3
+ 177 0100 48309FE5 		mov	r3, r3, lsr #2
+ 178 0104 921383E0 		str	r3, [fp, #-20]
+ 179 0108 2331A0E1 		ldr	r3, [fp, #-20]
+ 180 010c 14300BE5 		mov	r3, r3, asl #2
+ 181 0110 14301BE5 		ldr	r1, [fp, #-20]
+ 182 0114 0331A0E1 		add	r3, r3, r1
+ 183 0118 14101BE5 		rsb	r3, r3, r2
+ 184 011c 013083E0 		str	r3, [fp, #-20]
+ 185 0120 023063E0 		ldr	r3, .L8
+ 186 0124 14300BE5 		ldr	r2, [fp, #-20]
+ 187 0128 1C309FE5 		str	r2, [r3, #0]
+ 188 012c 14201BE5 	.L6:
+ 189 0130 002083E5 		.loc 1 87 0
+ 190              		mov	r3, #-1610612736
+  85:main.c        **** 	}
+  86:main.c        **** 
+  87:main.c        **** 	dummy = AT91C_BASE_PIOA->PIO_ISR;		// Bestätigung Interrupt Request
+ 191              	19
+ 192 0134 0A32A0E3 		ldr	r3, [r3, #76]
+ 193 0138 C339A0E1 		str	r3, [fp, #-16]
+ 194 013c 4C3093E5 		.loc 1 88 0
+ 195 0140 10300BE5 		sub	sp, fp, #12
+  88:main.c        **** }
+ 196              	d	sp, {fp, sp, pc}
+ 197 0144 0CD04BE2 	.L9:
+ 198 0148 00A89DE8 		.align	2
+ 199              	.L8:
+ 200              		.word	current_blink_mode
+ 201              		.word	-858993459
+ 202 014c 00000000 	.LFE4:
+ 204              		.align	2
+ 205              		.global	delay
+ 207              	delay:
+ 208              	.LFB5:
+ 209              		.loc 1 90 0
+ 210              		@ args = 0, pretend = 0, frame = 0
+  89:main.c        **** 
+  90:main.c        **** void delay () {
+ 211              	 = 1, uses_anonymous_args = 0
+ 212              		mov	ip, sp
+ 213              	.LCFI12:
+ 214 0154 0DC0A0E1 		stmfd	sp!, {fp, ip, lr, pc}
+ 215              	.LCFI13:
+ 216 0158 00D82DE9 		sub	fp, ip, #4
+ 217              	.LCFI14:
+ 218 015c 04B04CE2 		.loc 1 91 0
+ 219              		mov	r0, #100
+  91:main.c        **** 	delay_ms(100);
+ 220              	_ms
+ 221 0160 6400A0E3 		.loc 1 92 0
+ 222 0164 FEFFFFEB 		ldmfd	sp, {fp, sp, pc}
+  92:main.c        **** }
+ 223              	E5:
+ 225              		.align	2
+ 226              		.global	enable_led
+ 228              	enable_led:
+ 229              	.LFB6:
+ 230              		.loc 1 94 0
+ 231              		@ args = 0, pretend = 0, frame = 4
+  93:main.c        **** 
+  94:main.c        **** void enable_led(uint_t led) {
+ 232              	needed = 1, uses_anonymous_args = 0
+ 233              		mov	ip, sp
+ 234              	.LCFI15:
+ 235 016c 0DC0A0E1 		stmfd	sp!, {fp, ip, lr, pc}
+ 236              	.LCFI16:
+ 237 0170 00D82DE9 		sub	fp, ip, #4
+ 238              	.LCFI17:
+ 239 0174 04B04CE2 		sub	sp, sp, #4
+ 240              	.LCFI18:
+ 241 0178 04D04DE2 		str	r0, [fp, #-16]
+ 242              		.loc 1 95 0
+ 243 017c 10000BE5 		mov	r3, #-1610612736
+  95:main.c        **** 	AT91C_BASE_PIOA->PIO_OER = led;							// Ausgang freigeben
+ 244              	 asr #19
+ 245 0180 0A32A0E3 		ldr	r2, [fp, #-16]
+ 246 0184 C339A0E1 		str	r2, [r3, #16]
+ 247 0188 10201BE5 		.loc 1 96 0
+ 248 018c 102083E5 		mov	r3, #-1610612736
+  96:main.c        **** 	AT91C_BASE_PIOA->PIO_PPUDR = led;						// Pull-Up ausschalten
+ 249              	r3, r3, asr #19
+ 250 0190 0A32A0E3 		ldr	r2, [fp, #-16]
+ 251 0194 C339A0E1 		str	r2, [r3, #96]
+ 252 0198 10201BE5 		.loc 1 97 0
+ 253 019c 602083E5 		ldmfd	sp, {r3, fp, sp, pc}
+  97:main.c        **** }
+ 254              	:
+ 256              		.align	2
+ 257              		.global	led_on_pointer
+ 259              	led_on_pointer:
+ 260              	.LFB7:
+ 261              		.loc 1 99 0
+ 262              		@ args = 0, pretend = 0, frame = 8
+  98:main.c        **** 
+  99:main.c        **** void led_on_pointer(uint_t led) {
+ 263              	needed = 1, uses_anonymous_args = 0
+ 264              		mov	ip, sp
+ 265              	.LCFI19:
+ 266 01a4 0DC0A0E1 		stmfd	sp!, {fp, ip, lr, pc}
+ 267              	.LCFI20:
+ 268 01a8 00D82DE9 		sub	fp, ip, #4
+ 269              	.LCFI21:
+ 270 01ac 04B04CE2 		sub	sp, sp, #8
+ 271              	.LCFI22:
+ 272 01b0 08D04DE2 		str	r0, [fp, #-20]
+ 273              		.loc 1 100 0
+ 274 01b4 14000BE5 		mov	r3, #0
+ 100:main.c        **** 	volatile unsigned int *SODR = (unsigned int *) 0xFFFFF430;	// Zeigerdefiniton 'Set Output Data Reg
+ 275              	 #3024
+ 276 01b8 0030A0E3 		str	r3, [fp, #-16]
+ 277 01bc BD3E43E2 		.loc 1 101 0
+ 278 01c0 10300BE5 		ldr	r2, [fp, #-16]
+ 101:main.c        **** 	*SODR = led;												// LED an
+ 279              		r3, [fp, #-20]
+ 280 01c4 10201BE5 		str	r3, [r2, #0]
+ 281 01c8 14301BE5 		.loc 1 102 0
+ 282 01cc 003082E5 		sub	sp, fp, #12
+ 102:main.c        **** }
+ 283              	fd	sp, {fp, sp, pc}
+ 284 01d0 0CD04BE2 	.LFE7:
+ 286              		.align	2
+ 287              		.global	led_off_pointer
+ 289              	led_off_pointer:
+ 290              	.LFB8:
+ 291              		.loc 1 104 0
+ 292              		@ args = 0, pretend = 0, frame = 8
+ 103:main.c        **** 
+ 104:main.c        **** void led_off_pointer(uint_t led) {
+ 293              	eeded = 1, uses_anonymous_args = 0
+ 294              		mov	ip, sp
+ 295              	.LCFI23:
+ 296 01d8 0DC0A0E1 		stmfd	sp!, {fp, ip, lr, pc}
+ 297              	.LCFI24:
+ 298 01dc 00D82DE9 		sub	fp, ip, #4
+ 299              	.LCFI25:
+ 300 01e0 04B04CE2 		sub	sp, sp, #8
+ 301              	.LCFI26:
+ 302 01e4 08D04DE2 		str	r0, [fp, #-20]
+ 303              		.loc 1 105 0
+ 304 01e8 14000BE5 		mvn	r3, #3008
+ 105:main.c        **** 	volatile unsigned int *CODR = (unsigned int *) 0xFFFFF434;	// Zeigerdefiniton 'Clear Output Data R
+ 305              	 #11
+ 306 01ec 2F3DE0E3 		str	r3, [fp, #-16]
+ 307 01f0 0B3043E2 		.loc 1 106 0
+ 308 01f4 10300BE5 		ldr	r2, [fp, #-16]
+ 106:main.c        **** 	*CODR = led;													// LED an
+ 309              		r3, [fp, #-20]
+ 310 01f8 10201BE5 		str	r3, [r2, #0]
+ 311 01fc 14301BE5 		.loc 1 107 0
+ 312 0200 003082E5 		sub	sp, fp, #12
+ 107:main.c        **** }
+ 313              	fd	sp, {fp, sp, pc}
+ 314 0204 0CD04BE2 	.LFE8:
+ 316              		.align	2
+ 317              		.global	led_on_direct
+ 319              	led_on_direct:
+ 320              	.LFB9:
+ 321              		.loc 1 109 0
+ 322              		@ args = 0, pretend = 0, frame = 4
+ 108:main.c        **** 
+ 109:main.c        **** void led_on_direct(uint_t led) {
+ 323              	eeded = 1, uses_anonymous_args = 0
+ 324              		mov	ip, sp
+ 325              	.LCFI27:
+ 326 020c 0DC0A0E1 		stmfd	sp!, {fp, ip, lr, pc}
+ 327              	.LCFI28:
+ 328 0210 00D82DE9 		sub	fp, ip, #4
+ 329              	.LCFI29:
+ 330 0214 04B04CE2 		sub	sp, sp, #4
+ 331              	.LCFI30:
+ 332 0218 04D04DE2 		str	r0, [fp, #-16]
+ 333              		.loc 1 110 0
+ 334 021c 10000BE5 		mov	r3, #0
+ 110:main.c        **** 	*((volatile unsigned int *) 0xFFFFF430) = led;		// LED an
+ 335              	 #3024
+ 336 0220 0030A0E3 		ldr	r2, [fp, #-16]
+ 337 0224 BD3E43E2 		str	r2, [r3, #0]
+ 338 0228 10201BE5 		.loc 1 111 0
+ 339 022c 002083E5 		ldmfd	sp, {r3, fp, sp, pc}
+ 111:main.c        **** }
+ 340              	:
+ 342              		.align	2
+ 343              		.global	led_off_direct
+ 345              	led_off_direct:
+ 346              	.LFB10:
+ 347              		.loc 1 113 0
+ 348              		@ args = 0, pretend = 0, frame = 4
+ 112:main.c        **** 
+ 113:main.c        **** void led_off_direct(uint_t led) {
+ 349              	needed = 1, uses_anonymous_args = 0
+ 350              		mov	ip, sp
+ 351              	.LCFI31:
+ 352 0234 0DC0A0E1 		stmfd	sp!, {fp, ip, lr, pc}
+ 353              	.LCFI32:
+ 354 0238 00D82DE9 		sub	fp, ip, #4
+ 355              	.LCFI33:
+ 356 023c 04B04CE2 		sub	sp, sp, #4
+ 357              	.LCFI34:
+ 358 0240 04D04DE2 		str	r0, [fp, #-16]
+ 359              		.loc 1 114 0
+ 360 0244 10000BE5 		mvn	r3, #3008
+ 114:main.c        **** 	*((volatile unsigned int *) 0xFFFFF434) = led;		// LED aus
+ 361              	 #11
+ 362 0248 2F3DE0E3 		ldr	r2, [fp, #-16]
+ 363 024c 0B3043E2 		str	r2, [r3, #0]
+ 364 0250 10201BE5 		.loc 1 115 0
+ 365 0254 002083E5 		ldmfd	sp, {r3, fp, sp, pc}
+ 115:main.c        **** }
+ 366              	0:
+ 368              		.align	2
+ 369              		.global	led_on_base
+ 371              	led_on_base:
+ 372              	.LFB11:
+ 373              		.loc 1 117 0
+ 374              		@ args = 0, pretend = 0, frame = 4
+ 116:main.c        **** 
+ 117:main.c        **** void led_on_base (uint_t led) {
+ 375              	needed = 1, uses_anonymous_args = 0
+ 376              		mov	ip, sp
+ 377              	.LCFI35:
+ 378 025c 0DC0A0E1 		stmfd	sp!, {fp, ip, lr, pc}
+ 379              	.LCFI36:
+ 380 0260 00D82DE9 		sub	fp, ip, #4
+ 381              	.LCFI37:
+ 382 0264 04B04CE2 		sub	sp, sp, #4
+ 383              	.LCFI38:
+ 384 0268 04D04DE2 		str	r0, [fp, #-16]
+ 385              		.loc 1 118 0
+ 386 026c 10000BE5 		mov	r3, #-1610612736
+ 118:main.c        **** 	AT91C_BASE_PIOA->PIO_SODR = led;	// LED an
+ 387              	 asr #19
+ 388 0270 0A32A0E3 		ldr	r2, [fp, #-16]
+ 389 0274 C339A0E1 		str	r2, [r3, #48]
+ 390 0278 10201BE5 		.loc 1 119 0
+ 391 027c 302083E5 		ldmfd	sp, {r3, fp, sp, pc}
+ 119:main.c        **** }
+ 392              	1:
+ 394              		.align	2
+ 395              		.global	led_off_base
+ 397              	led_off_base:
+ 398              	.LFB12:
+ 399              		.loc 1 121 0
+ 400              		@ args = 0, pretend = 0, frame = 4
+ 120:main.c        **** 
+ 121:main.c        **** void led_off_base(uint_t led) {
+ 401              	needed = 1, uses_anonymous_args = 0
+ 402              		mov	ip, sp
+ 403              	.LCFI39:
+ 404 0284 0DC0A0E1 		stmfd	sp!, {fp, ip, lr, pc}
+ 405              	.LCFI40:
+ 406 0288 00D82DE9 		sub	fp, ip, #4
+ 407              	.LCFI41:
+ 408 028c 04B04CE2 		sub	sp, sp, #4
+ 409              	.LCFI42:
+ 410 0290 04D04DE2 		str	r0, [fp, #-16]
+ 411              		.loc 1 122 0
+ 412 0294 10000BE5 		mov	r3, #-1610612736
+ 122:main.c        **** 	AT91C_BASE_PIOA->PIO_CODR = led; 	// LED aus
+ 413              	 asr #19
+ 414 0298 0A32A0E3 		ldr	r2, [fp, #-16]
+ 415 029c C339A0E1 		str	r2, [r3, #52]
+ 416 02a0 10201BE5 		.loc 1 123 0
+ 417 02a4 342083E5 		ldmfd	sp, {r3, fp, sp, pc}
+ 123:main.c        **** }
+ 418              	2:
+ 420              		.align	2
+ 421              		.global	led_on
+ 423              	led_on:
+ 424              	.LFB13:
+ 425              		.loc 1 125 0
+ 426              		@ args = 0, pretend = 0, frame = 4
+ 124:main.c        **** 
+ 125:main.c        **** void led_on (uint_t led) {
+ 427              	needed = 1, uses_anonymous_args = 0
+ 428              		mov	ip, sp
+ 429              	.LCFI43:
+ 430 02ac 0DC0A0E1 		stmfd	sp!, {fp, ip, lr, pc}
+ 431              	.LCFI44:
+ 432 02b0 00D82DE9 		sub	fp, ip, #4
+ 433              	.LCFI45:
+ 434 02b4 04B04CE2 		sub	sp, sp, #4
+ 435              	.LCFI46:
+ 436 02b8 04D04DE2 		str	r0, [fp, #-16]
+ 437              		.loc 1 127 0
+ 438 02bc 10000BE5 		ldr	r0, [fp, #-16]
+ 126:main.c        **** #ifdef TYPICAL
+ 127:main.c        **** 	led_on_base(led);
+ 439              	ase
+ 440 02c0 10001BE5 		.loc 1 135 0
+ 441 02c4 FEFFFFEB 		ldmfd	sp, {r3, fp, sp, pc}
+ 128:main.c        **** #endif
+ 129:main.c        **** #ifdef POINTER
+ 130:main.c        **** 	led_on_pointer(led);
+ 131:main.c        **** #endif
+ 132:main.c        **** #ifdef DIRECT
+ 133:main.c        **** 	led_on_direct(led);
+ 134:main.c        **** #endif
+ 135:main.c        **** }
+ 442              	E13:
+ 444              		.align	2
+ 445              		.global	led_off
+ 447              	led_off:
+ 448              	.LFB14:
+ 449              		.loc 1 137 0
+ 450              		@ args = 0, pretend = 0, frame = 4
+ 136:main.c        **** 
+ 137:main.c        **** void led_off (uint_t led) {
+ 451              	needed = 1, uses_anonymous_args = 0
+ 452              		mov	ip, sp
+ 453              	.LCFI47:
+ 454 02cc 0DC0A0E1 		stmfd	sp!, {fp, ip, lr, pc}
+ 455              	.LCFI48:
+ 456 02d0 00D82DE9 		sub	fp, ip, #4
+ 457              	.LCFI49:
+ 458 02d4 04B04CE2 		sub	sp, sp, #4
+ 459              	.LCFI50:
+ 460 02d8 04D04DE2 		str	r0, [fp, #-16]
+ 461              		.loc 1 139 0
+ 462 02dc 10000BE5 		ldr	r0, [fp, #-16]
+ 138:main.c        **** #ifdef TYPICAL
+ 139:main.c        **** 	led_off_base(led);
+ 463              	base
+ 464 02e0 10001BE5 		.loc 1 147 0
+ 465 02e4 FEFFFFEB 		ldmfd	sp, {r3, fp, sp, pc}
+ 140:main.c        **** #endif
+ 141:main.c        **** #ifdef POINTER
+ 142:main.c        **** 	led_off_pointer(led);
+ 143:main.c        **** #endif
+ 144:main.c        **** #ifdef DIRECT
+ 145:main.c        **** 	led_off_direct(led);
+ 146:main.c        **** #endif
+ 147:main.c        **** }
+ 466              	E14:
+ 468              		.align	2
+ 469              		.global	blink_led
+ 471              	blink_led:
+ 472              	.LFB15:
+ 473              		.loc 1 149 0
+ 474              		@ args = 0, pretend = 0, frame = 8
+ 148:main.c        **** 
+ 149:main.c        **** void blink_led(uint_t led, uint_t _delay) {
+ 475              	needed = 1, uses_anonymous_args = 0
+ 476              		mov	ip, sp
+ 477              	.LCFI51:
+ 478 02ec 0DC0A0E1 		stmfd	sp!, {fp, ip, lr, pc}
+ 479              	.LCFI52:
+ 480 02f0 00D82DE9 		sub	fp, ip, #4
+ 481              	.LCFI53:
+ 482 02f4 04B04CE2 		sub	sp, sp, #8
+ 483              	.LCFI54:
+ 484 02f8 08D04DE2 		str	r0, [fp, #-16]
+ 485              		str	r1, [fp, #-20]
+ 486 02fc 10000BE5 		.loc 1 150 0
+ 487 0300 14100BE5 		ldr	r0, [fp, #-16]
+ 150:main.c        **** 	led_on(led);
+ 488              	loc 1 151 0
+ 489 0304 10001BE5 		ldr	r0, [fp, #-20]
+ 490 0308 FEFFFFEB 		bl	delay_ms
+ 151:main.c        **** 	delay_ms(_delay);
+ 491              	oc 1 152 0
+ 492 030c 14001BE5 		ldr	r0, [fp, #-16]
+ 493 0310 FEFFFFEB 		bl	led_off
+ 152:main.c        **** 	led_off(led);
+ 494              	oc 1 153 0
+ 495 0314 10001BE5 		ldr	r0, [fp, #-20]
+ 496 0318 FEFFFFEB 		bl	delay_ms
+ 153:main.c        **** 	delay_ms(_delay);
+ 497              	oc 1 154 0
+ 498 031c 14001BE5 		sub	sp, fp, #12
+ 499 0320 FEFFFFEB 		ldmfd	sp, {fp, sp, pc}
+ 154:main.c        **** }
+ 500              	E15:
+ 502 0328 00A89DE8 		.align	2
+ 503              		.global	get_bitfield_for_leds
+ 505              	get_bitfield_for_leds:
+ 506              	.LFB16:
+ 507              		.loc 1 156 0
+ 508              		@ args = 0, pretend = 0, frame = 16
+ 509              		@ frame_needed = 1, uses_anonymous_args = 0
+ 155:main.c        **** 
+ 156:main.c        **** uint_t get_bitfield_for_leds(uint_t *leds, uint_t num_leds) {
+ 510              	p
+ 511              	.LCFI55:
+ 512              		stmfd	sp!, {fp, ip, lr, pc}
+ 513 032c 0DC0A0E1 	.LCFI56:
+ 514              		sub	fp, ip, #4
+ 515 0330 00D82DE9 	.LCFI57:
+ 516              		sub	sp, sp, #16
+ 517 0334 04B04CE2 	.LCFI58:
+ 518              		str	r0, [fp, #-24]
+ 519 0338 10D04DE2 		str	r1, [fp, #-28]
+ 520              		.loc 1 157 0
+ 521 033c 18000BE5 		mov	r3, #0
+ 522 0340 1C100BE5 		str	r3, [fp, #-20]
+ 157:main.c        **** 	uint_t bitfield = 0;
+ 523              	1 159 0
+ 524 0344 0030A0E3 		mov	r3, #0
+ 525 0348 14300BE5 		str	r3, [fp, #-16]
+ 526              		b	.L33
+ 158:main.c        **** 
+ 159:main.c        **** 	for (uint_t i = 0; i < num_leds; i++) {
+ 527              	:
+ 528 034c 0030A0E3 		.loc 1 160 0
+ 529 0350 10300BE5 		ldr	r3, [fp, #-16]
+ 530 0354 0A0000EA 		mov	r2, r3, asl #2
+ 531              		ldr	r3, [fp, #-24]
+ 160:main.c        **** 		bitfield |= leds[i];
+ 532              	r3, r3, r2
+ 533 0358 10301BE5 		ldr	r2, [r3, #0]
+ 534 035c 0321A0E1 		ldr	r3, [fp, #-20]
+ 535 0360 18301BE5 		orr	r3, r3, r2
+ 536 0364 023083E0 		str	r3, [fp, #-20]
+ 537 0368 002093E5 		.loc 1 159 0
+ 538 036c 14301BE5 		ldr	r3, [fp, #-16]
+ 539 0370 023083E1 		add	r3, r3, #1
+ 540 0374 14300BE5 		str	r3, [fp, #-16]
+ 541              	.L33:
+ 542 0378 10301BE5 		ldr	r2, [fp, #-16]
+ 543 037c 013083E2 		ldr	r3, [fp, #-28]
+ 544 0380 10300BE5 		cmp	r2, r3
+ 545              		bcc	.L34
+ 546 0384 10201BE5 	.LBE2:
+ 547 0388 1C301BE5 		.loc 1 163 0
+ 548 038c 030052E1 		ldr	r3, [fp, #-20]
+ 549 0390 F0FFFF3A 		.loc 1 164 0
+ 550              		mov	r0, r3
+ 161:main.c        **** 	}
+ 162:main.c        **** 
+ 163:main.c        **** 	return bitfield;
+ 551              	dmfd	sp, {fp, sp, pc}
+ 552 0394 14301BE5 	.LFE16:
+ 164:main.c        **** }
+ 553              	size	get_bitfield_for_leds, .-get_bitfield_for_leds
+ 554 0398 0300A0E1 		.align	2
+ 555 039c 0CD04BE2 		.global	blink_leds
+ 557              	blink_leds:
+ 558              	.LFB17:
+ 559              		.loc 1 166 0
+ 560              		@ args = 0, pretend = 0, frame = 12
+ 561              		@ frame_needed = 1, uses_anonymous_args = 0
+ 562              		mov	ip, sp
+ 563              	.LCFI59:
+ 165:main.c        **** 
+ 166:main.c        **** void blink_leds(uint_t *leds, uint_t num_leds, uint_t _delay) {
+ 564              	 {fp, ip, lr, pc}
+ 565              	.LCFI60:
+ 566              		sub	fp, ip, #4
+ 567 03a4 0DC0A0E1 	.LCFI61:
+ 568              		sub	sp, sp, #12
+ 569 03a8 00D82DE9 	.LCFI62:
+ 570              		str	r0, [fp, #-16]
+ 571 03ac 04B04CE2 		str	r1, [fp, #-20]
+ 572              		str	r2, [fp, #-24]
+ 573 03b0 0CD04DE2 		.loc 1 167 0
+ 574              		ldr	r0, [fp, #-16]
+ 575 03b4 10000BE5 		ldr	r1, [fp, #-20]
+ 576 03b8 14100BE5 		bl	get_bitfield_for_leds
+ 577 03bc 18200BE5 		mov	r3, r0
+ 167:main.c        **** 	blink_led(get_bitfield_for_leds(leds, num_leds), _delay);
+ 578              	dr	r1, [fp, #-24]
+ 579 03c0 10001BE5 		bl	blink_led
+ 580 03c4 14101BE5 		.loc 1 168 0
+ 581 03c8 FEFFFFEB 		sub	sp, fp, #12
+ 582 03cc 0030A0E1 		ldmfd	sp, {fp, sp, pc}
+ 583 03d0 0300A0E1 	.LFE17:
+ 585 03d8 FEFFFFEB 		.align	2
+ 168:main.c        **** }
+ 586              		blink_all_in_line
+ 588 03e0 00A89DE8 	blink_all_in_line:
+ 589              	.LFB18:
+ 590              		.loc 1 174 0
+ 591              		@ args = 0, pretend = 0, frame = 20
+ 592              		@ frame_needed = 1, uses_anonymous_args = 0
+ 593              		mov	ip, sp
+ 594              	.LCFI63:
+ 595              		stmfd	sp!, {fp, ip, lr, pc}
+ 169:main.c        **** 
+ 170:main.c        **** enum BlinkLineDirection {
+ 171:main.c        **** 	FORWARD, BACKWARD
+ 172:main.c        **** };
+ 173:main.c        **** 
+ 174:main.c        **** void blink_all_in_line(uint_t *leds, uint_t num_leds, enum BlinkLineDirection direction) {
+ 596              	sub	fp, ip, #4
+ 597              	.LCFI65:
+ 598              		sub	sp, sp, #20
+ 599 03e4 0DC0A0E1 	.LCFI66:
+ 600              		str	r0, [fp, #-24]
+ 601 03e8 00D82DE9 		str	r1, [fp, #-28]
+ 602              		str	r2, [fp, #-32]
+ 603 03ec 04B04CE2 		.loc 1 175 0
+ 604              		ldr	r3, [fp, #-32]
+ 605 03f0 14D04DE2 		cmp	r3, #0
+ 606              		bne	.L39
+ 607 03f4 18000BE5 	.LBB3:
+ 608 03f8 1C100BE5 		.loc 1 176 0
+ 609 03fc 20200BE5 		mov	r3, #0
+ 175:main.c        **** 	if (direction == FORWARD) {
+ 610              	#-20]
+ 611 0400 20301BE5 		b	.L40
+ 612 0404 000053E3 	.L41:
+ 613 0408 1200001A 		.loc 1 177 0
+ 614              		ldr	r3, [fp, #-20]
+ 176:main.c        **** 		for (uint_t i = 0; i < num_leds; i++) {
+ 615              	r2, r3, asl #2
+ 616 040c 0030A0E3 		ldr	r3, [fp, #-24]
+ 617 0410 14300BE5 		add	r3, r3, r2
+ 618 0414 0A0000EA 		ldr	r3, [r3, #0]
+ 619              		mov	r0, r3
+ 177:main.c        **** 			blink_led(leds[i], 100);
+ 620              	r1, #100
+ 621 0418 14301BE5 		bl	blink_led
+ 622 041c 0321A0E1 		.loc 1 176 0
+ 623 0420 18301BE5 		ldr	r3, [fp, #-20]
+ 624 0424 023083E0 		add	r3, r3, #1
+ 625 0428 003093E5 		str	r3, [fp, #-20]
+ 626 042c 0300A0E1 	.L40:
+ 627 0430 6410A0E3 		ldr	r2, [fp, #-20]
+ 628 0434 FEFFFFEB 		ldr	r3, [fp, #-28]
+ 629              		cmp	r2, r3
+ 630 0438 14301BE5 		bcc	.L41
+ 631 043c 013083E2 		b	.L45
+ 632 0440 14300BE5 	.L39:
+ 633              	.LBE3:
+ 634 0444 14201BE5 		.loc 1 180 0
+ 635 0448 1C301BE5 		ldr	r3, [fp, #-32]
+ 636 044c 030052E1 		cmp	r3, #1
+ 637 0450 F0FFFF3A 		bne	.L45
+ 638 0454 140000EA 	.LBB4:
+ 639              		.loc 1 181 0
+ 640              		ldr	r3, [fp, #-28]
+ 178:main.c        **** 		}
+ 179:main.c        **** 	}
+ 180:main.c        **** 	else if (direction == BACKWARD) {
+ 641              	r3, [fp, #-16]
+ 642 0458 20301BE5 		b	.L43
+ 643 045c 010053E3 	.L44:
+ 644 0460 1100001A 		.loc 1 182 0
+ 645              		ldr	r3, [fp, #-16]
+ 181:main.c        **** 		for (int i = num_leds-1; i >= 0; i--) {
+ 646              	r2, r3, asl #2
+ 647 0464 1C301BE5 		ldr	r3, [fp, #-24]
+ 648 0468 013043E2 		add	r3, r3, r2
+ 649 046c 10300BE5 		ldr	r3, [r3, #0]
+ 650 0470 0A0000EA 		mov	r0, r3
+ 651              		mov	r1, #100
+ 182:main.c        **** 			blink_led(leds[i], 100);
+ 652              	ink_led
+ 653 0474 10301BE5 		.loc 1 181 0
+ 654 0478 0321A0E1 		ldr	r3, [fp, #-16]
+ 655 047c 18301BE5 		sub	r3, r3, #1
+ 656 0480 023083E0 		str	r3, [fp, #-16]
+ 657 0484 003093E5 	.L43:
+ 658 0488 0300A0E1 		ldr	r3, [fp, #-16]
+ 659 048c 6410A0E3 		cmp	r3, #0
+ 660 0490 FEFFFFEB 		bge	.L44
+ 661              	.L45:
+ 662 0494 10301BE5 	.LBE4:
+ 663 0498 013043E2 		.loc 1 185 0
+ 664 049c 10300BE5 		sub	sp, fp, #12
+ 665              		ldmfd	sp, {fp, sp, pc}
+ 666 04a0 10301BE5 	.LFE18:
+ 668 04a8 F1FFFFAA 		.align	2
+ 669              		.global	all_led_blinker_mode
+ 183:main.c        **** 		}
+ 184:main.c        **** 	}
+ 185:main.c        **** }
+ 671              	e:
+ 672 04ac 0CD04BE2 	.LFB19:
+ 673 04b0 00A89DE8 		.loc 1 187 0
+ 674              		@ args = 0, pretend = 0, frame = 0
+ 675              		@ frame_needed = 1, uses_anonymous_args = 0
+ 676              		mov	ip, sp
+ 677              	.LCFI67:
+ 678              		stmfd	sp!, {fp, ip, lr, pc}
+ 679              	.LCFI68:
+ 680              		sub	fp, ip, #4
+ 186:main.c        **** 
+ 187:main.c        **** void all_led_blinker_mode () {
+ 681              	.loc 1 188 0
+ 682              		ldr	r0, .L48
+ 683              		mov	r1, #5
+ 684 04b4 0DC0A0E1 		mov	r2, #100
+ 685              		bl	blink_leds
+ 686 04b8 00D82DE9 		.loc 1 189 0
+ 687              		ldmfd	sp, {fp, sp, pc}
+ 688 04bc 04B04CE2 	.L49:
+ 689              		.align	2
+ 188:main.c        **** 	blink_leds(all_leds, ARRAY_LENGTH(all_leds), 100);
+ 690              	ord	all_leds
+ 691 04c0 0C009FE5 	.LFE19:
+ 693 04c8 6420A0E3 		.section	.rodata
+ 694 04cc FEFFFFEB 		.align	2
+ 189:main.c        **** }
+ 695              	e	C.6.1835, %object
+ 697              	C.6.1835:
+ 698              		.word	4
+ 699              		.word	131072
+ 700 04d4 00000000 		.align	2
+ 703              	C.5.1834:
+ 704 0059 000000   		.word	1073741824
+ 705              		.word	268435456
+ 706              		.word	262144
+ 707              		.text
+ 708 005c 04000000 		.align	2
+ 709 0060 00000200 		.global	odd_even_blinker_mode
+ 711              	odd_even_blinker_mode:
+ 712              	.LFB20:
+ 713              		.loc 1 191 0
+ 714 0064 00000040 		@ args = 0, pretend = 0, frame = 20
+ 715 0068 00000010 		@ frame_needed = 1, uses_anonymous_args = 0
+ 716 006c 00000400 		mov	ip, sp
+ 717              	.LCFI70:
+ 718              		stmfd	sp!, {r4, fp, ip, lr, pc}
+ 719              	.LCFI71:
+ 720              		sub	fp, ip, #4
+ 721              	.LCFI72:
+ 722              		sub	sp, sp, #20
+ 190:main.c        **** 
+ 191:main.c        **** void odd_even_blinker_mode () {
+ 723              	r3, .L52
+ 724              		sub	ip, fp, #28
+ 725              		ldmia	r3, {r0, r1, r2}
+ 726 04d8 0DC0A0E1 		stmia	ip, {r0, r1, r2}
+ 727              		.loc 1 198 0
+ 728 04dc 10D82DE9 		ldr	r3, .L52+4
+ 729              		ldmia	r3, {r3-r4}
+ 730 04e0 04B04CE2 		str	r3, [fp, #-36]
+ 731              		str	r4, [fp, #-32]
+ 732 04e4 14D04DE2 		.loc 1 200 0
+ 733              		sub	r3, fp, #28
+ 192:main.c        **** 	uint_t odd_leds[] = {
+ 193:main.c        **** 			LED1, LED3, LED5
+ 194:main.c        **** 	};
+ 734              	
+ 735 04e8 48309FE5 		mov	r1, #3
+ 736 04ec 1CC04BE2 		mov	r2, #1000
+ 737 04f0 070093E8 		bl	blink_leds
+ 738 04f4 07008CE8 		.loc 1 201 0
+ 195:main.c        **** 
+ 196:main.c        **** 	uint_t even_leds[] = {
+ 197:main.c        **** 			LED2, LED4
+ 198:main.c        **** 	};
+ 739              		r3, fp, #36
+ 740 04f8 3C309FE5 		mov	r0, r3
+ 741 04fc 180093E8 		mov	r1, #2
+ 742 0500 24300BE5 		mov	r2, #1000
+ 743 0504 20400BE5 		bl	blink_leds
+ 199:main.c        **** 
+ 200:main.c        **** 	blink_leds(odd_leds, ARRAY_LENGTH(odd_leds), 1000);
+ 744              	 1 202 0
+ 745 0508 1C304BE2 		sub	sp, fp, #16
+ 746 050c 0300A0E1 		ldmfd	sp, {r4, fp, sp, pc}
+ 747 0510 0310A0E3 	.L53:
+ 748 0514 FA2FA0E3 		.align	2
+ 749 0518 FEFFFFEB 	.L52:
+ 201:main.c        **** 	blink_leds(even_leds, ARRAY_LENGTH(even_leds), 1000);
+ 750              		C.5.1834
+ 751 051c 24304BE2 		.word	C.6.1835
+ 752 0520 0300A0E1 	.LFE20:
+ 754 0528 FA2FA0E3 		.section	.rodata
+ 755 052c FEFFFFEB 		.align	2
+ 202:main.c        **** }
+ 756              		C.8.1841, %object
+ 758 0534 10A89DE8 	C.8.1841:
+ 759              		.word	4
+ 760              		.word	131072
+ 761              		.align	2
+ 764              	C.7.1840:
+ 765              		.word	1073741824
+ 766              		.word	268435456
+ 767              		.word	262144
+ 768              		.text
+ 769              		.align	2
+ 770              		.global	odd_even_blinker_direct_mode
+ 772 0074 00000200 	odd_even_blinker_direct_mode:
+ 773              	.LFB21:
+ 774              		.loc 1 204 0
+ 775              		@ args = 0, pretend = 0, frame = 20
+ 776              		@ frame_needed = 1, uses_anonymous_args = 0
+ 777 0078 00000040 		mov	ip, sp
+ 778 007c 00000010 	.LCFI74:
+ 779 0080 00000400 		stmfd	sp!, {r4, fp, ip, lr, pc}
+ 780              	.LCFI75:
+ 781              		sub	fp, ip, #4
+ 782              	.LCFI76:
+ 783              		sub	sp, sp, #20
+ 784              	.LCFI77:
+ 785              		.loc 1 207 0
+ 203:main.c        **** 
+ 204:main.c        **** void odd_even_blinker_direct_mode() {
+ 786              	
+ 787              		ldmia	r3, {r0, r1, r2}
+ 788              		stmia	ip, {r0, r1, r2}
+ 789 0540 0DC0A0E1 		.loc 1 211 0
+ 790              		ldr	r3, .L56+4
+ 791 0544 10D82DE9 		ldmia	r3, {r3-r4}
+ 792              		str	r3, [fp, #-36]
+ 793 0548 04B04CE2 		str	r4, [fp, #-32]
+ 794              		.loc 1 213 0
+ 795 054c 14D04DE2 		mov	r4, #-1610612736
+ 796              		mov	r4, r4, asr #19
+ 205:main.c        **** 	uint_t odd_leds[] = {
+ 206:main.c        **** 				LED1, LED3, LED5
+ 207:main.c        **** 	};
+ 797              	L56+8
+ 798 0550 C4309FE5 		mov	r1, #5
+ 799 0554 1CC04BE2 		bl	get_bitfield_for_leds
+ 800 0558 070093E8 		mov	r3, r0
+ 801 055c 07008CE8 		str	r3, [r4, #160]
+ 208:main.c        **** 
+ 209:main.c        **** 	uint_t even_leds[] = {
+ 210:main.c        **** 			LED2, LED4
+ 211:main.c        **** 	};
+ 802              	 1 215 0
+ 803 0560 B8309FE5 		mov	r4, #-1610612736
+ 804 0564 180093E8 		mov	r4, r4, asr #19
+ 805 0568 24300BE5 		sub	r3, fp, #28
+ 806 056c 20400BE5 		mov	r0, r3
+ 212:main.c        **** 
+ 213:main.c        **** 	AT91C_BASE_PIOA->PIO_OWER = get_bitfield_for_leds(all_leds, ARRAY_LENGTH(all_leds));
+ 807              	r1, #3
+ 808 0570 0A42A0E3 		bl	get_bitfield_for_leds
+ 809 0574 C449A0E1 		mov	r3, r0
+ 810 0578 A4009FE5 		str	r3, [r4, #56]
+ 811 057c 0510A0E3 		.loc 1 216 0
+ 812 0580 FEFFFFEB 		mov	r0, #500
+ 813 0584 0030A0E1 		bl	delay_ms
+ 814 0588 A03084E5 		.loc 1 217 0
+ 214:main.c        **** 
+ 215:main.c        **** 	AT91C_BASE_PIOA->PIO_ODSR = get_bitfield_for_leds(odd_leds, ARRAY_LENGTH(odd_leds));
+ 815              	 #-1610612736
+ 816 058c 0A42A0E3 		mov	r4, r4, asr #19
+ 817 0590 C449A0E1 		sub	r3, fp, #36
+ 818 0594 1C304BE2 		mov	r0, r3
+ 819 0598 0300A0E1 		mov	r1, #2
+ 820 059c 0310A0E3 		bl	get_bitfield_for_leds
+ 821 05a0 FEFFFFEB 		mov	r3, r0
+ 822 05a4 0030A0E1 		str	r3, [r4, #56]
+ 823 05a8 383084E5 		.loc 1 218 0
+ 216:main.c        **** 	delay_ms(500);
+ 824              	#500
+ 825 05ac 7D0FA0E3 		bl	delay_ms
+ 826 05b0 FEFFFFEB 		.loc 1 220 0
+ 217:main.c        **** 	AT91C_BASE_PIOA->PIO_ODSR = get_bitfield_for_leds(even_leds, ARRAY_LENGTH(even_leds));
+ 827              	v	r4, #-1610612736
+ 828 05b4 0A42A0E3 		mov	r4, r4, asr #19
+ 829 05b8 C449A0E1 		ldr	r0, .L56+8
+ 830 05bc 24304BE2 		mov	r1, #5
+ 831 05c0 0300A0E1 		bl	get_bitfield_for_leds
+ 832 05c4 0210A0E3 		mov	r3, r0
+ 833 05c8 FEFFFFEB 		str	r3, [r4, #52]
+ 834 05cc 0030A0E1 		.loc 1 221 0
+ 835 05d0 383084E5 		mov	r4, #-1610612736
+ 218:main.c        **** 	delay_ms(500);
+ 836              	r4, asr #19
+ 837 05d4 7D0FA0E3 		ldr	r0, .L56+8
+ 838 05d8 FEFFFFEB 		mov	r1, #5
+ 219:main.c        **** 
+ 220:main.c        **** 	AT91C_BASE_PIOA->PIO_CODR = get_bitfield_for_leds(all_leds, ARRAY_LENGTH(all_leds));
+ 839              		get_bitfield_for_leds
+ 840 05dc 0A42A0E3 		mov	r3, r0
+ 841 05e0 C449A0E1 		str	r3, [r4, #164]
+ 842 05e4 38009FE5 		.loc 1 222 0
+ 843 05e8 0510A0E3 		sub	sp, fp, #16
+ 844 05ec FEFFFFEB 		ldmfd	sp, {r4, fp, sp, pc}
+ 845 05f0 0030A0E1 	.L57:
+ 846 05f4 343084E5 		.align	2
+ 221:main.c        **** 	AT91C_BASE_PIOA->PIO_OWDR = get_bitfield_for_leds(all_leds, ARRAY_LENGTH(all_leds));
+ 847              	word	C.7.1840
+ 848 05f8 0A42A0E3 		.word	C.8.1841
+ 849 05fc C449A0E1 		.word	all_leds
+ 850 0600 1C009FE5 	.LFE21:
+ 852 0608 FEFFFFEB 		.align	2
+ 853 060c 0030A0E1 		.global	line_blinker_mode_forward
+ 222:main.c        **** }
+ 855              	nker_mode_forward:
+ 856 0614 10D04BE2 	.LFB22:
+ 857 0618 10A89DE8 		.loc 1 224 0
+ 858              		@ args = 0, pretend = 0, frame = 0
+ 859              		@ frame_needed = 1, uses_anonymous_args = 0
+ 860              		mov	ip, sp
+ 861 061c 78000000 	.LCFI78:
+ 862 0620 70000000 		stmfd	sp!, {fp, ip, lr, pc}
+ 863 0624 00000000 	.LCFI79:
+ 864              		sub	fp, ip, #4
+ 865              	.LCFI80:
+ 866              		.loc 1 225 0
+ 867              		ldr	r0, .L60
+ 868              		mov	r1, #5
+ 869              		mov	r2, #0
+ 870              		bl	blink_all_in_line
+ 223:main.c        **** 
+ 224:main.c        **** void line_blinker_mode_forward () {
+ 871              	dmfd	sp, {fp, sp, pc}
+ 872              	.L61:
+ 873              		.align	2
+ 874 0628 0DC0A0E1 	.L60:
+ 875              		.word	all_leds
+ 876 062c 00D82DE9 	.LFE22:
+ 878 0630 04B04CE2 		.align	2
+ 879              		.global	line_blinker_mode_backward
+ 225:main.c        **** 	blink_all_in_line(all_leds, ARRAY_LENGTH(all_leds), FORWARD);
+ 880              	ne_blinker_mode_backward, %function
+ 881 0634 0C009FE5 	line_blinker_mode_backward:
+ 882 0638 0510A0E3 	.LFB23:
+ 883 063c 0020A0E3 		.loc 1 228 0
+ 884 0640 FEFFFFEB 		@ args = 0, pretend = 0, frame = 0
+ 226:main.c        **** }
+ 885              	ame_needed = 1, uses_anonymous_args = 0
+ 886 0644 00A89DE8 		mov	ip, sp
+ 887              	.LCFI81:
+ 888              		stmfd	sp!, {fp, ip, lr, pc}
+ 889              	.LCFI82:
+ 890 0648 00000000 		sub	fp, ip, #4
+ 891              	.LCFI83:
+ 892              		.loc 1 229 0
+ 893              		ldr	r0, .L64
+ 894              		mov	r1, #5
+ 895              		mov	r2, #1
+ 896              		bl	blink_all_in_line
+ 897              		.loc 1 230 0
+ 227:main.c        **** 
+ 228:main.c        **** void line_blinker_mode_backward () {
+ 898              	p, sp, pc}
+ 899              	.L65:
+ 900              		.align	2
+ 901 064c 0DC0A0E1 	.L64:
+ 902              		.word	all_leds
+ 903 0650 00D82DE9 	.LFE23:
+ 905 0654 04B04CE2 		.align	2
+ 906              		.global	main
+ 229:main.c        **** 	blink_all_in_line(all_leds, ARRAY_LENGTH(all_leds), BACKWARD);
+ 907              	in, %function
+ 908 0658 0C009FE5 	main:
+ 909 065c 0510A0E3 	.LFB24:
+ 910 0660 0120A0E3 		.loc 1 233 0
+ 911 0664 FEFFFFEB 		@ args = 0, pretend = 0, frame = 4
+ 230:main.c        **** }
+ 912              	ame_needed = 1, uses_anonymous_args = 0
+ 913 0668 00A89DE8 		mov	ip, sp
+ 914              	.LCFI84:
+ 915              		stmfd	sp!, {fp, ip, lr, pc}
+ 916              	.LCFI85:
+ 917 066c 00000000 		sub	fp, ip, #4
+ 918              	.LCFI86:
+ 919              		sub	sp, sp, #4
+ 920              	.LCFI87:
+ 921              	.LBB5:
+ 922              		.loc 1 234 0
+ 923              		mov	r3, #0
+ 924              		str	r3, [fp, #-16]
+ 231:main.c        **** 
+ 232:main.c        **** // main: Hauptprogramm
+ 233:main.c        **** int main(void){
+ 925              	
+ 926              		.loc 1 235 0
+ 927              		ldr	r2, [fp, #-16]
+ 928 0670 0DC0A0E1 		ldr	r3, .L71
+ 929              		ldr	r3, [r3, r2, asl #2]
+ 930 0674 00D82DE9 		mov	r0, r3
+ 931              		bl	enable_led
+ 932 0678 04B04CE2 		.loc 1 234 0
+ 933              		ldr	r3, [fp, #-16]
+ 934 067c 04D04DE2 		add	r3, r3, #1
+ 935              		str	r3, [fp, #-16]
+ 936              	.L67:
+ 234:main.c        **** 	for (uint_t i = 0; i < ARRAY_LENGTH(all_leds); i++) {
+ 937              	p, #-16]
+ 938 0680 0030A0E3 		cmp	r3, #4
+ 939 0684 10300BE5 		bls	.L68
+ 940 0688 070000EA 	.LBE5:
+ 941              		.loc 1 238 0
+ 235:main.c        **** 		enable_led(all_leds[i]);
+ 942              	isplay_init
+ 943 068c 10201BE5 		.loc 1 241 0
+ 944 0690 90309FE5 		mov	r3, #-2147483648
+ 945 0694 023193E7 		mov	r3, r3, asr #21
+ 946 0698 0300A0E1 		mov	r2, #4
+ 947 069c FEFFFFEB 		str	r2, [r3, #16]
+ 948              		.loc 1 243 0
+ 949 06a0 10301BE5 		mov	r0, #2
+ 950 06a4 013083E2 		mov	r1, #4
+ 951 06a8 10300BE5 		mov	r2, #3
+ 952              		ldr	r3, .L71+4
+ 953 06ac 10301BE5 		bl	pioa_ir_init
+ 954 06b0 040053E3 	.L69:
+ 955 06b4 F4FFFF9A 		.loc 1 246 0
+ 956              		bl	display_clear
+ 236:main.c        **** 	}
+ 237:main.c        **** 
+ 238:main.c        **** 	display_init();
+ 957              	ldr	r3, .L71+8
+ 958 06b8 FEFFFFEB 		ldr	r2, [r3, #0]
+ 239:main.c        **** 
+ 240:main.c        **** 	// pio takt aktivieren
+ 241:main.c        **** 	AT91C_BASE_PMC->PMC_PCER = (1<<AT91C_ID_PIOA);
+ 959              	dr	r3, .L71+12
+ 960 06bc 0231A0E3 		ldr	r3, [r3, r2, asl #3]
+ 961 06c0 C33AA0E1 		mov	r0, r3
+ 962 06c4 0420A0E3 		bl	display_putstr
+ 963 06c8 102083E5 		.loc 1 248 0
+ 242:main.c        **** 
+ 243:main.c        **** 	pioa_ir_init(BUTTON1, 4, 3, pioa_isr);		// Port-IR initialisieren
+ 964              	r3, .L71+8
+ 965 06cc 0200A0E3 		ldr	r3, [r3, #0]
+ 966 06d0 0410A0E3 		ldr	r2, .L71+12
+ 967 06d4 0320A0E3 		mov	r3, r3, asl #1
+ 968 06d8 4C309FE5 		add	r3, r3, #1
+ 969 06dc FEFFFFEB 		ldr	r3, [r2, r3, asl #2]
+ 970              		mov	lr, pc
+ 244:main.c        **** 
+ 245:main.c        **** 	while (1) {
+ 246:main.c        **** 		display_clear();
+ 971              		.loc 1 249 0
+ 972 06e0 FEFFFFEB 		mov	r0, #50
+ 247:main.c        **** 		display_putstr(blinker_modes[current_blink_mode].name);
+ 973              	l	delay_ms
+ 974 06e4 44309FE5 		b	.L69
+ 975 06e8 002093E5 	.L72:
+ 976 06ec 40309FE5 		.align	2
+ 977 06f0 823193E7 	.L71:
+ 978 06f4 0300A0E1 		.word	all_leds
+ 979 06f8 FEFFFFEB 		.word	pioa_isr
+ 248:main.c        **** 		blinker_modes[current_blink_mode].function();
+ 980              	current_blink_mode
+ 981 06fc 2C309FE5 		.word	blinker_modes
+ 982 0700 003093E5 	.LFE24:
+ 984 0708 8330A0E1 		.section	.debug_frame,"",%progbits
+ 985 070c 013083E2 	.Lframe0:
+ 986 0710 033192E7 		.4byte	.LECIE0-.LSCIE0
+ 987 0714 0FE0A0E1 	.LSCIE0:
+ 988 0718 13FF2FE1 		.4byte	0xffffffff
+ 249:main.c        **** 		delay_ms(50);
+ 989              	1
+ 990 071c 3200A0E3 		.ascii	"\000"
+ 991 0720 FEFFFFEB 		.uleb128 0x1
+ 992 0724 EDFFFFEA 		.sleb128 -4
+ 993              		.byte	0xe
+ 994              		.byte	0xc
+ 995              		.uleb128 0xd
+ 996 0728 00000000 		.uleb128 0x0
+ 997 072c 00000000 		.align	2
+ 998 0730 00000000 	.LECIE0:
+ 999 0734 00000000 	.LSFDE0:
+ 1000              		.4byte	.LEFDE0-.LASFDE0
+ 1001              	.LASFDE0:
+ 1597              		.4byte	0x0
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:15     .data:00000000 all_leds
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:16     .data:00000000 $d
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:42     .data:00000014 blinker_modes
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:679    .text:000004b4 all_led_blinker_mode
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:721    .text:000004d8 odd_even_blinker_mode
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:784    .text:00000540 odd_even_blinker_direct_mode
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:869    .text:00000628 line_blinker_mode_forward
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:896    .text:0000064c line_blinker_mode_backward
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:58     .bss:00000000 current_blink_mode
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:64     .text:00000000 is_button_pressed
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:70     .text:00000000 $a
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:96     .text:0000003c pioa_ir_init
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:154    .text:000000d0 pioa_isr
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:202    .text:0000014c $d
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:209    .text:00000154 delay
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:214    .text:00000154 $a
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:230    .text:0000016c enable_led
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:261    .text:000001a4 led_on_pointer
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:291    .text:000001d8 led_off_pointer
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:321    .text:0000020c led_on_direct
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:347    .text:00000234 led_off_direct
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:373    .text:0000025c led_on_base
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:399    .text:00000284 led_off_base
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:425    .text:000002ac led_on
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:449    .text:000002cc led_off
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:473    .text:000002ec blink_led
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:508    .text:0000032c get_bitfield_for_leds
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:562    .text:000003a4 blink_leds
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:594    .text:000003e4 blink_all_in_line
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:700    .text:000004d4 $d
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:707    .rodata:0000005c C.6.1835
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:708    .rodata:0000005c $d
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:713    .rodata:00000064 C.5.1834
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:726    .text:000004d8 $a
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:762    .text:00000538 $d
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:770    .rodata:00000070 C.8.1841
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:776    .rodata:00000078 C.7.1840
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:789    .text:00000540 $a
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:861    .text:0000061c $d
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:874    .text:00000628 $a
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:890    .text:00000648 $d
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:901    .text:0000064c $a
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:917    .text:0000066c $d
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:923    .text:00000670 main
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:928    .text:00000670 $a
+C:\Users\Aomx\AppData\Local\Temp/ccAXWak6.s:996    .text:00000728 $d
+
+UNDEFINED SYMBOLS
+delay_ms
+display_init
+display_clear
+display_putstr

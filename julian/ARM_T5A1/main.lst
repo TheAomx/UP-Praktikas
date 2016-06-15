@@ -1,0 +1,389 @@
+   1              		.file	"main.c"
+   9              	.Ltext0:
+  10              		.align	2
+  11              		.global	delay_ms
+  13              	delay_ms:
+  14              	.LFB2:
+  15              		.file 1 "main.c"
+   1:main.c        **** //********************************************************************
+   2:main.c        **** // ARM_T4A4										Version 02.04.2012 hpw
+   3:main.c        **** //********************************************************************
+   4:main.c        **** #include	"include/AT91SAM7S64.h"			// Definition von ARM7 typischen Registern etc.
+   5:main.c        **** #include	"include/interrupt.h"			// IR-Routinen
+   6:main.c        **** #include "display.h"
+   7:main.c        **** 
+   8:main.c        **** #define SPEAKER_PIN AT91C_PIO_PA18
+   9:main.c        **** 
+  10:main.c        **** typedef unsigned int uint_t;
+  11:main.c        **** 
+  12:main.c        **** #define BUTTON1 AT91C_PIO_PA1
+  13:main.c        **** #define BUTTON2 AT91C_PIO_PA0
+  14:main.c        **** #define BUTTON3 AT91C_PIO_PA31
+  15:main.c        **** 
+  16:main.c        **** #define ARRAY_LENGTH(X) (sizeof(X)/sizeof(X[0]))
+  17:main.c        **** 
+  18:main.c        **** 
+  19:main.c        **** //**************************************************************
+  20:main.c        **** // delay5ms(uiK) verzögert um ca. uiK * 5ms
+  21:main.c        **** //**************************************************************
+  22:main.c        **** void delay_ms(unsigned int uiK) {
+  16              	 args = 0, pretend = 0, frame = 8
+  17              		@ frame_needed = 1, uses_anonymous_args = 0
+  18              		mov	ip, sp
+  19 0000 0DC0A0E1 	.LCFI0:
+  20              		stmfd	sp!, {fp, ip, lr, pc}
+  21 0004 00D82DE9 	.LCFI1:
+  22              		sub	fp, ip, #4
+  23 0008 04B04CE2 	.LCFI2:
+  24              		sub	sp, sp, #8
+  25 000c 08D04DE2 	.LCFI3:
+  26              		str	r0, [fp, #-20]
+  27 0010 14000BE5 		b	.L2
+  28 0014 0A0000EA 	.L5:
+  29              		.loc 1 26 0
+  23:main.c        **** **********************************************
+  24:main.c        **** void delay_ms(unsigned int uiK) {
+  25:main.c        **** 	volatile unsigned int uiI;
+  26:main.c        **** 
+  30              	tr	r3, [fp, #-16]
+  31 0018 0030A0E3 		b	.L3
+  32 001c 10300BE5 	.L4:
+  33 0020 020000EA 		ldr	r3, [fp, #-16]
+  34              		add	r3, r3, #1
+  35 0024 10301BE5 		str	r3, [fp, #-16]
+  36 0028 013083E2 	.L3:
+  37 002c 10300BE5 		ldr	r2, [fp, #-16]
+  38              		mov	r3, #1584
+  39 0030 10201BE5 		add	r3, r3, #15
+  40 0034 633EA0E3 		cmp	r2, r3
+  41 0038 0F3083E2 		bls	.L4
+  42 003c 030052E1 	.L2:
+  43 0040 F7FFFF9A 		.loc 1 25 0
+  44              		ldr	r3, [fp, #-20]
+  45              		cmp	r3, #0
+  46 0044 14301BE5 		moveq	r3, #0
+  47 0048 000053E3 		movne	r3, #1
+  48 004c 0030A003 		and	r2, r3, #255
+  49 0050 0130A013 		ldr	r3, [fp, #-20]
+  50 0054 FF2003E2 		sub	r3, r3, #1
+  51 0058 14301BE5 		str	r3, [fp, #-20]
+  52 005c 013043E2 		cmp	r2, #0
+  53 0060 14300BE5 		bne	.L5
+  54 0064 000052E3 		.loc 1 29 0
+  55 0068 EAFFFF1A 		sub	sp, fp, #12
+  27:main.c        **** ***************
+  28:main.c        **** void delay_ms(unsigned int uiK) {
+  29:main.c        **** 	volatile unsigned int uiI;
+  56              	FE2:
+  58 0070 00A89DE8 		.align	2
+  59              		.global	is_button_pressed
+  61              	is_button_pressed:
+  62              	.LFB3:
+  63              		.loc 1 31 0
+  64              		@ args = 0, pretend = 0, frame = 4
+  65              		@ frame_needed = 1, uses_anonymous_args = 0
+  30:main.c        **** *****************
+  31:main.c        **** void delay_ms(unsigned int uiK) {
+  66              	p
+  67              	.LCFI4:
+  68              		stmfd	sp!, {fp, ip, lr, pc}
+  69 0074 0DC0A0E1 	.LCFI5:
+  70              		sub	fp, ip, #4
+  71 0078 00D82DE9 	.LCFI6:
+  72              		sub	sp, sp, #4
+  73 007c 04B04CE2 	.LCFI7:
+  74              		str	r0, [fp, #-16]
+  75 0080 04D04DE2 		.loc 1 32 0
+  76              		mov	r3, #-1610612736
+  77 0084 10000BE5 		mov	r3, r3, asr #19
+  32:main.c        **** **********************************************
+  78              	, #60]
+  79 0088 0A32A0E3 		ldr	r3, [fp, #-16]
+  80 008c C339A0E1 		and	r3, r2, r3
+  81 0090 3C2093E5 		cmp	r3, #0
+  82 0094 10301BE5 		movne	r3, #0
+  83 0098 033002E0 		moveq	r3, #1
+  84 009c 000053E3 		.loc 1 33 0
+  85 00a0 0030A013 		mov	r0, r3
+  86 00a4 0130A003 		ldmfd	sp, {r3, fp, sp, pc}
+  33:main.c        **** um ca. uiK * 5ms
+  87              	size	is_button_pressed, .-is_button_pressed
+  88 00a8 0300A0E1 		.align	2
+  89 00ac 08A89DE8 		.global	get_button_state
+  91              	get_button_state:
+  92              	.LFB4:
+  93              		.loc 1 34 0
+  94              		@ args = 0, pretend = 0, frame = 4
+  95              		@ frame_needed = 1, uses_anonymous_args = 0
+  96              		mov	ip, sp
+  34:main.c        **** **************************************
+  97              	tmfd	sp!, {fp, ip, lr, pc}
+  98              	.LCFI9:
+  99              		sub	fp, ip, #4
+ 100 00b0 0DC0A0E1 	.LCFI10:
+ 101              		sub	sp, sp, #4
+ 102 00b4 00D82DE9 	.LCFI11:
+ 103              		.loc 1 35 0
+ 104 00b8 04B04CE2 		mov	r3, #0
+ 105              		strb	r3, [fp, #-13]
+ 106 00bc 04D04DE2 		.loc 1 37 0
+ 107              		mov	r0, #2
+  35:main.c        **** X)/sizeof(X[0]))
+ 108              	on_pressed
+ 109 00c0 0030A0E3 		mov	r3, r0
+ 110 00c4 0D304BE5 		cmp	r3, #0
+  36:main.c        **** O_PA0
+  37:main.c        **** #define BUTTON3 AT91C_PIO_PA31
+ 111              	q	.L10
+ 112 00c8 0200A0E3 		.loc 1 38 0
+ 113 00cc FEFFFFEB 		ldrb	r3, [fp, #-13]
+ 114 00d0 0030A0E1 		add	r3, r3, #1
+ 115 00d4 000053E3 		strb	r3, [fp, #-13]
+ 116 00d8 0200000A 	.L10:
+  38:main.c        **** efine BUTTON1 AT91C_PIO_PA1
+ 117              	1 41 0
+ 118 00dc 0D305BE5 		mov	r0, #1
+ 119 00e0 013083E2 		bl	is_button_pressed
+ 120 00e4 0D304BE5 		mov	r3, r0
+ 121              		cmp	r3, #0
+  39:main.c        **** ne SPEAKER_PIN AT91C_PIO_PA18
+  40:main.c        **** 
+  41:main.c        **** typedef unsigned int uint_t;
+ 122              	.L11
+ 123 00e8 0100A0E3 		.loc 1 42 0
+ 124 00ec FEFFFFEB 		ldrb	r3, [fp, #-13]
+ 125 00f0 0030A0E1 		add	r3, r3, #2
+ 126 00f4 000053E3 		strb	r3, [fp, #-13]
+ 127 00f8 0200000A 	.L11:
+  42:main.c        **** tinen
+ 128              	1 45 0
+ 129 00fc 0D305BE5 		mov	r0, #-2147483648
+ 130 0100 023083E2 		bl	is_button_pressed
+ 131 0104 0D304BE5 		mov	r3, r0
+ 132              		cmp	r3, #0
+  43:main.c        **** 		// Definition von ARM7 typischen Registern etc.
+  44:main.c        **** #include	"include/interrupt.h"			// IR-Routinen
+  45:main.c        **** #include "display.h"
+ 133              	.L12
+ 134 0108 0201A0E3 		.loc 1 46 0
+ 135 010c FEFFFFEB 		ldrb	r3, [fp, #-13]
+ 136 0110 0030A0E1 		add	r3, r3, #4
+ 137 0114 000053E3 		strb	r3, [fp, #-13]
+ 138 0118 0200000A 	.L12:
+  46:main.c        **** M7 typischen Registern etc.
+ 139              	1 49 0
+ 140 011c 0D305BE5 		ldrb	r3, [fp, #-13]	@ zero_extendqisi2
+ 141 0120 043083E2 		.loc 1 50 0
+ 142 0124 0D304BE5 		mov	r0, r3
+ 143              		ldmfd	sp, {r3, fp, sp, pc}
+  47:main.c        **** ***************
+  48:main.c        **** #include	"include/AT91SAM7S64.h"			// Definition von ARM7 typischen Registern etc.
+  49:main.c        **** #include	"include/interrupt.h"			// IR-Routinen
+ 144              	:
+  50:main.c        **** 		// Definition von ARM7 typischen Registern etc.
+ 146              	align	2
+ 147 012c 0300A0E1 		.global	pioa_isr
+ 149              	pioa_isr:
+ 150              	.LFB5:
+ 151              		.loc 1 56 0
+ 152              		@ args = 0, pretend = 0, frame = 4
+ 153              		@ frame_needed = 1, uses_anonymous_args = 0
+ 154              		mov	ip, sp
+ 155              	.LCFI12:
+  51:main.c        **** ***************
+  52:main.c        **** #include	"include/AT91SAM7S64.h"			// Definition von ARM7 typischen Registern etc.
+  53:main.c        **** #include	"include/interrupt.h"			// IR-Routinen
+  54:main.c        **** #include "display.h"
+  55:main.c        **** 
+  56:main.c        **** #define SPEAKER_PIN AT91C_PIO_PA18
+ 156              	, {fp, ip, lr, pc}
+ 157              	.LCFI13:
+ 158              		sub	fp, ip, #4
+ 159 0134 0DC0A0E1 	.LCFI14:
+ 160              		sub	sp, sp, #4
+ 161 0138 00D82DE9 	.LCFI15:
+ 162              		.loc 1 60 0
+ 163 013c 04B04CE2 		mov	r3, #-1610612736
+ 164              		mov	r3, r3, asr #19
+ 165 0140 04D04DE2 		ldr	r3, [r3, #76]
+ 166              		str	r3, [fp, #-16]
+  57:main.c        **** include/interrupt.h"			// IR-Routinen
+  58:main.c        **** #include "display.h"
+  59:main.c        **** 
+  60:main.c        **** #define SPEAKER_PIN AT91C_PIO_PA18
+ 167              	0
+ 168 0144 0A32A0E3 		ldmfd	sp, {r3, fp, sp, pc}
+ 169 0148 C339A0E1 	.LFE5:
+ 171 0150 10300BE5 		.align	2
+  61:main.c        **** include/interrupt.h"			// IR-Routinen
+ 172              	bal	timer1_isr
+ 174              	timer1_isr:
+ 175              	.LFB6:
+ 176              		.loc 1 67 0
+ 177              		@ args = 0, pretend = 0, frame = 12
+ 178              		@ frame_needed = 1, uses_anonymous_args = 0
+ 179              		mov	ip, sp
+ 180              	.LCFI16:
+  62:main.c        **** 		// Definition von ARM7 typischen Registern etc.
+  63:main.c        **** #include	"include/interrupt.h"			// IR-Routinen
+  64:main.c        **** #include "display.h"
+  65:main.c        **** 
+  66:main.c        **** #define SPEAKER_PIN AT91C_PIO_PA18
+  67:main.c        **** 
+ 181              	!, {fp, ip, lr, pc}
+ 182              	.LCFI17:
+ 183              		sub	fp, ip, #4
+ 184 0158 0DC0A0E1 	.LCFI18:
+ 185              		sub	sp, sp, #12
+ 186 015c 00D82DE9 	.LCFI19:
+ 187              		.loc 1 70 0
+ 188 0160 04B04CE2 		mov	r3, #-1610612736
+ 189              		mov	r3, r3, asr #19
+ 190 0164 0CD04DE2 		ldr	r3, [r3, #56]
+ 191              		and	r3, r3, #262144
+  68:main.c        **** clude/interrupt.h"			// IR-Routinen
+  69:main.c        **** #include "display.h"
+  70:main.c        **** 
+ 192              	p, #-20]
+ 193 0168 0A32A0E3 		.loc 1 71 0
+ 194 016c C339A0E1 		mov	r3, #-1610612736
+ 195 0170 383093E5 		mov	r3, r3, asr #19
+ 196 0174 013703E2 		ldr	r3, [r3, #56]
+ 197 0178 14300BE5 		bic	r3, r3, #262144
+  71:main.c        ****  typischen Registern etc.
+ 198              	3, [fp, #-16]
+ 199 017c 0A32A0E3 		.loc 1 72 0
+ 200 0180 C339A0E1 		ldr	r3, [fp, #-20]
+ 201 0184 383093E5 		mvn	r2, r3
+ 202 0188 0137C3E3 		ldr	r3, [fp, #-16]
+ 203 018c 10300BE5 		orr	r3, r3, r2
+  72:main.c        **** ***************
+ 204              	3, [fp, #-16]
+ 205 0190 14301BE5 		.loc 1 73 0
+ 206 0194 0320E0E1 		mov	r3, #-1610612736
+ 207 0198 10301BE5 		mov	r3, r3, asr #19
+ 208 019c 023083E1 		ldr	r2, [fp, #-16]
+ 209 01a0 10300BE5 		str	r2, [r3, #56]
+  73:main.c        **** 						Version 02.04.2012 hpw
+ 210              	1 75 0
+ 211 01a4 0A32A0E3 		mov	r3, #-16777216
+ 212 01a8 C339A0E1 		add	r3, r3, #16384000
+ 213 01ac 10201BE5 		add	r3, r3, #64
+ 214 01b0 382083E5 		mov	r2, #4
+  74:main.c        **** ********************************************************
+  75:main.c        **** // ARM_T4A4										Version 02.04.2012 hpw
+ 215              	r2, [r3, #0]
+ 216 01b4 FF34A0E3 		.loc 1 76 0
+ 217 01b8 FA3883E2 		mov	r3, #-16777216
+ 218 01bc 403083E2 		add	r3, r3, #16384000
+ 219 01c0 0420A0E3 		add	r3, r3, #64
+ 220 01c4 002083E5 		ldr	r3, [r3, #32]
+  76:main.c        **** ********************************************************
+ 221              	3, [fp, #-24]
+ 222 01c8 FF34A0E3 		.loc 1 77 0
+ 223 01cc FA3883E2 		sub	sp, fp, #12
+ 224 01d0 403083E2 		ldmfd	sp, {fp, sp, pc}
+ 225 01d4 203093E5 	.LFE6:
+  77:main.c        **** //********************************************************************
+ 227              	n	2
+ 228 01dc 0CD04BE2 		.global	main
+ 230              	main:
+ 231              	.LFB7:
+ 232              		.loc 1 82 0
+ 233              		@ args = 0, pretend = 0, frame = 0
+ 234              		@ frame_needed = 1, uses_anonymous_args = 0
+ 235              		mov	ip, sp
+ 236              	.LCFI20:
+  78:main.c        **** //********************************************************************
+  79:main.c        **** // ARM_T4A4										Version 02.04.2012 hpw
+  80:main.c        **** //********************************************************************
+  81:main.c        **** #include	"include/AT91SAM7S64.h"			// Definition von ARM7 typischen Registern etc.
+  82:main.c        **** #include	"include/interrupt.h"			// IR-Routinen
+ 237              	, {fp, ip, lr, pc}
+ 238              	.LCFI21:
+ 239              		sub	fp, ip, #4
+ 240 01e4 0DC0A0E1 	.LCFI22:
+ 241              		.loc 1 83 0
+ 242 01e8 00D82DE9 		mov	r3, #-2147483648
+ 243              		mov	r3, r3, asr #21
+ 244 01ec 04B04CE2 		mov	r2, #4
+ 245              		str	r2, [r3, #16]
+  83:main.c        **** 		// Definition von ARM7 typischen Registern etc.
+ 246              	4 0
+ 247 01f0 0231A0E3 		mov	r3, #-1610612736
+ 248 01f4 C33AA0E1 		mov	r3, r3, asr #19
+ 249 01f8 0420A0E3 		mov	r2, #262144
+ 250 01fc 102083E5 		str	r2, [r3, #16]
+  84:main.c        **** ***************
+ 251              	 1 85 0
+ 252 0200 0A32A0E3 		mov	r3, #-1610612736
+ 253 0204 C339A0E1 		mov	r3, r3, asr #19
+ 254 0208 0127A0E3 		mov	r2, #262144
+ 255 020c 102083E5 		str	r2, [r3, #160]
+  85:main.c        **** 						Version 02.04.2012 hpw
+ 256              	 1 88 0
+ 257 0210 0A32A0E3 		mov	r3, #-1610612736
+ 258 0214 C339A0E1 		mov	r3, r3, asr #19
+ 259 0218 0127A0E3 		mov	r2, #262144
+ 260 021c A02083E5 		str	r2, [r3, #96]
+  86:main.c        **** ********************************************************
+  87:main.c        **** // ARM_T4A4										Version 02.04.2012 hpw
+  88:main.c        **** //********************************************************************
+ 261              	 1 90 0
+ 262 0220 0A32A0E3 		mov	r0, #1
+ 263 0224 C339A0E1 		mov	r1, #4
+ 264 0228 0127A0E3 		mov	r2, #1
+ 265 022c 602083E5 		ldr	r3, .L21
+  89:main.c        **** 						Version 02.04.2012 hpw
+  90:main.c        **** //********************************************************************
+ 266              	imer_ir_init
+ 267 0230 0100A0E3 		.loc 1 91 0
+ 268 0234 0410A0E3 		mov	r2, #-16777216
+ 269 0238 0120A0E3 		add	r2, r2, #16384000
+ 270 023c 34309FE5 		add	r2, r2, #64
+ 271 0240 FEFFFFEB 		mov	r3, #6784
+  91:main.c        **** 						Version 02.04.2012 hpw
+ 272              	3, r3, #34
+ 273 0244 FF24A0E3 		str	r3, [r2, #28]
+ 274 0248 FA2882E2 		.loc 1 92 0
+ 275 024c 402082E2 		mov	r3, #-16777216
+ 276 0250 6A3DA0E3 		add	r3, r3, #16384000
+ 277 0254 223083E2 		add	r3, r3, #64
+ 278 0258 1C3082E5 		mov	r2, #4
+  92:main.c        **** ********************************************************
+ 279              	, [r3, #0]
+ 280 025c FF34A0E3 		.loc 1 98 0
+ 281 0260 FA3883E2 		bl	display_init
+ 282 0264 403083E2 	.L19:
+ 283 0268 0420A0E3 		b	.L19
+ 284 026c 002083E5 	.L22:
+  93:main.c        **** //********************************************************************
+  94:main.c        **** // ARM_T4A4										Version 02.04.2012 hpw
+  95:main.c        **** //********************************************************************
+  96:main.c        **** #include	"include/AT91SAM7S64.h"			// Definition von ARM7 typischen Registern etc.
+  97:main.c        **** #include	"include/interrupt.h"			// IR-Routinen
+  98:main.c        **** #include "display.h"
+ 285              	n	2
+ 286 0270 FEFFFFEB 	.L21:
+ 287              		.word	timer1_isr
+ 288 0274 FEFFFFEA 	.LFE7:
+ 290              		.section	.debug_frame,"",%progbits
+ 291              	.Lframe0:
+ 292 0278 00000000 		.4byte	.LECIE0-.LSCIE0
+ 293              	.LSCIE0:
+ 294              		.4byte	0xffffffff
+ 461              		.4byte	.LCFI0-.Ltext0
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\Aomx\AppData\Local\Temp/ccQH1iCO.s:13     .text:00000000 delay_ms
+C:\Users\Aomx\AppData\Local\Temp/ccQH1iCO.s:19     .text:00000000 $a
+C:\Users\Aomx\AppData\Local\Temp/ccQH1iCO.s:64     .text:00000074 is_button_pressed
+C:\Users\Aomx\AppData\Local\Temp/ccQH1iCO.s:95     .text:000000b0 get_button_state
+C:\Users\Aomx\AppData\Local\Temp/ccQH1iCO.s:154    .text:00000134 pioa_isr
+C:\Users\Aomx\AppData\Local\Temp/ccQH1iCO.s:179    .text:00000158 timer1_isr
+C:\Users\Aomx\AppData\Local\Temp/ccQH1iCO.s:235    .text:000001e4 main
+C:\Users\Aomx\AppData\Local\Temp/ccQH1iCO.s:292    .text:00000278 $d
+
+UNDEFINED SYMBOLS
+timer_ir_init
+display_init

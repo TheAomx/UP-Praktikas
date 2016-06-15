@@ -1,0 +1,289 @@
+   1              		.file	"interrupt.c"
+   9              	.Ltext0:
+  10              		.align	2
+  11              		.global	pioa_ir_init
+  13              	pioa_ir_init:
+  14              	.LFB2:
+  15              		.file 1 "interrupt.c"
+   1:interrupt.c   **** //********************************************************************
+   2:interrupt.c   **** // interrupt.c									Version 02.04.2012 hpw
+   3:interrupt.c   **** //********************************************************************
+   4:interrupt.c   **** #include "include/AT91SAM7S64.h"
+   5:interrupt.c   **** #include "include/interrupt.h"
+   6:interrupt.c   **** 
+   7:interrupt.c   **** //**************************************************************
+   8:interrupt.c   **** // pioa_ir_init
+   9:interrupt.c   **** // Initialisiert Interrupts des PIOA-Controllers
+  10:interrupt.c   **** // Übergabeparameter:  PORT     Auswahl des(r) Pins
+  11:interrupt.c   **** //                     PRIOR    Priorität   0 (niedrigste) .. 7 (höchste)
+  12:interrupt.c   **** //                     SRCTYPE  Sensivität  0  Low-Level
+  13:interrupt.c   **** //                                          1  Fallende Flanke
+  14:interrupt.c   **** //                                          2  High-Level
+  15:interrupt.c   **** //                                          3  Steigende Flanke
+  16:interrupt.c   **** //                     ADR_ISR  Adresse der ISR-Routine
+  17:interrupt.c   **** //**************************************************************
+  18:interrupt.c   **** void pioa_ir_init (unsigned int PORT, unsigned int PRIOR, unsigned int SRCTYPE, void (*ADR_ISR) (vo
+  16              	 args = 0, pretend = 0, frame = 16
+  17              		@ frame_needed = 1, uses_anonymous_args = 0
+  18              		mov	ip, sp
+  19 0000 0DC0A0E1 	.LCFI0:
+  20              		stmfd	sp!, {fp, ip, lr, pc}
+  21 0004 00D82DE9 	.LCFI1:
+  22              		sub	fp, ip, #4
+  23 0008 04B04CE2 	.LCFI2:
+  24              		sub	sp, sp, #16
+  25 000c 10D04DE2 	.LCFI3:
+  26              		str	r0, [fp, #-16]
+  27 0010 10000BE5 		str	r1, [fp, #-20]
+  28 0014 14100BE5 		str	r2, [fp, #-24]
+  29 0018 18200BE5 		str	r3, [fp, #-28]
+  30 001c 1C300BE5 		.loc 1 20 0
+  19:interrupt.c   ****  Konfiguration Advanced Interrupt Controllers (AIC):
+  20:interrupt.c   **** 	AT91C_BASE_AIC->AIC_IDCR = (1<<AT91C_ID_PIOA);					// PIOA-Interrupts sperren
+  31              	483648
+  32 0020 0231A0E3 		mov	r3, r3, asr #19
+  33 0024 C339A0E1 		mov	r2, #4
+  34 0028 0420A0E3 		str	r2, [r3, #292]
+  35 002c 242183E5 		.loc 1 21 0
+  21:interrupt.c   **** C_IDCR = (1<<AT91C_ID_PIOA);					// PIOA-Interrupts sperren
+  36              	r3, #-2147483648
+  37 0030 0231A0E3 		mov	r3, r3, asr #19
+  38 0034 C339A0E1 		ldr	r2, [fp, #-28]
+  39 0038 1C201BE5 		str	r2, [r3, #136]
+  40 003c 882083E5 		.loc 1 22 0
+  22:interrupt.c   **** C_IDCR = (1<<AT91C_ID_PIOA);					// PIOA-Interrupts sperren
+  41              	r2, #-2147483648
+  42 0040 0221A0E3 		mov	r2, r2, asr #19
+  43 0044 C229A0E1 		ldr	r3, [fp, #-24]
+  44 0048 18301BE5 		mov	r1, r3, asl #5
+  45 004c 8312A0E1 		ldr	r3, [fp, #-20]
+  46 0050 14301BE5 		orr	r3, r1, r3
+  47 0054 033081E1 		str	r3, [r2, #8]
+  48 0058 083082E5 		.loc 1 23 0
+  23:interrupt.c   **** C_IDCR = (1<<AT91C_ID_PIOA);					// PIOA-Interrupts sperren
+  49              	 #-2147483648
+  50 005c 0231A0E3 		mov	r3, r3, asr #19
+  51 0060 C339A0E1 		mov	r2, #4
+  52 0064 0420A0E3 		str	r2, [r3, #296]
+  53 0068 282183E5 		.loc 1 24 0
+  24:interrupt.c   **** C_IDCR = (1<<AT91C_ID_PIOA);					// PIOA-Interrupts sperren
+  54              	r3, #-2147483648
+  55 006c 0231A0E3 		mov	r3, r3, asr #19
+  56 0070 C339A0E1 		mov	r2, #4
+  57 0074 0420A0E3 		str	r2, [r3, #288]
+  58 0078 202183E5 		.loc 1 26 0
+  25:interrupt.c   **** C_IDCR = (1<<AT91C_ID_PIOA);					// PIOA-Interrupts sperren
+  26:interrupt.c   **** 	AT91C_BASE_AIC->AIC_SVR[AT91C_ID_PIOA]= (unsigned int) ADR_ISR;	// Adresse der ISR zuweisen
+  59              	r3, #-1610612736
+  60 007c 0A32A0E3 		mov	r3, r3, asr #19
+  61 0080 C339A0E1 		ldr	r2, [fp, #-16]
+  62 0084 10201BE5 		str	r2, [r3, #64]
+  63 0088 402083E5 		.loc 1 27 0
+  27:interrupt.c   **** PIOA]= (unsigned int) ADR_ISR;	// Adresse der ISR zuweisen
+  64              	sp, fp, #12
+  65 008c 0CD04BE2 		ldmfd	sp, {fp, sp, pc}
+  66 0090 00A89DE8 	.LFE2:
+  68              		.align	2
+  69              		.global	timer_ir_init
+  71              	timer_ir_init:
+  72              	.LFB3:
+  73              		.loc 1 41 0
+  28:interrupt.c   **** PIOA]= (unsigned int) ADR_ISR;	// Adresse der ISR zuweisen
+  29:interrupt.c   **** 	AT91C_BASE_AIC->AIC_SMR[AT91C_ID_PIOA]= (SRCTYPE<<5)|PRIOR;		// Type und Priorität auswählen
+  30:interrupt.c   **** 	AT91C_BASE_AIC->AIC_ICCR = (1<<AT91C_ID_PIOA);					// ev. IR-Flag löschen
+  31:interrupt.c   **** 	AT91C_BASE_AIC->AIC_IECR = (1<<AT91C_ID_PIOA);					// PIOA-Interrupts freigeben
+  32:interrupt.c   **** 
+  33:interrupt.c   **** 	AT91C_BASE_PIOA->PIO_IER = PORT;							// PIO-Pin(s) für Interrupts freigeben
+  34:interrupt.c   **** }
+  35:interrupt.c   **** 
+  36:interrupt.c   **** //**************************************************************
+  37:interrupt.c   **** // timer_ir_init
+  38:interrupt.c   **** // Initialisiert Interrupts des Timers 0..2
+  39:interrupt.c   **** // Übergabeparameter:  TC_NR    Nr. des Timers  0..2
+  40:interrupt.c   **** //                     PRIOR    Priorität       0 (niedrigste) .. 7 (höchste)
+  41:interrupt.c   **** //                     TCCLKS   Modus           0  TimerClock1 = MCK/2    =>  12,0    MHz
+  74              	0, pretend = 0, frame = 32
+  75              		@ frame_needed = 1, uses_anonymous_args = 0
+  76              		mov	ip, sp
+  77 0094 0DC0A0E1 	.LCFI4:
+  78              		stmfd	sp!, {fp, ip, lr, pc}
+  79 0098 00D82DE9 	.LCFI5:
+  80              		sub	fp, ip, #4
+  81 009c 04B04CE2 	.LCFI6:
+  82              		sub	sp, sp, #32
+  83 00a0 20D04DE2 	.LCFI7:
+  84              		str	r0, [fp, #-28]
+  85 00a4 1C000BE5 		str	r1, [fp, #-32]
+  86 00a8 20100BE5 		str	r2, [fp, #-36]
+  87 00ac 24200BE5 		str	r3, [fp, #-40]
+  88 00b0 28300BE5 		.loc 1 46 0
+  42:interrupt.c   ****     0  TimerClock1 = MCK/2    =>  12,0    MHz
+  43:interrupt.c   **** //                                              1  TimerClock2 = MCK/8    =>   3,0    MHz
+  44:interrupt.c   **** //                                              2  TimerClock3 = MCK/32   => 750,0    kHz
+  45:interrupt.c   **** //                                              3  TimerClock4 = MCK/128  => 187,5    kHz
+  46:interrupt.c   **** //                                              4  TimerClock5 = MCK/1024 =>  23,4375 kHz
+  89              	-28]
+  90 00b4 1C301BE5 		str	r3, [fp, #-44]
+  91 00b8 2C300BE5 		ldr	r3, [fp, #-44]
+  92 00bc 2C301BE5 		cmp	r3, #1
+  93 00c0 010053E3 		beq	.L6
+  94 00c4 0C00000A 		ldr	r3, [fp, #-44]
+  95 00c8 2C301BE5 		cmp	r3, #1
+  96 00cc 010053E3 		bcc	.L5
+  97 00d0 0300003A 		ldr	r3, [fp, #-44]
+  98 00d4 2C301BE5 		cmp	r3, #2
+  99 00d8 020053E3 		beq	.L7
+ 100 00dc 0D00000A 		b	.L10
+ 101 00e0 130000EA 	.L5:
+ 102              		.loc 1 48 0
+  47:interrupt.c   **** 4  TimerClock5 = MCK/1024 =>  23,4375 kHz
+  48:interrupt.c   **** //                     ADR_ISR  Adresse der ISR-Routine
+ 103              	0612736
+ 104 00e4 0A32A0E3 		mov	r3, r3, asr #12
+ 105 00e8 4336A0E1 		str	r3, [fp, #-20]
+ 106 00ec 14300BE5 		.loc 1 49 0
+  49:interrupt.c   ****         ADR_ISR  Adresse der ISR-Routine
+ 107              		r3, #12
+ 108 00f0 0C30A0E3 		str	r3, [fp, #-16]
+ 109 00f4 10300BE5 		b	.L8
+ 110 00f8 120000EA 	.L6:
+ 111              		.loc 1 52 0
+  50:interrupt.c   ****         ADR_ISR  Adresse der ISR-Routine
+  51:interrupt.c   **** //**************************************************************
+  52:interrupt.c   **** void timer_ir_init (unsigned int TC_NR, unsigned int PRIOR, unsigned int TCCLKS, void (*ADR_ISR) (v
+ 112              	r3, #-16777216
+ 113 00fc FF34A0E3 		add	r3, r3, #16384000
+ 114 0100 FA3883E2 		add	r3, r3, #64
+ 115 0104 403083E2 		str	r3, [fp, #-20]
+ 116 0108 14300BE5 		.loc 1 53 0
+  53:interrupt.c   ****  int TCCLKS, void (*ADR_ISR) (void) ){
+ 117              	r3, #13
+ 118 010c 0D30A0E3 		str	r3, [fp, #-16]
+ 119 0110 10300BE5 		b	.L8
+ 120 0114 0B0000EA 	.L7:
+ 121              		.loc 1 56 0
+  54:interrupt.c   ****  int TCCLKS, void (*ADR_ISR) (void) ){
+  55:interrupt.c   **** 	AT91S_TC *TC_POINTER;										// Pointer TimerCounter Channel
+  56:interrupt.c   **** 	unsigned int IRQ_ID;										// Timer-IRQ-ID
+ 122              	r3, #-16777216
+ 123 0118 FF34A0E3 		add	r3, r3, #16384000
+ 124 011c FA3883E2 		add	r3, r3, #128
+ 125 0120 803083E2 		str	r3, [fp, #-20]
+ 126 0124 14300BE5 		.loc 1 57 0
+  57:interrupt.c   **** int IRQ_ID;										// Timer-IRQ-ID
+ 127              	r3, #14
+ 128 0128 0E30A0E3 		str	r3, [fp, #-16]
+ 129 012c 10300BE5 		b	.L8
+ 130 0130 040000EA 	.L10:
+ 131              		.loc 1 60 0
+  58:interrupt.c   **** int IRQ_ID;										// Timer-IRQ-ID
+  59:interrupt.c   **** 	volatile unsigned int dummy;								// Dummy-Variable
+  60:interrupt.c   **** 
+ 132              	r3, #-1610612736
+ 133 0134 0A32A0E3 		mov	r3, r3, asr #12
+ 134 0138 4336A0E1 		str	r3, [fp, #-20]
+ 135 013c 14300BE5 		.loc 1 61 0
+  61:interrupt.c   **** t dummy;								// Dummy-Variable
+ 136              		r3, #12
+ 137 0140 0C30A0E3 		str	r3, [fp, #-16]
+ 138 0144 10300BE5 	.L8:
+ 139              		.loc 1 64 0
+  62:interrupt.c   **** int dummy;								// Dummy-Variable
+  63:interrupt.c   **** 
+  64:interrupt.c   **** 	switch(TC_NR){												// Timer auswählen:
+ 140              		r2, #-2147483648
+ 141 0148 0221A0E3 		mov	r2, r2, asr #21
+ 142 014c C22AA0E1 		ldr	r1, [fp, #-16]
+ 143 0150 10101BE5 		mov	r3, #1
+ 144 0154 0130A0E3 		mov	r3, r3, asl r1
+ 145 0158 1331A0E1 		str	r3, [r2, #16]
+ 146 015c 103082E5 		.loc 1 67 0
+  65:interrupt.c   **** ){												// Timer auswählen:
+  66:interrupt.c   **** 		case 0:
+  67:interrupt.c   **** 			TC_POINTER = AT91C_BASE_TC0;							// Pointer für Timer0 zuweisen
+ 147              	, [fp, #-20]
+ 148 0160 14201BE5 		mov	r3, #2
+ 149 0164 0230A0E3 		str	r3, [r2, #0]
+ 150 0168 003082E5 		.loc 1 68 0
+  68:interrupt.c   **** 	// Pointer für Timer0 zuweisen
+ 151              		r2, [fp, #-20]
+ 152 016c 14201BE5 		mov	r3, #255
+ 153 0170 FF30A0E3 		str	r3, [r2, #40]
+ 154 0174 283082E5 		.loc 1 69 0
+  69:interrupt.c   **** 	// Pointer für Timer0 zuweisen
+ 155              		r3, [fp, #-20]
+ 156 0178 14301BE5 		ldr	r3, [r3, #32]
+ 157 017c 203093E5 		str	r3, [fp, #-24]
+ 158 0180 18300BE5 		.loc 1 70 0
+  70:interrupt.c   **** 	// Pointer für Timer0 zuweisen
+ 159              		r2, [fp, #-20]
+ 160 0184 14201BE5 		ldr	r3, [fp, #-36]
+ 161 0188 24301BE5 		str	r3, [r2, #4]
+ 162 018c 043082E5 		.loc 1 71 0
+  71:interrupt.c   **** 	// Pointer für Timer0 zuweisen
+ 163              		r2, [fp, #-20]
+ 164 0190 14201BE5 		mov	r3, #1
+ 165 0194 0130A0E3 		str	r3, [r2, #0]
+ 166 0198 003082E5 		.loc 1 72 0
+  72:interrupt.c   **** 	// Pointer für Timer0 zuweisen
+ 167              		r2, [fp, #-20]
+ 168 019c 14201BE5 		mov	r3, #16
+ 169 01a0 1030A0E3 		str	r3, [r2, #36]
+ 170 01a4 243082E5 		.loc 1 75 0
+  73:interrupt.c   **** 	// Pointer für Timer0 zuweisen
+  74:interrupt.c   **** 			IRQ_ID = AT91C_ID_TC0;									// IRQ_ID des Timers0 zuweisen
+  75:interrupt.c   **** 			break;
+ 171              		r2, #-2147483648
+ 172 01a8 0221A0E3 		mov	r2, r2, asr #19
+ 173 01ac C229A0E1 		ldr	r1, [fp, #-16]
+ 174 01b0 10101BE5 		mov	r3, #1
+ 175 01b4 0130A0E3 		mov	r3, r3, asl r1
+ 176 01b8 1331A0E1 		str	r3, [r2, #292]
+ 177 01bc 243182E5 		.loc 1 76 0
+  76:interrupt.c   **** es Timers0 zuweisen
+ 178              	, #-2147483648
+ 179 01c0 0221A0E3 		mov	r2, r2, asr #19
+ 180 01c4 C229A0E1 		ldr	r3, [fp, #-16]
+ 181 01c8 10301BE5 		ldr	r1, [fp, #-40]
+ 182 01cc 28101BE5 		add	r3, r3, #32
+ 183 01d0 203083E2 		str	r1, [r2, r3, asl #2]
+ 184 01d4 031182E7 		.loc 1 77 0
+  77:interrupt.c   **** // IRQ_ID des Timers0 zuweisen
+ 185              	, #-2147483648
+ 186 01d8 0221A0E3 		mov	r2, r2, asr #19
+ 187 01dc C229A0E1 		ldr	r1, [fp, #-16]
+ 188 01e0 10101BE5 		ldr	r3, [fp, #-32]
+ 189 01e4 20301BE5 		orr	r3, r3, #64
+ 190 01e8 403083E3 		str	r3, [r2, r1, asl #2]
+ 191 01ec 013182E7 		.loc 1 78 0
+  78:interrupt.c   **** // IRQ_ID des Timers0 zuweisen
+ 192              	, #-2147483648
+ 193 01f0 0221A0E3 		mov	r2, r2, asr #19
+ 194 01f4 C229A0E1 		ldr	r1, [fp, #-16]
+ 195 01f8 10101BE5 		mov	r3, #1
+ 196 01fc 0130A0E3 		mov	r3, r3, asl r1
+ 197 0200 1331A0E1 		str	r3, [r2, #296]
+ 198 0204 283182E5 		.loc 1 79 0
+  79:interrupt.c   **** // IRQ_ID des Timers0 zuweisen
+ 199              	, #-2147483648
+ 200 0208 0221A0E3 		mov	r2, r2, asr #19
+ 201 020c C229A0E1 		ldr	r1, [fp, #-16]
+ 202 0210 10101BE5 		mov	r3, #1
+ 203 0214 0130A0E3 		mov	r3, r3, asl r1
+ 204 0218 1331A0E1 		str	r3, [r2, #288]
+ 205 021c 203182E5 		.loc 1 80 0
+  80:interrupt.c   **** // IRQ_ID des Timers0 zuweisen
+ 206              	, fp, #12
+ 207 0220 0CD04BE2 		ldmfd	sp, {fp, sp, pc}
+ 208 0224 00A89DE8 	.LFE3:
+ 210              		.section	.debug_frame,"",%progbits
+ 277              		.section	.debug_loc,"",%progbits
+DEFINED SYMBOLS
+                            *ABS*:00000000 interrupt.c
+C:\Users\Aomx\AppData\Local\Temp/cc2az4WS.s:13     .text:00000000 pioa_ir_init
+C:\Users\Aomx\AppData\Local\Temp/cc2az4WS.s:19     .text:00000000 $a
+C:\Users\Aomx\AppData\Local\Temp/cc2az4WS.s:72     .text:00000094 timer_ir_init
+C:\Users\Aomx\AppData\Local\Temp/cc2az4WS.s:213    .debug_frame:00000000 $d
+C:\Users\Aomx\AppData\Local\Temp/cc2az4WS.s:281    .debug_loc:00000000 $d
+
+NO UNDEFINED SYMBOLS

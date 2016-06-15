@@ -1,0 +1,762 @@
+
+main.elf:     file format elf32-littlearm
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000072c  00000000  00000000  00008000  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .rodata       00000014  0000072c  0000072c  0000872c  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  2 .data         00000014  00200000  00000740  00010000  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  3 .comment      00000024  00000000  00000000  00010014  2**0
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000060  00000000  00000000  00010038  2**3
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_pubnames 00000135  00000000  00000000  00010098  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00000a9a  00000000  00000000  000101cd  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 000001df  00000000  00000000  00010c67  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00000194  00000000  00000000  00010e46  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000220  00000000  00000000  00010fdc  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    0000044e  00000000  00000000  000111fc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    000002a0  00000000  00000000  0001164a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .ARM.attributes 00000010  00000000  00000000  000118ea  2**0
+                  CONTENTS, READONLY
+Disassembly of section .text:
+
+00000000 <_startup>:
+   0:	ea000010 	b	48 <InitReset>
+
+00000004 <undefvec>:
+   4:	eafffffe 	b	4 <undefvec>
+
+00000008 <swivec>:
+   8:	eafffffe 	b	8 <swivec>
+
+0000000c <pabtvec>:
+   c:	eafffffe 	b	c <pabtvec>
+
+00000010 <dabtvec>:
+  10:	eafffffe 	b	10 <dabtvec>
+
+00000014 <rsvdvec>:
+  14:	eafffffe 	b	14 <rsvdvec>
+
+00000018 <irqvec>:
+  18:	ea000027 	b	bc <IRQ_Handler_Entry>
+
+0000001c <FIQ_Handler_Entry>:
+  1c:	e1a09000 	mov	r9, r0
+  20:	e5980104 	ldr	r0, [r8, #260]
+  24:	e321f0d3 	msr	CPSR_c, #211	; 0xd3
+  28:	e92d500e 	push	{r1, r2, r3, ip, lr}
+  2c:	e1a0e00f 	mov	lr, pc
+  30:	e12fff10 	bx	r0
+  34:	e8bd500e 	pop	{r1, r2, r3, ip, lr}
+  38:	e321f0d1 	msr	CPSR_c, #209	; 0xd1
+  3c:	e1a00009 	mov	r0, r9
+  40:	e25ef004 	subs	pc, lr, #4	; 0x4
+
+00000044 <.RAM_TOP>:
+  44:	00204000 	.word	0x00204000
+
+00000048 <InitReset>:
+  48:	e51fd00c 	ldr	sp, [pc, #-12]	; 44 <.RAM_TOP>
+  4c:	e59f00c4 	ldr	r0, [pc, #196]	; 118 <AT91F_Spurious_handler+0x4>
+  50:	e1a0e00f 	mov	lr, pc
+  54:	e12fff10 	bx	r0
+  58:	e1a0000d 	mov	r0, sp
+  5c:	e321f0d1 	msr	CPSR_c, #209	; 0xd1
+  60:	e59f80b4 	ldr	r8, [pc, #180]	; 11c <AT91F_Spurious_handler+0x8>
+  64:	e321f0d2 	msr	CPSR_c, #210	; 0xd2
+  68:	e1a0d000 	mov	sp, r0
+  6c:	e2400060 	sub	r0, r0, #96	; 0x60
+  70:	e321f013 	msr	CPSR_c, #19	; 0x13
+  74:	e1a0d000 	mov	sp, r0
+  78:	e59f10a0 	ldr	r1, [pc, #160]	; 120 <AT91F_Spurious_handler+0xc>
+  7c:	e59f20a0 	ldr	r2, [pc, #160]	; 124 <AT91F_Spurious_handler+0x10>
+  80:	e59f30a0 	ldr	r3, [pc, #160]	; 128 <AT91F_Spurious_handler+0x14>
+
+00000084 <LoopRel>:
+  84:	e1520003 	cmp	r2, r3
+  88:	34910004 	ldrcc	r0, [r1], #4
+  8c:	34820004 	strcc	r0, [r2], #4
+  90:	3afffffb 	bcc	84 <LoopRel>
+  94:	e3a00000 	mov	r0, #0	; 0x0
+  98:	e59f108c 	ldr	r1, [pc, #140]	; 12c <AT91F_Spurious_handler+0x18>
+  9c:	e59f208c 	ldr	r2, [pc, #140]	; 130 <AIC_EOICR>
+
+000000a0 <LoopZI>:
+  a0:	e1510002 	cmp	r1, r2
+  a4:	34810004 	strcc	r0, [r1], #4
+  a8:	3afffffc 	bcc	a0 <LoopZI>
+  ac:	e59fe080 	ldr	lr, [pc, #128]	; 134 <AIC_EOICR+0x4>
+  b0:	e59f0080 	ldr	r0, [pc, #128]	; 138 <AIC_EOICR+0x8>
+  b4:	e12fff10 	bx	r0
+
+000000b8 <exit>:
+  b8:	eafffffe 	b	b8 <exit>
+
+000000bc <IRQ_Handler_Entry>:
+  bc:	e24ee004 	sub	lr, lr, #4	; 0x4
+  c0:	e92d4000 	push	{lr}
+  c4:	e14fe000 	mrs	lr, SPSR
+  c8:	e92d4000 	push	{lr}
+  cc:	e92d0001 	push	{r0}
+  d0:	e59fe044 	ldr	lr, [pc, #68]	; 11c <AT91F_Spurious_handler+0x8>
+  d4:	e59e0100 	ldr	r0, [lr, #256]
+  d8:	e58ee100 	str	lr, [lr, #256]
+  dc:	e321f013 	msr	CPSR_c, #19	; 0x13
+  e0:	e92d500e 	push	{r1, r2, r3, ip, lr}
+  e4:	e1a0e00f 	mov	lr, pc
+  e8:	e12fff10 	bx	r0
+  ec:	e8bd500e 	pop	{r1, r2, r3, ip, lr}
+  f0:	e321f092 	msr	CPSR_c, #146	; 0x92
+  f4:	e59fe020 	ldr	lr, [pc, #32]	; 11c <AT91F_Spurious_handler+0x8>
+  f8:	e58ee130 	str	lr, [lr, #304]
+  fc:	e8bd0001 	pop	{r0}
+ 100:	e8bd4000 	pop	{lr}
+ 104:	e16ff00e 	msr	SPSR_fsxc, lr
+ 108:	e8fd8000 	ldm	sp!, {pc}^
+
+0000010c <AT91F_Default_FIQ_handler>:
+ 10c:	eafffffe 	b	10c <AT91F_Default_FIQ_handler>
+
+00000110 <AT91F_Default_IRQ_handler>:
+ 110:	eafffffe 	b	110 <AT91F_Default_IRQ_handler>
+
+00000114 <AT91F_Spurious_handler>:
+ 114:	eafffffe 	b	114 <AT91F_Spurious_handler>
+ 118:	0000013c 	.word	0x0000013c
+ 11c:	fffff000 	.word	0xfffff000
+ 120:	00000740 	.word	0x00000740
+ 124:	00200000 	.word	0x00200000
+ 128:	00200014 	.word	0x00200014
+ 12c:	00200014 	.word	0x00200014
+ 130:	00200014 	.word	0x00200014
+ 134:	000000b8 	.word	0x000000b8
+ 138:	000005dc 	.word	0x000005dc
+
+0000013c <AT91F_LowLevelInit>:
+//* \brief This function performs very low level HW initialization
+//*        this function can be use a Stack, depending the compilation
+//*        optimization mode
+//*----------------------------------------------------------------------------
+void AT91F_LowLevelInit( void)
+{  int i;
+ 13c:	e1a0c00d 	mov	ip, sp
+ 140:	e92dd800 	push	{fp, ip, lr, pc}
+ 144:	e24cb004 	sub	fp, ip, #4	; 0x4
+ 148:	e24dd004 	sub	sp, sp, #4	; 0x4
+  // Disable Watchdog
+  AT91C_BASE_WDTC->WDTC_WDMR= AT91C_WDTC_WDDIS;
+ 14c:	e3a0332a 	mov	r3, #-1476395008	; 0xa8000000
+ 150:	e1a03ac3 	asr	r3, r3, #21
+ 154:	e3a02902 	mov	r2, #32768	; 0x8000
+ 158:	e5832004 	str	r2, [r3, #4]
+  // Set MCK at 24 MHz
+  // Enabling the Main Oscillator:
+  AT91C_BASE_PMC->PMC_MOR = ( (AT91C_CKGR_OSCOUNT) & (0x10 << 8)) | AT91C_CKGR_MOSCEN ;
+ 15c:	e3a02102 	mov	r2, #-2147483648	; 0x80000000
+ 160:	e1a02ac2 	asr	r2, r2, #21
+ 164:	e3a03a01 	mov	r3, #4096	; 0x1000
+ 168:	e2833001 	add	r3, r3, #1	; 0x1
+ 16c:	e5823020 	str	r3, [r2, #32]
+  // Wait the startup time
+  while(!(AT91C_BASE_PMC->PMC_SR & AT91C_PMC_MOSCS));
+ 170:	e3a03102 	mov	r3, #-2147483648	; 0x80000000
+ 174:	e1a03ac3 	asr	r3, r3, #21
+ 178:	e5933068 	ldr	r3, [r3, #104]
+ 17c:	e2033001 	and	r3, r3, #1	; 0x1
+ 180:	e3530000 	cmp	r3, #0	; 0x0
+ 184:	0afffff9 	beq	170 <AT91F_LowLevelInit+0x34>
+  // CPU-Clock: MAIN_CLK / 4 (3 MHz)
+  AT91C_BASE_PMC->PMC_MCKR = AT91C_PMC_CSS_MAIN_CLK | AT91C_PMC_PRES_CLK_4;
+ 188:	e3a03102 	mov	r3, #-2147483648	; 0x80000000
+ 18c:	e1a03ac3 	asr	r3, r3, #21
+ 190:	e3a02009 	mov	r2, #9	; 0x9
+ 194:	e5832030 	str	r2, [r3, #48]
+  // wait until MCKRDY in PMC_SR is set
+  while(!(AT91C_BASE_PMC->PMC_SR & AT91C_PMC_MCKRDY));
+ 198:	e3a03102 	mov	r3, #-2147483648	; 0x80000000
+ 19c:	e1a03ac3 	asr	r3, r3, #21
+ 1a0:	e5933068 	ldr	r3, [r3, #104]
+ 1a4:	e2033008 	and	r3, r3, #8	; 0x8
+ 1a8:	e3530000 	cmp	r3, #0	; 0x0
+ 1ac:	0afffff9 	beq	198 <AT91F_LowLevelInit+0x5c>
+  // setting PLL (96 MHz)
+  AT91C_BASE_PMC->PMC_PLLR = ((AT91C_CKGR_DIV      & 8) |
+ 1b0:	e3a02102 	mov	r2, #-2147483648	; 0x80000000
+ 1b4:	e1a02ac2 	asr	r2, r2, #21
+ 1b8:	e3a039fd 	mov	r3, #4145152	; 0x3f4000
+ 1bc:	e2433ffe 	sub	r3, r3, #1016	; 0x3f8
+ 1c0:	e582302c 	str	r3, [r2, #44]
+                              (AT91C_CKGR_PLLCOUNT & (60 << 8)) |
+                              (AT91C_CKGR_MUL      & (63 << 16)));
+  // Wait the startup time
+  while(!(AT91C_BASE_PMC->PMC_SR & AT91C_PMC_LOCK));
+ 1c4:	e3a03102 	mov	r3, #-2147483648	; 0x80000000
+ 1c8:	e1a03ac3 	asr	r3, r3, #21
+ 1cc:	e5933068 	ldr	r3, [r3, #104]
+ 1d0:	e2033004 	and	r3, r3, #4	; 0x4
+ 1d4:	e3530000 	cmp	r3, #0	; 0x0
+ 1d8:	0afffff9 	beq	1c4 <AT91F_LowLevelInit+0x88>
+  // CPU-Clock: PLL / 4 (24 MHz)
+  AT91C_BASE_PMC->PMC_MCKR = AT91C_PMC_CSS_PLL_CLK | AT91C_PMC_PRES_CLK_4;
+ 1dc:	e3a03102 	mov	r3, #-2147483648	; 0x80000000
+ 1e0:	e1a03ac3 	asr	r3, r3, #21
+ 1e4:	e3a0200b 	mov	r2, #11	; 0xb
+ 1e8:	e5832030 	str	r2, [r3, #48]
+  // wait until MCKRDY in PMC_SR is set
+  while(!(AT91C_BASE_PMC->PMC_SR & AT91C_PMC_MCKRDY));
+ 1ec:	e3a03102 	mov	r3, #-2147483648	; 0x80000000
+ 1f0:	e1a03ac3 	asr	r3, r3, #21
+ 1f4:	e5933068 	ldr	r3, [r3, #104]
+ 1f8:	e2033008 	and	r3, r3, #8	; 0x8
+ 1fc:	e3530000 	cmp	r3, #0	; 0x0
+ 200:	0afffff9 	beq	1ec <AT91F_LowLevelInit+0xb0>
+  //  Set Flash Waite state
+  //  if MCK = 24MHz I have 36 Cycle for 1.5 usecond ( flied MC_FMR->FMCN)
+  AT91C_BASE_MC->MC_FMR = ((AT91C_MC_FMCN)&(36<<16)) | AT91C_MC_FWS_0FWS ;
+ 204:	e3e020ff 	mvn	r2, #255	; 0xff
+ 208:	e3a03709 	mov	r3, #2359296	; 0x240000
+ 20c:	e5823060 	str	r3, [r2, #96]
+  // Set up the default interrupts handler vectors
+  AT91C_BASE_AIC->AIC_SVR[0] = (int) AT91F_Default_FIQ_handler ;
+ 210:	e3a03102 	mov	r3, #-2147483648	; 0x80000000
+ 214:	e1a039c3 	asr	r3, r3, #19
+ 218:	e59f2050 	ldr	r2, [pc, #80]	; 270 <AT91F_LowLevelInit+0x134>
+ 21c:	e5832080 	str	r2, [r3, #128]
+  for (i=1;i<31; i++)
+ 220:	e3a03001 	mov	r3, #1	; 0x1
+ 224:	e50b3010 	str	r3, [fp, #-16]
+ 228:	ea000008 	b	250 <AT91F_LowLevelInit+0x114>
+  {
+	  AT91C_BASE_AIC->AIC_SVR[i] = (int) AT91F_Default_IRQ_handler ;
+ 22c:	e3a02102 	mov	r2, #-2147483648	; 0x80000000
+ 230:	e1a029c2 	asr	r2, r2, #19
+ 234:	e51b3010 	ldr	r3, [fp, #-16]
+ 238:	e59f1034 	ldr	r1, [pc, #52]	; 274 <AT91F_LowLevelInit+0x138>
+ 23c:	e2833020 	add	r3, r3, #32	; 0x20
+ 240:	e7821103 	str	r1, [r2, r3, lsl #2]
+  //  Set Flash Waite state
+  //  if MCK = 24MHz I have 36 Cycle for 1.5 usecond ( flied MC_FMR->FMCN)
+  AT91C_BASE_MC->MC_FMR = ((AT91C_MC_FMCN)&(36<<16)) | AT91C_MC_FWS_0FWS ;
+  // Set up the default interrupts handler vectors
+  AT91C_BASE_AIC->AIC_SVR[0] = (int) AT91F_Default_FIQ_handler ;
+  for (i=1;i<31; i++)
+ 244:	e51b3010 	ldr	r3, [fp, #-16]
+ 248:	e2833001 	add	r3, r3, #1	; 0x1
+ 24c:	e50b3010 	str	r3, [fp, #-16]
+ 250:	e51b3010 	ldr	r3, [fp, #-16]
+ 254:	e353001e 	cmp	r3, #30	; 0x1e
+ 258:	dafffff3 	ble	22c <AT91F_LowLevelInit+0xf0>
+  {
+	  AT91C_BASE_AIC->AIC_SVR[i] = (int) AT91F_Default_IRQ_handler ;
+  }
+  AT91C_BASE_AIC->AIC_SPU  = (int) AT91F_Spurious_handler ;
+ 25c:	e3a03102 	mov	r3, #-2147483648	; 0x80000000
+ 260:	e1a039c3 	asr	r3, r3, #19
+ 264:	e59f200c 	ldr	r2, [pc, #12]	; 278 <AT91F_LowLevelInit+0x13c>
+ 268:	e5832134 	str	r2, [r3, #308]
+}
+ 26c:	e89da808 	ldm	sp, {r3, fp, sp, pc}
+ 270:	0000010c 	.word	0x0000010c
+ 274:	00000110 	.word	0x00000110
+ 278:	00000114 	.word	0x00000114
+
+0000027c <delay5ms>:
+
+
+//**************************************************************
+// delay5ms(uiK) verzögert um ca. uiK * 5ms
+//**************************************************************
+void delay5ms(unsigned int uiK){
+ 27c:	e1a0c00d 	mov	ip, sp
+ 280:	e92dd800 	push	{fp, ip, lr, pc}
+ 284:	e24cb004 	sub	fp, ip, #4	; 0x4
+ 288:	e24dd008 	sub	sp, sp, #8	; 0x8
+ 28c:	e50b0014 	str	r0, [fp, #-20]
+ 290:	ea00000a 	b	2c0 <delay5ms+0x44>
+	volatile unsigned int uiI;
+
+	while (uiK--)							// folgende for-Schleife wird uiK-mal aufgerufen
+		for (uiI=0; uiI<8192; uiI++);		//  for-Schleife wird 8192-mal durchlaufen. Dies
+ 294:	e3a03000 	mov	r3, #0	; 0x0
+ 298:	e50b3010 	str	r3, [fp, #-16]
+ 29c:	ea000002 	b	2ac <delay5ms+0x30>
+ 2a0:	e51b3010 	ldr	r3, [fp, #-16]
+ 2a4:	e2833001 	add	r3, r3, #1	; 0x1
+ 2a8:	e50b3010 	str	r3, [fp, #-16]
+ 2ac:	e51b2010 	ldr	r2, [fp, #-16]
+ 2b0:	e3a03d7f 	mov	r3, #8128	; 0x1fc0
+ 2b4:	e283303f 	add	r3, r3, #63	; 0x3f
+ 2b8:	e1520003 	cmp	r2, r3
+ 2bc:	9afffff7 	bls	2a0 <delay5ms+0x24>
+// delay5ms(uiK) verzögert um ca. uiK * 5ms
+//**************************************************************
+void delay5ms(unsigned int uiK){
+	volatile unsigned int uiI;
+
+	while (uiK--)							// folgende for-Schleife wird uiK-mal aufgerufen
+ 2c0:	e51b3014 	ldr	r3, [fp, #-20]
+ 2c4:	e3530000 	cmp	r3, #0	; 0x0
+ 2c8:	03a03000 	moveq	r3, #0	; 0x0
+ 2cc:	13a03001 	movne	r3, #1	; 0x1
+ 2d0:	e20320ff 	and	r2, r3, #255	; 0xff
+ 2d4:	e51b3014 	ldr	r3, [fp, #-20]
+ 2d8:	e2433001 	sub	r3, r3, #1	; 0x1
+ 2dc:	e50b3014 	str	r3, [fp, #-20]
+ 2e0:	e3520000 	cmp	r2, #0	; 0x0
+ 2e4:	1affffea 	bne	294 <delay5ms+0x18>
+		for (uiI=0; uiI<8192; uiI++);		//  for-Schleife wird 8192-mal durchlaufen. Dies
+											//  verursacht eine Zeitverzögerung von ca. 5ms.
+}
+ 2e8:	e24bd00c 	sub	sp, fp, #12	; 0xc
+ 2ec:	e89da800 	ldm	sp, {fp, sp, pc}
+
+000002f0 <delay_ms>:
+
+void delay_ms(unsigned int milliseconds){
+ 2f0:	e1a0c00d 	mov	ip, sp
+ 2f4:	e92dd800 	push	{fp, ip, lr, pc}
+ 2f8:	e24cb004 	sub	fp, ip, #4	; 0x4
+ 2fc:	e24dd008 	sub	sp, sp, #8	; 0x8
+ 300:	e50b0014 	str	r0, [fp, #-20]
+ 304:	ea00000a 	b	334 <delay_ms+0x44>
+	volatile unsigned int i;
+
+	while (milliseconds--)
+		for (i=0; i<1638; i++);
+ 308:	e3a03000 	mov	r3, #0	; 0x0
+ 30c:	e50b3010 	str	r3, [fp, #-16]
+ 310:	ea000002 	b	320 <delay_ms+0x30>
+ 314:	e51b3010 	ldr	r3, [fp, #-16]
+ 318:	e2833001 	add	r3, r3, #1	; 0x1
+ 31c:	e50b3010 	str	r3, [fp, #-16]
+ 320:	e51b2010 	ldr	r2, [fp, #-16]
+ 324:	e3a03e66 	mov	r3, #1632	; 0x660
+ 328:	e2833005 	add	r3, r3, #5	; 0x5
+ 32c:	e1520003 	cmp	r2, r3
+ 330:	9afffff7 	bls	314 <delay_ms+0x24>
+}
+
+void delay_ms(unsigned int milliseconds){
+	volatile unsigned int i;
+
+	while (milliseconds--)
+ 334:	e51b3014 	ldr	r3, [fp, #-20]
+ 338:	e3530000 	cmp	r3, #0	; 0x0
+ 33c:	03a03000 	moveq	r3, #0	; 0x0
+ 340:	13a03001 	movne	r3, #1	; 0x1
+ 344:	e20320ff 	and	r2, r3, #255	; 0xff
+ 348:	e51b3014 	ldr	r3, [fp, #-20]
+ 34c:	e2433001 	sub	r3, r3, #1	; 0x1
+ 350:	e50b3014 	str	r3, [fp, #-20]
+ 354:	e3520000 	cmp	r2, #0	; 0x0
+ 358:	1affffea 	bne	308 <delay_ms+0x18>
+		for (i=0; i<1638; i++);
+}
+ 35c:	e24bd00c 	sub	sp, fp, #12	; 0xc
+ 360:	e89da800 	ldm	sp, {fp, sp, pc}
+
+00000364 <enable_led>:
+
+void enable_led(uint_t led) {
+ 364:	e1a0c00d 	mov	ip, sp
+ 368:	e92dd800 	push	{fp, ip, lr, pc}
+ 36c:	e24cb004 	sub	fp, ip, #4	; 0x4
+ 370:	e24dd004 	sub	sp, sp, #4	; 0x4
+ 374:	e50b0010 	str	r0, [fp, #-16]
+	AT91C_BASE_PIOA->PIO_OER = led;							// Ausgang freigeben
+ 378:	e3a0320a 	mov	r3, #-1610612736	; 0xa0000000
+ 37c:	e1a039c3 	asr	r3, r3, #19
+ 380:	e51b2010 	ldr	r2, [fp, #-16]
+ 384:	e5832010 	str	r2, [r3, #16]
+	AT91C_BASE_PIOA->PIO_PPUDR = led;						// Pull-Up ausschalten
+ 388:	e3a0320a 	mov	r3, #-1610612736	; 0xa0000000
+ 38c:	e1a039c3 	asr	r3, r3, #19
+ 390:	e51b2010 	ldr	r2, [fp, #-16]
+ 394:	e5832060 	str	r2, [r3, #96]
+}
+ 398:	e89da808 	ldm	sp, {r3, fp, sp, pc}
+
+0000039c <led_on_pointer>:
+
+void led_on_pointer(uint_t led) {
+ 39c:	e1a0c00d 	mov	ip, sp
+ 3a0:	e92dd800 	push	{fp, ip, lr, pc}
+ 3a4:	e24cb004 	sub	fp, ip, #4	; 0x4
+ 3a8:	e24dd008 	sub	sp, sp, #8	; 0x8
+ 3ac:	e50b0014 	str	r0, [fp, #-20]
+	volatile unsigned int *SODR = (unsigned int *) 0xFFFFF430;	// Zeigerdefiniton 'Set Output Data Register'
+ 3b0:	e3a03000 	mov	r3, #0	; 0x0
+ 3b4:	e2433ebd 	sub	r3, r3, #3024	; 0xbd0
+ 3b8:	e50b3010 	str	r3, [fp, #-16]
+	*SODR = led;												// LED an
+ 3bc:	e51b2010 	ldr	r2, [fp, #-16]
+ 3c0:	e51b3014 	ldr	r3, [fp, #-20]
+ 3c4:	e5823000 	str	r3, [r2]
+}
+ 3c8:	e24bd00c 	sub	sp, fp, #12	; 0xc
+ 3cc:	e89da800 	ldm	sp, {fp, sp, pc}
+
+000003d0 <led_off_pointer>:
+
+void led_off_pointer(uint_t led) {
+ 3d0:	e1a0c00d 	mov	ip, sp
+ 3d4:	e92dd800 	push	{fp, ip, lr, pc}
+ 3d8:	e24cb004 	sub	fp, ip, #4	; 0x4
+ 3dc:	e24dd008 	sub	sp, sp, #8	; 0x8
+ 3e0:	e50b0014 	str	r0, [fp, #-20]
+	volatile unsigned int *CODR = (unsigned int *) 0xFFFFF434;	// Zeigerdefiniton 'Clear Output Data Register'
+ 3e4:	e3e03d2f 	mvn	r3, #3008	; 0xbc0
+ 3e8:	e243300b 	sub	r3, r3, #11	; 0xb
+ 3ec:	e50b3010 	str	r3, [fp, #-16]
+	*CODR = led;													// LED an
+ 3f0:	e51b2010 	ldr	r2, [fp, #-16]
+ 3f4:	e51b3014 	ldr	r3, [fp, #-20]
+ 3f8:	e5823000 	str	r3, [r2]
+}
+ 3fc:	e24bd00c 	sub	sp, fp, #12	; 0xc
+ 400:	e89da800 	ldm	sp, {fp, sp, pc}
+
+00000404 <led_on_direct>:
+
+void led_on_direct(uint_t led) {
+ 404:	e1a0c00d 	mov	ip, sp
+ 408:	e92dd800 	push	{fp, ip, lr, pc}
+ 40c:	e24cb004 	sub	fp, ip, #4	; 0x4
+ 410:	e24dd004 	sub	sp, sp, #4	; 0x4
+ 414:	e50b0010 	str	r0, [fp, #-16]
+	*((volatile unsigned int *) 0xFFFFF430) = led;		// LED an
+ 418:	e3a03000 	mov	r3, #0	; 0x0
+ 41c:	e2433ebd 	sub	r3, r3, #3024	; 0xbd0
+ 420:	e51b2010 	ldr	r2, [fp, #-16]
+ 424:	e5832000 	str	r2, [r3]
+}
+ 428:	e89da808 	ldm	sp, {r3, fp, sp, pc}
+
+0000042c <led_off_direct>:
+
+void led_off_direct(uint_t led) {
+ 42c:	e1a0c00d 	mov	ip, sp
+ 430:	e92dd800 	push	{fp, ip, lr, pc}
+ 434:	e24cb004 	sub	fp, ip, #4	; 0x4
+ 438:	e24dd004 	sub	sp, sp, #4	; 0x4
+ 43c:	e50b0010 	str	r0, [fp, #-16]
+	*((volatile unsigned int *) 0xFFFFF434) = led;		// LED aus
+ 440:	e3e03d2f 	mvn	r3, #3008	; 0xbc0
+ 444:	e243300b 	sub	r3, r3, #11	; 0xb
+ 448:	e51b2010 	ldr	r2, [fp, #-16]
+ 44c:	e5832000 	str	r2, [r3]
+}
+ 450:	e89da808 	ldm	sp, {r3, fp, sp, pc}
+
+00000454 <led_on_base>:
+
+void led_on_base (uint_t led) {
+ 454:	e1a0c00d 	mov	ip, sp
+ 458:	e92dd800 	push	{fp, ip, lr, pc}
+ 45c:	e24cb004 	sub	fp, ip, #4	; 0x4
+ 460:	e24dd004 	sub	sp, sp, #4	; 0x4
+ 464:	e50b0010 	str	r0, [fp, #-16]
+	AT91C_BASE_PIOA->PIO_SODR = led;	// LED an
+ 468:	e3a0320a 	mov	r3, #-1610612736	; 0xa0000000
+ 46c:	e1a039c3 	asr	r3, r3, #19
+ 470:	e51b2010 	ldr	r2, [fp, #-16]
+ 474:	e5832030 	str	r2, [r3, #48]
+}
+ 478:	e89da808 	ldm	sp, {r3, fp, sp, pc}
+
+0000047c <led_off_base>:
+
+void led_off_base(uint_t led) {
+ 47c:	e1a0c00d 	mov	ip, sp
+ 480:	e92dd800 	push	{fp, ip, lr, pc}
+ 484:	e24cb004 	sub	fp, ip, #4	; 0x4
+ 488:	e24dd004 	sub	sp, sp, #4	; 0x4
+ 48c:	e50b0010 	str	r0, [fp, #-16]
+	AT91C_BASE_PIOA->PIO_CODR = led; 	// LED aus
+ 490:	e3a0320a 	mov	r3, #-1610612736	; 0xa0000000
+ 494:	e1a039c3 	asr	r3, r3, #19
+ 498:	e51b2010 	ldr	r2, [fp, #-16]
+ 49c:	e5832034 	str	r2, [r3, #52]
+}
+ 4a0:	e89da808 	ldm	sp, {r3, fp, sp, pc}
+
+000004a4 <led_on>:
+
+void led_on (uint_t led) {
+ 4a4:	e1a0c00d 	mov	ip, sp
+ 4a8:	e92dd800 	push	{fp, ip, lr, pc}
+ 4ac:	e24cb004 	sub	fp, ip, #4	; 0x4
+ 4b0:	e24dd004 	sub	sp, sp, #4	; 0x4
+ 4b4:	e50b0010 	str	r0, [fp, #-16]
+#ifdef TYPICAL
+	led_on_base(led);
+ 4b8:	e51b0010 	ldr	r0, [fp, #-16]
+ 4bc:	ebffffe4 	bl	454 <led_on_base>
+	led_on_pointer(led);
+#endif
+#ifdef DIRECT
+	led_on_direct(led);
+#endif
+}
+ 4c0:	e89da808 	ldm	sp, {r3, fp, sp, pc}
+
+000004c4 <led_off>:
+
+void led_off (uint_t led) {
+ 4c4:	e1a0c00d 	mov	ip, sp
+ 4c8:	e92dd800 	push	{fp, ip, lr, pc}
+ 4cc:	e24cb004 	sub	fp, ip, #4	; 0x4
+ 4d0:	e24dd004 	sub	sp, sp, #4	; 0x4
+ 4d4:	e50b0010 	str	r0, [fp, #-16]
+#ifdef TYPICAL
+	led_off_base(led);
+ 4d8:	e51b0010 	ldr	r0, [fp, #-16]
+ 4dc:	ebffffe6 	bl	47c <led_off_base>
+	led_off_pointer(led);
+#endif
+#ifdef DIRECT
+	led_off_direct(led);
+#endif
+}
+ 4e0:	e89da808 	ldm	sp, {r3, fp, sp, pc}
+
+000004e4 <blink_led>:
+
+void blink_led(uint_t led, uint_t _delay) {
+ 4e4:	e1a0c00d 	mov	ip, sp
+ 4e8:	e92dd800 	push	{fp, ip, lr, pc}
+ 4ec:	e24cb004 	sub	fp, ip, #4	; 0x4
+ 4f0:	e24dd008 	sub	sp, sp, #8	; 0x8
+ 4f4:	e50b0010 	str	r0, [fp, #-16]
+ 4f8:	e50b1014 	str	r1, [fp, #-20]
+	led_on(led);
+ 4fc:	e51b0010 	ldr	r0, [fp, #-16]
+ 500:	ebffffe7 	bl	4a4 <led_on>
+	delay_ms(_delay);
+ 504:	e51b0014 	ldr	r0, [fp, #-20]
+ 508:	ebffff78 	bl	2f0 <delay_ms>
+	led_off(led);
+ 50c:	e51b0010 	ldr	r0, [fp, #-16]
+ 510:	ebffffeb 	bl	4c4 <led_off>
+	delay_ms(_delay);
+ 514:	e51b0014 	ldr	r0, [fp, #-20]
+ 518:	ebffff74 	bl	2f0 <delay_ms>
+}
+ 51c:	e24bd00c 	sub	sp, fp, #12	; 0xc
+ 520:	e89da800 	ldm	sp, {fp, sp, pc}
+
+00000524 <get_bitfield_for_leds>:
+
+uint_t get_bitfield_for_leds(uint_t *leds, uint_t num_leds) {
+ 524:	e1a0c00d 	mov	ip, sp
+ 528:	e92dd800 	push	{fp, ip, lr, pc}
+ 52c:	e24cb004 	sub	fp, ip, #4	; 0x4
+ 530:	e24dd010 	sub	sp, sp, #16	; 0x10
+ 534:	e50b0018 	str	r0, [fp, #-24]
+ 538:	e50b101c 	str	r1, [fp, #-28]
+	uint_t bitfield = 0;
+ 53c:	e3a03000 	mov	r3, #0	; 0x0
+ 540:	e50b3014 	str	r3, [fp, #-20]
+
+	for (uint_t i = 0; i < num_leds; i++) {
+ 544:	e3a03000 	mov	r3, #0	; 0x0
+ 548:	e50b3010 	str	r3, [fp, #-16]
+ 54c:	ea00000a 	b	57c <get_bitfield_for_leds+0x58>
+		bitfield |= leds[i];
+ 550:	e51b3010 	ldr	r3, [fp, #-16]
+ 554:	e1a02103 	lsl	r2, r3, #2
+ 558:	e51b3018 	ldr	r3, [fp, #-24]
+ 55c:	e0833002 	add	r3, r3, r2
+ 560:	e5932000 	ldr	r2, [r3]
+ 564:	e51b3014 	ldr	r3, [fp, #-20]
+ 568:	e1833002 	orr	r3, r3, r2
+ 56c:	e50b3014 	str	r3, [fp, #-20]
+}
+
+uint_t get_bitfield_for_leds(uint_t *leds, uint_t num_leds) {
+	uint_t bitfield = 0;
+
+	for (uint_t i = 0; i < num_leds; i++) {
+ 570:	e51b3010 	ldr	r3, [fp, #-16]
+ 574:	e2833001 	add	r3, r3, #1	; 0x1
+ 578:	e50b3010 	str	r3, [fp, #-16]
+ 57c:	e51b2010 	ldr	r2, [fp, #-16]
+ 580:	e51b301c 	ldr	r3, [fp, #-28]
+ 584:	e1520003 	cmp	r2, r3
+ 588:	3afffff0 	bcc	550 <get_bitfield_for_leds+0x2c>
+		bitfield |= leds[i];
+	}
+
+	return bitfield;
+ 58c:	e51b3014 	ldr	r3, [fp, #-20]
+}
+ 590:	e1a00003 	mov	r0, r3
+ 594:	e24bd00c 	sub	sp, fp, #12	; 0xc
+ 598:	e89da800 	ldm	sp, {fp, sp, pc}
+
+0000059c <blink_leds>:
+
+void blink_leds(uint_t *leds, uint_t num_leds, uint_t _delay) {
+ 59c:	e1a0c00d 	mov	ip, sp
+ 5a0:	e92dd800 	push	{fp, ip, lr, pc}
+ 5a4:	e24cb004 	sub	fp, ip, #4	; 0x4
+ 5a8:	e24dd00c 	sub	sp, sp, #12	; 0xc
+ 5ac:	e50b0010 	str	r0, [fp, #-16]
+ 5b0:	e50b1014 	str	r1, [fp, #-20]
+ 5b4:	e50b2018 	str	r2, [fp, #-24]
+	blink_led(get_bitfield_for_leds(leds, num_leds), _delay);
+ 5b8:	e51b0010 	ldr	r0, [fp, #-16]
+ 5bc:	e51b1014 	ldr	r1, [fp, #-20]
+ 5c0:	ebffffd7 	bl	524 <get_bitfield_for_leds>
+ 5c4:	e1a03000 	mov	r3, r0
+ 5c8:	e1a00003 	mov	r0, r3
+ 5cc:	e51b1018 	ldr	r1, [fp, #-24]
+ 5d0:	ebffffc3 	bl	4e4 <blink_led>
+}
+ 5d4:	e24bd00c 	sub	sp, fp, #12	; 0xc
+ 5d8:	e89da800 	ldm	sp, {fp, sp, pc}
+
+000005dc <main>:
+
+
+//**************************************************************
+// main läßt LED am Port P30 für ca. 1 Minute mit 1 Hz blinken
+//**************************************************************
+int main(){
+ 5dc:	e1a0c00d 	mov	ip, sp
+ 5e0:	e92dd810 	push	{r4, fp, ip, lr, pc}
+ 5e4:	e24cb004 	sub	fp, ip, #4	; 0x4
+ 5e8:	e24dd01c 	sub	sp, sp, #28	; 0x1c
+	unsigned char ucB=60;					// lokale Variable ucB
+ 5ec:	e3a0303c 	mov	r3, #60	; 0x3c
+ 5f0:	e54b3015 	strb	r3, [fp, #-21]
+
+	for (uint_t i = 0; i < ARRAY_LENGTH(all_leds); i++) {
+ 5f4:	e3a03000 	mov	r3, #0	; 0x0
+ 5f8:	e50b3014 	str	r3, [fp, #-20]
+ 5fc:	ea000007 	b	620 <main+0x44>
+		enable_led(all_leds[i]);
+ 600:	e51b2014 	ldr	r2, [fp, #-20]
+ 604:	e59f3114 	ldr	r3, [pc, #276]	; 720 <main+0x144>
+ 608:	e7933102 	ldr	r3, [r3, r2, lsl #2]
+ 60c:	e1a00003 	mov	r0, r3
+ 610:	ebffff53 	bl	364 <enable_led>
+// main läßt LED am Port P30 für ca. 1 Minute mit 1 Hz blinken
+//**************************************************************
+int main(){
+	unsigned char ucB=60;					// lokale Variable ucB
+
+	for (uint_t i = 0; i < ARRAY_LENGTH(all_leds); i++) {
+ 614:	e51b3014 	ldr	r3, [fp, #-20]
+ 618:	e2833001 	add	r3, r3, #1	; 0x1
+ 61c:	e50b3014 	str	r3, [fp, #-20]
+ 620:	e51b3014 	ldr	r3, [fp, #-20]
+ 624:	e3530004 	cmp	r3, #4	; 0x4
+ 628:	9afffff4 	bls	600 <main+0x24>
+#endif
+
+#if 1
+	uint_t odd_leds[] = {
+				LED1, LED3, LED5
+	};
+ 62c:	e59f30f0 	ldr	r3, [pc, #240]	; 724 <main+0x148>
+ 630:	e24bc024 	sub	ip, fp, #36	; 0x24
+ 634:	e8930007 	ldm	r3, {r0, r1, r2}
+ 638:	e88c0007 	stm	ip, {r0, r1, r2}
+
+	uint_t even_leds[] = {
+			LED2, LED4
+	};
+ 63c:	e59f30e4 	ldr	r3, [pc, #228]	; 728 <main+0x14c>
+ 640:	e8930018 	ldm	r3, {r3, r4}
+ 644:	e50b302c 	str	r3, [fp, #-44]
+ 648:	e50b4028 	str	r4, [fp, #-40]
+
+	AT91C_BASE_PIOA->PIO_OWER = get_bitfield_for_leds(all_leds, ARRAY_LENGTH(all_leds));
+ 64c:	e3a0420a 	mov	r4, #-1610612736	; 0xa0000000
+ 650:	e1a049c4 	asr	r4, r4, #19
+ 654:	e59f00c4 	ldr	r0, [pc, #196]	; 720 <main+0x144>
+ 658:	e3a01005 	mov	r1, #5	; 0x5
+ 65c:	ebffffb0 	bl	524 <get_bitfield_for_leds>
+ 660:	e1a03000 	mov	r3, r0
+ 664:	e58430a0 	str	r3, [r4, #160]
+ 668:	ea000013 	b	6bc <main+0xe0>
+
+	while (ucB--){
+		AT91C_BASE_PIOA->PIO_ODSR = get_bitfield_for_leds(odd_leds, ARRAY_LENGTH(odd_leds));
+ 66c:	e3a0420a 	mov	r4, #-1610612736	; 0xa0000000
+ 670:	e1a049c4 	asr	r4, r4, #19
+ 674:	e24b3024 	sub	r3, fp, #36	; 0x24
+ 678:	e1a00003 	mov	r0, r3
+ 67c:	e3a01003 	mov	r1, #3	; 0x3
+ 680:	ebffffa7 	bl	524 <get_bitfield_for_leds>
+ 684:	e1a03000 	mov	r3, r0
+ 688:	e5843038 	str	r3, [r4, #56]
+		delay_ms(500);
+ 68c:	e3a00f7d 	mov	r0, #500	; 0x1f4
+ 690:	ebffff16 	bl	2f0 <delay_ms>
+		AT91C_BASE_PIOA->PIO_ODSR = get_bitfield_for_leds(even_leds, ARRAY_LENGTH(even_leds));
+ 694:	e3a0420a 	mov	r4, #-1610612736	; 0xa0000000
+ 698:	e1a049c4 	asr	r4, r4, #19
+ 69c:	e24b302c 	sub	r3, fp, #44	; 0x2c
+ 6a0:	e1a00003 	mov	r0, r3
+ 6a4:	e3a01002 	mov	r1, #2	; 0x2
+ 6a8:	ebffff9d 	bl	524 <get_bitfield_for_leds>
+ 6ac:	e1a03000 	mov	r3, r0
+ 6b0:	e5843038 	str	r3, [r4, #56]
+		delay_ms(500);
+ 6b4:	e3a00f7d 	mov	r0, #500	; 0x1f4
+ 6b8:	ebffff0c 	bl	2f0 <delay_ms>
+			LED2, LED4
+	};
+
+	AT91C_BASE_PIOA->PIO_OWER = get_bitfield_for_leds(all_leds, ARRAY_LENGTH(all_leds));
+
+	while (ucB--){
+ 6bc:	e55b3015 	ldrb	r3, [fp, #-21]
+ 6c0:	e3530000 	cmp	r3, #0	; 0x0
+ 6c4:	03a03000 	moveq	r3, #0	; 0x0
+ 6c8:	13a03001 	movne	r3, #1	; 0x1
+ 6cc:	e20320ff 	and	r2, r3, #255	; 0xff
+ 6d0:	e55b3015 	ldrb	r3, [fp, #-21]
+ 6d4:	e2433001 	sub	r3, r3, #1	; 0x1
+ 6d8:	e54b3015 	strb	r3, [fp, #-21]
+ 6dc:	e3520000 	cmp	r2, #0	; 0x0
+ 6e0:	1affffe1 	bne	66c <main+0x90>
+		delay_ms(500);
+		AT91C_BASE_PIOA->PIO_ODSR = get_bitfield_for_leds(even_leds, ARRAY_LENGTH(even_leds));
+		delay_ms(500);
+	}
+
+	AT91C_BASE_PIOA->PIO_CODR = get_bitfield_for_leds(all_leds, ARRAY_LENGTH(all_leds));
+ 6e4:	e3a0420a 	mov	r4, #-1610612736	; 0xa0000000
+ 6e8:	e1a049c4 	asr	r4, r4, #19
+ 6ec:	e59f002c 	ldr	r0, [pc, #44]	; 720 <main+0x144>
+ 6f0:	e3a01005 	mov	r1, #5	; 0x5
+ 6f4:	ebffff8a 	bl	524 <get_bitfield_for_leds>
+ 6f8:	e1a03000 	mov	r3, r0
+ 6fc:	e5843034 	str	r3, [r4, #52]
+	AT91C_BASE_PIOA->PIO_OWDR = get_bitfield_for_leds(all_leds, ARRAY_LENGTH(all_leds));
+ 700:	e3a0420a 	mov	r4, #-1610612736	; 0xa0000000
+ 704:	e1a049c4 	asr	r4, r4, #19
+ 708:	e59f0010 	ldr	r0, [pc, #16]	; 720 <main+0x144>
+ 70c:	e3a01005 	mov	r1, #5	; 0x5
+ 710:	ebffff83 	bl	524 <get_bitfield_for_leds>
+ 714:	e1a03000 	mov	r3, r0
+ 718:	e58430a4 	str	r3, [r4, #164]
+ 71c:	eafffffe 	b	71c <main+0x140>
+ 720:	00200000 	.word	0x00200000
+ 724:	00000734 	.word	0x00000734
+ 728:	0000072c 	.word	0x0000072c

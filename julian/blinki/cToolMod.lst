@@ -1,0 +1,110 @@
+   1              		.file	"cToolMod.c"
+   9              	.Ltext0:
+  10              		.align	2
+  11              		.global	delay_ms
+  13              	delay_ms:
+  14              	.LFB2:
+  15              		.file 1 "cToolMod.c"
+   1:cToolMod.c    **** /*
+   2:cToolMod.c    ****  * cToolMod.c
+   3:cToolMod.c    ****  *
+   4:cToolMod.c    ****  *  Created on: 18.04.2016
+   5:cToolMod.c    ****  *      Author: Aomx
+   6:cToolMod.c    ****  */
+   7:cToolMod.c    **** 
+   8:cToolMod.c    **** #include "cToolMod.h"
+   9:cToolMod.c    **** 
+  10:cToolMod.c    **** void delay_ms(unsigned int milliseconds){
+  16              	 args = 0, pretend = 0, frame = 8
+  17              		@ frame_needed = 1, uses_anonymous_args = 0
+  18              		mov	ip, sp
+  19 0000 0DC0A0E1 	.LCFI0:
+  20              		stmfd	sp!, {fp, ip, lr, pc}
+  21 0004 00D82DE9 	.LCFI1:
+  22              		sub	fp, ip, #4
+  23 0008 04B04CE2 	.LCFI2:
+  24              		sub	sp, sp, #8
+  25 000c 08D04DE2 	.LCFI3:
+  26              		str	r0, [fp, #-20]
+  27 0010 14000BE5 		b	.L2
+  28 0014 0A0000EA 	.L5:
+  29              		.loc 1 14 0
+  11:cToolMod.c    **** 	volatile unsigned int i;
+  12:cToolMod.c    **** 
+  13:cToolMod.c    **** 	while (milliseconds--)
+  14:cToolMod.c    **** 		for (i=0; i<1638; i++);
+  30              	tr	r3, [fp, #-16]
+  31 0018 0030A0E3 		b	.L3
+  32 001c 10300BE5 	.L4:
+  33 0020 020000EA 		ldr	r3, [fp, #-16]
+  34              		add	r3, r3, #1
+  35 0024 10301BE5 		str	r3, [fp, #-16]
+  36 0028 013083E2 	.L3:
+  37 002c 10300BE5 		ldr	r2, [fp, #-16]
+  38              		mov	r3, #1632
+  39 0030 10201BE5 		add	r3, r3, #5
+  40 0034 663EA0E3 		cmp	r2, r3
+  41 0038 053083E2 		bls	.L4
+  42 003c 030052E1 	.L2:
+  43 0040 F7FFFF9A 		.loc 1 13 0
+  44              		ldr	r3, [fp, #-20]
+  45              		cmp	r3, #0
+  46 0044 14301BE5 		moveq	r3, #0
+  47 0048 000053E3 		movne	r3, #1
+  48 004c 0030A003 		and	r2, r3, #255
+  49 0050 0130A013 		ldr	r3, [fp, #-20]
+  50 0054 FF2003E2 		sub	r3, r3, #1
+  51 0058 14301BE5 		str	r3, [fp, #-20]
+  52 005c 013043E2 		cmp	r2, #0
+  53 0060 14300BE5 		bne	.L5
+  54 0064 000052E3 		.loc 1 15 0
+  55 0068 EAFFFF1A 		sub	sp, fp, #12
+  15:cToolMod.c    **** }
+  56              	FE2:
+  58 0070 00A89DE8 		.align	2
+  59              		.global	delay_s
+  61              	delay_s:
+  62              	.LFB3:
+  63              		.loc 1 17 0
+  64              		@ args = 0, pretend = 0, frame = 4
+  65              		@ frame_needed = 1, uses_anonymous_args = 0
+  16:cToolMod.c    **** 
+  17:cToolMod.c    **** void delay_s(unsigned int seconds) {
+  66              	p
+  67              	.LCFI4:
+  68              		stmfd	sp!, {fp, ip, lr, pc}
+  69 0074 0DC0A0E1 	.LCFI5:
+  70              		sub	fp, ip, #4
+  71 0078 00D82DE9 	.LCFI6:
+  72              		sub	sp, sp, #4
+  73 007c 04B04CE2 	.LCFI7:
+  74              		str	r0, [fp, #-16]
+  75 0080 04D04DE2 		.loc 1 18 0
+  76              		ldr	r1, [fp, #-16]
+  77 0084 10000BE5 		mov	r3, r1
+  18:cToolMod.c    **** 	delay_ms(1000 * seconds);
+  78              	 asl #2
+  79 0088 10101BE5 		mov	r3, r2, asl #5
+  80 008c 0130A0E1 		rsb	r3, r2, r3
+  81 0090 0321A0E1 		add	r3, r3, r1
+  82 0094 8232A0E1 		mov	r3, r3, asl #3
+  83 0098 033062E0 		mov	r0, r3
+  84 009c 013083E0 		bl	delay_ms
+  85 00a0 8331A0E1 		.loc 1 19 0
+  86 00a4 0300A0E1 		ldmfd	sp, {r3, fp, sp, pc}
+  87 00a8 FEFFFFEB 	.LFE3:
+  19:cToolMod.c    **** }
+  88              	ay_s, .-delay_s
+  89 00ac 08A89DE8 		.section	.debug_frame,"",%progbits
+  90              	.Lframe0:
+  91              		.4byte	.LECIE0-.LSCIE0
+ 158              	.LLST0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 cToolMod.c
+C:\Users\Aomx\AppData\Local\Temp/ccLkEwSg.s:13     .text:00000000 delay_ms
+C:\Users\Aomx\AppData\Local\Temp/ccLkEwSg.s:19     .text:00000000 $a
+C:\Users\Aomx\AppData\Local\Temp/ccLkEwSg.s:64     .text:00000074 delay_s
+C:\Users\Aomx\AppData\Local\Temp/ccLkEwSg.s:94     .debug_frame:00000000 $d
+C:\Users\Aomx\AppData\Local\Temp/ccLkEwSg.s:162    .debug_loc:00000000 $d
+
+NO UNDEFINED SYMBOLS
