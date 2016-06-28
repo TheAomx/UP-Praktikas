@@ -1,0 +1,4 @@
+reg pc 0x00000000
+arm7_9 force_hw_bkpts enable
+armv4_5 core_state arm
+arm7_9 fast_memory_access enable
