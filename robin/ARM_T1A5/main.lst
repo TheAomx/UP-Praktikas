@@ -1,0 +1,123 @@
+   1              		.file	"main.c"
+   9              	.Ltext0:
+  10              		.section	.rodata
+  11              		.align	2
+  12              	.LC0:
+  13 0000 257500   		.ascii	"%u\000"
+  14 0003 00       		.align	2
+  15              	.LC1:
+  16 0004 256400   		.ascii	"%d\000"
+  17 0007 00       		.text
+  18              		.align	2
+  19              		.global	main
+  21              	main:
+  22              	.LFB2:
+  23              		.file 1 "main.c"
+   1:main.c        **** //********************************************************************
+   2:main.c        **** // ARM_T1A14									Version 02.04.2012 hpw
+   3:main.c        **** //********************************************************************
+   4:main.c        **** #include	"include/AT91SAM7S64.h"			// Definition von ARM7 typischen Registern etc.
+   5:main.c        **** #include 	"include/cToolMod.h"
+   6:main.c        **** #include 	"include/display.h"
+   7:main.c        **** #include 	<stdio.h>
+   8:main.c        **** 
+   9:main.c        **** #define		BUTTON1	AT91C_PIO_PA1			// Parallel Input Output Control Pin 30
+  10:main.c        **** #define		BUTTON2	AT91C_PIO_PA0 			// Parallel Input Output Control Pin 2
+  11:main.c        **** #define		BUTTON3	AT91C_PIO_PA31			// Parallel Input Output Control Pin 28
+  12:main.c        **** 
+  13:main.c        **** 
+  14:main.c        **** 
+  15:main.c        **** 
+  16:main.c        **** //**************************************************************
+  17:main.c        **** // main läßt LED am Port P30 für ca. 1 Minute mit 1 Hz blinken
+  18:main.c        **** //**************************************************************
+  19:main.c        **** int main(){
+  24              	0, pretend = 0, frame = 16
+  25              		@ frame_needed = 1, uses_anonymous_args = 0
+  26              		mov	ip, sp
+  27 0000 0DC0A0E1 	.LCFI0:
+  28              		stmfd	sp!, {fp, ip, lr, pc}
+  29 0004 00D82DE9 	.LCFI1:
+  30              		sub	fp, ip, #4
+  31 0008 04B04CE2 	.LCFI2:
+  32              		sub	sp, sp, #16
+  33 000c 10D04DE2 	.LCFI3:
+  34              		.loc 1 20 0
+  20:main.c        **** 	AT91C_BASE_PMC->PMC_PCER = (1<<AT91C_ID_PIOA); // wichtig;
+  35              	2147483648
+  36 0010 0231A0E3 		mov	r3, r3, asr #21
+  37 0014 C33AA0E1 		mov	r2, #4
+  38 0018 0420A0E3 		str	r2, [r3, #16]
+  39 001c 102083E5 		.loc 1 22 0
+  21:main.c        **** 
+  22:main.c        **** 	unsigned char ucB=0;					// lokale Variable ucB
+  40              	r3, #0
+  41 0020 0030A0E3 		strb	r3, [fp, #-17]
+  42 0024 11304BE5 		.loc 1 24 0
+  23:main.c        **** 	char buf[10];
+  24:main.c        **** 	display_init();
+  43              		display_init
+  44 0028 FEFFFFEB 	.L2:
+  45              	.LBB2:
+  46              		.loc 1 27 0
+  25:main.c        **** 
+  26:main.c        **** 	while(1) {
+  27:main.c        **** 		ucB++;
+  47              	b	r3, [fp, #-17]
+  48 002c 11305BE5 		add	r3, r3, #1
+  49 0030 013083E2 		strb	r3, [fp, #-17]
+  50 0034 11304BE5 		.loc 1 28 0
+  28:main.c        **** 		unsigned int t = getTaste();
+  51              	getTaste
+  52 0038 FEFFFFEB 		mov	r3, r0
+  53 003c 0030A0E1 		str	r3, [fp, #-16]
+  54 0040 10300BE5 		.loc 1 29 0
+  29:main.c        **** 		sprintf(buf,"%u", t);
+  55              		r3, fp, #27
+  56 0044 1B304BE2 		mov	r0, r3
+  57 0048 0300A0E1 		ldr	r1, .L4
+  58 004c 38109FE5 		ldr	r2, [fp, #-16]
+  59 0050 10201BE5 		bl	sprintf
+  60 0054 FEFFFFEB 		.loc 1 30 0
+  30:main.c        **** 		display_set_cursor(0,0);
+  61              	0, #0
+  62 0058 0000A0E3 		mov	r1, #0
+  63 005c 0010A0E3 		bl	display_set_cursor
+  64 0060 FEFFFFEB 		.loc 1 31 0
+  31:main.c        **** 		display_putstr(buf);
+  65              		r3, fp, #27
+  66 0064 1B304BE2 		mov	r0, r3
+  67 0068 0300A0E1 		bl	display_putstr
+  68 006c FEFFFFEB 		.loc 1 32 0
+  32:main.c        **** 		display_set_cursor(0,1);
+  69              		r0, #0
+  70 0070 0000A0E3 		mov	r1, #1
+  71 0074 0110A0E3 		bl	display_set_cursor
+  72 0078 FEFFFFEB 		.loc 1 33 0
+  33:main.c        **** 		display_printf("%d", t);
+  73              		r0, .L4+4
+  74 007c 0C009FE5 		ldr	r1, [fp, #-16]
+  75 0080 10101BE5 		bl	display_printf
+  76 0084 FEFFFFEB 		b	.L2
+  77 0088 E7FFFFEA 	.L5:
+  78              		.align	2
+  79              	.L4:
+  80              		.word	.LC0
+  81 008c 00000000 		.word	.LC1
+  82 0090 04000000 	.LBE2:
+  83              	.LFE2:
+  85              		.section	.debug_frame,"",%progbits
+ 127              		.section	.debug_loc,"",%progbits
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\Robin\AppData\Local\Temp/ccB9VqDa.s:21     .text:00000000 main
+C:\Users\Robin\AppData\Local\Temp/ccB9VqDa.s:27     .text:00000000 $a
+C:\Users\Robin\AppData\Local\Temp/ccB9VqDa.s:81     .text:0000008c $d
+
+UNDEFINED SYMBOLS
+display_init
+getTaste
+sprintf
+display_set_cursor
+display_putstr
+display_printf

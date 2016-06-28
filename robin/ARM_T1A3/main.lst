@@ -1,0 +1,127 @@
+   1              		.file	"main.c"
+   9              	.Ltext0:
+  10              		.align	2
+  11              		.global	main
+  13              	main:
+  14              	.LFB2:
+  15              		.file 1 "main.c"
+   1:main.c        **** //********************************************************************
+   2:main.c        **** // ARM_T1A1										Version 02.04.2012 hpw
+   3:main.c        **** //********************************************************************
+   4:main.c        **** #include	"include/AT91SAM7S64.h"			// Definition von ARM7 typischen Registern etc.
+   5:main.c        **** #include 	"include/cToolMod.h"
+   6:main.c        **** 
+   7:main.c        **** #define		LED1	AT91C_PIO_PA30			// Parallel Input Output Control Pin 30
+   8:main.c        **** #define		LED2	AT91C_PIO_PA2 			// Parallel Input Output Control Pin 2
+   9:main.c        **** #define		LED3	AT91C_PIO_PA28			// Parallel Input Output Control Pin 28
+  10:main.c        **** #define		LED4	AT91C_PIO_PA17			// Parallel Input Output Control Pin 30
+  11:main.c        **** #define		LED5	AT91C_PIO_PA18			// Parallel Input Output Control Pin 30
+  12:main.c        **** 
+  13:main.c        **** 
+  14:main.c        **** 
+  15:main.c        **** 
+  16:main.c        **** //**************************************************************
+  17:main.c        **** // main läßt LED am Port P30 für ca. 1 Minute mit 1 Hz blinken
+  18:main.c        **** //**************************************************************
+  19:main.c        **** int main(){
+  16              	 args = 0, pretend = 0, frame = 8
+  17              		@ frame_needed = 1, uses_anonymous_args = 0
+  18              		mov	ip, sp
+  19 0000 0DC0A0E1 	.LCFI0:
+  20              		stmfd	sp!, {fp, ip, lr, pc}
+  21 0004 00D82DE9 	.LCFI1:
+  22              		sub	fp, ip, #4
+  23 0008 04B04CE2 	.LCFI2:
+  24              		sub	sp, sp, #8
+  25 000c 08D04DE2 	.LCFI3:
+  26              		.loc 1 20 0
+  20:main.c        **** *****
+  27              	20
+  28 0010 7830A0E3 		strb	r3, [fp, #-17]
+  29 0014 11304BE5 		.loc 1 21 0
+  21:main.c        **** ******************
+  30              	v	r3, #1342177284
+  31 0018 4532A0E3 		add	r3, r3, #393216
+  32 001c 063883E2 		str	r3, [fp, #-16]
+  33 0020 10300BE5 		.loc 1 23 0
+  22:main.c        **** ******************
+  23:main.c        **** int main(){
+  34              		r3, #-1610612736
+  35 0024 0A32A0E3 		mov	r3, r3, asr #19
+  36 0028 C339A0E1 		ldr	r2, [fp, #-16]
+  37 002c 10201BE5 		str	r2, [r3, #16]
+  38 0030 102083E5 		.loc 1 24 0
+  24:main.c        **** *****
+  39              	r3, #-1610612736
+  40 0034 0A32A0E3 		mov	r3, r3, asr #19
+  41 0038 C339A0E1 		ldr	r2, [fp, #-16]
+  42 003c 10201BE5 		str	r2, [r3, #160]
+  43 0040 A02083E5 		.loc 1 25 0
+  25:main.c        **** ******************
+  44              	r3, #-1610612736
+  45 0044 0A32A0E3 		mov	r3, r3, asr #19
+  46 0048 C339A0E1 		ldr	r2, [fp, #-16]
+  47 004c 10201BE5 		str	r2, [r3, #96]
+  48 0050 602083E5 		.loc 1 27 0
+  26:main.c        **** ******************
+  27:main.c        **** int main(){
+  49              	r2, #-1610612736
+  50 0054 0A22A0E3 		mov	r2, r2, asr #19
+  51 0058 C229A0E1 		mov	r3, #-1610612736
+  52 005c 0A32A0E3 		mov	r3, r3, asr #19
+  53 0060 C339A0E1 		ldr	r1, [r3, #56]
+  54 0064 381093E5 		ldr	r3, [fp, #-16]
+  55 0068 10301BE5 		mvn	r3, r3
+  56 006c 0330E0E1 		and	r3, r1, r3
+  57 0070 033001E0 		str	r3, [r2, #56]
+  58 0074 383082E5 		.loc 1 29 0
+  28:main.c        **** *****
+  29:main.c        **** int main(){
+  59              	-1610612736
+  60 0078 0A22A0E3 		mov	r2, r2, asr #19
+  61 007c C229A0E1 		mov	r3, #1342177280
+  62 0080 0532A0E3 		add	r3, r3, #262144
+  63 0084 013783E2 		str	r3, [r2, #56]
+  64 0088 383082E5 		b	.L2
+  65 008c 090000EA 	.L3:
+  66              		.loc 1 31 0
+  30:main.c        **** *****
+  31:main.c        **** int main(){
+  67              	 #-1610612736
+  68 0090 0A22A0E3 		mov	r2, r2, asr #19
+  69 0094 C229A0E1 		mov	r3, #-1610612736
+  70 0098 0A32A0E3 		mov	r3, r3, asr #19
+  71 009c C339A0E1 		ldr	r1, [r3, #56]
+  72 00a0 381093E5 		ldr	r3, [fp, #-16]
+  73 00a4 10301BE5 		eor	r3, r1, r3
+  74 00a8 033021E0 		str	r3, [r2, #56]
+  75 00ac 383082E5 		.loc 1 32 0
+  32:main.c        **** *****
+  76              	#100
+  77 00b0 6400A0E3 		bl	delay5ms
+  78 00b4 FEFFFFEB 	.L2:
+  79              		.loc 1 30 0
+  80              		ldrb	r3, [fp, #-17]	@ zero_extendqisi2
+  81 00b8 11305BE5 		cmp	r3, #0
+  82 00bc 000053E3 		moveq	r3, #0
+  83 00c0 0030A003 		movne	r3, #1
+  84 00c4 0130A013 		and	r2, r3, #255
+  85 00c8 FF2003E2 		ldrb	r3, [fp, #-17]
+  86 00cc 11305BE5 		sub	r3, r3, #1
+  87 00d0 013043E2 		strb	r3, [fp, #-17]
+  88 00d4 11304BE5 		cmp	r2, #0
+  89 00d8 000052E3 		bne	.L3
+  90 00dc EBFFFF1A 	.L4:
+  91              		b	.L4
+  92 00e0 FEFFFFEA 	.LFE2:
+  94              		.section	.debug_frame,"",%progbits
+ 136              		.section	.debug_loc,"",%progbits
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\Robin\AppData\Local\Temp/cccomKjg.s:13     .text:00000000 main
+C:\Users\Robin\AppData\Local\Temp/cccomKjg.s:19     .text:00000000 $a
+C:\Users\Robin\AppData\Local\Temp/cccomKjg.s:97     .debug_frame:00000000 $d
+C:\Users\Robin\AppData\Local\Temp/cccomKjg.s:140    .debug_loc:00000000 $d
+
+UNDEFINED SYMBOLS
+delay5ms

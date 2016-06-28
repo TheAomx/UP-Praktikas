@@ -1,0 +1,121 @@
+   1              		.file	"main.c"
+   9              	.Ltext0:
+  10              		.section	.rodata
+  11              		.align	2
+  12              	.LC0:
+  13 0000 257800   		.ascii	"%x\000"
+  14 0003 00       		.text
+  15              		.align	2
+  16              		.global	main
+  18              	main:
+  19              	.LFB2:
+  20              		.file 1 "main.c"
+   1:main.c        **** //********************************************************************
+   2:main.c        **** // ARM_T1A14									Version 02.04.2012 hpw
+   3:main.c        **** //********************************************************************
+   4:main.c        **** #include	"include/AT91SAM7S64.h"			// Definition von ARM7 typischen Registern etc.
+   5:main.c        **** #include 	"include/cToolMod.h"
+   6:main.c        **** #include 	"include/display.h"
+   7:main.c        **** #include 	<stdio.h>
+   8:main.c        **** 
+   9:main.c        **** #define		LED1	AT91C_PIO_PA30			// Parallel Input Output Control Pin 30
+  10:main.c        **** #define		LED2	AT91C_PIO_PA2 			// Parallel Input Output Control Pin 2
+  11:main.c        **** #define		LED3	AT91C_PIO_PA28			// Parallel Input Output Control Pin 28
+  12:main.c        **** #define		LED4	AT91C_PIO_PA17			// Parallel Input Output Control Pin 30
+  13:main.c        **** #define		LED5	AT91C_PIO_PA18			// Parallel Input Output Control Pin 30
+  14:main.c        **** 
+  15:main.c        **** 
+  16:main.c        **** 
+  17:main.c        **** 
+  18:main.c        **** //**************************************************************
+  19:main.c        **** // main läßt LED am Port P30 für ca. 1 Minute mit 1 Hz blinken
+  20:main.c        **** //**************************************************************
+  21:main.c        **** int main(){
+  21              	 = 0, pretend = 0, frame = 12
+  22              		@ frame_needed = 1, uses_anonymous_args = 0
+  23              		mov	ip, sp
+  24 0000 0DC0A0E1 	.LCFI0:
+  25              		stmfd	sp!, {fp, ip, lr, pc}
+  26 0004 00D82DE9 	.LCFI1:
+  27              		sub	fp, ip, #4
+  28 0008 04B04CE2 	.LCFI2:
+  29              		sub	sp, sp, #12
+  30 000c 0CD04DE2 	.LCFI3:
+  31              		.loc 1 22 0
+  22:main.c        **** 	unsigned char ucB=0;					// lokale Variable ucB
+  32              	
+  33 0010 0030A0E3 		strb	r3, [fp, #-13]
+  34 0014 0D304BE5 		.loc 1 24 0
+  23:main.c        **** 	char buf[10];
+  24:main.c        **** 	display_init();
+  35              	l	display_init
+  36 0018 FEFFFFEB 	.L2:
+  37              		.loc 1 28 0
+  25:main.c        **** 
+  26:main.c        **** 
+  27:main.c        **** 	do {
+  28:main.c        **** 		ucB++;
+  38              	rb	r3, [fp, #-13]
+  39 001c 0D305BE5 		add	r3, r3, #1
+  40 0020 013083E2 		strb	r3, [fp, #-13]
+  41 0024 0D304BE5 		.loc 1 30 0
+  29:main.c        **** 
+  30:main.c        **** 		sprintf(buf,"%x", ucB);
+  42              	b	r2, [fp, #-13]	@ zero_extendqisi2
+  43 0028 0D205BE5 		sub	r3, fp, #23
+  44 002c 17304BE2 		mov	r0, r3
+  45 0030 0300A0E1 		ldr	r1, .L5
+  46 0034 48109FE5 		bl	sprintf
+  47 0038 FEFFFFEB 		.loc 1 32 0
+  31:main.c        **** //		AT91C_BASE_PIOA->PIO_ODSR ^= mask;	// LED1 ein
+  32:main.c        **** 		display_set_cursor(0,0);
+  48              	0, #0
+  49 003c 0000A0E3 		mov	r1, #0
+  50 0040 0010A0E3 		bl	display_set_cursor
+  51 0044 FEFFFFEB 		.loc 1 33 0
+  33:main.c        **** 		display_putstr(buf);
+  52              		r3, fp, #23
+  53 0048 17304BE2 		mov	r0, r3
+  54 004c 0300A0E1 		bl	display_putstr
+  55 0050 FEFFFFEB 		.loc 1 34 0
+  34:main.c        **** 		display_set_cursor(0,1);
+  56              		r0, #0
+  57 0054 0000A0E3 		mov	r1, #1
+  58 0058 0110A0E3 		bl	display_set_cursor
+  59 005c FEFFFFEB 		.loc 1 35 0
+  35:main.c        **** 		display_putchar(ucB);
+  60              	b	r3, [fp, #-13]	@ zero_extendqisi2
+  61 0060 0D305BE5 		mov	r0, r3
+  62 0064 0300A0E1 		bl	display_putchar
+  63 0068 FEFFFFEB 		.loc 1 36 0
+  36:main.c        **** 		delay5ms(10);						// Verzögerung von 500ms
+  64              		r0, #10
+  65 006c 0A00A0E3 		bl	delay5ms
+  66 0070 FEFFFFEB 		.loc 1 38 0
+  37:main.c        **** 
+  38:main.c        **** 	}while(ucB < 255);
+  67              	rb	r3, [fp, #-13]	@ zero_extendqisi2
+  68 0074 0D305BE5 		cmp	r3, #255
+  69 0078 FF0053E3 		bne	.L2
+  70 007c E6FFFF1A 	.L3:
+  71              		b	.L3
+  72 0080 FEFFFFEA 	.L6:
+  73              		.align	2
+  74              	.L5:
+  75              		.word	.LC0
+  76 0084 00000000 	.LFE2:
+  78              		.section	.debug_frame,"",%progbits
+ 120              		.section	.debug_loc,"",%progbits
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\Robin\AppData\Local\Temp/ccS2Yoc7.s:18     .text:00000000 main
+C:\Users\Robin\AppData\Local\Temp/ccS2Yoc7.s:24     .text:00000000 $a
+C:\Users\Robin\AppData\Local\Temp/ccS2Yoc7.s:76     .text:00000084 $d
+
+UNDEFINED SYMBOLS
+display_init
+sprintf
+display_set_cursor
+display_putstr
+display_putchar
+delay5ms

@@ -1,0 +1,138 @@
+   1              		.file	"cToolMod.c"
+   9              	.Ltext0:
+  10              		.align	2
+  11              		.global	delay5ms
+  13              	delay5ms:
+  14              	.LFB2:
+  15              		.file 1 "include/cToolMod.c"
+   1:include/cToolMod.c **** /*
+   2:include/cToolMod.c ****  * cToolMod.c
+   3:include/cToolMod.c **** 
+   4:include/cToolMod.c ****  *
+   5:include/cToolMod.c ****  *  Created on: 27.06.2016
+   6:include/cToolMod.c ****  *      Author: Robin
+   7:include/cToolMod.c ****  */
+   8:include/cToolMod.c **** 
+   9:include/cToolMod.c **** //**************************************************************
+  10:include/cToolMod.c **** // delay5ms(uiK) verzögert um ca. uiK * 5ms
+  11:include/cToolMod.c **** //**************************************************************
+  12:include/cToolMod.c **** void delay5ms(unsigned int uiK){
+  16              	 args = 0, pretend = 0, frame = 8
+  17              		@ frame_needed = 1, uses_anonymous_args = 0
+  18              		mov	ip, sp
+  19 0000 0DC0A0E1 	.LCFI0:
+  20              		stmfd	sp!, {fp, ip, lr, pc}
+  21 0004 00D82DE9 	.LCFI1:
+  22              		sub	fp, ip, #4
+  23 0008 04B04CE2 	.LCFI2:
+  24              		sub	sp, sp, #8
+  25 000c 08D04DE2 	.LCFI3:
+  26              		str	r0, [fp, #-20]
+  27 0010 14000BE5 		b	.L2
+  28 0014 0A0000EA 	.L5:
+  29              		.loc 1 16 0
+  13:include/cToolMod.c **** 	volatile unsigned int uiI;
+  14:include/cToolMod.c **** 
+  15:include/cToolMod.c **** 	while (uiK--)							// folgende for-Schleife wird uiK-mal aufgerufen
+  16:include/cToolMod.c **** 		for (uiI=0; uiI<8192; uiI++);		//  for-Schleife wird 8192-mal durchlaufen. Dies
+  30              	tr	r3, [fp, #-16]
+  31 0018 0030A0E3 		b	.L3
+  32 001c 10300BE5 	.L4:
+  33 0020 020000EA 		ldr	r3, [fp, #-16]
+  34              		add	r3, r3, #1
+  35 0024 10301BE5 		str	r3, [fp, #-16]
+  36 0028 013083E2 	.L3:
+  37 002c 10300BE5 		ldr	r2, [fp, #-16]
+  38              		mov	r3, #8128
+  39 0030 10201BE5 		add	r3, r3, #63
+  40 0034 7F3DA0E3 		cmp	r2, r3
+  41 0038 3F3083E2 		bls	.L4
+  42 003c 030052E1 	.L2:
+  43 0040 F7FFFF9A 		.loc 1 15 0
+  44              		ldr	r3, [fp, #-20]
+  45              		cmp	r3, #0
+  46 0044 14301BE5 		moveq	r3, #0
+  47 0048 000053E3 		movne	r3, #1
+  48 004c 0030A003 		and	r2, r3, #255
+  49 0050 0130A013 		ldr	r3, [fp, #-20]
+  50 0054 FF2003E2 		sub	r3, r3, #1
+  51 0058 14301BE5 		str	r3, [fp, #-20]
+  52 005c 013043E2 		cmp	r2, #0
+  53 0060 14300BE5 		bne	.L5
+  54 0064 000052E3 		.loc 1 18 0
+  55 0068 EAFFFF1A 		sub	sp, fp, #12
+  17:include/cToolMod.c **** 											//  verursacht eine Zeitverzögerung von ca. 5ms.
+  18:include/cToolMod.c **** }
+  56              	FE2:
+  58 0070 00A89DE8 		.align	2
+  59              		.global	delay1ms
+  61              	delay1ms:
+  62              	.LFB3:
+  63              		.loc 1 23 0
+  64              		@ args = 0, pretend = 0, frame = 8
+  65              		@ frame_needed = 1, uses_anonymous_args = 0
+  19:include/cToolMod.c **** 
+  20:include/cToolMod.c **** //**************************************************************
+  21:include/cToolMod.c **** // delay1ms(uiK) verzögert um ca. uiK * 1ms
+  22:include/cToolMod.c **** //**************************************************************
+  23:include/cToolMod.c **** void delay1ms(unsigned int uiK){
+  66              	p
+  67              	.LCFI4:
+  68              		stmfd	sp!, {fp, ip, lr, pc}
+  69 0074 0DC0A0E1 	.LCFI5:
+  70              		sub	fp, ip, #4
+  71 0078 00D82DE9 	.LCFI6:
+  72              		sub	sp, sp, #8
+  73 007c 04B04CE2 	.LCFI7:
+  74              		str	r0, [fp, #-20]
+  75 0080 08D04DE2 		b	.L8
+  76              	.L11:
+  77 0084 14000BE5 		.loc 1 27 0
+  78 0088 0A0000EA 		mov	r3, #0
+  79              		str	r3, [fp, #-16]
+  24:include/cToolMod.c **** 	volatile unsigned int uiI;
+  25:include/cToolMod.c **** 
+  26:include/cToolMod.c **** 	while (uiK--)							// folgende for-Schleife wird uiK-mal aufgerufen
+  27:include/cToolMod.c **** 		for (uiI=0; uiI<1638; uiI++);		//  for-Schleife wird 1638-mal durchlaufen. Dies
+  80              	ldr	r3, [fp, #-16]
+  81 008c 0030A0E3 		add	r3, r3, #1
+  82 0090 10300BE5 		str	r3, [fp, #-16]
+  83 0094 020000EA 	.L9:
+  84              		ldr	r2, [fp, #-16]
+  85 0098 10301BE5 		mov	r3, #1632
+  86 009c 013083E2 		add	r3, r3, #5
+  87 00a0 10300BE5 		cmp	r2, r3
+  88              		bls	.L10
+  89 00a4 10201BE5 	.L8:
+  90 00a8 663EA0E3 		.loc 1 26 0
+  91 00ac 053083E2 		ldr	r3, [fp, #-20]
+  92 00b0 030052E1 		cmp	r3, #0
+  93 00b4 F7FFFF9A 		moveq	r3, #0
+  94              		movne	r3, #1
+  95              		and	r2, r3, #255
+  96 00b8 14301BE5 		ldr	r3, [fp, #-20]
+  97 00bc 000053E3 		sub	r3, r3, #1
+  98 00c0 0030A003 		str	r3, [fp, #-20]
+  99 00c4 0130A013 		cmp	r2, #0
+ 100 00c8 FF2003E2 		bne	.L11
+ 101 00cc 14301BE5 		.loc 1 29 0
+ 102 00d0 013043E2 		sub	sp, fp, #12
+ 103 00d4 14300BE5 		ldmfd	sp, {fp, sp, pc}
+ 104 00d8 000052E3 	.LFE3:
+  28:include/cToolMod.c **** 											//  verursacht eine Zeitverzögerung von ca. 1ms.
+  29:include/cToolMod.c **** }
+ 106              	%progbits
+ 107 00e0 0CD04BE2 	.Lframe0:
+ 108 00e4 00A89DE8 		.4byte	.LECIE0-.LSCIE0
+ 109              	.LSCIE0:
+ 110              		.4byte	0xffffffff
+ 177              		.4byte	.LCFI0-.Ltext0
+DEFINED SYMBOLS
+                            *ABS*:00000000 cToolMod.c
+C:\Users\Robin\AppData\Local\Temp/ccmzaevl.s:13     .text:00000000 delay5ms
+C:\Users\Robin\AppData\Local\Temp/ccmzaevl.s:19     .text:00000000 $a
+C:\Users\Robin\AppData\Local\Temp/ccmzaevl.s:64     .text:00000074 delay1ms
+C:\Users\Robin\AppData\Local\Temp/ccmzaevl.s:113    .debug_frame:00000000 $d
+C:\Users\Robin\AppData\Local\Temp/ccmzaevl.s:181    .debug_loc:00000000 $d
+
+NO UNDEFINED SYMBOLS

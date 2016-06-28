@@ -1,0 +1,418 @@
+   1              		.file	"twi_tools.c"
+   9              	.Ltext0:
+  10              		.align	2
+  11              		.global	twi_init
+  13              	twi_init:
+  14              	.LFB2:
+  15              		.file 1 "twi_tools.c"
+   1:twi_tools.c   **** //***********************************************************************
+   2:twi_tools.c   **** // twi_tools.c                                     Version hpw 06.05.2014
+   3:twi_tools.c   **** //***********************************************************************
+   4:twi_tools.c   **** 
+   5:twi_tools.c   **** #include "include/AT91SAM7S64.h"
+   6:twi_tools.c   **** #include "include/twi_tools.h"
+   7:twi_tools.c   **** 
+   8:twi_tools.c   **** //**********************************************************
+   9:twi_tools.c   **** // twi_init
+  10:twi_tools.c   **** // TWI-Controller-Modul initialisieren
+  11:twi_tools.c   **** //**********************************************************
+  12:twi_tools.c   **** void twi_init(void){
+  16              	 args = 0, pretend = 0, frame = 0
+  17              		@ frame_needed = 1, uses_anonymous_args = 0
+  18              		mov	ip, sp
+  19 0000 0DC0A0E1 	.LCFI0:
+  20              		stmfd	sp!, {fp, ip, lr, pc}
+  21 0004 00D82DE9 	.LCFI1:
+  22              		sub	fp, ip, #4
+  23 0008 04B04CE2 	.LCFI2:
+  24              		.loc 1 13 0
+  13:twi_tools.c   **** 	AT91C_BASE_PIOA->PIO_PDR=(AT91C_PA3_TWD|AT91C_PA4_TWCK);	// PIO-Modus auf Pheriperie
+  25              	#-1610612736
+  26 000c 0A32A0E3 		mov	r3, r3, asr #19
+  27 0010 C339A0E1 		mov	r2, #24
+  28 0014 1820A0E3 		str	r2, [r3, #4]
+  29 0018 042083E5 		.loc 1 14 0
+  14:twi_tools.c   **** 	AT91C_BASE_PIOA->PIO_ASR=(AT91C_PA3_TWD|AT91C_PA4_TWCK);	// TWIContoller-Modul als Pheripherie A a
+  30              	r3, #-1610612736
+  31 001c 0A32A0E3 		mov	r3, r3, asr #19
+  32 0020 C339A0E1 		mov	r2, #24
+  33 0024 1820A0E3 		str	r2, [r3, #112]
+  34 0028 702083E5 		.loc 1 15 0
+  15:twi_tools.c   **** 	AT91C_BASE_PIOA->PIO_MDER=(AT91C_PA3_TWD|AT91C_PA4_TWCK);	// Pins als 'open drain'
+  35              	r3, #-1610612736
+  36 002c 0A32A0E3 		mov	r3, r3, asr #19
+  37 0030 C339A0E1 		mov	r2, #24
+  38 0034 1820A0E3 		str	r2, [r3, #80]
+  39 0038 502083E5 		.loc 1 16 0
+  16:twi_tools.c   **** 	AT91C_BASE_PIOA->PIO_PPUDR=(AT91C_PA3_TWD|AT91C_PA4_TWCK);	// Pull-up-Widerstände aus
+  40              	r3, #-1610612736
+  41 003c 0A32A0E3 		mov	r3, r3, asr #19
+  42 0040 C339A0E1 		mov	r2, #24
+  43 0044 1820A0E3 		str	r2, [r3, #96]
+  44 0048 602083E5 		.loc 1 18 0
+  17:twi_tools.c   **** 
+  18:twi_tools.c   **** 	AT91C_BASE_PMC->PMC_PCER=(1<<AT91C_ID_TWI);					// TWI-Clock einschalten
+  45              	r3, #-2147483648
+  46 004c 0231A0E3 		mov	r3, r3, asr #21
+  47 0050 C33AA0E1 		mov	r2, #512
+  48 0054 022CA0E3 		str	r2, [r3, #16]
+  49 0058 102083E5 		.loc 1 20 0
+  19:twi_tools.c   **** 
+  20:twi_tools.c   **** 	AT91C_BASE_TWI->TWI_CR = AT91C_TWI_SWRST;					// TWI-Controller-Modul Reset
+  50              	r3, #-1207959552
+  51 005c 2E33A0E3 		mov	r3, r3, asr #12
+  52 0060 4336A0E1 		mov	r2, #128
+  53 0064 8020A0E3 		str	r2, [r3, #0]
+  54 0068 002083E5 		.loc 1 26 0
+  21:twi_tools.c   **** 
+  22:twi_tools.c   **** 
+  23:twi_tools.c   **** 	// TWI Clock Waveform Generator Register; MCK = 24.0MHz
+  24:twi_tools.c   **** //	AT91C_BASE_TWI->TWI_CWGR=0x0002EAEA;	// LOW: ~12.8kHz, CKDIV=2, CLDIV=234, CHDIV=234
+  25:twi_tools.c   **** //	AT91C_BASE_TWI->TWI_CWGR=0x00007575;	// SM :   100kHz, CKDIV=0, CLDIV=117, CHDIV=117
+  26:twi_tools.c   **** 	AT91C_BASE_TWI->TWI_CWGR=0x00001B1B;	// FM :   400kHz, CKDIV=0, CLDIV= 27, CHDIV=027
+  55              	r2, #-1207959552
+  56 006c 2E23A0E3 		mov	r2, r2, asr #12
+  57 0070 4226A0E1 		mov	r3, #6912
+  58 0074 1B3CA0E3 		add	r3, r3, #27
+  59 0078 1B3083E2 		str	r3, [r2, #16]
+  60 007c 103082E5 		.loc 1 29 0
+  27:twi_tools.c   **** //	AT91C_BASE_TWI->TWI_CWGR=0x00000909;	// FM+:   1.0MHz, CKDIV=0, CLDIV=  9, CHDIV=  9
+  28:twi_tools.c   **** //	AT91C_BASE_TWI->TWI_CWGR=0x00000101;	// HS :   3.4MHz, CKDIV=0, CLDIV=  1, CHDIV=  1
+  29:twi_tools.c   **** }
+  61              		sp, {fp, sp, pc}
+  62 0080 00A89DE8 	.LFE2:
+  64              		.align	2
+  65              		.global	i2c_start
+  67              	i2c_start:
+  68              	.LFB3:
+  69              		.loc 1 44 0
+  30:twi_tools.c   **** 
+  31:twi_tools.c   **** //**********************************************************
+  32:twi_tools.c   **** // i2c_start
+  33:twi_tools.c   **** // Generiert eine Startbedingung auf dem I2C-Bus
+  34:twi_tools.c   **** // Übergabewert:	Adresse des I2C Bausteines inkl. RW
+  35:twi_tools.c   **** //					A6	A5	A4	A3	A3	A1	A0	RW
+  36:twi_tools.c   **** //					A[6..0] :	Bausteinadresse
+  37:twi_tools.c   **** //					RW = 0  :	Nächter Zugriff schreibend
+  38:twi_tools.c   **** //					RW = 1  :	Nächter Zugriff lesend
+  39:twi_tools.c   **** // Rückgabewert:	ACK :		Wird hier nicht unterstützt.
+  40:twi_tools.c   **** //								Aus Kompatibilitätsgründen
+  41:twi_tools.c   **** //								zu 'i2c_tools.c' wird immer
+  42:twi_tools.c   **** //								'0' zurückgegeben
+  43:twi_tools.c   **** //**********************************************************
+  44:twi_tools.c   **** unsigned char i2c_start(unsigned char sladr){
+  70              	 0, pretend = 0, frame = 12
+  71              		@ frame_needed = 1, uses_anonymous_args = 0
+  72              		mov	ip, sp
+  73 0084 0DC0A0E1 	.LCFI3:
+  74              		stmfd	sp!, {fp, ip, lr, pc}
+  75 0088 00D82DE9 	.LCFI4:
+  76              		sub	fp, ip, #4
+  77 008c 04B04CE2 	.LCFI5:
+  78              		sub	sp, sp, #12
+  79 0090 0CD04DE2 	.LCFI6:
+  80              		mov	r3, r0
+  81 0094 0030A0E1 		strb	r3, [fp, #-24]
+  82 0098 18304BE5 		.loc 1 45 0
+  45:twi_tools.c   **** 	unsigned int DADR  = (unsigned int) sladr & 0x000000FE;		// Slave Adresse ohne RW-Bit
+  83              	, #-24]	@ zero_extendqisi2
+  84 009c 18305BE5 		and	r3, r3, #254
+  85 00a0 FE3003E2 		str	r3, [fp, #-20]
+  86 00a4 14300BE5 		.loc 1 46 0
+  46:twi_tools.c   **** 	unsigned int MREAD = (unsigned int) sladr & 0x00000001;		// RW-Bit für 'Master read direction'
+  87              	b	r3, [fp, #-24]	@ zero_extendqisi2
+  88 00a8 18305BE5 		and	r3, r3, #1
+  89 00ac 013003E2 		str	r3, [fp, #-16]
+  90 00b0 10300BE5 		.loc 1 48 0
+  47:twi_tools.c   **** 
+  48:twi_tools.c   **** 	AT91C_BASE_TWI->TWI_CR = AT91C_TWI_MSEN;					// TWI-Controller-Modul als Master freigeben
+  91              		r3, #-1207959552
+  92 00b4 2E33A0E3 		mov	r3, r3, asr #12
+  93 00b8 4336A0E1 		mov	r2, #4
+  94 00bc 0420A0E3 		str	r2, [r3, #0]
+  95 00c0 002083E5 	.L4:
+  96              		.loc 1 49 0
+  49:twi_tools.c   **** 	while (!(AT91C_BASE_TWI->TWI_SR & AT91C_TWI_TXCOMP));		// Warten bis ev. Übertragung zu Ende
+  97              	3, #-1207959552
+  98 00c4 2E33A0E3 		mov	r3, r3, asr #12
+  99 00c8 4336A0E1 		ldr	r3, [r3, #32]
+ 100 00cc 203093E5 		and	r3, r3, #1
+ 101 00d0 013003E2 		cmp	r3, #0
+ 102 00d4 000053E3 		beq	.L4
+ 103 00d8 F9FFFF0A 		.loc 1 50 0
+  50:twi_tools.c   **** 	AT91C_BASE_TWI->TWI_MMR = (DADR << 15) | (MREAD << 12);		// Master-Mode Register konfigurieren
+ 104              	, #-1207959552
+ 105 00dc 2E23A0E3 		mov	r2, r2, asr #12
+ 106 00e0 4226A0E1 		ldr	r3, [fp, #-20]
+ 107 00e4 14301BE5 		mov	r1, r3, asl #15
+ 108 00e8 8317A0E1 		ldr	r3, [fp, #-16]
+ 109 00ec 10301BE5 		mov	r3, r3, asl #12
+ 110 00f0 0336A0E1 		orr	r3, r1, r3
+ 111 00f4 033081E1 		str	r3, [r2, #4]
+ 112 00f8 043082E5 		.loc 1 52 0
+  51:twi_tools.c   **** 
+  52:twi_tools.c   **** 	return 0;
+ 113              	#0
+ 114 00fc 0030A0E3 		.loc 1 53 0
+  53:twi_tools.c   **** }
+ 115              	ov	r0, r3
+ 116 0100 0300A0E1 		sub	sp, fp, #12
+ 117 0104 0CD04BE2 		ldmfd	sp, {fp, sp, pc}
+ 118 0108 00A89DE8 	.LFE3:
+ 120              		.bss
+ 121              	s.1713:
+ 122              		.space	1
+ 123 0000 00       		.text
+ 124              		.align	2
+ 125              		.global	i2c_rbyte
+ 127              	i2c_rbyte:
+ 128              	.LFB4:
+ 129              		.loc 1 62 0
+  54:twi_tools.c   **** 
+  55:twi_tools.c   **** //**********************************************************
+  56:twi_tools.c   **** // i2c_rbyte
+  57:twi_tools.c   **** // Liest ein Byte vom I2C Bus
+  58:twi_tools.c   **** // Übergabewert:	ACK = 0:	Es soll anschließend ein weiteres Byte gelesen werden
+  59:twi_tools.c   **** //					ACK = 1:	Im Anschluß Beendigung der Datenübertragung
+  60:twi_tools.c   **** // Rückgabewert:	Gelesenes Byte
+  61:twi_tools.c   **** //**********************************************************
+  62:twi_tools.c   **** unsigned char i2c_rbyte(unsigned char ACK){
+ 130              	etend = 0, frame = 8
+ 131              		@ frame_needed = 1, uses_anonymous_args = 0
+ 132              		mov	ip, sp
+ 133 010c 0DC0A0E1 	.LCFI7:
+ 134              		stmfd	sp!, {fp, ip, lr, pc}
+ 135 0110 00D82DE9 	.LCFI8:
+ 136              		sub	fp, ip, #4
+ 137 0114 04B04CE2 	.LCFI9:
+ 138              		sub	sp, sp, #8
+ 139 0118 08D04DE2 	.LCFI10:
+ 140              		mov	r3, r0
+ 141 011c 0030A0E1 		strb	r3, [fp, #-20]
+ 142 0120 14304BE5 		.loc 1 67 0
+  63:twi_tools.c   **** 	unsigned char byte;											// Variable für Rückgabewert
+  64:twi_tools.c   **** 	static unsigned char s=0;									// Status-Bit für Start/Stop Condition
+  65:twi_tools.c   **** 
+  66:twi_tools.c   **** 																// Entscheidung zur Sendung der Start/Stop-Bedingung
+  67:twi_tools.c   **** 	if (!s && ACK){													// Insgesammt nur ein Byte lesen
+ 143              	
+ 144 0124 F0309FE5 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 145 0128 0030D3E5 		cmp	r3, #0
+ 146 012c 000053E3 		bne	.L7
+ 147 0130 0600001A 		ldrb	r3, [fp, #-20]	@ zero_extendqisi2
+ 148 0134 14305BE5 		cmp	r3, #0
+ 149 0138 000053E3 		beq	.L7
+ 150 013c 0300000A 		.loc 1 68 0
+  68:twi_tools.c   **** 		AT91C_BASE_TWI->TWI_CR=(AT91C_TWI_START|AT91C_TWI_STOP);		// Start+Stop gleichzeitig senden
+ 151              	, #-1207959552
+ 152 0140 2E33A0E3 		mov	r3, r3, asr #12
+ 153 0144 4336A0E1 		mov	r2, #3
+ 154 0148 0320A0E3 		str	r2, [r3, #0]
+ 155 014c 002083E5 	.L7:
+ 156              		.loc 1 70 0
+  69:twi_tools.c   **** 	}
+  70:twi_tools.c   **** 	if (!s && !ACK){												// Das erste einer Vielzahl von Byte lesen
+ 157              	3, .L13
+ 158 0150 C4309FE5 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 159 0154 0030D3E5 		cmp	r3, #0
+ 160 0158 000053E3 		bne	.L8
+ 161 015c 0900001A 		ldrb	r3, [fp, #-20]	@ zero_extendqisi2
+ 162 0160 14305BE5 		cmp	r3, #0
+ 163 0164 000053E3 		bne	.L8
+ 164 0168 0600001A 		.loc 1 71 0
+  71:twi_tools.c   **** 		AT91C_BASE_TWI->TWI_CR=AT91C_TWI_START;							// Start-Bedingung senden
+ 165              	 #-1207959552
+ 166 016c 2E33A0E3 		mov	r3, r3, asr #12
+ 167 0170 4336A0E1 		mov	r2, #1
+ 168 0174 0120A0E3 		str	r2, [r3, #0]
+ 169 0178 002083E5 		.loc 1 72 0
+  72:twi_tools.c   **** 		s=1;															// Status-Bit setzen
+ 170              	r2, .L13
+ 171 017c 98209FE5 		mov	r3, #1
+ 172 0180 0130A0E3 		strb	r3, [r2, #0]
+ 173 0184 0030C2E5 	.L8:
+ 174              		.loc 1 74 0
+  73:twi_tools.c   **** 	}
+  74:twi_tools.c   **** 	if (s && ACK){													// Das letzte Byte einer Vielzahl lesen
+ 175              	r3, .L13
+ 176 0188 8C309FE5 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 177 018c 0030D3E5 		cmp	r3, #0
+ 178 0190 000053E3 		beq	.L9
+ 179 0194 0900000A 		ldrb	r3, [fp, #-20]	@ zero_extendqisi2
+ 180 0198 14305BE5 		cmp	r3, #0
+ 181 019c 000053E3 		beq	.L9
+ 182 01a0 0600000A 		.loc 1 75 0
+  75:twi_tools.c   **** 		AT91C_BASE_TWI->TWI_CR=AT91C_TWI_STOP;							// Stop-Bedingung senden
+ 183              	 #-1207959552
+ 184 01a4 2E33A0E3 		mov	r3, r3, asr #12
+ 185 01a8 4336A0E1 		mov	r2, #2
+ 186 01ac 0220A0E3 		str	r2, [r3, #0]
+ 187 01b0 002083E5 		.loc 1 76 0
+  76:twi_tools.c   **** 		s=0;															// Status-Bit löschen
+ 188              	r2, .L13
+ 189 01b4 60209FE5 		mov	r3, #0
+ 190 01b8 0030A0E3 		strb	r3, [r2, #0]
+ 191 01bc 0030C2E5 	.L9:
+ 192              		.loc 1 78 0
+  77:twi_tools.c   **** 	}
+  78:twi_tools.c   **** 	while (!(AT91C_BASE_TWI->TWI_SR & AT91C_TWI_RXRDY));		// Warten bis Byte übertragen
+ 193              	r3, #-1207959552
+ 194 01c0 2E33A0E3 		mov	r3, r3, asr #12
+ 195 01c4 4336A0E1 		ldr	r3, [r3, #32]
+ 196 01c8 203093E5 		and	r3, r3, #2
+ 197 01cc 023003E2 		cmp	r3, #0
+ 198 01d0 000053E3 		beq	.L9
+ 199 01d4 F9FFFF0A 		.loc 1 79 0
+  79:twi_tools.c   **** 	byte = AT91C_BASE_TWI->TWI_RHR;								// Byte abholen
+ 200              	, #-1207959552
+ 201 01d8 2E33A0E3 		mov	r3, r3, asr #12
+ 202 01dc 4336A0E1 		ldr	r3, [r3, #48]
+ 203 01e0 303093E5 		strb	r3, [fp, #-13]
+ 204 01e4 0D304BE5 		.loc 1 80 0
+  80:twi_tools.c   **** 	if (ACK) while(!(AT91C_BASE_TWI->TWI_SR & AT91C_TWI_TXCOMP));	// Warten bis Übertragung zu Ende
+ 205              		r3, [fp, #-20]	@ zero_extendqisi2
+ 206 01e8 14305BE5 		cmp	r3, #0
+ 207 01ec 000053E3 		beq	.L10
+ 208 01f0 0500000A 	.L11:
+ 209              		mov	r3, #-1207959552
+ 210 01f4 2E33A0E3 		mov	r3, r3, asr #12
+ 211 01f8 4336A0E1 		ldr	r3, [r3, #32]
+ 212 01fc 203093E5 		and	r3, r3, #1
+ 213 0200 013003E2 		cmp	r3, #0
+ 214 0204 000053E3 		beq	.L11
+ 215 0208 F9FFFF0A 	.L10:
+ 216              		.loc 1 81 0
+  81:twi_tools.c   **** 	return byte;												// Gelesener Wert zurück
+ 217              	p, #-13]	@ zero_extendqisi2
+ 218 020c 0D305BE5 		.loc 1 82 0
+  82:twi_tools.c   **** }
+ 219              	ov	r0, r3
+ 220 0210 0300A0E1 		sub	sp, fp, #12
+ 221 0214 0CD04BE2 		ldmfd	sp, {fp, sp, pc}
+ 222 0218 00A89DE8 	.L14:
+ 223              		.align	2
+ 224              	.L13:
+ 225              		.word	s.1713
+ 226 021c 00000000 	.LFE4:
+ 228              		.align	2
+ 229              		.global	i2c_wbyte
+ 231              	i2c_wbyte:
+ 232              	.LFB5:
+ 233              		.loc 1 90 0
+  83:twi_tools.c   **** 
+  84:twi_tools.c   **** //**************************************************************
+  85:twi_tools.c   **** // i2c_wbyte
+  86:twi_tools.c   **** // Ein Byte auf den I2C Bus schreiben
+  87:twi_tools.c   **** // Übergabewert:	Byte, welches geschrieben werden soll
+  88:twi_tools.c   **** // Rückgabewert:	ACK
+  89:twi_tools.c   **** //**************************************************************
+  90:twi_tools.c   **** unsigned char i2c_wbyte(unsigned char byte){
+ 234              	etend = 0, frame = 8
+ 235              		@ frame_needed = 1, uses_anonymous_args = 0
+ 236              		mov	ip, sp
+ 237 0220 0DC0A0E1 	.LCFI11:
+ 238              		stmfd	sp!, {fp, ip, lr, pc}
+ 239 0224 00D82DE9 	.LCFI12:
+ 240              		sub	fp, ip, #4
+ 241 0228 04B04CE2 	.LCFI13:
+ 242              		sub	sp, sp, #8
+ 243 022c 08D04DE2 	.LCFI14:
+ 244              		mov	r3, r0
+ 245 0230 0030A0E1 		strb	r3, [fp, #-16]
+ 246 0234 10304BE5 		.loc 1 92 0
+  91:twi_tools.c   **** 
+  92:twi_tools.c   **** 	AT91C_BASE_TWI->TWI_THR = byte;									// Byte in Transmit-Hold-Register -> Starten der Übertragu
+ 247              	07959552
+ 248 0238 2E33A0E3 		mov	r3, r3, asr #12
+ 249 023c 4336A0E1 		ldrb	r2, [fp, #-16]	@ zero_extendqisi2
+ 250 0240 10205BE5 		str	r2, [r3, #52]
+ 251 0244 342083E5 	.L16:
+ 252              		.loc 1 93 0
+  93:twi_tools.c   **** 	while (!(AT91C_BASE_TWI->TWI_SR & AT91C_TWI_TXRDY));			// Warten bis Byte übertragen
+ 253              	3, #-1207959552
+ 254 0248 2E33A0E3 		mov	r3, r3, asr #12
+ 255 024c 4336A0E1 		ldr	r3, [r3, #32]
+ 256 0250 203093E5 		and	r3, r3, #4
+ 257 0254 043003E2 		cmp	r3, #0
+ 258 0258 000053E3 		beq	.L16
+ 259 025c F9FFFF0A 		.loc 1 94 0
+  94:twi_tools.c   **** 	if (AT91C_BASE_TWI->TWI_SR & AT91C_TWI_NACK) return 1;			// ACK zurück
+ 260              	, #-1207959552
+ 261 0260 2E33A0E3 		mov	r3, r3, asr #12
+ 262 0264 4336A0E1 		ldr	r3, [r3, #32]
+ 263 0268 203093E5 		and	r3, r3, #256
+ 264 026c 013C03E2 		cmp	r3, #0
+ 265 0270 000053E3 		beq	.L17
+ 266 0274 0200000A 		mov	r3, #1
+ 267 0278 0130A0E3 		str	r3, [fp, #-20]
+ 268 027c 14300BE5 		b	.L18
+ 269 0280 010000EA 	.L17:
+ 270              		.loc 1 95 0
+  95:twi_tools.c   **** 	else return 0;
+ 271              	
+ 272 0284 0030A0E3 		str	r3, [fp, #-20]
+ 273 0288 14300BE5 	.L18:
+ 274              		ldr	r3, [fp, #-20]
+ 275 028c 14301BE5 		.loc 1 96 0
+  96:twi_tools.c   **** }
+ 276              		r0, r3
+ 277 0290 0300A0E1 		sub	sp, fp, #12
+ 278 0294 0CD04BE2 		ldmfd	sp, {fp, sp, pc}
+ 279 0298 00A89DE8 	.LFE5:
+ 281              		.align	2
+ 282              		.global	i2c_stop
+ 284              	i2c_stop:
+ 285              	.LFB6:
+ 286              		.loc 1 102 0
+  97:twi_tools.c   **** 
+  98:twi_tools.c   **** //**********************************************************
+  99:twi_tools.c   **** // i2c_stop
+ 100:twi_tools.c   **** // Beendet Datenübertragung und gibt den Bus frei
+ 101:twi_tools.c   **** //**********************************************************
+ 102:twi_tools.c   **** void i2c_stop(void){
+ 287              	, pretend = 0, frame = 0
+ 288              		@ frame_needed = 1, uses_anonymous_args = 0
+ 289              		mov	ip, sp
+ 290 029c 0DC0A0E1 	.LCFI15:
+ 291              		stmfd	sp!, {fp, ip, lr, pc}
+ 292 02a0 00D82DE9 	.LCFI16:
+ 293              		sub	fp, ip, #4
+ 294 02a4 04B04CE2 	.LCFI17:
+ 295              	.L21:
+ 296              		.loc 1 103 0
+ 103:twi_tools.c   **** 	while (!(AT91C_BASE_TWI->TWI_SR & AT91C_TWI_TXCOMP));			// Warten bis Übertragung zu Ende
+ 297              	-1207959552
+ 298 02a8 2E33A0E3 		mov	r3, r3, asr #12
+ 299 02ac 4336A0E1 		ldr	r3, [r3, #32]
+ 300 02b0 203093E5 		and	r3, r3, #1
+ 301 02b4 013003E2 		cmp	r3, #0
+ 302 02b8 000053E3 		beq	.L21
+ 303 02bc F9FFFF0A 		.loc 1 104 0
+ 104:twi_tools.c   **** 	AT91C_BASE_TWI->TWI_CR = AT91C_TWI_MSDIS;						// TWI-Controller-Modul als Master sperren
+ 304              	, #-1207959552
+ 305 02c0 2E33A0E3 		mov	r3, r3, asr #12
+ 306 02c4 4336A0E1 		mov	r2, #8
+ 307 02c8 0820A0E3 		str	r2, [r3, #0]
+ 308 02cc 002083E5 		.loc 1 106 0
+ 105:twi_tools.c   **** 	return;
+ 106:twi_tools.c   **** }
+ 309              	d	sp, {fp, sp, pc}
+ 310 02d0 00A89DE8 	.LFE6:
+ 312              		.section	.debug_frame,"",%progbits
+ 454              		.section	.debug_loc,"",%progbits
+DEFINED SYMBOLS
+                            *ABS*:00000000 twi_tools.c
+C:\Users\Robin\AppData\Local\Temp/ccUB7YdV.s:13     .text:00000000 twi_init
+C:\Users\Robin\AppData\Local\Temp/ccUB7YdV.s:19     .text:00000000 $a
+C:\Users\Robin\AppData\Local\Temp/ccUB7YdV.s:68     .text:00000084 i2c_start
+                             .bss:00000000 $d
+C:\Users\Robin\AppData\Local\Temp/ccUB7YdV.s:122    .bss:00000000 s.1713
+C:\Users\Robin\AppData\Local\Temp/ccUB7YdV.s:128    .text:0000010c i2c_rbyte
+C:\Users\Robin\AppData\Local\Temp/ccUB7YdV.s:226    .text:0000021c $d
+C:\Users\Robin\AppData\Local\Temp/ccUB7YdV.s:232    .text:00000220 i2c_wbyte
+C:\Users\Robin\AppData\Local\Temp/ccUB7YdV.s:237    .text:00000220 $a
+C:\Users\Robin\AppData\Local\Temp/ccUB7YdV.s:285    .text:0000029c i2c_stop
+C:\Users\Robin\AppData\Local\Temp/ccUB7YdV.s:315    .debug_frame:00000000 $d
+C:\Users\Robin\AppData\Local\Temp/ccUB7YdV.s:458    .debug_loc:00000000 $d
+
+NO UNDEFINED SYMBOLS

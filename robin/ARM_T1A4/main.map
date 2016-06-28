@@ -1,0 +1,1675 @@
+Archive member included because of file (symbol)
+
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memcpy.o)
+                              display.o (memcpy)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sprintf.o)
+                              main.o (sprintf)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sprintf.o) (_vfprintf_r)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-wsetup.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o) (__swsetup_r)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o) (_dtoa_r)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fflush.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o) (_fflush_r)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o) (__sinit)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-freer.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-wsetup.o) (_free_r)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fvwrite.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o) (__sfvwrite_r)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fwalk.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fflush.o) (_fwalk_reent)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-impure.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sprintf.o) (_impure_ptr)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-locale.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o) (_localeconv_r)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-makebuf.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-wsetup.o) (__smakebuf_r)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mallocr.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o) (_malloc_r)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memchr.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o) (memchr)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memmove.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fvwrite.o) (memmove)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memset.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o) (memset)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mlock.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-freer.o) (__malloc_lock)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o) (_Bfree)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reallocr.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fvwrite.o) (_realloc_r)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isinfd.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o) (__isinfd)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isnand.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o) (__isnand)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sbrkr.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-freer.o) (_sbrk_r)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-stdio.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o) (__sclose)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strcmp.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-locale.o) (strcmp)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strlen.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o) (strlen)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sbrkr.o) (_sbrk)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-writer.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-stdio.o) (_write_r)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-callocr.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o) (_calloc_r)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-closer.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-stdio.o) (_close_r)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-errno.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o) (__errno)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fclose.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o) (fclose)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fstatr.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-makebuf.o) (_fstat_r)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-lseekr.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-stdio.o) (_lseek_r)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-readr.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-stdio.o) (_read_r)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reent.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sbrkr.o) (errno)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_udivsi3.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o) (__udivsi3)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_dvmd_tls.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_udivsi3.o) (__div0)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_addsubdf3.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o) (__subdf3)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_muldivdf3.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o) (__muldf3)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_cmpdf2.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o) (__gtdf2)
+c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_fixdfsi.o)
+                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o) (__fixdfsi)
+
+Allocating common symbols
+Common symbol       size              file
+
+errno               0x4               c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reent.o)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+CODE             0x00000000         0x00010000         xr
+DATA             0x00200000         0x00004000         rw
+STACK            0x00204000         0x00000000         rw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD include/Cstartup.o
+LOAD include/Cstartup_SAM7.o
+LOAD main.o
+LOAD display.o
+LOAD include/cToolMod.o
+LOAD c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a
+LOAD c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libm.a
+LOAD c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a
+LOAD c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a
+START GROUP
+LOAD c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a
+LOAD c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libg.a
+LOAD c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a
+END GROUP
+                0x00000000                . = 0x0
+
+.text           0x00000000     0x8d84
+ *Cstartup.o(.text)
+ .text          0x00000000      0x13c include/Cstartup.o
+                0x000000bc                IRQ_Handler_Entry
+                0x0000010c                AT91F_Default_FIQ_handler
+                0x00000000                _startup
+                0x00000110                AT91F_Default_IRQ_handler
+                0x00000114                AT91F_Spurious_handler
+                0x000000b8                exit
+ *(.text)
+ .text          0x0000013c      0x140 include/Cstartup_SAM7.o
+                0x0000013c                AT91F_LowLevelInit
+ .text          0x0000027c       0x88 main.o
+                0x0000027c                main
+ .text          0x00000304      0x9f8 display.o
+                0x00000304                delay1us
+                0x00000320                lcd_write
+                0x0000066c                display_printf
+                0x00000618                display_set_cursor
+                0x000005d0                display_putstr
+                0x000004d8                display_init
+                0x000005a4                display_putchar
+ .text          0x00000cfc       0xe8 include/cToolMod.o
+                0x00000d70                delay1ms
+                0x00000cfc                delay5ms
+ .text          0x00000de4       0xfc c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memcpy.o)
+                0x00000de4                memcpy
+ .text          0x00000ee0       0xcc c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sprintf.o)
+                0x00000f4c                _sprintf_r
+                0x00000ee0                sprintf
+ .text          0x00000fac     0x1dd8 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)
+                0x00000fdc                _vfprintf_r
+                0x00002d58                vfprintf
+ .text          0x00002d84      0x144 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-wsetup.o)
+                0x00002d84                __swsetup_r
+ .text          0x00002ec8     0x16e8 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+                0x000030b8                _dtoa_r
+ .text          0x000045b0      0x1dc c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fflush.o)
+                0x00004758                fflush
+                0x000045b0                _fflush_r
+ .text          0x0000478c      0x2ac c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+                0x0000478c                __sinit
+                0x0000491c                __sfmoreglue
+                0x00004904                _cleanup
+                0x000048f8                _cleanup_r
+                0x000048e0                __fp_lock_all
+                0x000048a8                __sfp_lock_acquire
+                0x00004964                __sfp
+                0x000048b4                __sinit_lock_release
+                0x000048c8                __fp_unlock_all
+                0x000048ac                __sfp_lock_release
+                0x000048b0                __sinit_lock_acquire
+ .text          0x00004a38      0x370 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-freer.o)
+                0x00004b30                _free_r
+                0x00004a38                _malloc_trim_r
+ .text          0x00004da8      0x46c c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fvwrite.o)
+                0x00004da8                __sfvwrite_r
+ .text          0x00005214      0x10c c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fwalk.o)
+                0x0000529c                _fwalk
+                0x00005214                _fwalk_reent
+ .text          0x00005320        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-impure.o)
+ .text          0x00005320       0xa4 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-locale.o)
+                0x00005348                _setlocale_r
+                0x00005320                __locale_charset
+                0x00005330                _localeconv_r
+                0x000053a8                setlocale
+                0x0000533c                localeconv
+ .text          0x000053c4      0x164 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-makebuf.o)
+                0x000053c4                __smakebuf_r
+ .text          0x00005528      0x734 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mallocr.o)
+                0x00005528                _malloc_r
+ .text          0x00005c5c      0x118 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memchr.o)
+                0x00005c5c                memchr
+ .text          0x00005d74      0x144 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memmove.o)
+                0x00005d74                memmove
+ .text          0x00005eb8       0xd0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memset.o)
+                0x00005eb8                memset
+ .text          0x00005f88        0x8 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mlock.o)
+                0x00005f8c                __malloc_unlock
+                0x00005f88                __malloc_lock
+ .text          0x00005f90      0xd88 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+                0x00006294                _mprec_log10
+                0x00006370                __any_on
+                0x0000640c                _Balloc
+                0x00006218                __ratio
+                0x00006a40                __i2b
+                0x00006158                __b2d
+                0x00006c34                __s2b
+                0x00006098                __mcmp
+                0x00005fac                __hi0bits
+                0x00006b3c                __pow5mult
+                0x00006730                __lshift
+                0x00006854                __multiply
+                0x00006490                __d2b
+                0x000062e8                __copybits
+                0x000060f8                __ulp
+                0x000065ac                __mdiff
+                0x00006004                __lo0bits
+                0x00006a60                __multadd
+                0x00005f90                _Bfree
+ .text          0x00006d18      0x510 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reallocr.o)
+                0x00006d18                _realloc_r
+ .text          0x00007228       0x3c c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isinfd.o)
+                0x00007228                __isinfd
+ .text          0x00007264       0x30 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isnand.o)
+                0x00007264                __isnand
+ .text          0x00007294       0x38 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sbrkr.o)
+                0x00007294                _sbrk_r
+ .text          0x000072cc       0xc0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-stdio.o)
+                0x000072d4                __sseek
+                0x0000735c                __sread
+                0x000072cc                __sclose
+                0x00007308                __swrite
+ .text          0x0000738c       0xe8 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strcmp.o)
+                0x0000738c                strcmp
+ .text          0x00007474       0x9c c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strlen.o)
+                0x00007474                strlen
+ .text          0x00007510      0x8ec c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+                0x00007638                _getpid
+                0x00007510                initialise_monitor_handles
+                0x00007a08                isatty
+                0x00007dcc                _fstat
+                0x00007918                _open
+                0x00007938                _sbrk
+                0x00007648                _raise
+                0x00007690                _times
+                0x00007d80                _stat
+                0x00007c90                _lseek
+                0x00007640                _link
+                0x00007ab8                _swiwrite
+                0x0000770c                _rename
+                0x00007b9c                _swilseek
+                0x00007a40                _swiclose
+                0x00007838                _swiopen
+                0x000077f4                _unlink
+                0x00007af4                _write
+                0x000075c4                _kill
+                0x0000764c                _gettimeofday
+                0x00007cdc                _read
+                0x00007618                _exit
+                0x00007764                _system
+                0x00007ca0                _swiread
+                0x00007aa8                _close
+ .text          0x00007dfc       0x40 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-writer.o)
+                0x00007dfc                _write_r
+ .text          0x00007e3c       0x9c c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-callocr.o)
+                0x00007e3c                _calloc_r
+ .text          0x00007ed8       0x38 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-closer.o)
+                0x00007ed8                _close_r
+ .text          0x00007f10       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-errno.o)
+                0x00007f10                __errno
+ .text          0x00007f20      0x118 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fclose.o)
+                0x00007f20                _fclose_r
+                0x00008024                fclose
+ .text          0x00008038       0x3c c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fstatr.o)
+                0x00008038                _fstat_r
+ .text          0x00008074       0x40 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-lseekr.o)
+                0x00008074                _lseek_r
+ .text          0x000080b4       0x40 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-readr.o)
+                0x000080b4                _read_r
+ .text          0x000080f4      0x188 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reent.o)
+                0x00008168                cleanup_glue
+                0x00008190                _reclaim_reent
+                0x000080f4                _wrapup_reent
+ .text          0x0000827c      0x110 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_udivsi3.o)
+                0x0000827c                __udivsi3
+                0x0000827c                __aeabi_uidiv
+                0x00008374                __aeabi_uidivmod
+ .text          0x0000838c        0x4 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_dvmd_tls.o)
+                0x0000838c                __aeabi_ldiv0
+                0x0000838c                __div0
+                0x0000838c                __aeabi_idiv0
+ .text          0x00008390      0x400 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_addsubdf3.o)
+                0x00008724                __floatdidf
+                0x000086a4                __floatsidf
+                0x0000867c                __aeabi_ui2d
+                0x00008390                __aeabi_drsub
+                0x000086d0                __extendsfdf2
+                0x0000839c                __adddf3
+                0x0000867c                __floatunsidf
+                0x0000839c                __aeabi_dadd
+                0x00008710                __aeabi_ul2d
+                0x00008398                __aeabi_dsub
+                0x00008710                __floatundidf
+                0x000086a4                __aeabi_i2d
+                0x00008724                __aeabi_l2d
+                0x000086d0                __aeabi_f2d
+                0x00008398                __subdf3
+ .text          0x00008790      0x470 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_muldivdf3.o)
+                0x000089fc                __aeabi_ddiv
+                0x00008790                __aeabi_dmul
+                0x000089fc                __divdf3
+                0x00008790                __muldf3
+ .text          0x00008c00      0x128 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_cmpdf2.o)
+                0x00008cec                __aeabi_dcmple
+                0x00008c10                __cmpdf2
+                0x00008c10                __eqdf2
+                0x00008c00                __gtdf2
+                0x00008cb0                __aeabi_cdcmple
+                0x00008c94                __aeabi_cdrcmple
+                0x00008c08                __ltdf2
+                0x00008cd8                __aeabi_dcmplt
+                0x00008c08                __ledf2
+                0x00008d14                __aeabi_dcmpgt
+                0x00008d00                __aeabi_dcmpge
+                0x00008c10                __nedf2
+                0x00008cc4                __aeabi_dcmpeq
+                0x00008cb0                __aeabi_cdcmpeq
+                0x00008c00                __gedf2
+ .text          0x00008d28       0x5c c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_fixdfsi.o)
+                0x00008d28                __fixdfsi
+                0x00008d28                __aeabi_d2iz
+ *(.glue_7t)
+ .glue_7t       0x00008d84        0x0 include/Cstartup.o
+ .glue_7t       0x00008d84        0x0 include/Cstartup_SAM7.o
+ .glue_7t       0x00008d84        0x0 main.o
+ .glue_7t       0x00008d84        0x0 display.o
+ .glue_7t       0x00008d84        0x0 include/cToolMod.o
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memcpy.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sprintf.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-wsetup.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fflush.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-freer.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fvwrite.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fwalk.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-impure.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-locale.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-makebuf.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mallocr.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memchr.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memmove.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memset.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mlock.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reallocr.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isinfd.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isnand.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sbrkr.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-stdio.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strcmp.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strlen.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-writer.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-callocr.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-closer.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-errno.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fclose.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fstatr.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-lseekr.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-readr.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reent.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_udivsi3.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_dvmd_tls.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_addsubdf3.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_muldivdf3.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_cmpdf2.o)
+ .glue_7t       0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_fixdfsi.o)
+ *(.glue_7)
+ .glue_7        0x00008d84        0x0 include/Cstartup.o
+ .glue_7        0x00008d84        0x0 include/Cstartup_SAM7.o
+ .glue_7        0x00008d84        0x0 main.o
+ .glue_7        0x00008d84        0x0 display.o
+ .glue_7        0x00008d84        0x0 include/cToolMod.o
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memcpy.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sprintf.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-wsetup.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fflush.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-freer.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fvwrite.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fwalk.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-impure.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-locale.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-makebuf.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mallocr.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memchr.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memmove.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memset.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mlock.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reallocr.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isinfd.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isnand.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sbrkr.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-stdio.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strcmp.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strlen.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-writer.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-callocr.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-closer.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-errno.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fclose.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fstatr.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-lseekr.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-readr.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reent.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_udivsi3.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_dvmd_tls.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_addsubdf3.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_muldivdf3.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_cmpdf2.o)
+ .glue_7        0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_fixdfsi.o)
+
+.vfp11_veneer   0x00008d84        0x0
+ .vfp11_veneer  0x00008d84        0x0 include/Cstartup.o
+ .vfp11_veneer  0x00008d84        0x0 include/Cstartup_SAM7.o
+ .vfp11_veneer  0x00008d84        0x0 main.o
+ .vfp11_veneer  0x00008d84        0x0 display.o
+ .vfp11_veneer  0x00008d84        0x0 include/cToolMod.o
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memcpy.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sprintf.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-wsetup.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fflush.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-freer.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fvwrite.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fwalk.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-impure.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-locale.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-makebuf.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mallocr.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memchr.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memmove.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memset.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mlock.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reallocr.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isinfd.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isnand.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sbrkr.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-stdio.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strcmp.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strlen.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-writer.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-callocr.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-closer.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-errno.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fclose.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fstatr.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-lseekr.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-readr.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reent.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_udivsi3.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_dvmd_tls.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_addsubdf3.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_muldivdf3.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_cmpdf2.o)
+ .vfp11_veneer  0x00008d84        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_fixdfsi.o)
+                0x00008d84                . = ALIGN (0x4)
+
+.rodata         0x00008d84      0x194
+ *(.rodata)
+ .rodata        0x00008d84        0x4 main.o
+ .rodata        0x00008d88       0x14 display.o
+ .rodata        0x00008d9c       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)
+ .rodata        0x00008dbc        0x4 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-impure.o)
+                0x00008dbc                _global_impure_ptr
+ .rodata        0x00008dc0       0x34 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-locale.o)
+ .rodata        0x00008df4      0x124 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+                0x00008ee4                __mprec_tinytens
+                0x00008df4                __mprec_tens
+                0x00008ebc                __mprec_bigtens
+
+.rodata.str1.4  0x00008f18       0x88
+ .rodata.str1.4
+                0x00008f18       0x5e c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)
+                                 0x60 (size before relaxing)
+ *fill*         0x00008f76        0x2 00
+ .rodata.str1.4
+                0x00008f78       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+                                 0x14 (size before relaxing)
+ .rodata.str1.4
+                0x00008f88        0x2 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-impure.o)
+                                  0x4 (size before relaxing)
+ *fill*         0x00008f8a        0x2 00
+ .rodata.str1.4
+                0x00008f8c        0xf c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-locale.o)
+                                 0x18 (size before relaxing)
+ *fill*         0x00008f9b        0x1 00
+ .rodata.str1.4
+                0x00008f9c        0x4 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+                0x00008fa0                . = ALIGN (0x4)
+                0x00008fa0                _etext = .
+                0x00008fa0                PROVIDE (etext, .)
+
+.data           0x00200000      0x824 load address 0x00008fa0
+                0x00200000                _data = .
+ *(.data)
+ .data          0x00200000        0x0 include/Cstartup.o
+ .data          0x00200000        0x0 include/Cstartup_SAM7.o
+ .data          0x00200000        0x0 main.o
+ .data          0x00200000        0x0 display.o
+ .data          0x00200000        0x0 include/cToolMod.o
+ .data          0x00200000        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memcpy.o)
+ .data          0x00200000        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sprintf.o)
+ .data          0x00200000        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)
+ .data          0x00200000        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-wsetup.o)
+ .data          0x00200000        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+ .data          0x00200000        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fflush.o)
+ .data          0x00200000        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+ .data          0x00200000        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-freer.o)
+ .data          0x00200000        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fvwrite.o)
+ .data          0x00200000        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fwalk.o)
+ .data          0x00200000      0x404 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-impure.o)
+                0x00200000                _impure_ptr
+ .data          0x00200404       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-locale.o)
+                0x00200404                __mb_cur_max
+                0x00200408                __lc_ctype
+ .data          0x00200414        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-makebuf.o)
+ .data          0x00200414      0x410 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mallocr.o)
+                0x00200820                __malloc_sbrk_base
+                0x00200414                __malloc_av_
+                0x0020081c                __malloc_trim_threshold
+ .data          0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memchr.o)
+ .data          0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memmove.o)
+ .data          0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memset.o)
+ .data          0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mlock.o)
+ .data          0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+ .data          0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reallocr.o)
+ .data          0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isinfd.o)
+ .data          0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isnand.o)
+ .data          0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sbrkr.o)
+ .data          0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-stdio.o)
+ .data          0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strcmp.o)
+ .data          0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strlen.o)
+ .data          0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+ .data          0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-writer.o)
+ .data          0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-callocr.o)
+ .data          0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-closer.o)
+ .data          0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-errno.o)
+ .data          0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fclose.o)
+ .data          0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fstatr.o)
+ .data          0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-lseekr.o)
+ .data          0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-readr.o)
+ .data          0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reent.o)
+ .data          0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_udivsi3.o)
+ .data          0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_dvmd_tls.o)
+ .data          0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_addsubdf3.o)
+ .data          0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_muldivdf3.o)
+ .data          0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_cmpdf2.o)
+ .data          0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_fixdfsi.o)
+                0x00200824                . = ALIGN (0x4)
+                0x00200824                _edata = .
+                0x00200824                PROVIDE (edata, .)
+
+.bss            0x00200824       0xf4 load address 0x000097c4
+                0x00200824                __bss_start = .
+                0x00200824                __bss_start__ = .
+ *(.bss)
+ .bss           0x00200824        0x0 include/Cstartup.o
+ .bss           0x00200824        0x0 include/Cstartup_SAM7.o
+ .bss           0x00200824        0x0 main.o
+ .bss           0x00200824        0x0 display.o
+ .bss           0x00200824        0x0 include/cToolMod.o
+ .bss           0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memcpy.o)
+ .bss           0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sprintf.o)
+ .bss           0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)
+ .bss           0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-wsetup.o)
+ .bss           0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+ .bss           0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fflush.o)
+ .bss           0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+ .bss           0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-freer.o)
+ .bss           0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fvwrite.o)
+ .bss           0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fwalk.o)
+ .bss           0x00200824        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-impure.o)
+ .bss           0x00200824        0xc c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-locale.o)
+                0x00200824                __nlocale_changed
+                0x00200828                __mlocale_changed
+                0x0020082c                _PathLocale
+ .bss           0x00200830        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-makebuf.o)
+ .bss           0x00200830       0x34 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mallocr.o)
+                0x00200830                __malloc_top_pad
+                0x00200834                __malloc_max_sbrked_mem
+                0x0020083c                __malloc_current_mallinfo
+                0x00200838                __malloc_max_total_mem
+ .bss           0x00200864        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memchr.o)
+ .bss           0x00200864        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memmove.o)
+ .bss           0x00200864        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memset.o)
+ .bss           0x00200864        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mlock.o)
+ .bss           0x00200864        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+ .bss           0x00200864        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reallocr.o)
+ .bss           0x00200864        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isinfd.o)
+ .bss           0x00200864        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isnand.o)
+ .bss           0x00200864        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sbrkr.o)
+ .bss           0x00200864        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-stdio.o)
+ .bss           0x00200864        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strcmp.o)
+ .bss           0x00200864        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strlen.o)
+ .bss           0x00200864       0xb0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+ .bss           0x00200914        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-writer.o)
+ .bss           0x00200914        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-callocr.o)
+ .bss           0x00200914        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-closer.o)
+ .bss           0x00200914        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-errno.o)
+ .bss           0x00200914        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fclose.o)
+ .bss           0x00200914        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fstatr.o)
+ .bss           0x00200914        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-lseekr.o)
+ .bss           0x00200914        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-readr.o)
+ .bss           0x00200914        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reent.o)
+ .bss           0x00200914        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_udivsi3.o)
+ .bss           0x00200914        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_dvmd_tls.o)
+ .bss           0x00200914        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_addsubdf3.o)
+ .bss           0x00200914        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_muldivdf3.o)
+ .bss           0x00200914        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_cmpdf2.o)
+ .bss           0x00200914        0x0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_fixdfsi.o)
+ *(COMMON)
+ COMMON         0x00200914        0x4 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reent.o)
+                0x00200914                errno
+                0x00200918                . = ALIGN (0x4)
+                0x00200918                __bss_end__ = .
+                0x00200918                __bss_end__ = .
+                0x00200918                _end = .
+                0x00200918                PROVIDE (end, .)
+
+.int_data       0x00204000        0x0
+ *(.internal_ram_top)
+ .internal_ram_top
+                0x00204000        0x0 include/Cstartup.o
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment        0x00000000      0x2d0
+ *(.comment)
+ .comment       0x00000000       0x12 include/Cstartup_SAM7.o
+ .comment       0x00000012       0x12 main.o
+ .comment       0x00000024       0x12 display.o
+ .comment       0x00000036       0x12 include/cToolMod.o
+ .comment       0x00000048       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memcpy.o)
+ .comment       0x0000005a       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sprintf.o)
+ .comment       0x0000006c       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)
+ .comment       0x0000007e       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-wsetup.o)
+ .comment       0x00000090       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+ .comment       0x000000a2       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fflush.o)
+ .comment       0x000000b4       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+ .comment       0x000000c6       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-freer.o)
+ .comment       0x000000d8       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fvwrite.o)
+ .comment       0x000000ea       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fwalk.o)
+ .comment       0x000000fc       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-impure.o)
+ .comment       0x0000010e       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-locale.o)
+ .comment       0x00000120       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-makebuf.o)
+ .comment       0x00000132       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mallocr.o)
+ .comment       0x00000144       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memchr.o)
+ .comment       0x00000156       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memmove.o)
+ .comment       0x00000168       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memset.o)
+ .comment       0x0000017a       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mlock.o)
+ .comment       0x0000018c       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+ .comment       0x0000019e       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reallocr.o)
+ .comment       0x000001b0       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isinfd.o)
+ .comment       0x000001c2       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isnand.o)
+ .comment       0x000001d4       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sbrkr.o)
+ .comment       0x000001e6       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-stdio.o)
+ .comment       0x000001f8       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strcmp.o)
+ .comment       0x0000020a       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strlen.o)
+ .comment       0x0000021c       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+ .comment       0x0000022e       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-writer.o)
+ .comment       0x00000240       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-callocr.o)
+ .comment       0x00000252       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-closer.o)
+ .comment       0x00000264       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-errno.o)
+ .comment       0x00000276       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fclose.o)
+ .comment       0x00000288       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fstatr.o)
+ .comment       0x0000029a       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-lseekr.o)
+ .comment       0x000002ac       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-readr.o)
+ .comment       0x000002be       0x12 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reent.o)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges  0x00000000      0x5c0
+ *(.debug_aranges)
+ .debug_aranges
+                0x00000000       0x20 include/Cstartup.o
+ .debug_aranges
+                0x00000020       0x20 include/Cstartup_SAM7.o
+ .debug_aranges
+                0x00000040       0x20 main.o
+ .debug_aranges
+                0x00000060       0x20 display.o
+ .debug_aranges
+                0x00000080       0x20 include/cToolMod.o
+ .debug_aranges
+                0x000000a0       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memcpy.o)
+ .debug_aranges
+                0x000000c0       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sprintf.o)
+ .debug_aranges
+                0x000000e0       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)
+ .debug_aranges
+                0x00000100       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-wsetup.o)
+ .debug_aranges
+                0x00000120       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+ .debug_aranges
+                0x00000140       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fflush.o)
+ .debug_aranges
+                0x00000160       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+ .debug_aranges
+                0x00000180       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-freer.o)
+ .debug_aranges
+                0x000001a0       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fvwrite.o)
+ .debug_aranges
+                0x000001c0       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fwalk.o)
+ .debug_aranges
+                0x000001e0       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-locale.o)
+ .debug_aranges
+                0x00000200       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-makebuf.o)
+ .debug_aranges
+                0x00000220       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mallocr.o)
+ .debug_aranges
+                0x00000240       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memchr.o)
+ .debug_aranges
+                0x00000260       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memmove.o)
+ .debug_aranges
+                0x00000280       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memset.o)
+ .debug_aranges
+                0x000002a0       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mlock.o)
+ .debug_aranges
+                0x000002c0       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+ .debug_aranges
+                0x000002e0       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reallocr.o)
+ .debug_aranges
+                0x00000300       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isinfd.o)
+ .debug_aranges
+                0x00000320       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isnand.o)
+ .debug_aranges
+                0x00000340       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sbrkr.o)
+ .debug_aranges
+                0x00000360       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-stdio.o)
+ .debug_aranges
+                0x00000380       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strcmp.o)
+ .debug_aranges
+                0x000003a0       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strlen.o)
+ .debug_aranges
+                0x000003c0       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+ .debug_aranges
+                0x000003e0       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-writer.o)
+ .debug_aranges
+                0x00000400       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-callocr.o)
+ .debug_aranges
+                0x00000420       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-closer.o)
+ .debug_aranges
+                0x00000440       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-errno.o)
+ .debug_aranges
+                0x00000460       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fclose.o)
+ .debug_aranges
+                0x00000480       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fstatr.o)
+ .debug_aranges
+                0x000004a0       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-lseekr.o)
+ .debug_aranges
+                0x000004c0       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-readr.o)
+ .debug_aranges
+                0x000004e0       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reent.o)
+ .debug_aranges
+                0x00000500       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_udivsi3.o)
+ .debug_aranges
+                0x00000520       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_dvmd_tls.o)
+ .debug_aranges
+                0x00000540       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_addsubdf3.o)
+ .debug_aranges
+                0x00000560       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_muldivdf3.o)
+ .debug_aranges
+                0x00000580       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_cmpdf2.o)
+ .debug_aranges
+                0x000005a0       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_fixdfsi.o)
+
+.debug_pubnames
+                0x00000000      0xa9f
+ *(.debug_pubnames)
+ .debug_pubnames
+                0x00000000       0x29 include/Cstartup_SAM7.o
+ .debug_pubnames
+                0x00000029       0x1b main.o
+ .debug_pubnames
+                0x00000044       0x8f display.o
+ .debug_pubnames
+                0x000000d3       0x2c include/cToolMod.o
+ .debug_pubnames
+                0x000000ff       0x1d c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memcpy.o)
+ .debug_pubnames
+                0x0000011c       0x2d c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sprintf.o)
+ .debug_pubnames
+                0x00000149       0x2f c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)
+ .debug_pubnames
+                0x00000178       0x22 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-wsetup.o)
+ .debug_pubnames
+                0x0000019a       0x1e c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+ .debug_pubnames
+                0x000001b8       0x2b c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fflush.o)
+ .debug_pubnames
+                0x000001e3       0xdb c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+ .debug_pubnames
+                0x000002be       0x31 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-freer.o)
+ .debug_pubnames
+                0x000002ef       0x23 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fvwrite.o)
+ .debug_pubnames
+                0x00000312       0x2e c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fwalk.o)
+ .debug_pubnames
+                0x00000340       0x39 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-impure.o)
+ .debug_pubnames
+                0x00000379       0xc3 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-locale.o)
+ .debug_pubnames
+                0x0000043c       0x23 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-makebuf.o)
+ .debug_pubnames
+                0x0000045f       0xce c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mallocr.o)
+ .debug_pubnames
+                0x0000052d       0x1d c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memchr.o)
+ .debug_pubnames
+                0x0000054a       0x1e c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memmove.o)
+ .debug_pubnames
+                0x00000568       0x1d c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memset.o)
+ .debug_pubnames
+                0x00000585       0x38 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mlock.o)
+ .debug_pubnames
+                0x000005bd      0x13a c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+ .debug_pubnames
+                0x000006f7       0x21 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reallocr.o)
+ .debug_pubnames
+                0x00000718       0x1f c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isinfd.o)
+ .debug_pubnames
+                0x00000737       0x1f c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isnand.o)
+ .debug_pubnames
+                0x00000756       0x1e c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sbrkr.o)
+ .debug_pubnames
+                0x00000774       0x44 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-stdio.o)
+ .debug_pubnames
+                0x000007b8       0x1d c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strcmp.o)
+ .debug_pubnames
+                0x000007d5       0x1d c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strlen.o)
+ .debug_pubnames
+                0x000007f2      0x158 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+ .debug_pubnames
+                0x0000094a       0x1f c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-writer.o)
+ .debug_pubnames
+                0x00000969       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-callocr.o)
+ .debug_pubnames
+                0x00000989       0x1f c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-closer.o)
+ .debug_pubnames
+                0x000009a8       0x1e c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-errno.o)
+ .debug_pubnames
+                0x000009c6       0x2b c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fclose.o)
+ .debug_pubnames
+                0x000009f1       0x1f c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fstatr.o)
+ .debug_pubnames
+                0x00000a10       0x1f c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-lseekr.o)
+ .debug_pubnames
+                0x00000a2f       0x1e c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-readr.o)
+ .debug_pubnames
+                0x00000a4d       0x52 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reent.o)
+
+.debug_info     0x00000000    0x15a31
+ *(.debug_info .gnu.linkonce.wi.*)
+ .debug_info    0x00000000       0x61 include/Cstartup.o
+ .debug_info    0x00000061      0x41e include/Cstartup_SAM7.o
+ .debug_info    0x0000047f       0xbb main.o
+ .debug_info    0x0000053a      0x471 display.o
+ .debug_info    0x000009ab       0x9a include/cToolMod.o
+ .debug_info    0x00000a45      0x10e c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memcpy.o)
+ .debug_info    0x00000b53      0xa0c c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sprintf.o)
+ .debug_info    0x0000155f     0x10c7 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)
+ .debug_info    0x00002626      0x959 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-wsetup.o)
+ .debug_info    0x00002f7f      0xd6c c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+ .debug_info    0x00003ceb      0x9f2 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fflush.o)
+ .debug_info    0x000046dd      0xc04 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+ .debug_info    0x000052e1      0xbbf c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-freer.o)
+ .debug_info    0x00005ea0      0xa80 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fvwrite.o)
+ .debug_info    0x00006920      0xae1 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fwalk.o)
+ .debug_info    0x00007401      0x939 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-impure.o)
+ .debug_info    0x00007d3a      0xba9 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-locale.o)
+ .debug_info    0x000088e3      0xb1a c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-makebuf.o)
+ .debug_info    0x000093fd      0xcca c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mallocr.o)
+ .debug_info    0x0000a0c7      0x134 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memchr.o)
+ .debug_info    0x0000a1fb      0x142 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memmove.o)
+ .debug_info    0x0000a33d      0x113 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memset.o)
+ .debug_info    0x0000a450      0x953 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mlock.o)
+ .debug_info    0x0000ada3     0x14dc c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+ .debug_info    0x0000c27f      0xbb3 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reallocr.o)
+ .debug_info    0x0000ce32      0x14d c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isinfd.o)
+ .debug_info    0x0000cf7f      0x14b c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isnand.o)
+ .debug_info    0x0000d0ca      0x962 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sbrkr.o)
+ .debug_info    0x0000da2c      0xaaa c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-stdio.o)
+ .debug_info    0x0000e4d6       0xdb c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strcmp.o)
+ .debug_info    0x0000e5b1       0xd7 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strlen.o)
+ .debug_info    0x0000e688     0x186e c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+ .debug_info    0x0000fef6      0x991 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-writer.o)
+ .debug_info    0x00010887      0xa15 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-callocr.o)
+ .debug_info    0x0001129c      0x956 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-closer.o)
+ .debug_info    0x00011bf2      0x92a c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-errno.o)
+ .debug_info    0x0001251c      0x98e c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fclose.o)
+ .debug_info    0x00012eaa      0xafa c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fstatr.o)
+ .debug_info    0x000139a4      0x97f c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-lseekr.o)
+ .debug_info    0x00014323      0x98a c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-readr.o)
+ .debug_info    0x00014cad      0xa1c c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reent.o)
+ .debug_info    0x000156c9       0x92 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_udivsi3.o)
+ .debug_info    0x0001575b       0x92 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_dvmd_tls.o)
+ .debug_info    0x000157ed       0x91 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_addsubdf3.o)
+ .debug_info    0x0001587e       0x91 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_muldivdf3.o)
+ .debug_info    0x0001590f       0x91 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_cmpdf2.o)
+ .debug_info    0x000159a0       0x91 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_fixdfsi.o)
+
+.debug_abbrev   0x00000000     0x3fa5
+ *(.debug_abbrev)
+ .debug_abbrev  0x00000000       0x14 include/Cstartup.o
+ .debug_abbrev  0x00000014       0xae include/Cstartup_SAM7.o
+ .debug_abbrev  0x000000c2       0x69 main.o
+ .debug_abbrev  0x0000012b      0x10d display.o
+ .debug_abbrev  0x00000238       0x70 include/cToolMod.o
+ .debug_abbrev  0x000002a8       0x99 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memcpy.o)
+ .debug_abbrev  0x00000341      0x1b2 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sprintf.o)
+ .debug_abbrev  0x000004f3      0x379 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)
+ .debug_abbrev  0x0000086c      0x179 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-wsetup.o)
+ .debug_abbrev  0x000009e5      0x22c c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+ .debug_abbrev  0x00000c11      0x1c4 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fflush.o)
+ .debug_abbrev  0x00000dd5      0x2b3 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+ .debug_abbrev  0x00001088      0x200 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-freer.o)
+ .debug_abbrev  0x00001288      0x1ac c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fvwrite.o)
+ .debug_abbrev  0x00001434      0x1ee c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fwalk.o)
+ .debug_abbrev  0x00001622      0x160 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-impure.o)
+ .debug_abbrev  0x00001782      0x22a c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-locale.o)
+ .debug_abbrev  0x000019ac      0x193 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-makebuf.o)
+ .debug_abbrev  0x00001b3f      0x22e c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mallocr.o)
+ .debug_abbrev  0x00001d6d       0xbe c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memchr.o)
+ .debug_abbrev  0x00001e2b       0xa2 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memmove.o)
+ .debug_abbrev  0x00001ecd       0xb2 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memset.o)
+ .debug_abbrev  0x00001f7f      0x173 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mlock.o)
+ .debug_abbrev  0x000020f2      0x344 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+ .debug_abbrev  0x00002436      0x1ef c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reallocr.o)
+ .debug_abbrev  0x00002625       0xdd c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isinfd.o)
+ .debug_abbrev  0x00002702       0xce c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isnand.o)
+ .debug_abbrev  0x000027d0      0x197 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sbrkr.o)
+ .debug_abbrev  0x00002967      0x1c3 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-stdio.o)
+ .debug_abbrev  0x00002b2a       0x7a c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strcmp.o)
+ .debug_abbrev  0x00002ba4       0x94 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strlen.o)
+ .debug_abbrev  0x00002c38      0x450 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+ .debug_abbrev  0x00003088      0x18d c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-writer.o)
+ .debug_abbrev  0x00003215      0x1d0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-callocr.o)
+ .debug_abbrev  0x000033e5      0x188 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-closer.o)
+ .debug_abbrev  0x0000356d      0x168 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-errno.o)
+ .debug_abbrev  0x000036d5      0x1b0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fclose.o)
+ .debug_abbrev  0x00003885      0x197 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fstatr.o)
+ .debug_abbrev  0x00003a1c      0x197 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-lseekr.o)
+ .debug_abbrev  0x00003bb3      0x188 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-readr.o)
+ .debug_abbrev  0x00003d3b      0x1f2 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reent.o)
+ .debug_abbrev  0x00003f2d       0x14 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_udivsi3.o)
+ .debug_abbrev  0x00003f41       0x14 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_dvmd_tls.o)
+ .debug_abbrev  0x00003f55       0x14 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_addsubdf3.o)
+ .debug_abbrev  0x00003f69       0x14 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_muldivdf3.o)
+ .debug_abbrev  0x00003f7d       0x14 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_cmpdf2.o)
+ .debug_abbrev  0x00003f91       0x14 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_fixdfsi.o)
+
+.debug_line     0x00000000     0x45f3
+ *(.debug_line)
+ .debug_line    0x00000000       0x92 include/Cstartup.o
+ .debug_line    0x00000092       0x68 include/Cstartup_SAM7.o
+ .debug_line    0x000000fa       0x40 main.o
+ .debug_line    0x0000013a       0xdd display.o
+ .debug_line    0x00000217       0x4d include/cToolMod.o
+ .debug_line    0x00000264       0xf8 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memcpy.o)
+ .debug_line    0x0000035c      0x1a0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sprintf.o)
+ .debug_line    0x000004fc      0x58c c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)
+ .debug_line    0x00000a88      0x18b c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-wsetup.o)
+ .debug_line    0x00000c13      0x4ce c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+ .debug_line    0x000010e1      0x1ca c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fflush.o)
+ .debug_line    0x000012ab      0x238 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+ .debug_line    0x000014e3      0x1ac c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-freer.o)
+ .debug_line    0x0000168f      0x227 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fvwrite.o)
+ .debug_line    0x000018b6      0x188 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fwalk.o)
+ .debug_line    0x00001a3e      0x10a c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-impure.o)
+ .debug_line    0x00001b48      0x183 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-locale.o)
+ .debug_line    0x00001ccb      0x1b9 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-makebuf.o)
+ .debug_line    0x00001e84      0x257 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mallocr.o)
+ .debug_line    0x000020db       0xf7 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memchr.o)
+ .debug_line    0x000021d2      0x107 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memmove.o)
+ .debug_line    0x000022d9       0xfd c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memset.o)
+ .debug_line    0x000023d6      0x11c c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mlock.o)
+ .debug_line    0x000024f2      0x488 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+ .debug_line    0x0000297a      0x1cc c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reallocr.o)
+ .debug_line    0x00002b46       0xd3 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isinfd.o)
+ .debug_line    0x00002c19       0xd2 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isnand.o)
+ .debug_line    0x00002ceb      0x11f c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sbrkr.o)
+ .debug_line    0x00002e0a      0x193 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-stdio.o)
+ .debug_line    0x00002f9d       0x84 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strcmp.o)
+ .debug_line    0x00003021       0xc8 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strlen.o)
+ .debug_line    0x000030e9      0x383 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+ .debug_line    0x0000346c      0x120 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-writer.o)
+ .debug_line    0x0000358c      0x128 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-callocr.o)
+ .debug_line    0x000036b4      0x120 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-closer.o)
+ .debug_line    0x000037d4      0x119 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-errno.o)
+ .debug_line    0x000038ed      0x187 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fclose.o)
+ .debug_line    0x00003a74      0x17b c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fstatr.o)
+ .debug_line    0x00003bef      0x120 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-lseekr.o)
+ .debug_line    0x00003d0f      0x11f c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-readr.o)
+ .debug_line    0x00003e2e      0x14f c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reent.o)
+ .debug_line    0x00003f7d       0x96 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_udivsi3.o)
+ .debug_line    0x00004013       0x6a c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_dvmd_tls.o)
+ .debug_line    0x0000407d      0x1f5 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_addsubdf3.o)
+ .debug_line    0x00004272      0x206 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_muldivdf3.o)
+ .debug_line    0x00004478       0xfc c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_cmpdf2.o)
+ .debug_line    0x00004574       0x7f c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_fixdfsi.o)
+
+.debug_frame    0x00000000      0xf3c
+ *(.debug_frame)
+ .debug_frame   0x00000000       0x30 include/Cstartup_SAM7.o
+ .debug_frame   0x00000030       0x30 main.o
+ .debug_frame   0x00000060       0xe8 display.o
+ .debug_frame   0x00000148       0x50 include/cToolMod.o
+ .debug_frame   0x00000198       0x2c c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memcpy.o)
+ .debug_frame   0x000001c4       0x58 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sprintf.o)
+ .debug_frame   0x0000021c       0x70 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)
+ .debug_frame   0x0000028c       0x2c c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-wsetup.o)
+ .debug_frame   0x000002b8       0x64 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+ .debug_frame   0x0000031c       0x40 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fflush.o)
+ .debug_frame   0x0000035c      0x10c c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+ .debug_frame   0x00000468       0x50 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-freer.o)
+ .debug_frame   0x000004b8       0x38 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fvwrite.o)
+ .debug_frame   0x000004f0       0x58 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fwalk.o)
+ .debug_frame   0x00000548       0x6c c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-locale.o)
+ .debug_frame   0x000005b4       0x30 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-makebuf.o)
+ .debug_frame   0x000005e4       0x38 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mallocr.o)
+ .debug_frame   0x0000061c       0x28 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memchr.o)
+ .debug_frame   0x00000644       0x2c c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memmove.o)
+ .debug_frame   0x00000670       0x28 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memset.o)
+ .debug_frame   0x00000698       0x30 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mlock.o)
+ .debug_frame   0x000006c8      0x228 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+ .debug_frame   0x000008f0       0x38 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reallocr.o)
+ .debug_frame   0x00000928       0x28 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isinfd.o)
+ .debug_frame   0x00000950       0x28 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isnand.o)
+ .debug_frame   0x00000978       0x2c c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sbrkr.o)
+ .debug_frame   0x000009a4       0x70 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-stdio.o)
+ .debug_frame   0x00000a14       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strcmp.o)
+ .debug_frame   0x00000a34       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strlen.o)
+ .debug_frame   0x00000a54      0x2f8 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+ .debug_frame   0x00000d4c       0x2c c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-writer.o)
+ .debug_frame   0x00000d78       0x28 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-callocr.o)
+ .debug_frame   0x00000da0       0x2c c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-closer.o)
+ .debug_frame   0x00000dcc       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-errno.o)
+ .debug_frame   0x00000dec       0x3c c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fclose.o)
+ .debug_frame   0x00000e28       0x2c c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fstatr.o)
+ .debug_frame   0x00000e54       0x2c c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-lseekr.o)
+ .debug_frame   0x00000e80       0x2c c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-readr.o)
+ .debug_frame   0x00000eac       0x68 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reent.o)
+ .debug_frame   0x00000f14       0x28 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_udivsi3.o)
+
+.debug_str      0x00000000     0x1dda
+ *(.debug_str)
+ .debug_str     0x00000000      0x221 include/Cstartup_SAM7.o
+                                0x22e (size before relaxing)
+ .debug_str     0x00000221       0x5c main.o
+                                 0xc9 (size before relaxing)
+ .debug_str     0x0000027d      0x1ad display.o
+                                0x24e (size before relaxing)
+ .debug_str     0x0000042a       0x25 include/cToolMod.o
+                                 0x66 (size before relaxing)
+ .debug_str     0x0000044f       0xa8 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memcpy.o)
+                                 0xdb (size before relaxing)
+ .debug_str     0x000004f7      0x3c2 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sprintf.o)
+                                0x4f0 (size before relaxing)
+ .debug_str     0x000008b9      0x1af c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)
+                                0x6a7 (size before relaxing)
+ .debug_str     0x00000a68       0x44 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-wsetup.o)
+                                0x4bf (size before relaxing)
+ .debug_str     0x00000aac      0x141 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+                                0x5b4 (size before relaxing)
+ .debug_str     0x00000bed       0x63 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fflush.o)
+                                0x4e5 (size before relaxing)
+ .debug_str     0x00000c50      0x100 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+                                0x5a7 (size before relaxing)
+ .debug_str     0x00000d50      0x159 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-freer.o)
+                                0x5f6 (size before relaxing)
+ .debug_str     0x00000ea9       0x64 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fvwrite.o)
+                                0x516 (size before relaxing)
+ .debug_str     0x00000f0d       0x5c c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fwalk.o)
+                                0x4e8 (size before relaxing)
+ .debug_str     0x00000f69       0x84 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-impure.o)
+                                0x4cd (size before relaxing)
+ .debug_str     0x00000fed      0x1d8 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-locale.o)
+                                0x65c (size before relaxing)
+ .debug_str     0x000011c5      0x121 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-makebuf.o)
+                                0x5b9 (size before relaxing)
+ .debug_str     0x000012e6       0xef c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mallocr.o)
+                                0x6a4 (size before relaxing)
+ .debug_str     0x000013d5       0x5a c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memchr.o)
+                                0x13e (size before relaxing)
+ .debug_str     0x0000142f       0x4b c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memmove.o)
+                                0x150 (size before relaxing)
+ .debug_str     0x0000147a       0x4d c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memset.o)
+                                0x131 (size before relaxing)
+ .debug_str     0x000014c7       0x6b c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mlock.o)
+                                0x4d6 (size before relaxing)
+ .debug_str     0x00001532       0xf6 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+                                0x5c1 (size before relaxing)
+ .debug_str     0x00001628       0x59 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reallocr.o)
+                                0x576 (size before relaxing)
+ .debug_str     0x00001681       0xb1 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isinfd.o)
+                                0x170 (size before relaxing)
+ .debug_str     0x00001732       0x44 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isnand.o)
+                                0x170 (size before relaxing)
+ .debug_str     0x00001776       0x4e c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sbrkr.o)
+                                0x4be (size before relaxing)
+ .debug_str     0x000017c4       0x60 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-stdio.o)
+                                0x4e4 (size before relaxing)
+ .debug_str     0x00001824       0x40 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strcmp.o)
+                                0x116 (size before relaxing)
+ .debug_str     0x00001864       0x46 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strlen.o)
+                                0x130 (size before relaxing)
+ .debug_str     0x000018aa      0x28c c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+                                0x7f2 (size before relaxing)
+ .debug_str     0x00001b36       0x4a c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-writer.o)
+                                0x4c1 (size before relaxing)
+ .debug_str     0x00001b80       0x19 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-callocr.o)
+                                0x4f5 (size before relaxing)
+ .debug_str     0x00001b99       0x41 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-closer.o)
+                                0x4b1 (size before relaxing)
+ .debug_str     0x00001bda       0x7f c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-errno.o)
+                                0x4b5 (size before relaxing)
+ .debug_str     0x00001c59       0x49 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fclose.o)
+                                0x4c9 (size before relaxing)
+ .debug_str     0x00001ca2       0x47 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fstatr.o)
+                                0x5a4 (size before relaxing)
+ .debug_str     0x00001ce9       0x41 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-lseekr.o)
+                                0x4bf (size before relaxing)
+ .debug_str     0x00001d2a       0x3f c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-readr.o)
+                                0x4bf (size before relaxing)
+ .debug_str     0x00001d69       0x71 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reent.o)
+                                0x4f2 (size before relaxing)
+
+.debug_loc      0x00000000     0x8452
+ *(.debug_loc)
+ .debug_loc     0x00000000       0x2a include/Cstartup_SAM7.o
+ .debug_loc     0x0000002a       0x2a main.o
+ .debug_loc     0x00000054       0xfc display.o
+ .debug_loc     0x00000150       0x54 include/cToolMod.o
+ .debug_loc     0x000001a4      0x130 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memcpy.o)
+ .debug_loc     0x000002d4       0xbf c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sprintf.o)
+ .debug_loc     0x00000393     0x1ff6 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)
+ .debug_loc     0x00002389       0x5b c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-wsetup.o)
+ .debug_loc     0x000023e4     0x1df2 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+ .debug_loc     0x000041d6      0x151 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fflush.o)
+ .debug_loc     0x00004327      0x1a7 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+ .debug_loc     0x000044ce      0x2ab c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-freer.o)
+ .debug_loc     0x00004779      0x42e c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fvwrite.o)
+ .debug_loc     0x00004ba7       0xc1 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fwalk.o)
+ .debug_loc     0x00004c68       0xc8 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-locale.o)
+ .debug_loc     0x00004d30       0xcd c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-makebuf.o)
+ .debug_loc     0x00004dfd      0x75d c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mallocr.o)
+ .debug_loc     0x0000555a      0x196 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memchr.o)
+ .debug_loc     0x000056f0      0x193 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memmove.o)
+ .debug_loc     0x00005883      0x12b c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memset.o)
+ .debug_loc     0x000059ae     0x107d c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+ .debug_loc     0x00006a2b      0x727 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reallocr.o)
+ .debug_loc     0x00007152       0x4f c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isinfd.o)
+ .debug_loc     0x000071a1       0x4f c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isnand.o)
+ .debug_loc     0x000071f0       0x63 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sbrkr.o)
+ .debug_loc     0x00007253      0x1cf c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-stdio.o)
+ .debug_loc     0x00007422       0xba c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strcmp.o)
+ .debug_loc     0x000074dc       0x47 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strlen.o)
+ .debug_loc     0x00007523      0x9f0 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+ .debug_loc     0x00007f13       0x89 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-writer.o)
+ .debug_loc     0x00007f9c       0xcb c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-callocr.o)
+ .debug_loc     0x00008067       0x63 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-closer.o)
+ .debug_loc     0x000080ca       0x79 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fclose.o)
+ .debug_loc     0x00008143       0x76 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fstatr.o)
+ .debug_loc     0x000081b9       0x89 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-lseekr.o)
+ .debug_loc     0x00008242       0x89 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-readr.o)
+ .debug_loc     0x000082cb      0x187 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reent.o)
+
+.debug_macinfo
+ *(.debug_macinfo)
+
+.debug_weaknames
+ *(.debug_weaknames)
+
+.debug_funcnames
+ *(.debug_funcnames)
+
+.debug_typenames
+ *(.debug_typenames)
+
+.debug_varnames
+ *(.debug_varnames)
+OUTPUT(main.elf elf32-littlearm)
+
+.reset          0x00000000        0x0
+ .reset         0x00000000        0x0 include/Cstartup.o
+
+.ARM.attributes
+                0x00000000       0x10
+ .ARM.attributes
+                0x00000000       0x10 include/Cstartup.o
+ .ARM.attributes
+                0x00000010       0x10 include/Cstartup_SAM7.o
+ .ARM.attributes
+                0x00000020       0x10 main.o
+ .ARM.attributes
+                0x00000030       0x10 display.o
+ .ARM.attributes
+                0x00000040       0x10 include/cToolMod.o
+ .ARM.attributes
+                0x00000050       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memcpy.o)
+ .ARM.attributes
+                0x00000060       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sprintf.o)
+ .ARM.attributes
+                0x00000070       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)
+ .ARM.attributes
+                0x00000080       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-wsetup.o)
+ .ARM.attributes
+                0x00000090       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+ .ARM.attributes
+                0x000000a0       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fflush.o)
+ .ARM.attributes
+                0x000000b0       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+ .ARM.attributes
+                0x000000c0       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-freer.o)
+ .ARM.attributes
+                0x000000d0       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fvwrite.o)
+ .ARM.attributes
+                0x000000e0       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fwalk.o)
+ .ARM.attributes
+                0x000000f0       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-impure.o)
+ .ARM.attributes
+                0x00000100       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-locale.o)
+ .ARM.attributes
+                0x00000110       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-makebuf.o)
+ .ARM.attributes
+                0x00000120       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mallocr.o)
+ .ARM.attributes
+                0x00000130       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memchr.o)
+ .ARM.attributes
+                0x00000140       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memmove.o)
+ .ARM.attributes
+                0x00000150       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memset.o)
+ .ARM.attributes
+                0x00000160       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mlock.o)
+ .ARM.attributes
+                0x00000170       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+ .ARM.attributes
+                0x00000180       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reallocr.o)
+ .ARM.attributes
+                0x00000190       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isinfd.o)
+ .ARM.attributes
+                0x000001a0       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isnand.o)
+ .ARM.attributes
+                0x000001b0       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sbrkr.o)
+ .ARM.attributes
+                0x000001c0       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-stdio.o)
+ .ARM.attributes
+                0x000001d0       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strcmp.o)
+ .ARM.attributes
+                0x000001e0       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strlen.o)
+ .ARM.attributes
+                0x000001f0       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+ .ARM.attributes
+                0x00000200       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-writer.o)
+ .ARM.attributes
+                0x00000210       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-callocr.o)
+ .ARM.attributes
+                0x00000220       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-closer.o)
+ .ARM.attributes
+                0x00000230       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-errno.o)
+ .ARM.attributes
+                0x00000240       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fclose.o)
+ .ARM.attributes
+                0x00000250       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fstatr.o)
+ .ARM.attributes
+                0x00000260       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-lseekr.o)
+ .ARM.attributes
+                0x00000270       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-readr.o)
+ .ARM.attributes
+                0x00000280       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reent.o)
+ .ARM.attributes
+                0x00000290       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_udivsi3.o)
+ .ARM.attributes
+                0x000002a0       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_dvmd_tls.o)
+ .ARM.attributes
+                0x000002b0       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_addsubdf3.o)
+ .ARM.attributes
+                0x000002c0       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_muldivdf3.o)
+ .ARM.attributes
+                0x000002d0       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_cmpdf2.o)
+ .ARM.attributes
+                0x000002e0       0x10 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_fixdfsi.o)
+
+.debug_ranges   0x00000000      0x5f8
+ .debug_ranges  0x00000000      0x128 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)
+ .debug_ranges  0x00000128       0x38 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fflush.o)
+ .debug_ranges  0x00000160       0x80 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+ .debug_ranges  0x000001e0       0x20 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fvwrite.o)
+ .debug_ranges  0x00000200       0x40 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fwalk.o)
+ .debug_ranges  0x00000240       0x58 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mallocr.o)
+ .debug_ranges  0x00000298       0x98 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+ .debug_ranges  0x00000330       0x58 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reallocr.o)
+ .debug_ranges  0x00000388      0x258 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+ .debug_ranges  0x000005e0       0x18 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-callocr.o)
+
+Cross Reference Table
+
+Symbol                                            File
+AT91F_Default_FIQ_handler                         include/Cstartup.o
+                                                  include/Cstartup_SAM7.o
+AT91F_Default_IRQ_handler                         include/Cstartup.o
+                                                  include/Cstartup_SAM7.o
+AT91F_LowLevelInit                                include/Cstartup_SAM7.o
+                                                  include/Cstartup.o
+AT91F_Spurious_handler                            include/Cstartup.o
+                                                  include/Cstartup_SAM7.o
+IRQ_Handler_Entry                                 include/Cstartup.o
+Top_Stack                                         include/Cstartup.o
+_Balloc                                           c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+_Bfree                                            c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+_PathLocale                                       c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-locale.o)
+__adddf3                                          c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_addsubdf3.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+__aeabi_cdcmpeq                                   c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_cmpdf2.o)
+__aeabi_cdcmple                                   c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_cmpdf2.o)
+__aeabi_cdrcmple                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_cmpdf2.o)
+__aeabi_d2iz                                      c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_fixdfsi.o)
+__aeabi_dadd                                      c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_addsubdf3.o)
+__aeabi_dcmpeq                                    c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_cmpdf2.o)
+__aeabi_dcmpge                                    c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_cmpdf2.o)
+__aeabi_dcmpgt                                    c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_cmpdf2.o)
+__aeabi_dcmple                                    c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_cmpdf2.o)
+__aeabi_dcmplt                                    c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_cmpdf2.o)
+__aeabi_ddiv                                      c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_muldivdf3.o)
+__aeabi_dmul                                      c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_muldivdf3.o)
+__aeabi_drsub                                     c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_addsubdf3.o)
+__aeabi_dsub                                      c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_addsubdf3.o)
+__aeabi_f2d                                       c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_addsubdf3.o)
+__aeabi_i2d                                       c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_addsubdf3.o)
+__aeabi_idiv0                                     c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_dvmd_tls.o)
+__aeabi_l2d                                       c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_addsubdf3.o)
+__aeabi_ldiv0                                     c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_dvmd_tls.o)
+__aeabi_ui2d                                      c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_addsubdf3.o)
+__aeabi_uidiv                                     c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_udivsi3.o)
+__aeabi_uidivmod                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_udivsi3.o)
+__aeabi_ul2d                                      c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_addsubdf3.o)
+__any_on                                          c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+__b2d                                             c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+__bss_end__                                       include/Cstartup.o
+__bss_start__                                     include/Cstartup.o
+__cmpdf2                                          c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_cmpdf2.o)
+__copybits                                        c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+__d2b                                             c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+__div0                                            c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_dvmd_tls.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_udivsi3.o)
+__divdf3                                          c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_muldivdf3.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+__eqdf2                                           c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_cmpdf2.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)
+__errno                                           c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-errno.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+__extendsfdf2                                     c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_addsubdf3.o)
+__fixdfsi                                         c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_fixdfsi.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+__floatdidf                                       c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_addsubdf3.o)
+__floatsidf                                       c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_addsubdf3.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+__floatundidf                                     c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_addsubdf3.o)
+__floatunsidf                                     c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_addsubdf3.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+__fp_lock_all                                     c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+__fp_unlock_all                                   c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+__gedf2                                           c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_cmpdf2.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+__gtdf2                                           c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_cmpdf2.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+__hi0bits                                         c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+__i2b                                             c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+__isinfd                                          c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isinfd.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)
+__isnand                                          c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-s_isnand.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)
+__lc_ctype                                        c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-locale.o)
+__ledf2                                           c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_cmpdf2.o)
+__lo0bits                                         c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+__locale_charset                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-locale.o)
+__lshift                                          c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+__ltdf2                                           c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_cmpdf2.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)
+__malloc_av_                                      c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mallocr.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reallocr.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-freer.o)
+__malloc_current_mallinfo                         c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mallocr.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-freer.o)
+__malloc_lock                                     c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mlock.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reallocr.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mallocr.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-freer.o)
+__malloc_max_sbrked_mem                           c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mallocr.o)
+__malloc_max_total_mem                            c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mallocr.o)
+__malloc_sbrk_base                                c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mallocr.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-freer.o)
+__malloc_top_pad                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mallocr.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-freer.o)
+__malloc_trim_threshold                           c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mallocr.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-freer.o)
+__malloc_unlock                                   c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mlock.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reallocr.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mallocr.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-freer.o)
+__mb_cur_max                                      c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-locale.o)
+__mcmp                                            c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+__mdiff                                           c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+__mlocale_changed                                 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-locale.o)
+__mprec_bigtens                                   c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+__mprec_tens                                      c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+__mprec_tinytens                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+__muldf3                                          c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_muldivdf3.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+__multadd                                         c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+__multiply                                        c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+__nedf2                                           c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_cmpdf2.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)
+__nlocale_changed                                 c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-locale.o)
+__pow5mult                                        c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+__ratio                                           c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+__s2b                                             c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+__sclose                                          c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-stdio.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+__sfmoreglue                                      c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+__sfp                                             c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+__sfp_lock_acquire                                c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fclose.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fwalk.o)
+__sfp_lock_release                                c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fclose.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fwalk.o)
+__sfvwrite_r                                      c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fvwrite.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)
+__sinit                                           c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fclose.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fflush.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-wsetup.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)
+__sinit_lock_acquire                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+__sinit_lock_release                              c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+__smakebuf_r                                      c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-makebuf.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-wsetup.o)
+__sread                                           c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-stdio.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+__sseek                                           c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-stdio.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-makebuf.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+__subdf3                                          c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_addsubdf3.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+__swrite                                          c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-stdio.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+__swsetup_r                                       c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-wsetup.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fvwrite.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)
+__udivsi3                                         c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2\libgcc.a(_udivsi3.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+__ulp                                             c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+_calloc_r                                         c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-callocr.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+_cleanup                                          c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+_cleanup_r                                        c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-makebuf.o)
+_close                                            c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-closer.o)
+_close_r                                          c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-closer.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-stdio.o)
+_data                                             include/Cstartup.o
+_dtoa_r                                           c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)
+_edata                                            include/Cstartup.o
+_etext                                            include/Cstartup.o
+_exit                                             c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+_fclose_r                                         c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fclose.o)
+_fflush_r                                         c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fflush.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fclose.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fvwrite.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)
+_free_r                                           c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-freer.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reent.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fclose.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reallocr.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mallocr.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fvwrite.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-wsetup.o)
+_fstat                                            c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fstatr.o)
+_fstat_r                                          c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fstatr.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-makebuf.o)
+_fwalk                                            c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fwalk.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+_fwalk_reent                                      c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fwalk.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fflush.o)
+_getpid                                           c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+_gettimeofday                                     c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+_global_impure_ptr                                c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-impure.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fflush.o)
+_impure_ptr                                       c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-impure.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reent.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fclose.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-errno.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-locale.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fflush.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-wsetup.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sprintf.o)
+_kill                                             c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+_link                                             c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+_localeconv_r                                     c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-locale.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)
+_lseek                                            c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-lseekr.o)
+_lseek_r                                          c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-lseekr.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-stdio.o)
+_malloc_r                                         c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mallocr.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-callocr.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reallocr.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-makebuf.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fvwrite.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+_malloc_trim_r                                    c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-freer.o)
+_mprec_log10                                      c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+_open                                             c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+_raise                                            c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+_read                                             c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-readr.o)
+_read_r                                           c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-readr.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-stdio.o)
+_realloc_r                                        c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reallocr.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fvwrite.o)
+_reclaim_reent                                    c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reent.o)
+_rename                                           c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+_sbrk                                             c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sbrkr.o)
+_sbrk_r                                           c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sbrkr.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mallocr.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-freer.o)
+_setlocale_r                                      c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-locale.o)
+_sprintf_r                                        c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sprintf.o)
+_startup                                          include/Cstartup.o
+_stat                                             c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+_swiclose                                         c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+_swilseek                                         c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+_swiopen                                          c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+_swiread                                          c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+_swiwrite                                         c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+_system                                           c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+_times                                            c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+_unlink                                           c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+_vfprintf_r                                       c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sprintf.o)
+_wrapup_reent                                     c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reent.o)
+_write                                            c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-writer.o)
+_write_r                                          c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-writer.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-stdio.o)
+cleanup_glue                                      c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reent.o)
+delay1ms                                          include/cToolMod.o
+delay1us                                          display.o
+delay5ms                                          include/cToolMod.o
+                                                  main.o
+display_init                                      display.o
+                                                  main.o
+display_printf                                    display.o
+display_putchar                                   display.o
+                                                  main.o
+display_putstr                                    display.o
+                                                  main.o
+display_set_cursor                                display.o
+                                                  main.o
+end                                               c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+errno                                             c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reent.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-readr.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-lseekr.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fstatr.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-closer.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-writer.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sbrkr.o)
+exit                                              include/Cstartup.o
+fclose                                            c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fclose.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+fflush                                            c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fflush.o)
+initialise_monitor_handles                        c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+isatty                                            c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-makebuf.o)
+lcd_write                                         display.o
+localeconv                                        c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-locale.o)
+main                                              main.o
+                                                  include/Cstartup.o
+memchr                                            c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memchr.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fvwrite.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)
+memcpy                                            c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memcpy.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-mprec.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fvwrite.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-dtoa.o)
+                                                  display.o
+memmove                                           c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memmove.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-reallocr.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-fvwrite.o)
+memset                                            c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-memset.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-callocr.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-findfp.o)
+setlocale                                         c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-locale.o)
+sprintf                                           c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-sprintf.o)
+                                                  main.o
+strcmp                                            c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strcmp.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-locale.o)
+strlen                                            c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-strlen.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-syscalls.o)
+                                                  c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)
+vfprintf                                          c:/arm7/yagarto/bin/../lib/gcc/arm-elf/4.3.2/../../../../arm-elf/lib\libc.a(lib_a-vfprintf.o)

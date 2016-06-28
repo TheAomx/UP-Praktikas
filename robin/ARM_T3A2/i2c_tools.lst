@@ -1,0 +1,773 @@
+   1              		.file	"i2c_tools.c"
+   9              	.Ltext0:
+  10              		.align	2
+  11              		.global	i2c_stop
+  13              	i2c_stop:
+  14              	.LFB2:
+  15              		.file 1 "i2c_tools.c"
+   1:i2c_tools.c   **** //********************************************************************
+   2:i2c_tools.c   **** // i2c_tools.c								Version 24.06.2014_stud cs
+   3:i2c_tools.c   **** //********************************************************************
+   4:i2c_tools.c   **** #include	"include/AT91SAM7S64.h"
+   5:i2c_tools.c   **** 
+   6:i2c_tools.c   **** #define		SDA		AT91C_PIO_PA3					// SDA auf PA3
+   7:i2c_tools.c   **** #define		SCL		AT91C_PIO_PA4					// SCL auf PA4
+   8:i2c_tools.c   **** 
+   9:i2c_tools.c   **** //**************************************************************
+  10:i2c_tools.c   **** // i2c_stop
+  11:i2c_tools.c   **** // Generiert eine Stoppbedingung auf dem I2C Bus
+  12:i2c_tools.c   **** //**************************************************************
+  13:i2c_tools.c   **** void i2c_stop(void){
+  16              	 args = 0, pretend = 0, frame = 0
+  17              		@ frame_needed = 1, uses_anonymous_args = 0
+  18              		mov	ip, sp
+  19 0000 0DC0A0E1 	.LCFI0:
+  20              		stmfd	sp!, {fp, ip, lr, pc}
+  21 0004 00D82DE9 	.LCFI1:
+  22              		sub	fp, ip, #4
+  23 0008 04B04CE2 	.LCFI2:
+  24              		.loc 1 14 0
+  14:i2c_tools.c   **** 	AT91C_BASE_PIOA->PIO_CODR = SDA;				// SDA -> 0
+  25              	#-1610612736
+  26 000c 0A32A0E3 		mov	r3, r3, asr #19
+  27 0010 C339A0E1 		mov	r2, #8
+  28 0014 0820A0E3 		str	r2, [r3, #52]
+  29 0018 342083E5 		.loc 1 15 0
+  15:i2c_tools.c   **** 	AT91C_BASE_PIOA->PIO_SODR = SCL;				// SCL -> 1
+  30              	r3, #-1610612736
+  31 001c 0A32A0E3 		mov	r3, r3, asr #19
+  32 0020 C339A0E1 		mov	r2, #16
+  33 0024 1020A0E3 		str	r2, [r3, #48]
+  34 0028 302083E5 		.loc 1 16 0
+  16:i2c_tools.c   **** 	{	asm("NOP"); asm("NOP"); asm("NOP");			// Stop condition setup time
+  35              	"i2c_tools.c" 1
+  36              		NOP
+  37 002c 0000A0E1 	@ 0 "" 2
+  38              	@ 16 "i2c_tools.c" 1
+  39              		NOP
+  40 0030 0000A0E1 	@ 0 "" 2
+  41              	@ 16 "i2c_tools.c" 1
+  42              		NOP
+  43 0034 0000A0E1 	@ 0 "" 2
+  44              		.loc 1 17 0
+  17:i2c_tools.c   **** 		asm("NOP"); asm("NOP"); asm("NOP");
+  45              	tools.c" 1
+  46              		NOP
+  47 0038 0000A0E1 	@ 0 "" 2
+  48              	@ 17 "i2c_tools.c" 1
+  49              		NOP
+  50 003c 0000A0E1 	@ 0 "" 2
+  51              	@ 17 "i2c_tools.c" 1
+  52              		NOP
+  53 0040 0000A0E1 	@ 0 "" 2
+  54              		.loc 1 18 0
+  18:i2c_tools.c   **** 		asm("NOP"); asm("NOP"); asm("NOP");
+  55              	tools.c" 1
+  56              		NOP
+  57 0044 0000A0E1 	@ 0 "" 2
+  58              	@ 18 "i2c_tools.c" 1
+  59              		NOP
+  60 0048 0000A0E1 	@ 0 "" 2
+  61              	@ 18 "i2c_tools.c" 1
+  62              		NOP
+  63 004c 0000A0E1 	@ 0 "" 2
+  64              		.loc 1 19 0
+  19:i2c_tools.c   **** 		asm("NOP"); asm("NOP"); asm("NOP");
+  65              	tools.c" 1
+  66              		NOP
+  67 0050 0000A0E1 	@ 0 "" 2
+  68              	@ 19 "i2c_tools.c" 1
+  69              		NOP
+  70 0054 0000A0E1 	@ 0 "" 2
+  71              	@ 19 "i2c_tools.c" 1
+  72              		NOP
+  73 0058 0000A0E1 	@ 0 "" 2
+  74              		.loc 1 20 0
+  20:i2c_tools.c   **** 		asm("NOP"); asm("NOP"); asm("NOP");
+  75              	tools.c" 1
+  76              		NOP
+  77 005c 0000A0E1 	@ 0 "" 2
+  78              	@ 20 "i2c_tools.c" 1
+  79              		NOP
+  80 0060 0000A0E1 	@ 0 "" 2
+  81              	@ 20 "i2c_tools.c" 1
+  82              		NOP
+  83 0064 0000A0E1 	@ 0 "" 2
+  84              		.loc 1 21 0
+  21:i2c_tools.c   **** 		asm("NOP"); asm("NOP"); asm("NOP");
+  85              	tools.c" 1
+  86              		NOP
+  87 0068 0000A0E1 	@ 0 "" 2
+  88              	@ 21 "i2c_tools.c" 1
+  89              		NOP
+  90 006c 0000A0E1 	@ 0 "" 2
+  91              	@ 21 "i2c_tools.c" 1
+  92              		NOP
+  93 0070 0000A0E1 	@ 0 "" 2
+  94              		.loc 1 23 0
+  22:i2c_tools.c   **** 	}
+  23:i2c_tools.c   **** 	AT91C_BASE_PIOA->PIO_SODR = SDA;				// SDA -> 1
+  95              	-1610612736
+  96 0074 0A32A0E3 		mov	r3, r3, asr #19
+  97 0078 C339A0E1 		mov	r2, #8
+  98 007c 0820A0E3 		str	r2, [r3, #48]
+  99 0080 302083E5 		.loc 1 24 0
+  24:i2c_tools.c   **** }
+ 100              	d	sp, {fp, sp, pc}
+ 101 0084 00A89DE8 	.LFE2:
+ 103              		.align	2
+ 104              		.global	i2c_rbit
+ 106              	i2c_rbit:
+ 107              	.LFB3:
+ 108              		.loc 1 30 0
+  25:i2c_tools.c   **** 
+  26:i2c_tools.c   **** //**************************************************************
+  27:i2c_tools.c   **** // i2c_rbit
+  28:i2c_tools.c   **** // Ein Bit von der Datenleitung lesen
+  29:i2c_tools.c   **** //**************************************************************
+  30:i2c_tools.c   **** unsigned char i2c_rbit(void){
+ 109              	 0, pretend = 0, frame = 4
+ 110              		@ frame_needed = 1, uses_anonymous_args = 0
+ 111              		mov	ip, sp
+ 112 0088 0DC0A0E1 	.LCFI3:
+ 113              		stmfd	sp!, {fp, ip, lr, pc}
+ 114 008c 00D82DE9 	.LCFI4:
+ 115              		sub	fp, ip, #4
+ 116 0090 04B04CE2 	.LCFI5:
+ 117              		sub	sp, sp, #4
+ 118 0094 04D04DE2 	.LCFI6:
+ 119              		.loc 1 33 0
+  31:i2c_tools.c   **** 	unsigned char bit;								// Variablendeklaration
+  32:i2c_tools.c   **** 
+  33:i2c_tools.c   **** 	AT91C_BASE_PIOA->PIO_SODR = SCL;				// SCL -> 1
+ 120              	1610612736
+ 121 0098 0A32A0E3 		mov	r3, r3, asr #19
+ 122 009c C339A0E1 		mov	r2, #16
+ 123 00a0 1020A0E3 		str	r2, [r3, #48]
+ 124 00a4 302083E5 		.loc 1 34 0
+  34:i2c_tools.c   **** 	{	asm("NOP"); asm("NOP"); asm("NOP");
+ 125              	"i2c_tools.c" 1
+ 126              		NOP
+ 127 00a8 0000A0E1 	@ 0 "" 2
+ 128              	@ 34 "i2c_tools.c" 1
+ 129              		NOP
+ 130 00ac 0000A0E1 	@ 0 "" 2
+ 131              	@ 34 "i2c_tools.c" 1
+ 132              		NOP
+ 133 00b0 0000A0E1 	@ 0 "" 2
+ 134              		.loc 1 35 0
+  35:i2c_tools.c   **** 		asm("NOP"); asm("NOP"); asm("NOP");
+ 135              	tools.c" 1
+ 136              		NOP
+ 137 00b4 0000A0E1 	@ 0 "" 2
+ 138              	@ 35 "i2c_tools.c" 1
+ 139              		NOP
+ 140 00b8 0000A0E1 	@ 0 "" 2
+ 141              	@ 35 "i2c_tools.c" 1
+ 142              		NOP
+ 143 00bc 0000A0E1 	@ 0 "" 2
+ 144              		.loc 1 36 0
+  36:i2c_tools.c   **** 		asm("NOP"); asm("NOP"); asm("NOP");
+ 145              	tools.c" 1
+ 146              		NOP
+ 147 00c0 0000A0E1 	@ 0 "" 2
+ 148              	@ 36 "i2c_tools.c" 1
+ 149              		NOP
+ 150 00c4 0000A0E1 	@ 0 "" 2
+ 151              	@ 36 "i2c_tools.c" 1
+ 152              		NOP
+ 153 00c8 0000A0E1 	@ 0 "" 2
+ 154              		.loc 1 37 0
+  37:i2c_tools.c   **** 		asm("NOP"); asm("NOP"); asm("NOP");
+ 155              	tools.c" 1
+ 156              		NOP
+ 157 00cc 0000A0E1 	@ 0 "" 2
+ 158              	@ 37 "i2c_tools.c" 1
+ 159              		NOP
+ 160 00d0 0000A0E1 	@ 0 "" 2
+ 161              	@ 37 "i2c_tools.c" 1
+ 162              		NOP
+ 163 00d4 0000A0E1 	@ 0 "" 2
+ 164              		.loc 1 38 0
+  38:i2c_tools.c   **** 		asm("NOP"); asm("NOP"); asm("NOP");
+ 165              	tools.c" 1
+ 166              		NOP
+ 167 00d8 0000A0E1 	@ 0 "" 2
+ 168              	@ 38 "i2c_tools.c" 1
+ 169              		NOP
+ 170 00dc 0000A0E1 	@ 0 "" 2
+ 171              	@ 38 "i2c_tools.c" 1
+ 172              		NOP
+ 173 00e0 0000A0E1 	@ 0 "" 2
+ 174              		.loc 1 40 0
+  39:i2c_tools.c   **** 	}
+  40:i2c_tools.c   **** 	if (AT91C_BASE_PIOA->PIO_PDSR & SDA) bit=1;		// Pegel von SDA lesen
+ 175              	-1610612736
+ 176 00e4 0A32A0E3 		mov	r3, r3, asr #19
+ 177 00e8 C339A0E1 		ldr	r3, [r3, #60]
+ 178 00ec 3C3093E5 		and	r3, r3, #8
+ 179 00f0 083003E2 		cmp	r3, #0
+ 180 00f4 000053E3 		beq	.L4
+ 181 00f8 0200000A 		mov	r3, #1
+ 182 00fc 0130A0E3 		strb	r3, [fp, #-13]
+ 183 0100 0D304BE5 		b	.L5
+ 184 0104 010000EA 	.L4:
+ 185              		.loc 1 41 0
+  41:i2c_tools.c   **** 	else bit=0;										// und bit zuweisen
+ 186              	
+ 187 0108 0030A0E3 		strb	r3, [fp, #-13]
+ 188 010c 0D304BE5 	.L5:
+ 189              		.loc 1 42 0
+  42:i2c_tools.c   **** 	AT91C_BASE_PIOA->PIO_CODR = SCL;				// SCL -> 0
+ 190              	v	r3, #-1610612736
+ 191 0110 0A32A0E3 		mov	r3, r3, asr #19
+ 192 0114 C339A0E1 		mov	r2, #16
+ 193 0118 1020A0E3 		str	r2, [r3, #52]
+ 194 011c 342083E5 		.loc 1 43 0
+  43:i2c_tools.c   **** 	return bit;										// Eingelesenes Bit zurück
+ 195              		r3, [fp, #-13]	@ zero_extendqisi2
+ 196 0120 0D305BE5 		.loc 1 44 0
+  44:i2c_tools.c   **** }
+ 197              	ov	r0, r3
+ 198 0124 0300A0E1 		ldmfd	sp, {r3, fp, sp, pc}
+ 199 0128 08A89DE8 	.LFE3:
+ 201              		.align	2
+ 202              		.global	i2c_wbit
+ 204              	i2c_wbit:
+ 205              	.LFB4:
+ 206              		.loc 1 50 0
+  45:i2c_tools.c   **** 
+  46:i2c_tools.c   **** //**************************************************************
+  47:i2c_tools.c   **** // i2c_wbit
+  48:i2c_tools.c   **** // Ein Bit auf die Datenleitung legen
+  49:i2c_tools.c   **** //**************************************************************
+  50:i2c_tools.c   **** void i2c_wbit(unsigned char bit){
+ 207              	0, pretend = 0, frame = 4
+ 208              		@ frame_needed = 1, uses_anonymous_args = 0
+ 209              		mov	ip, sp
+ 210 012c 0DC0A0E1 	.LCFI7:
+ 211              		stmfd	sp!, {fp, ip, lr, pc}
+ 212 0130 00D82DE9 	.LCFI8:
+ 213              		sub	fp, ip, #4
+ 214 0134 04B04CE2 	.LCFI9:
+ 215              		sub	sp, sp, #4
+ 216 0138 04D04DE2 	.LCFI10:
+ 217              		mov	r3, r0
+ 218 013c 0030A0E1 		strb	r3, [fp, #-16]
+ 219 0140 10304BE5 		.loc 1 51 0
+  51:i2c_tools.c   **** 	if(bit) AT91C_BASE_PIOA->PIO_SODR = SDA;		// Ausgabe von bit: High
+ 220              	, #-16]	@ zero_extendqisi2
+ 221 0144 10305BE5 		cmp	r3, #0
+ 222 0148 000053E3 		beq	.L8
+ 223 014c 0400000A 		mov	r3, #-1610612736
+ 224 0150 0A32A0E3 		mov	r3, r3, asr #19
+ 225 0154 C339A0E1 		mov	r2, #8
+ 226 0158 0820A0E3 		str	r2, [r3, #48]
+ 227 015c 302083E5 		b	.L9
+ 228 0160 030000EA 	.L8:
+ 229              		.loc 1 52 0
+  52:i2c_tools.c   **** 	else AT91C_BASE_PIOA->PIO_CODR = SDA;			//                  Low
+ 230              	-1610612736
+ 231 0164 0A32A0E3 		mov	r3, r3, asr #19
+ 232 0168 C339A0E1 		mov	r2, #8
+ 233 016c 0820A0E3 		str	r2, [r3, #52]
+ 234 0170 342083E5 	.L9:
+ 235              		.loc 1 53 0
+  53:i2c_tools.c   **** 	{	asm("NOP"); asm("NOP"); asm("NOP");			// Setup time
+ 236              	i2c_tools.c" 1
+ 237              		NOP
+ 238 0174 0000A0E1 	@ 0 "" 2
+ 239              	@ 53 "i2c_tools.c" 1
+ 240              		NOP
+ 241 0178 0000A0E1 	@ 0 "" 2
+ 242              	@ 53 "i2c_tools.c" 1
+ 243              		NOP
+ 244 017c 0000A0E1 	@ 0 "" 2
+ 245              		.loc 1 54 0
+  54:i2c_tools.c   **** 		asm("NOP"); asm("NOP"); asm("NOP");
+ 246              	tools.c" 1
+ 247              		NOP
+ 248 0180 0000A0E1 	@ 0 "" 2
+ 249              	@ 54 "i2c_tools.c" 1
+ 250              		NOP
+ 251 0184 0000A0E1 	@ 0 "" 2
+ 252              	@ 54 "i2c_tools.c" 1
+ 253              		NOP
+ 254 0188 0000A0E1 	@ 0 "" 2
+ 255              		.loc 1 55 0
+  55:i2c_tools.c   **** 		asm("NOP"); asm("NOP"); asm("NOP");
+ 256              	tools.c" 1
+ 257              		NOP
+ 258 018c 0000A0E1 	@ 0 "" 2
+ 259              	@ 55 "i2c_tools.c" 1
+ 260              		NOP
+ 261 0190 0000A0E1 	@ 0 "" 2
+ 262              	@ 55 "i2c_tools.c" 1
+ 263              		NOP
+ 264 0194 0000A0E1 	@ 0 "" 2
+ 265              		.loc 1 57 0
+  56:i2c_tools.c   **** 	}
+  57:i2c_tools.c   **** 	AT91C_BASE_PIOA->PIO_SODR = SCL;				// SCL -> 1
+ 266              	-1610612736
+ 267 0198 0A32A0E3 		mov	r3, r3, asr #19
+ 268 019c C339A0E1 		mov	r2, #16
+ 269 01a0 1020A0E3 		str	r2, [r3, #48]
+ 270 01a4 302083E5 		.loc 1 58 0
+  58:i2c_tools.c   **** 	{	asm("NOP"); asm("NOP"); asm("NOP");			// Hold time and clock high time
+ 271              	"i2c_tools.c" 1
+ 272              		NOP
+ 273 01a8 0000A0E1 	@ 0 "" 2
+ 274              	@ 58 "i2c_tools.c" 1
+ 275              		NOP
+ 276 01ac 0000A0E1 	@ 0 "" 2
+ 277              	@ 58 "i2c_tools.c" 1
+ 278              		NOP
+ 279 01b0 0000A0E1 	@ 0 "" 2
+ 280              		.loc 1 59 0
+  59:i2c_tools.c   **** 		asm("NOP"); asm("NOP"); asm("NOP");
+ 281              	tools.c" 1
+ 282              		NOP
+ 283 01b4 0000A0E1 	@ 0 "" 2
+ 284              	@ 59 "i2c_tools.c" 1
+ 285              		NOP
+ 286 01b8 0000A0E1 	@ 0 "" 2
+ 287              	@ 59 "i2c_tools.c" 1
+ 288              		NOP
+ 289 01bc 0000A0E1 	@ 0 "" 2
+ 290              		.loc 1 60 0
+  60:i2c_tools.c   **** 		asm("NOP"); asm("NOP"); asm("NOP");
+ 291              	tools.c" 1
+ 292              		NOP
+ 293 01c0 0000A0E1 	@ 0 "" 2
+ 294              	@ 60 "i2c_tools.c" 1
+ 295              		NOP
+ 296 01c4 0000A0E1 	@ 0 "" 2
+ 297              	@ 60 "i2c_tools.c" 1
+ 298              		NOP
+ 299 01c8 0000A0E1 	@ 0 "" 2
+ 300              		.loc 1 61 0
+  61:i2c_tools.c   **** 		asm("NOP"); asm("NOP"); asm("NOP");
+ 301              	tools.c" 1
+ 302              		NOP
+ 303 01cc 0000A0E1 	@ 0 "" 2
+ 304              	@ 61 "i2c_tools.c" 1
+ 305              		NOP
+ 306 01d0 0000A0E1 	@ 0 "" 2
+ 307              	@ 61 "i2c_tools.c" 1
+ 308              		NOP
+ 309 01d4 0000A0E1 	@ 0 "" 2
+ 310              		.loc 1 62 0
+  62:i2c_tools.c   **** 		asm("NOP"); asm("NOP"); asm("NOP");
+ 311              	tools.c" 1
+ 312              		NOP
+ 313 01d8 0000A0E1 	@ 0 "" 2
+ 314              	@ 62 "i2c_tools.c" 1
+ 315              		NOP
+ 316 01dc 0000A0E1 	@ 0 "" 2
+ 317              	@ 62 "i2c_tools.c" 1
+ 318              		NOP
+ 319 01e0 0000A0E1 	@ 0 "" 2
+ 320              		.loc 1 63 0
+  63:i2c_tools.c   **** 		asm("NOP"); asm("NOP"); asm("NOP");
+ 321              	tools.c" 1
+ 322              		NOP
+ 323 01e4 0000A0E1 	@ 0 "" 2
+ 324              	@ 63 "i2c_tools.c" 1
+ 325              		NOP
+ 326 01e8 0000A0E1 	@ 0 "" 2
+ 327              	@ 63 "i2c_tools.c" 1
+ 328              		NOP
+ 329 01ec 0000A0E1 	@ 0 "" 2
+ 330              		.loc 1 64 0
+  64:i2c_tools.c   **** 		asm("NOP"); asm("NOP"); asm("NOP");
+ 331              	tools.c" 1
+ 332              		NOP
+ 333 01f0 0000A0E1 	@ 0 "" 2
+ 334              	@ 64 "i2c_tools.c" 1
+ 335              		NOP
+ 336 01f4 0000A0E1 	@ 0 "" 2
+ 337              	@ 64 "i2c_tools.c" 1
+ 338              		NOP
+ 339 01f8 0000A0E1 	@ 0 "" 2
+ 340              		.loc 1 65 0
+  65:i2c_tools.c   **** 		asm("NOP"); asm("NOP"); asm("NOP");
+ 341              	tools.c" 1
+ 342              		NOP
+ 343 01fc 0000A0E1 	@ 0 "" 2
+ 344              	@ 65 "i2c_tools.c" 1
+ 345              		NOP
+ 346 0200 0000A0E1 	@ 0 "" 2
+ 347              	@ 65 "i2c_tools.c" 1
+ 348              		NOP
+ 349 0204 0000A0E1 	@ 0 "" 2
+ 350              		.loc 1 67 0
+  66:i2c_tools.c   **** 	}
+  67:i2c_tools.c   **** 	AT91C_BASE_PIOA->PIO_CODR = SCL;				// SCL -> 0
+ 351              	-1610612736
+ 352 0208 0A32A0E3 		mov	r3, r3, asr #19
+ 353 020c C339A0E1 		mov	r2, #16
+ 354 0210 1020A0E3 		str	r2, [r3, #52]
+ 355 0214 342083E5 		.loc 1 68 0
+  68:i2c_tools.c   **** }
+ 356              	d	sp, {r3, fp, sp, pc}
+ 357 0218 08A89DE8 	.LFE4:
+ 359              		.align	2
+ 360              		.global	i2c_wbyte
+ 362              	i2c_wbyte:
+ 363              	.LFB5:
+ 364              		.loc 1 76 0
+  69:i2c_tools.c   **** 
+  70:i2c_tools.c   **** //**************************************************************
+  71:i2c_tools.c   **** // i2c_wbyte
+  72:i2c_tools.c   **** // Ein Byte auf den I2C Bus schreiben
+  73:i2c_tools.c   **** // Übergabewert:	Byte, welches geschrieben werden soll
+  74:i2c_tools.c   **** // Rückgabewert:	ACK
+  75:i2c_tools.c   **** //**************************************************************
+  76:i2c_tools.c   **** unsigned char i2c_wbyte(unsigned char byte){
+ 365              	 0, pretend = 0, frame = 12
+ 366              		@ frame_needed = 1, uses_anonymous_args = 0
+ 367              		mov	ip, sp
+ 368 021c 0DC0A0E1 	.LCFI11:
+ 369              		stmfd	sp!, {fp, ip, lr, pc}
+ 370 0220 00D82DE9 	.LCFI12:
+ 371              		sub	fp, ip, #4
+ 372 0224 04B04CE2 	.LCFI13:
+ 373              		sub	sp, sp, #12
+ 374 0228 0CD04DE2 	.LCFI14:
+ 375              		mov	r3, r0
+ 376 022c 0030A0E1 		strb	r3, [fp, #-20]
+ 377 0230 14304BE5 		.loc 1 79 0
+  77:i2c_tools.c   **** 	signed char i;									// Variablendeklaration
+  78:i2c_tools.c   **** 
+  79:i2c_tools.c   **** 	for(i=7;i>=0;i--){								// Jedes Bit seriell senden
+ 378              	strb	r3, [fp, #-13]
+ 379 0234 0730A0E3 		b	.L12
+ 380 0238 0D304BE5 	.L13:
+ 381 023c 0C0000EA 		.loc 1 80 0
+ 382              		ldrsb	r2, [fp, #-13]
+  80:i2c_tools.c   **** 		i2c_wbit(((1<<i) & byte)>>i);				// Bit aus dem Byte lesen + senden
+ 383              	r3, #1
+ 384 0240 DD205BE1 		mov	r2, r3, asl r2
+ 385 0244 0130A0E3 		ldrb	r3, [fp, #-20]	@ zero_extendqisi2
+ 386 0248 1322A0E1 		and	r2, r2, r3
+ 387 024c 14305BE5 		ldrsb	r3, [fp, #-13]
+ 388 0250 032002E0 		mov	r3, r2, asr r3
+ 389 0254 DD305BE1 		and	r3, r3, #255
+ 390 0258 5233A0E1 		mov	r0, r3
+ 391 025c FF3003E2 		bl	i2c_wbit
+ 392 0260 0300A0E1 		.loc 1 79 0
+ 393 0264 FEFFFFEB 		ldrb	r3, [fp, #-13]
+ 394              		sub	r3, r3, #1
+ 395 0268 0D305BE5 		strb	r3, [fp, #-13]
+ 396 026c 013043E2 	.L12:
+ 397 0270 0D304BE5 		ldrsb	r3, [fp, #-13]
+ 398              		cmp	r3, #0
+ 399 0274 DD305BE1 		bge	.L13
+ 400 0278 000053E3 		.loc 1 82 0
+ 401 027c EFFFFFAA 		mov	r3, #-1610612736
+  81:i2c_tools.c   **** 	}
+  82:i2c_tools.c   **** 	AT91C_BASE_PIOA->PIO_SODR = SDA;				// SDA -> 1 - Leitung für ACK freigeben
+ 402              	9
+ 403 0280 0A32A0E3 		mov	r2, #8
+ 404 0284 C339A0E1 		str	r2, [r3, #48]
+ 405 0288 0820A0E3 		.loc 1 83 0
+ 406 028c 302083E5 		bl	i2c_rbit
+  83:i2c_tools.c   **** 	if (i2c_rbit()){								// falls keine Rückmeldung vom Slave (ACK=1):
+ 407              	r3, r0
+ 408 0290 FEFFFFEB 		cmp	r3, #0
+ 409 0294 0030A0E1 		beq	.L14
+ 410 0298 000053E3 		.loc 1 84 0
+ 411 029c 0300000A 		bl	i2c_stop
+  84:i2c_tools.c   **** 		i2c_stop();									//  Fehler	-> Ende des Protokolls
+ 412              	 1 85 0
+ 413 02a0 FEFFFFEB 		mov	r3, #1
+  85:i2c_tools.c   **** 		return 1;									// 			-> zurück mit ACK = 1
+ 414              	tr	r3, [fp, #-24]
+ 415 02a4 0130A0E3 		b	.L15
+ 416 02a8 18300BE5 	.L14:
+ 417 02ac 010000EA 		.loc 1 87 0
+ 418              		mov	r3, #0
+  86:i2c_tools.c   **** 	}
+  87:i2c_tools.c   **** 	return 0;										// zurück mit ACK = 0
+ 419              	r3, [fp, #-24]
+ 420 02b0 0030A0E3 	.L15:
+ 421 02b4 18300BE5 		ldr	r3, [fp, #-24]
+ 422              		.loc 1 88 0
+ 423 02b8 18301BE5 		mov	r0, r3
+  88:i2c_tools.c   **** }
+ 424              	sp, fp, #12
+ 425 02bc 0300A0E1 		ldmfd	sp, {fp, sp, pc}
+ 426 02c0 0CD04BE2 	.LFE5:
+ 428              		.align	2
+ 429              		.global	i2c_start
+ 431              	i2c_start:
+ 432              	.LFB6:
+ 433              		.loc 1 101 0
+ 434              		@ args = 0, pretend = 0, frame = 4
+  89:i2c_tools.c   **** 
+  90:i2c_tools.c   **** //**************************************************************
+  91:i2c_tools.c   **** // i2c_start
+  92:i2c_tools.c   **** // Startbedingung auf dem I2C-Bus generieren
+  93:i2c_tools.c   **** // Übergabewert:	Adresse des I2C Bausteines inkl. RW
+  94:i2c_tools.c   **** //					A6	A5	A4	A3	A3	A1	A0	RW
+  95:i2c_tools.c   **** //					A[6..0] :	Bausteinadresse
+  96:i2c_tools.c   **** //					RW = 0  :	Nächter Zugriff schreibend
+  97:i2c_tools.c   **** //					RW = 1  :	Nächter Zugriff lesend
+  98:i2c_tools.c   **** // Rückgabewert:	ACK = 0 :	Slave hat erfolgreich quittiert
+  99:i2c_tools.c   **** //					ACK = 1 :	kein Slave hat geantwortet
+ 100:i2c_tools.c   **** //**************************************************************
+ 101:i2c_tools.c   **** unsigned char i2c_start(unsigned char sladr){
+ 435              	eded = 1, uses_anonymous_args = 0
+ 436              		mov	ip, sp
+ 437              	.LCFI15:
+ 438 02c8 0DC0A0E1 		stmfd	sp!, {fp, ip, lr, pc}
+ 439              	.LCFI16:
+ 440 02cc 00D82DE9 		sub	fp, ip, #4
+ 441              	.LCFI17:
+ 442 02d0 04B04CE2 		sub	sp, sp, #4
+ 443              	.LCFI18:
+ 444 02d4 04D04DE2 		mov	r3, r0
+ 445              		strb	r3, [fp, #-16]
+ 446 02d8 0030A0E1 		.loc 1 102 0
+ 447 02dc 10304BE5 		mov	r3, #-2147483648
+ 102:i2c_tools.c   **** 	AT91C_BASE_PMC->PMC_PCER = (1<<AT91C_ID_PIOA);	// PIO-Takt einschalten
+ 448              	asr #21
+ 449 02e0 0231A0E3 		mov	r2, #4
+ 450 02e4 C33AA0E1 		str	r2, [r3, #16]
+ 451 02e8 0420A0E3 		.loc 1 103 0
+ 452 02ec 102083E5 		mov	r3, #-1610612736
+ 103:i2c_tools.c   **** 	AT91C_BASE_PIOA->PIO_MDER = (SDA|SCL);			// Pins auf 'Open Drain'
+ 453              	r3, r3, asr #19
+ 454 02f0 0A32A0E3 		mov	r2, #24
+ 455 02f4 C339A0E1 		str	r2, [r3, #80]
+ 456 02f8 1820A0E3 		.loc 1 104 0
+ 457 02fc 502083E5 		mov	r3, #-1610612736
+ 104:i2c_tools.c   **** 	AT91C_BASE_PIOA->PIO_PPUDR = (SDA|SCL);			// Pull-Ups aus
+ 458              	r3, r3, asr #19
+ 459 0300 0A32A0E3 		mov	r2, #24
+ 460 0304 C339A0E1 		str	r2, [r3, #96]
+ 461 0308 1820A0E3 		.loc 1 105 0
+ 462 030c 602083E5 		mov	r3, #-1610612736
+ 105:i2c_tools.c   **** 	AT91C_BASE_PIOA->PIO_SODR = (SDA|SCL);			// SDA+SCL -> 1
+ 463              	r3, r3, asr #19
+ 464 0310 0A32A0E3 		mov	r2, #24
+ 465 0314 C339A0E1 		str	r2, [r3, #48]
+ 466 0318 1820A0E3 		.loc 1 106 0
+ 467 031c 302083E5 		mov	r3, #-1610612736
+ 106:i2c_tools.c   **** 	AT91C_BASE_PIOA->PIO_OER = (SDA|SCL);			// SDA, SCL aktivieren
+ 468              	r3, r3, asr #19
+ 469 0320 0A32A0E3 		mov	r2, #24
+ 470 0324 C339A0E1 		str	r2, [r3, #16]
+ 471 0328 1820A0E3 		.loc 1 107 0
+ 472 032c 102083E5 	@ 107 "i2c_tools.c" 1
+ 107:i2c_tools.c   **** 	{	asm("NOP"); asm("NOP"); asm("NOP");			// Start condition setup time
+ 473              	@ 0 "" 2
+ 474              	@ 107 "i2c_tools.c" 1
+ 475 0330 0000A0E1 		NOP
+ 476              	@ 0 "" 2
+ 477              	@ 107 "i2c_tools.c" 1
+ 478 0334 0000A0E1 		NOP
+ 479              	@ 0 "" 2
+ 480              		.loc 1 108 0
+ 481 0338 0000A0E1 	@ 108 "i2c_tools.c" 1
+ 482              		NOP
+ 108:i2c_tools.c   **** 		asm("NOP"); asm("NOP"); asm("NOP");
+ 483              	 108 "i2c_tools.c" 1
+ 484              		NOP
+ 485 033c 0000A0E1 	@ 0 "" 2
+ 486              	@ 108 "i2c_tools.c" 1
+ 487              		NOP
+ 488 0340 0000A0E1 	@ 0 "" 2
+ 489              		.loc 1 109 0
+ 490              	@ 109 "i2c_tools.c" 1
+ 491 0344 0000A0E1 		NOP
+ 492              	@ 0 "" 2
+ 109:i2c_tools.c   **** 		asm("NOP"); asm("NOP"); asm("NOP");
+ 493              	_tools.c" 1
+ 494              		NOP
+ 495 0348 0000A0E1 	@ 0 "" 2
+ 496              	@ 109 "i2c_tools.c" 1
+ 497              		NOP
+ 498 034c 0000A0E1 	@ 0 "" 2
+ 499              		.loc 1 110 0
+ 500              	@ 110 "i2c_tools.c" 1
+ 501 0350 0000A0E1 		NOP
+ 502              	@ 0 "" 2
+ 110:i2c_tools.c   **** 		asm("NOP"); asm("NOP"); asm("NOP");
+ 503              	_tools.c" 1
+ 504              		NOP
+ 505 0354 0000A0E1 	@ 0 "" 2
+ 506              	@ 110 "i2c_tools.c" 1
+ 507              		NOP
+ 508 0358 0000A0E1 	@ 0 "" 2
+ 509              		.loc 1 112 0
+ 510              		mov	r3, #-1610612736
+ 511 035c 0000A0E1 		mov	r3, r3, asr #19
+ 512              		mov	r2, #8
+ 111:i2c_tools.c   **** 	}
+ 112:i2c_tools.c   **** 	AT91C_BASE_PIOA->PIO_CODR = SDA;				// Start condition hold time
+ 513              	r3, #52]
+ 514 0360 0A32A0E3 		.loc 1 113 0
+ 515 0364 C339A0E1 	@ 113 "i2c_tools.c" 1
+ 516 0368 0820A0E3 		NOP
+ 517 036c 342083E5 	@ 0 "" 2
+ 113:i2c_tools.c   **** 	{	asm("NOP"); asm("NOP"); asm("NOP");
+ 518              	 "i2c_tools.c" 1
+ 519              		NOP
+ 520 0370 0000A0E1 	@ 0 "" 2
+ 521              	@ 113 "i2c_tools.c" 1
+ 522              		NOP
+ 523 0374 0000A0E1 	@ 0 "" 2
+ 524              		.loc 1 114 0
+ 525              	@ 114 "i2c_tools.c" 1
+ 526 0378 0000A0E1 		NOP
+ 527              	@ 0 "" 2
+ 114:i2c_tools.c   **** 		asm("NOP"); asm("NOP"); asm("NOP");
+ 528              	_tools.c" 1
+ 529              		NOP
+ 530 037c 0000A0E1 	@ 0 "" 2
+ 531              	@ 114 "i2c_tools.c" 1
+ 532              		NOP
+ 533 0380 0000A0E1 	@ 0 "" 2
+ 534              		.loc 1 115 0
+ 535              	@ 115 "i2c_tools.c" 1
+ 536 0384 0000A0E1 		NOP
+ 537              	@ 0 "" 2
+ 115:i2c_tools.c   **** 		asm("NOP"); asm("NOP"); asm("NOP");
+ 538              	_tools.c" 1
+ 539              		NOP
+ 540 0388 0000A0E1 	@ 0 "" 2
+ 541              	@ 115 "i2c_tools.c" 1
+ 542              		NOP
+ 543 038c 0000A0E1 	@ 0 "" 2
+ 544              		.loc 1 116 0
+ 545              	@ 116 "i2c_tools.c" 1
+ 546 0390 0000A0E1 		NOP
+ 547              	@ 0 "" 2
+ 116:i2c_tools.c   **** 		asm("NOP"); asm("NOP"); asm("NOP");
+ 548              	_tools.c" 1
+ 549              		NOP
+ 550 0394 0000A0E1 	@ 0 "" 2
+ 551              	@ 116 "i2c_tools.c" 1
+ 552              		NOP
+ 553 0398 0000A0E1 	@ 0 "" 2
+ 554              		.loc 1 118 0
+ 555              		mov	r3, #-1610612736
+ 556 039c 0000A0E1 		mov	r3, r3, asr #19
+ 557              		mov	r2, #16
+ 117:i2c_tools.c   **** 	}
+ 118:i2c_tools.c   **** 	AT91C_BASE_PIOA->PIO_CODR = SCL;				// SCL -> 0
+ 558              	r3, #52]
+ 559 03a0 0A32A0E3 		.loc 1 119 0
+ 560 03a4 C339A0E1 		ldrb	r3, [fp, #-16]	@ zero_extendqisi2
+ 561 03a8 1020A0E3 		mov	r0, r3
+ 562 03ac 342083E5 		bl	i2c_wbyte
+ 119:i2c_tools.c   **** 	return i2c_wbyte(sladr);						// ACK zurück
+ 563              	r3, r0
+ 564 03b0 10305BE5 		.loc 1 120 0
+ 565 03b4 0300A0E1 		mov	r0, r3
+ 566 03b8 FEFFFFEB 		ldmfd	sp, {r3, fp, sp, pc}
+ 567 03bc 0030A0E1 	.LFE6:
+ 120:i2c_tools.c   **** }
+ 568              	e	i2c_start, .-i2c_start
+ 569 03c0 0300A0E1 		.align	2
+ 570 03c4 08A89DE8 		.global	i2c_rbyte
+ 572              	i2c_rbyte:
+ 573              	.LFB7:
+ 574              		.loc 1 129 0
+ 575              		@ args = 0, pretend = 0, frame = 8
+ 576              		@ frame_needed = 1, uses_anonymous_args = 0
+ 577              		mov	ip, sp
+ 121:i2c_tools.c   **** 
+ 122:i2c_tools.c   **** //**************************************************************
+ 123:i2c_tools.c   **** // i2c_rbyte
+ 124:i2c_tools.c   **** // Ein Byte vom I2C Bus lesen
+ 125:i2c_tools.c   **** // Übergabewert:	ACK = 0:	Es soll anschließend ein weiteres Byte gelesen werden
+ 126:i2c_tools.c   **** //					ACK = 1:	Im Anschluß Beendigung der Datenübertragung
+ 127:i2c_tools.c   **** // Rückgabewert:	gibt ausgelesenes Byte zurück
+ 128:i2c_tools.c   **** //**************************************************************
+ 129:i2c_tools.c   **** unsigned char i2c_rbyte(unsigned char ACK){
+ 578              	stmfd	sp!, {fp, ip, lr, pc}
+ 579              	.LCFI20:
+ 580              		sub	fp, ip, #4
+ 581 03c8 0DC0A0E1 	.LCFI21:
+ 582              		sub	sp, sp, #8
+ 583 03cc 00D82DE9 	.LCFI22:
+ 584              		mov	r3, r0
+ 585 03d0 04B04CE2 		strb	r3, [fp, #-20]
+ 586              		.loc 1 130 0
+ 587 03d4 08D04DE2 		mov	r3, #0
+ 588              		strb	r3, [fp, #-14]
+ 589 03d8 0030A0E1 		.loc 1 133 0
+ 590 03dc 14304BE5 		mov	r3, #7
+ 130:i2c_tools.c   **** 	unsigned char byte = 0;
+ 591              	, #-13]
+ 592 03e0 0030A0E3 		b	.L20
+ 593 03e4 0E304BE5 	.L21:
+ 131:i2c_tools.c   **** 	signed char i;									// Variablendeklaration
+ 132:i2c_tools.c   **** 
+ 133:i2c_tools.c   **** 	for(i=7;i>=0;i--){								// Jedes Bit seriell senden
+ 594              	oc 1 134 0
+ 595 03e8 0730A0E3 		bl	i2c_rbit
+ 596 03ec 0D304BE5 		mov	r3, r0
+ 597 03f0 0E0000EA 		mov	r2, r3
+ 598              		ldrsb	r3, [fp, #-13]
+ 134:i2c_tools.c   **** 			byte |=(i2c_rbit()<<i);				// Bit aus dem Byte lesen + senden
+ 599              	r3, r2, asl r3
+ 600 03f4 FEFFFFEB 		and	r3, r3, #255
+ 601 03f8 0030A0E1 		ldrb	r2, [fp, #-14]	@ zero_extendqisi2
+ 602 03fc 0320A0E1 		mov	r1, r3
+ 603 0400 DD305BE1 		mov	r3, r2
+ 604 0404 1233A0E1 		orr	r3, r1, r3
+ 605 0408 FF3003E2 		and	r3, r3, #255
+ 606 040c 0E205BE5 		strb	r3, [fp, #-14]
+ 607 0410 0310A0E1 		.loc 1 133 0
+ 608 0414 0230A0E1 		ldrb	r3, [fp, #-13]
+ 609 0418 033081E1 		sub	r3, r3, #1
+ 610 041c FF3003E2 		strb	r3, [fp, #-13]
+ 611 0420 0E304BE5 	.L20:
+ 612              		ldrsb	r3, [fp, #-13]
+ 613 0424 0D305BE5 		cmp	r3, #0
+ 614 0428 013043E2 		bge	.L21
+ 615 042c 0D304BE5 		.loc 1 136 0
+ 616              		ldrb	r3, [fp, #-20]	@ zero_extendqisi2
+ 617 0430 DD305BE1 		mov	r0, r3
+ 618 0434 000053E3 		bl	i2c_wbit
+ 619 0438 EDFFFFAA 		.loc 1 137 0
+ 135:i2c_tools.c   **** 	}
+ 136:i2c_tools.c   **** 	i2c_wbit(ACK);
+ 620              	
+ 621 043c 14305BE5 		mov	r3, r3, asr #19
+ 622 0440 0300A0E1 		mov	r2, #8
+ 623 0444 FEFFFFEB 		str	r2, [r3, #48]
+ 137:i2c_tools.c   **** 	AT91C_BASE_PIOA->PIO_SODR = SDA;				// SDA -> 1 - Leitung für ACK freigeben
+ 624              	oc 1 139 0
+ 625 0448 0A32A0E3 		ldrb	r3, [fp, #-14]	@ zero_extendqisi2
+ 626 044c C339A0E1 		.loc 1 140 0
+ 627 0450 0820A0E3 		mov	r0, r3
+ 628 0454 302083E5 		sub	sp, fp, #12
+ 138:i2c_tools.c   **** 
+ 139:i2c_tools.c   **** 	return byte;
+ 629              	d	sp, {fp, sp, pc}
+ 630 0458 0E305BE5 	.LFE7:
+ 140:i2c_tools.c   **** }
+ 631              	size	i2c_rbyte, .-i2c_rbyte
+ 632 045c 0300A0E1 		.section	.debug_frame,"",%progbits
+ 633 0460 0CD04BE2 	.Lframe0:
+ 634 0464 00A89DE8 		.4byte	.LECIE0-.LSCIE0
+ 635              	.LSCIE0:
+ 636              		.4byte	0xffffffff
+ 803              		.4byte	.LCFI0-.Ltext0
+DEFINED SYMBOLS
+                            *ABS*:00000000 i2c_tools.c
+C:\Users\Robin\AppData\Local\Temp/ccuZQjQ5.s:13     .text:00000000 i2c_stop
+C:\Users\Robin\AppData\Local\Temp/ccuZQjQ5.s:19     .text:00000000 $a
+C:\Users\Robin\AppData\Local\Temp/ccuZQjQ5.s:107    .text:00000088 i2c_rbit
+C:\Users\Robin\AppData\Local\Temp/ccuZQjQ5.s:205    .text:0000012c i2c_wbit
+C:\Users\Robin\AppData\Local\Temp/ccuZQjQ5.s:363    .text:0000021c i2c_wbyte
+C:\Users\Robin\AppData\Local\Temp/ccuZQjQ5.s:433    .text:000002c8 i2c_start
+C:\Users\Robin\AppData\Local\Temp/ccuZQjQ5.s:576    .text:000003c8 i2c_rbyte
+C:\Users\Robin\AppData\Local\Temp/ccuZQjQ5.s:639    .debug_frame:00000000 $d
+C:\Users\Robin\AppData\Local\Temp/ccuZQjQ5.s:807    .debug_loc:00000000 $d
+
+NO UNDEFINED SYMBOLS

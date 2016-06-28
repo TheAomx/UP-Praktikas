@@ -1,0 +1,415 @@
+
+main.elf:     file format elf32-littlearm
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000448  00000000  00000000  00008000  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .comment      00000036  00000000  00000000  00008448  2**0
+                  CONTENTS, READONLY
+  2 .debug_aranges 00000080  00000000  00000000  00008480  2**3
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_pubnames 00000070  00000000  00000000  00008500  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_info   000007f1  00000000  00000000  00008570  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_abbrev 000001d1  00000000  00000000  00008d61  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   000001a1  00000000  00000000  00008f32  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_frame  000000b0  00000000  00000000  000090d4  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    00000383  00000000  00000000  00009184  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_loc    000000a8  00000000  00000000  00009507  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .ARM.attributes 00000010  00000000  00000000  000095af  2**0
+                  CONTENTS, READONLY
+Disassembly of section .text:
+
+00000000 <_startup>:
+   0:	ea000010 	b	48 <InitReset>
+
+00000004 <undefvec>:
+   4:	eafffffe 	b	4 <undefvec>
+
+00000008 <swivec>:
+   8:	eafffffe 	b	8 <swivec>
+
+0000000c <pabtvec>:
+   c:	eafffffe 	b	c <pabtvec>
+
+00000010 <dabtvec>:
+  10:	eafffffe 	b	10 <dabtvec>
+
+00000014 <rsvdvec>:
+  14:	eafffffe 	b	14 <rsvdvec>
+
+00000018 <irqvec>:
+  18:	ea000027 	b	bc <IRQ_Handler_Entry>
+
+0000001c <FIQ_Handler_Entry>:
+  1c:	e1a09000 	mov	r9, r0
+  20:	e5980104 	ldr	r0, [r8, #260]
+  24:	e321f0d3 	msr	CPSR_c, #211	; 0xd3
+  28:	e92d500e 	push	{r1, r2, r3, ip, lr}
+  2c:	e1a0e00f 	mov	lr, pc
+  30:	e12fff10 	bx	r0
+  34:	e8bd500e 	pop	{r1, r2, r3, ip, lr}
+  38:	e321f0d1 	msr	CPSR_c, #209	; 0xd1
+  3c:	e1a00009 	mov	r0, r9
+  40:	e25ef004 	subs	pc, lr, #4	; 0x4
+
+00000044 <.RAM_TOP>:
+  44:	00204000 	.word	0x00204000
+
+00000048 <InitReset>:
+  48:	e51fd00c 	ldr	sp, [pc, #-12]	; 44 <.RAM_TOP>
+  4c:	e59f00c4 	ldr	r0, [pc, #196]	; 118 <AT91F_Spurious_handler+0x4>
+  50:	e1a0e00f 	mov	lr, pc
+  54:	e12fff10 	bx	r0
+  58:	e1a0000d 	mov	r0, sp
+  5c:	e321f0d1 	msr	CPSR_c, #209	; 0xd1
+  60:	e59f80b4 	ldr	r8, [pc, #180]	; 11c <AT91F_Spurious_handler+0x8>
+  64:	e321f0d2 	msr	CPSR_c, #210	; 0xd2
+  68:	e1a0d000 	mov	sp, r0
+  6c:	e2400060 	sub	r0, r0, #96	; 0x60
+  70:	e321f013 	msr	CPSR_c, #19	; 0x13
+  74:	e1a0d000 	mov	sp, r0
+  78:	e59f10a0 	ldr	r1, [pc, #160]	; 120 <AT91F_Spurious_handler+0xc>
+  7c:	e59f20a0 	ldr	r2, [pc, #160]	; 124 <AT91F_Spurious_handler+0x10>
+  80:	e59f30a0 	ldr	r3, [pc, #160]	; 128 <AT91F_Spurious_handler+0x14>
+
+00000084 <LoopRel>:
+  84:	e1520003 	.word	0xe1520003
+  88:	34910004 	.word	0x34910004
+  8c:	34820004 	.word	0x34820004
+  90:	3afffffb 	.word	0x3afffffb
+  94:	e3a00000 	.word	0xe3a00000
+  98:	e59f108c 	.word	0xe59f108c
+  9c:	e59f208c 	.word	0xe59f208c
+
+000000a0 <LoopZI>:
+  a0:	e1510002 	.word	0xe1510002
+  a4:	34810004 	.word	0x34810004
+  a8:	3afffffc 	.word	0x3afffffc
+  ac:	e59fe080 	.word	0xe59fe080
+  b0:	e59f0080 	.word	0xe59f0080
+  b4:	e12fff10 	.word	0xe12fff10
+
+000000b8 <exit>:
+  b8:	eafffffe 	.word	0xeafffffe
+
+000000bc <IRQ_Handler_Entry>:
+  bc:	e24ee004 	.word	0xe24ee004
+  c0:	e92d4000 	.word	0xe92d4000
+  c4:	e14fe000 	.word	0xe14fe000
+  c8:	e92d4000 	.word	0xe92d4000
+  cc:	e92d0001 	.word	0xe92d0001
+  d0:	e59fe044 	.word	0xe59fe044
+  d4:	e59e0100 	.word	0xe59e0100
+  d8:	e58ee100 	.word	0xe58ee100
+  dc:	e321f013 	.word	0xe321f013
+  e0:	e92d500e 	.word	0xe92d500e
+  e4:	e1a0e00f 	.word	0xe1a0e00f
+  e8:	e12fff10 	.word	0xe12fff10
+  ec:	e8bd500e 	.word	0xe8bd500e
+  f0:	e321f092 	.word	0xe321f092
+  f4:	e59fe020 	.word	0xe59fe020
+  f8:	e58ee130 	.word	0xe58ee130
+  fc:	e8bd0001 	.word	0xe8bd0001
+ 100:	e8bd4000 	.word	0xe8bd4000
+ 104:	e16ff00e 	.word	0xe16ff00e
+ 108:	e8fd8000 	.word	0xe8fd8000
+
+0000010c <AT91F_Default_FIQ_handler>:
+ 10c:	eafffffe 	.word	0xeafffffe
+
+00000110 <AT91F_Default_IRQ_handler>:
+ 110:	eafffffe 	.word	0xeafffffe
+
+00000114 <AT91F_Spurious_handler>:
+ 114:	eafffffe 	.word	0xeafffffe
+ 118:	0000013c 	.word	0x0000013c
+ 11c:	fffff000 	.word	0xfffff000
+ 120:	00000448 	.word	0x00000448
+ 124:	00200000 	.word	0x00200000
+ 128:	00200000 	.word	0x00200000
+ 12c:	00200000 	.word	0x00200000
+ 130:	00200000 	.word	0x00200000
+ 134:	000000b8 	.word	0x000000b8
+ 138:	0000027c 	.word	0x0000027c
+
+0000013c <AT91F_LowLevelInit>:
+//* \brief This function performs very low level HW initialization
+//*        this function can be use a Stack, depending the compilation
+//*        optimization mode
+//*----------------------------------------------------------------------------
+void AT91F_LowLevelInit( void)
+{  int i;
+ 13c:	e1a0c00d 	mov	ip, sp
+ 140:	e92dd800 	push	{fp, ip, lr, pc}
+ 144:	e24cb004 	sub	fp, ip, #4	; 0x4
+ 148:	e24dd004 	sub	sp, sp, #4	; 0x4
+  // Disable Watchdog
+  AT91C_BASE_WDTC->WDTC_WDMR= AT91C_WDTC_WDDIS;
+ 14c:	e3a0332a 	mov	r3, #-1476395008	; 0xa8000000
+ 150:	e1a03ac3 	asr	r3, r3, #21
+ 154:	e3a02902 	mov	r2, #32768	; 0x8000
+ 158:	e5832004 	str	r2, [r3, #4]
+  // Set MCK at 24 MHz
+  // Enabling the Main Oscillator:
+  AT91C_BASE_PMC->PMC_MOR = ( (AT91C_CKGR_OSCOUNT) & (0x10 << 8)) | AT91C_CKGR_MOSCEN ;
+ 15c:	e3a02102 	mov	r2, #-2147483648	; 0x80000000
+ 160:	e1a02ac2 	asr	r2, r2, #21
+ 164:	e3a03a01 	mov	r3, #4096	; 0x1000
+ 168:	e2833001 	add	r3, r3, #1	; 0x1
+ 16c:	e5823020 	str	r3, [r2, #32]
+  // Wait the startup time
+  while(!(AT91C_BASE_PMC->PMC_SR & AT91C_PMC_MOSCS));
+ 170:	e3a03102 	mov	r3, #-2147483648	; 0x80000000
+ 174:	e1a03ac3 	asr	r3, r3, #21
+ 178:	e5933068 	ldr	r3, [r3, #104]
+ 17c:	e2033001 	and	r3, r3, #1	; 0x1
+ 180:	e3530000 	cmp	r3, #0	; 0x0
+ 184:	0afffff9 	beq	170 <AT91F_LowLevelInit+0x34>
+  // CPU-Clock: MAIN_CLK / 4 (3 MHz)
+  AT91C_BASE_PMC->PMC_MCKR = AT91C_PMC_CSS_MAIN_CLK | AT91C_PMC_PRES_CLK_4;
+ 188:	e3a03102 	mov	r3, #-2147483648	; 0x80000000
+ 18c:	e1a03ac3 	asr	r3, r3, #21
+ 190:	e3a02009 	mov	r2, #9	; 0x9
+ 194:	e5832030 	str	r2, [r3, #48]
+  // wait until MCKRDY in PMC_SR is set
+  while(!(AT91C_BASE_PMC->PMC_SR & AT91C_PMC_MCKRDY));
+ 198:	e3a03102 	mov	r3, #-2147483648	; 0x80000000
+ 19c:	e1a03ac3 	asr	r3, r3, #21
+ 1a0:	e5933068 	ldr	r3, [r3, #104]
+ 1a4:	e2033008 	and	r3, r3, #8	; 0x8
+ 1a8:	e3530000 	cmp	r3, #0	; 0x0
+ 1ac:	0afffff9 	beq	198 <AT91F_LowLevelInit+0x5c>
+  // setting PLL (96 MHz)
+  AT91C_BASE_PMC->PMC_PLLR = ((AT91C_CKGR_DIV      & 8) |
+ 1b0:	e3a02102 	mov	r2, #-2147483648	; 0x80000000
+ 1b4:	e1a02ac2 	asr	r2, r2, #21
+ 1b8:	e3a039fd 	mov	r3, #4145152	; 0x3f4000
+ 1bc:	e2433ffe 	sub	r3, r3, #1016	; 0x3f8
+ 1c0:	e582302c 	str	r3, [r2, #44]
+                              (AT91C_CKGR_PLLCOUNT & (60 << 8)) |
+                              (AT91C_CKGR_MUL      & (63 << 16)));
+  // Wait the startup time
+  while(!(AT91C_BASE_PMC->PMC_SR & AT91C_PMC_LOCK));
+ 1c4:	e3a03102 	mov	r3, #-2147483648	; 0x80000000
+ 1c8:	e1a03ac3 	asr	r3, r3, #21
+ 1cc:	e5933068 	ldr	r3, [r3, #104]
+ 1d0:	e2033004 	and	r3, r3, #4	; 0x4
+ 1d4:	e3530000 	cmp	r3, #0	; 0x0
+ 1d8:	0afffff9 	beq	1c4 <AT91F_LowLevelInit+0x88>
+  // CPU-Clock: PLL / 4 (24 MHz)
+  AT91C_BASE_PMC->PMC_MCKR = AT91C_PMC_CSS_PLL_CLK | AT91C_PMC_PRES_CLK_4;
+ 1dc:	e3a03102 	mov	r3, #-2147483648	; 0x80000000
+ 1e0:	e1a03ac3 	asr	r3, r3, #21
+ 1e4:	e3a0200b 	mov	r2, #11	; 0xb
+ 1e8:	e5832030 	str	r2, [r3, #48]
+  // wait until MCKRDY in PMC_SR is set
+  while(!(AT91C_BASE_PMC->PMC_SR & AT91C_PMC_MCKRDY));
+ 1ec:	e3a03102 	mov	r3, #-2147483648	; 0x80000000
+ 1f0:	e1a03ac3 	asr	r3, r3, #21
+ 1f4:	e5933068 	ldr	r3, [r3, #104]
+ 1f8:	e2033008 	and	r3, r3, #8	; 0x8
+ 1fc:	e3530000 	cmp	r3, #0	; 0x0
+ 200:	0afffff9 	beq	1ec <AT91F_LowLevelInit+0xb0>
+  //  Set Flash Waite state
+  //  if MCK = 24MHz I have 36 Cycle for 1.5 usecond ( flied MC_FMR->FMCN)
+  AT91C_BASE_MC->MC_FMR = ((AT91C_MC_FMCN)&(36<<16)) | AT91C_MC_FWS_0FWS ;
+ 204:	e3e020ff 	mvn	r2, #255	; 0xff
+ 208:	e3a03709 	mov	r3, #2359296	; 0x240000
+ 20c:	e5823060 	str	r3, [r2, #96]
+  // Set up the default interrupts handler vectors
+  AT91C_BASE_AIC->AIC_SVR[0] = (int) AT91F_Default_FIQ_handler ;
+ 210:	e3a03102 	mov	r3, #-2147483648	; 0x80000000
+ 214:	e1a039c3 	asr	r3, r3, #19
+ 218:	e59f2050 	ldr	r2, [pc, #80]	; 270 <AT91F_LowLevelInit+0x134>
+ 21c:	e5832080 	str	r2, [r3, #128]
+  for (i=1;i<31; i++)
+ 220:	e3a03001 	mov	r3, #1	; 0x1
+ 224:	e50b3010 	str	r3, [fp, #-16]
+ 228:	ea000008 	b	250 <AT91F_LowLevelInit+0x114>
+  {
+	  AT91C_BASE_AIC->AIC_SVR[i] = (int) AT91F_Default_IRQ_handler ;
+ 22c:	e3a02102 	mov	r2, #-2147483648	; 0x80000000
+ 230:	e1a029c2 	asr	r2, r2, #19
+ 234:	e51b3010 	ldr	r3, [fp, #-16]
+ 238:	e59f1034 	ldr	r1, [pc, #52]	; 274 <AT91F_LowLevelInit+0x138>
+ 23c:	e2833020 	add	r3, r3, #32	; 0x20
+ 240:	e7821103 	str	r1, [r2, r3, lsl #2]
+  //  Set Flash Waite state
+  //  if MCK = 24MHz I have 36 Cycle for 1.5 usecond ( flied MC_FMR->FMCN)
+  AT91C_BASE_MC->MC_FMR = ((AT91C_MC_FMCN)&(36<<16)) | AT91C_MC_FWS_0FWS ;
+  // Set up the default interrupts handler vectors
+  AT91C_BASE_AIC->AIC_SVR[0] = (int) AT91F_Default_FIQ_handler ;
+  for (i=1;i<31; i++)
+ 244:	e51b3010 	ldr	r3, [fp, #-16]
+ 248:	e2833001 	add	r3, r3, #1	; 0x1
+ 24c:	e50b3010 	str	r3, [fp, #-16]
+ 250:	e51b3010 	ldr	r3, [fp, #-16]
+ 254:	e353001e 	cmp	r3, #30	; 0x1e
+ 258:	dafffff3 	ble	22c <AT91F_LowLevelInit+0xf0>
+  {
+	  AT91C_BASE_AIC->AIC_SVR[i] = (int) AT91F_Default_IRQ_handler ;
+  }
+  AT91C_BASE_AIC->AIC_SPU  = (int) AT91F_Spurious_handler ;
+ 25c:	e3a03102 	mov	r3, #-2147483648	; 0x80000000
+ 260:	e1a039c3 	asr	r3, r3, #19
+ 264:	e59f200c 	ldr	r2, [pc, #12]	; 278 <AT91F_LowLevelInit+0x13c>
+ 268:	e5832134 	str	r2, [r3, #308]
+}
+ 26c:	e89da808 	ldm	sp, {r3, fp, sp, pc}
+ 270:	0000010c 	.word	0x0000010c
+ 274:	00000110 	.word	0x00000110
+ 278:	00000114 	.word	0x00000114
+
+0000027c <main>:
+
+
+//**************************************************************
+// main läßt LED am Port P30 für ca. 1 Minute mit 1 Hz blinken
+//**************************************************************
+int main(){
+ 27c:	e1a0c00d 	mov	ip, sp
+ 280:	e92dd800 	push	{fp, ip, lr, pc}
+ 284:	e24cb004 	sub	fp, ip, #4	; 0x4
+ 288:	e24dd008 	sub	sp, sp, #8	; 0x8
+	unsigned char ucB=120;					// lokale Variable ucB
+ 28c:	e3a03078 	mov	r3, #120	; 0x78
+ 290:	e54b3011 	strb	r3, [fp, #-17]
+	unsigned int mask = (LED1 | LED2 | LED3 | LED4 | LED5);
+ 294:	e3a03245 	mov	r3, #1342177284	; 0x50000004
+ 298:	e2833806 	add	r3, r3, #393216	; 0x60000
+ 29c:	e50b3010 	str	r3, [fp, #-16]
+
+	AT91C_BASE_PIOA->PIO_OER = mask;		// Freigabe des LED-Port-Pins
+ 2a0:	e3a0320a 	mov	r3, #-1610612736	; 0xa0000000
+ 2a4:	e1a039c3 	asr	r3, r3, #19
+ 2a8:	e51b2010 	ldr	r2, [fp, #-16]
+ 2ac:	e5832010 	str	r2, [r3, #16]
+	AT91C_BASE_PIOA->PIO_OWER = mask;		// Register: Schreib-Freigabe des Output Write Enable Register
+ 2b0:	e3a0320a 	mov	r3, #-1610612736	; 0xa0000000
+ 2b4:	e1a039c3 	asr	r3, r3, #19
+ 2b8:	e51b2010 	ldr	r2, [fp, #-16]
+ 2bc:	e58320a0 	str	r2, [r3, #160]
+	AT91C_BASE_PIOA->PIO_PPUDR = mask;		// Ausschalten des Pull-up-Widerstandes
+ 2c0:	e3a0320a 	mov	r3, #-1610612736	; 0xa0000000
+ 2c4:	e1a039c3 	asr	r3, r3, #19
+ 2c8:	e51b2010 	ldr	r2, [fp, #-16]
+ 2cc:	e5832060 	str	r2, [r3, #96]
+
+	AT91C_BASE_PIOA->PIO_ODSR &= ~mask;
+ 2d0:	e3a0220a 	mov	r2, #-1610612736	; 0xa0000000
+ 2d4:	e1a029c2 	asr	r2, r2, #19
+ 2d8:	e3a0320a 	mov	r3, #-1610612736	; 0xa0000000
+ 2dc:	e1a039c3 	asr	r3, r3, #19
+ 2e0:	e5931038 	ldr	r1, [r3, #56]
+ 2e4:	e51b3010 	ldr	r3, [fp, #-16]
+ 2e8:	e1e03003 	mvn	r3, r3
+ 2ec:	e0013003 	and	r3, r1, r3
+ 2f0:	e5823038 	str	r3, [r2, #56]
+
+	AT91C_BASE_PIOA->PIO_ODSR = (LED1 | LED3 | LED5);
+ 2f4:	e3a0220a 	mov	r2, #-1610612736	; 0xa0000000
+ 2f8:	e1a029c2 	asr	r2, r2, #19
+ 2fc:	e3a03205 	mov	r3, #1342177280	; 0x50000000
+ 300:	e2833701 	add	r3, r3, #262144	; 0x40000
+ 304:	e5823038 	str	r3, [r2, #56]
+ 308:	ea000009 	b	334 <main+0xb8>
+	while (ucB--){
+		AT91C_BASE_PIOA->PIO_ODSR ^= mask;	// LED1 ein
+ 30c:	e3a0220a 	mov	r2, #-1610612736	; 0xa0000000
+ 310:	e1a029c2 	asr	r2, r2, #19
+ 314:	e3a0320a 	mov	r3, #-1610612736	; 0xa0000000
+ 318:	e1a039c3 	asr	r3, r3, #19
+ 31c:	e5931038 	ldr	r1, [r3, #56]
+ 320:	e51b3010 	ldr	r3, [fp, #-16]
+ 324:	e0213003 	eor	r3, r1, r3
+ 328:	e5823038 	str	r3, [r2, #56]
+		delay5ms(100);						// Verzögerung von 500ms
+ 32c:	e3a00064 	mov	r0, #100	; 0x64
+ 330:	eb00000a 	bl	360 <delay5ms>
+	AT91C_BASE_PIOA->PIO_PPUDR = mask;		// Ausschalten des Pull-up-Widerstandes
+
+	AT91C_BASE_PIOA->PIO_ODSR &= ~mask;
+
+	AT91C_BASE_PIOA->PIO_ODSR = (LED1 | LED3 | LED5);
+	while (ucB--){
+ 334:	e55b3011 	ldrb	r3, [fp, #-17]
+ 338:	e3530000 	cmp	r3, #0	; 0x0
+ 33c:	03a03000 	moveq	r3, #0	; 0x0
+ 340:	13a03001 	movne	r3, #1	; 0x1
+ 344:	e20320ff 	and	r2, r3, #255	; 0xff
+ 348:	e55b3011 	ldrb	r3, [fp, #-17]
+ 34c:	e2433001 	sub	r3, r3, #1	; 0x1
+ 350:	e54b3011 	strb	r3, [fp, #-17]
+ 354:	e3520000 	cmp	r2, #0	; 0x0
+ 358:	1affffeb 	bne	30c <main+0x90>
+ 35c:	eafffffe 	b	35c <main+0xe0>
+
+00000360 <delay5ms>:
+ 360:	e1a0c00d 	mov	ip, sp
+ 364:	e92dd800 	push	{fp, ip, lr, pc}
+ 368:	e24cb004 	sub	fp, ip, #4	; 0x4
+ 36c:	e24dd008 	sub	sp, sp, #8	; 0x8
+ 370:	e50b0014 	str	r0, [fp, #-20]
+ 374:	ea00000a 	b	3a4 <delay5ms+0x44>
+ 378:	e3a03000 	mov	r3, #0	; 0x0
+ 37c:	e50b3010 	str	r3, [fp, #-16]
+ 380:	ea000002 	b	390 <delay5ms+0x30>
+ 384:	e51b3010 	ldr	r3, [fp, #-16]
+ 388:	e2833001 	add	r3, r3, #1	; 0x1
+ 38c:	e50b3010 	str	r3, [fp, #-16]
+ 390:	e51b2010 	ldr	r2, [fp, #-16]
+ 394:	e3a03d7f 	mov	r3, #8128	; 0x1fc0
+ 398:	e283303f 	add	r3, r3, #63	; 0x3f
+ 39c:	e1520003 	cmp	r2, r3
+ 3a0:	9afffff7 	bls	384 <delay5ms+0x24>
+ 3a4:	e51b3014 	ldr	r3, [fp, #-20]
+ 3a8:	e3530000 	cmp	r3, #0	; 0x0
+ 3ac:	03a03000 	moveq	r3, #0	; 0x0
+ 3b0:	13a03001 	movne	r3, #1	; 0x1
+ 3b4:	e20320ff 	and	r2, r3, #255	; 0xff
+ 3b8:	e51b3014 	ldr	r3, [fp, #-20]
+ 3bc:	e2433001 	sub	r3, r3, #1	; 0x1
+ 3c0:	e50b3014 	str	r3, [fp, #-20]
+ 3c4:	e3520000 	cmp	r2, #0	; 0x0
+ 3c8:	1affffea 	bne	378 <delay5ms+0x18>
+ 3cc:	e24bd00c 	sub	sp, fp, #12	; 0xc
+ 3d0:	e89da800 	ldm	sp, {fp, sp, pc}
+
+000003d4 <delay1ms>:
+ 3d4:	e1a0c00d 	mov	ip, sp
+ 3d8:	e92dd800 	push	{fp, ip, lr, pc}
+ 3dc:	e24cb004 	sub	fp, ip, #4	; 0x4
+ 3e0:	e24dd008 	sub	sp, sp, #8	; 0x8
+ 3e4:	e50b0014 	str	r0, [fp, #-20]
+ 3e8:	ea00000a 	b	418 <delay1ms+0x44>
+ 3ec:	e3a03000 	mov	r3, #0	; 0x0
+ 3f0:	e50b3010 	str	r3, [fp, #-16]
+ 3f4:	ea000002 	b	404 <delay1ms+0x30>
+ 3f8:	e51b3010 	ldr	r3, [fp, #-16]
+ 3fc:	e2833001 	add	r3, r3, #1	; 0x1
+ 400:	e50b3010 	str	r3, [fp, #-16]
+ 404:	e51b2010 	ldr	r2, [fp, #-16]
+ 408:	e3a03e66 	mov	r3, #1632	; 0x660
+ 40c:	e2833005 	add	r3, r3, #5	; 0x5
+ 410:	e1520003 	cmp	r2, r3
+ 414:	9afffff7 	bls	3f8 <delay1ms+0x24>
+ 418:	e51b3014 	ldr	r3, [fp, #-20]
+ 41c:	e3530000 	cmp	r3, #0	; 0x0
+ 420:	03a03000 	moveq	r3, #0	; 0x0
+ 424:	13a03001 	movne	r3, #1	; 0x1
+ 428:	e20320ff 	and	r2, r3, #255	; 0xff
+ 42c:	e51b3014 	ldr	r3, [fp, #-20]
+ 430:	e2433001 	sub	r3, r3, #1	; 0x1
+ 434:	e50b3014 	str	r3, [fp, #-20]
+ 438:	e3520000 	cmp	r2, #0	; 0x0
+ 43c:	1affffea 	bne	3ec <delay1ms+0x18>
+ 440:	e24bd00c 	sub	sp, fp, #12	; 0xc
+ 444:	e89da800 	ldm	sp, {fp, sp, pc}
