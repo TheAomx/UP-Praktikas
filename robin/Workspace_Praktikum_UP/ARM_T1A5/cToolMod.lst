@@ -1,0 +1,213 @@
+   1              		.file	"cToolMod.c"
+   9              	.Ltext0:
+  10              		.align	2
+  11              		.global	delay5ms
+  13              	delay5ms:
+  14              	.LFB2:
+  15              		.file 1 "cToolMod.c"
+   1:cToolMod.c    **** /*
+   2:cToolMod.c    ****  * cToolMod.c
+   3:cToolMod.c    ****  *
+   4:cToolMod.c    ****  *  Created on: 27.04.2016
+   5:cToolMod.c    ****  *      Author: Robin
+   6:cToolMod.c    ****  */
+   7:cToolMod.c    **** 
+   8:cToolMod.c    **** #include 	"cToolMod.h"
+   9:cToolMod.c    **** #include	"include/AT91SAM7S64.h"
+  10:cToolMod.c    **** 
+  11:cToolMod.c    **** #define		BUTTON1	AT91C_PIO_PA1			// Parallel Input Output Control Pin 1
+  12:cToolMod.c    **** #define		BUTTON2 AT91C_PIO_PA0			// Parallel Input Output Control Pin 0
+  13:cToolMod.c    **** #define		BUTTON3	AT91C_PIO_PA31			// Parallel Input Output Control Pin 31
+  14:cToolMod.c    **** 
+  15:cToolMod.c    **** //**************************************************************
+  16:cToolMod.c    **** // delay5ms(uiK) verzögert um ca. uiK * 5ms
+  17:cToolMod.c    **** //**************************************************************
+  18:cToolMod.c    **** void delay5ms(unsigned int uiK){
+  16              	 args = 0, pretend = 0, frame = 8
+  17              		@ frame_needed = 1, uses_anonymous_args = 0
+  18              		mov	ip, sp
+  19 0000 0DC0A0E1 	.LCFI0:
+  20              		stmfd	sp!, {fp, ip, lr, pc}
+  21 0004 00D82DE9 	.LCFI1:
+  22              		sub	fp, ip, #4
+  23 0008 04B04CE2 	.LCFI2:
+  24              		sub	sp, sp, #8
+  25 000c 08D04DE2 	.LCFI3:
+  26              		str	r0, [fp, #-20]
+  27 0010 14000BE5 		b	.L2
+  28 0014 0A0000EA 	.L5:
+  29              		.loc 1 22 0
+  19:cToolMod.c    **** 	volatile unsigned int uiI;
+  20:cToolMod.c    **** 
+  21:cToolMod.c    **** 	while (uiK--)							// folgende for-Schleife wird uiK-mal aufgerufen
+  22:cToolMod.c    **** 		for (uiI=0; uiI<8192; uiI++);		//  for-Schleife wird 8192-mal durchlaufen. Dies
+  30              	tr	r3, [fp, #-16]
+  31 0018 0030A0E3 		b	.L3
+  32 001c 10300BE5 	.L4:
+  33 0020 020000EA 		ldr	r3, [fp, #-16]
+  34              		add	r3, r3, #1
+  35 0024 10301BE5 		str	r3, [fp, #-16]
+  36 0028 013083E2 	.L3:
+  37 002c 10300BE5 		ldr	r2, [fp, #-16]
+  38              		mov	r3, #8128
+  39 0030 10201BE5 		add	r3, r3, #63
+  40 0034 7F3DA0E3 		cmp	r2, r3
+  41 0038 3F3083E2 		bls	.L4
+  42 003c 030052E1 	.L2:
+  43 0040 F7FFFF9A 		.loc 1 21 0
+  44              		ldr	r3, [fp, #-20]
+  45              		cmp	r3, #0
+  46 0044 14301BE5 		moveq	r3, #0
+  47 0048 000053E3 		movne	r3, #1
+  48 004c 0030A003 		and	r2, r3, #255
+  49 0050 0130A013 		ldr	r3, [fp, #-20]
+  50 0054 FF2003E2 		sub	r3, r3, #1
+  51 0058 14301BE5 		str	r3, [fp, #-20]
+  52 005c 013043E2 		cmp	r2, #0
+  53 0060 14300BE5 		bne	.L5
+  54 0064 000052E3 		.loc 1 24 0
+  55 0068 EAFFFF1A 		sub	sp, fp, #12
+  23:cToolMod.c    **** 	//  verursacht eine Zeitverzögerung von ca. 5ms.
+  24:cToolMod.c    **** }
+  56              	FE2:
+  58 0070 00A89DE8 		.align	2
+  59              		.global	delay1ms
+  61              	delay1ms:
+  62              	.LFB3:
+  63              		.loc 1 29 0
+  64              		@ args = 0, pretend = 0, frame = 8
+  65              		@ frame_needed = 1, uses_anonymous_args = 0
+  25:cToolMod.c    **** 
+  26:cToolMod.c    **** //**************************************************************
+  27:cToolMod.c    **** // delay1ms(uiK) verzögert um ca. uiK * 1ms
+  28:cToolMod.c    **** //**************************************************************
+  29:cToolMod.c    **** void delay1ms(unsigned int uiK){
+  66              	p
+  67              	.LCFI4:
+  68              		stmfd	sp!, {fp, ip, lr, pc}
+  69 0074 0DC0A0E1 	.LCFI5:
+  70              		sub	fp, ip, #4
+  71 0078 00D82DE9 	.LCFI6:
+  72              		sub	sp, sp, #8
+  73 007c 04B04CE2 	.LCFI7:
+  74              		str	r0, [fp, #-20]
+  75 0080 08D04DE2 		b	.L8
+  76              	.L11:
+  77 0084 14000BE5 		.loc 1 33 0
+  78 0088 0A0000EA 		mov	r3, #0
+  79              		str	r3, [fp, #-16]
+  30:cToolMod.c    **** 	volatile unsigned int uiI;
+  31:cToolMod.c    **** 
+  32:cToolMod.c    **** 	while (uiK--)							// folgende for-Schleife wird uiK-mal aufgerufen
+  33:cToolMod.c    **** 		for (uiI=0; uiI<1638; uiI++);		//  for-Schleife wird 8192-mal durchlaufen. Dies
+  80              	ldr	r3, [fp, #-16]
+  81 008c 0030A0E3 		add	r3, r3, #1
+  82 0090 10300BE5 		str	r3, [fp, #-16]
+  83 0094 020000EA 	.L9:
+  84              		ldr	r2, [fp, #-16]
+  85 0098 10301BE5 		mov	r3, #1632
+  86 009c 013083E2 		add	r3, r3, #5
+  87 00a0 10300BE5 		cmp	r2, r3
+  88              		bls	.L10
+  89 00a4 10201BE5 	.L8:
+  90 00a8 663EA0E3 		.loc 1 32 0
+  91 00ac 053083E2 		ldr	r3, [fp, #-20]
+  92 00b0 030052E1 		cmp	r3, #0
+  93 00b4 F7FFFF9A 		moveq	r3, #0
+  94              		movne	r3, #1
+  95              		and	r2, r3, #255
+  96 00b8 14301BE5 		ldr	r3, [fp, #-20]
+  97 00bc 000053E3 		sub	r3, r3, #1
+  98 00c0 0030A003 		str	r3, [fp, #-20]
+  99 00c4 0130A013 		cmp	r2, #0
+ 100 00c8 FF2003E2 		bne	.L11
+ 101 00cc 14301BE5 		.loc 1 35 0
+ 102 00d0 013043E2 		sub	sp, fp, #12
+ 103 00d4 14300BE5 		ldmfd	sp, {fp, sp, pc}
+ 104 00d8 000052E3 	.LFE3:
+  34:cToolMod.c    **** 	//  verursacht eine Zeitverzögerung von ca. 5ms.
+  35:cToolMod.c    **** }
+ 106              	e
+ 108 00e4 00A89DE8 	getTaste:
+ 109              	.LFB4:
+ 110              		.loc 1 38 0
+ 111              		@ args = 0, pretend = 0, frame = 20
+ 112              		@ frame_needed = 1, uses_anonymous_args = 0
+ 113              		mov	ip, sp
+ 114              	.LCFI8:
+ 115              		stmfd	sp!, {fp, ip, lr, pc}
+  36:cToolMod.c    **** 
+  37:cToolMod.c    **** 
+  38:cToolMod.c    **** unsigned int getTaste() {
+ 116              	ub	fp, ip, #4
+ 117              	.LCFI10:
+ 118              		sub	sp, sp, #20
+ 119 00e8 0DC0A0E1 	.LCFI11:
+ 120              		.loc 1 40 0
+ 121 00ec 00D82DE9 		mov	r3, #-1610612736
+ 122              		mov	r3, r3, asr #19
+ 123 00f0 04B04CE2 		ldr	r3, [r3, #60]
+ 124              		str	r3, [fp, #-16]
+ 125 00f4 14D04DE2 		.loc 1 41 0
+ 126              		ldr	r3, [fp, #-16]
+  39:cToolMod.c    **** 
+  40:cToolMod.c    **** 	unsigned int reg = AT91C_BASE_PIOA->PIO_PDSR;
+ 127              	, #2
+ 128 00f8 0A32A0E3 		cmp	r3, #0
+ 129 00fc C339A0E1 		movne	r1, #0
+ 130 0100 3C3093E5 		moveq	r1, #1
+ 131 0104 10300BE5 		str	r1, [fp, #-32]
+  41:cToolMod.c    **** 	return !(reg & BUTTON1) |  !(reg & BUTTON2) << 1 | !(reg & BUTTON3) << 2;
+ 132              	r3, [fp, #-16]
+ 133 0108 10301BE5 		and	r3, r3, #1
+ 134 010c 023003E2 		cmp	r3, #0
+ 135 0110 000053E3 		bne	.L14
+ 136 0114 0010A013 		mov	r2, #2
+ 137 0118 0110A003 		str	r2, [fp, #-28]
+ 138 011c 20100BE5 		b	.L15
+ 139 0120 10301BE5 	.L14:
+ 140 0124 013003E2 		mov	r3, #0
+ 141 0128 000053E3 		str	r3, [fp, #-28]
+ 142 012c 0200001A 	.L15:
+ 143 0130 0220A0E3 		ldr	r1, [fp, #-32]
+ 144 0134 1C200BE5 		ldr	r2, [fp, #-28]
+ 145 0138 010000EA 		orr	r1, r1, r2
+ 146              		str	r1, [fp, #-24]
+ 147 013c 0030A0E3 		ldr	r3, [fp, #-16]
+ 148 0140 1C300BE5 		cmp	r3, #0
+ 149              		blt	.L16
+ 150 0144 20101BE5 		mov	r3, #4
+ 151 0148 1C201BE5 		str	r3, [fp, #-20]
+ 152 014c 021081E1 		b	.L17
+ 153 0150 18100BE5 	.L16:
+ 154 0154 10301BE5 		mov	r1, #0
+ 155 0158 000053E3 		str	r1, [fp, #-20]
+ 156 015c 020000BA 	.L17:
+ 157 0160 0430A0E3 		ldr	r2, [fp, #-24]
+ 158 0164 14300BE5 		ldr	r1, [fp, #-20]
+ 159 0168 010000EA 		orr	r3, r2, r1
+ 160              		.loc 1 43 0
+ 161 016c 0010A0E3 		mov	r0, r3
+ 162 0170 14100BE5 		sub	sp, fp, #12
+ 163              		ldmfd	sp, {fp, sp, pc}
+ 164 0174 18201BE5 	.LFE4:
+ 166 017c 013082E1 		.section	.debug_frame,"",%progbits
+  42:cToolMod.c    **** 
+  43:cToolMod.c    **** }
+ 167              	LSCIE0:
+ 168 0180 0300A0E1 		.4byte	0xffffffff
+ 169 0184 0CD04BE2 		.byte	0x1
+ 170 0188 00A89DE8 		.ascii	"\000"
+ 171              		.uleb128 0x1
+ 172              		.sleb128 -4
+ 264              		.4byte	.LCFI2-.Ltext0
+DEFINED SYMBOLS
+                            *ABS*:00000000 cToolMod.c
+C:\Users\Robin\AppData\Local\Temp/ccecN6wU.s:13     .text:00000000 delay5ms
+C:\Users\Robin\AppData\Local\Temp/ccecN6wU.s:19     .text:00000000 $a
+C:\Users\Robin\AppData\Local\Temp/ccecN6wU.s:64     .text:00000074 delay1ms
+C:\Users\Robin\AppData\Local\Temp/ccecN6wU.s:114    .text:000000e8 getTaste
+C:\Users\Robin\AppData\Local\Temp/ccecN6wU.s:175    .debug_frame:00000000 $d
+C:\Users\Robin\AppData\Local\Temp/ccecN6wU.s:268    .debug_loc:00000000 $d
+
+NO UNDEFINED SYMBOLS

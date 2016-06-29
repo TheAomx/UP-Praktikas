@@ -1,0 +1,205 @@
+   1              		.file	"main.c"
+   9              	.Ltext0:
+  10              		.bss
+  11              	i.1684:
+  12 0000 00       		.space	1
+  13              		.section	.rodata
+  14              		.align	2
+  17              	C.0.1686:
+  18 0000 00C08000 		.word	8437760
+  19 0004 00008000 		.word	8388608
+  20 0008 00001100 		.word	1114112
+  21 000c 00000000 		.word	0
+  22 0010 00E00000 		.word	57344
+  23 0014 00200000 		.word	8192
+  24 0018 00209100 		.word	9510912
+  25 001c 00208000 		.word	8396800
+  26              		.text
+  27              		.align	2
+  28              		.global	timer1_isr
+  30              	timer1_isr:
+  31              	.LFB2:
+  32              		.file 1 "main.c"
+   1:main.c        **** //********************************************************************
+   2:main.c        **** // ARM_T4A3										Version 02.04.2012 hpw
+   3:main.c        **** //********************************************************************
+   4:main.c        **** #include	"include/AT91SAM7S64.h"			// Definition von ARM7 typischen Registern etc.
+   5:main.c        **** #include	"include/interrupt.h"			// IR-Routinen
+   6:main.c        **** 
+   7:main.c        **** #define		PH2			AT91C_PIO_PA23		// Alle Ports die für den Motor verwendet werden
+   8:main.c        **** #define		PH1			AT91C_PIO_PA13
+   9:main.c        **** #define		I21			AT91C_PIO_PA20
+  10:main.c        **** #define		I11			AT91C_PIO_PA14
+  11:main.c        **** #define		I20			AT91C_PIO_PA16
+  12:main.c        **** #define		I10			AT91C_PIO_PA15
+  13:main.c        **** #define		MOTOR_MASK	(PH2|PH1|I21|I11|I20|I10)
+  14:main.c        **** 
+  15:main.c        **** 
+  16:main.c        **** //**************************************************************
+  17:main.c        **** // Interrupt-Service-Routine Timer1
+  18:main.c        **** //**************************************************************
+  19:main.c        **** __attribute__ ((used)) void timer1_isr (void){
+  33              	d = 0, frame = 36
+  34              		@ frame_needed = 1, uses_anonymous_args = 0
+  35              		mov	ip, sp
+  36 0000 0DC0A0E1 	.LCFI0:
+  37              		stmfd	sp!, {r4, fp, ip, lr, pc}
+  38 0004 10D82DE9 	.LCFI1:
+  39              		sub	fp, ip, #4
+  40 0008 04B04CE2 	.LCFI2:
+  41              		sub	sp, sp, #36
+  42 000c 24D04DE2 	.LCFI3:
+  43              		.loc 1 31 0
+  20:main.c        **** ute__ ((used)) void timer1_isr (void){
+  21:main.c        **** 	volatile unsigned int dummy;			// Lokale dummy-Variable
+  22:main.c        **** 	static unsigned char i=0;				// Laufvariable
+  23:main.c        **** 	unsigned int cRECHTS[8]= {
+  24:main.c        **** 				(PH2 | I10 | I11),
+  25:main.c        **** 				(PH2),
+  26:main.c        **** 				(I20 | I21),
+  27:main.c        **** 				0,
+  28:main.c        **** 				(PH1 | I10 | I11),
+  29:main.c        **** 				(PH1),
+  30:main.c        **** 				(PH2 | I20 | I21 | PH1),
+  31:main.c        **** 				(PH1 | PH2)
+  44              	3
+  45 0010 78309FE5 		sub	r4, fp, #52
+  46 0014 34404BE2 		mov	ip, r3
+  47 0018 03C0A0E1 		ldmia	ip!, {r0, r1, r2, r3}
+  48 001c 0F00BCE8 		stmia	r4!, {r0, r1, r2, r3}
+  49 0020 0F00A4E8 		ldmia	ip, {r0, r1, r2, r3}
+  50 0024 0F009CE8 		stmia	r4, {r0, r1, r2, r3}
+  51 0028 0F0084E8 		.loc 1 32 0
+  32:main.c        **** I21 | PH1),
+  52              	 #-1610612736
+  53 002c 0A22A0E3 		mov	r2, r2, asr #19
+  54 0030 C229A0E1 		ldr	r3, .L3+4
+  55 0034 58309FE5 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+  56 0038 0030D3E5 		and	r3, r3, #7
+  57 003c 073003E2 		mvn	r1, #35
+  58 0040 2310E0E3 		mov	r3, r3, asl #2
+  59 0044 0331A0E1 		sub	r0, fp, #16
+  60 0048 10004BE2 		add	r3, r0, r3
+  61 004c 033080E0 		add	r3, r3, r1
+  62 0050 013083E0 		ldr	r3, [r3, #0]
+  63 0054 003093E5 		str	r3, [r2, #56]
+  64 0058 383082E5 		.loc 1 33 0
+  33:main.c        **** 				(PH2 | I20 | I21 | PH1),
+  65              	4
+  66 005c 30309FE5 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+  67 0060 0030D3E5 		add	r3, r3, #1
+  68 0064 013083E2 		and	r3, r3, #255
+  69 0068 FF3003E2 		ldr	r2, .L3+4
+  70 006c 20209FE5 		strb	r3, [r2, #0]
+  71 0070 0030C2E5 		.loc 1 39 0
+  34:main.c        **** 				(PH2 | I20 | I21 | PH1),
+  35:main.c        **** 				(PH1 | PH2)
+  36:main.c        **** 		};
+  37:main.c        **** 	AT91C_BASE_PIOA->PIO_ODSR = cRECHTS[i % 8];
+  38:main.c        **** 	i++;
+  39:main.c        **** 	// Ausgabe der Schnittstellensignale für die Schrittmotorsteuerung
+  72              	, #-16777216
+  73 0074 FF34A0E3 		add	r3, r3, #16384000
+  74 0078 FA3883E2 		add	r3, r3, #64
+  75 007c 403083E2 		ldr	r3, [r3, #32]
+  76 0080 203093E5 		str	r3, [fp, #-20]
+  77 0084 14300BE5 		.loc 1 40 0
+  40:main.c        **** e Schrittmotorsteuerung
+  78              	p, fp, #16
+  79 0088 10D04BE2 		ldmfd	sp, {r4, fp, sp, pc}
+  80 008c 10A89DE8 	.L4:
+  81              		.align	2
+  82              	.L3:
+  83              		.word	C.0.1686
+  84 0090 00000000 		.word	i.1684
+  85 0094 00000000 	.LFE2:
+  87              		.align	2
+  88              		.global	main
+  90              	main:
+  91              	.LFB3:
+  92              		.loc 1 45 0
+  41:main.c        **** e Schrittmotorsteuerung
+  42:main.c        **** 
+  43:main.c        **** 
+  44:main.c        **** 	// auskommentiert wegen AT91C_TC_WAVESEL_UP_AUTO
+  45:main.c        **** 	//	AT91C_BASE_TC1->TC_CCR=AT91sC_TC_SWTRG;	// Zurücksetzen des Zählers
+  93              	etend = 0, frame = 0
+  94              		@ frame_needed = 1, uses_anonymous_args = 0
+  95              		mov	ip, sp
+  96 0098 0DC0A0E1 	.LCFI4:
+  97              		stmfd	sp!, {fp, ip, lr, pc}
+  98 009c 00D82DE9 	.LCFI5:
+  99              		sub	fp, ip, #4
+ 100 00a0 04B04CE2 	.LCFI6:
+ 101              		.loc 1 46 0
+  46:main.c        **** ksetzen des Zählers
+ 102              	#-1610612736
+ 103 00a4 0A22A0E3 		mov	r2, r2, asr #19
+ 104 00a8 C229A0E1 		mov	r3, #9502720
+ 105 00ac 9138A0E3 		add	r3, r3, #57344
+ 106 00b0 0E3A83E2 		str	r3, [r2, #16]
+ 107 00b4 103082E5 		.loc 1 47 0
+  47:main.c        **** ksetzen des Zählers
+ 108              	2, #-1610612736
+ 109 00b8 0A22A0E3 		mov	r2, r2, asr #19
+ 110 00bc C229A0E1 		mov	r3, #9502720
+ 111 00c0 9138A0E3 		add	r3, r3, #57344
+ 112 00c4 0E3A83E2 		str	r3, [r2, #160]
+ 113 00c8 A03082E5 		.loc 1 50 0
+  48:main.c        **** ksetzen des Zählers
+  49:main.c        **** 	dummy = AT91C_BASE_TC1->TC_SR;			// Bestätigung Interrupt Request
+  50:main.c        **** }
+ 114              	2, #-1610612736
+ 115 00cc 0A22A0E3 		mov	r2, r2, asr #19
+ 116 00d0 C229A0E1 		mov	r3, #9502720
+ 117 00d4 9138A0E3 		add	r3, r3, #57344
+ 118 00d8 0E3A83E2 		str	r3, [r2, #96]
+ 119 00dc 603082E5 		.loc 1 53 0
+  51:main.c        **** terrupt Request
+  52:main.c        **** }
+  53:main.c        **** 
+ 120              	0, #1
+ 121 00e0 0100A0E3 		mov	r1, #4
+ 122 00e4 0410A0E3 		mov	r2, #16384
+ 123 00e8 0129A0E3 		add	r2, r2, #3
+ 124 00ec 032082E2 		ldr	r3, .L8
+ 125 00f0 30309FE5 		bl	timer_ir_init
+ 126 00f4 FEFFFFEB 		.loc 1 54 0
+  54:main.c        **** rrupt Request
+ 127              	, #-16777216
+ 128 00f8 FF24A0E3 		add	r2, r2, #16384000
+ 129 00fc FA2882E2 		add	r2, r2, #64
+ 130 0100 402082E2 		mov	r3, #6976
+ 131 0104 6D3DA0E3 		add	r3, r3, #55
+ 132 0108 373083E2 		str	r3, [r2, #28]
+ 133 010c 1C3082E5 		.loc 1 55 0
+  55:main.c        ****  Interrupt Request
+ 134              	, #-16777216
+ 135 0110 FF34A0E3 		add	r3, r3, #16384000
+ 136 0114 FA3883E2 		add	r3, r3, #64
+ 137 0118 403083E2 		mov	r2, #4
+ 138 011c 0420A0E3 		str	r2, [r3, #0]
+ 139 0120 002083E5 	.L6:
+ 140              		b	.L6
+ 141 0124 FEFFFFEA 	.L9:
+ 142              		.align	2
+ 143              	.L8:
+ 144              		.word	timer1_isr
+ 145 0128 00000000 	.LFE3:
+ 147              		.section	.debug_frame,"",%progbits
+ 216              		.section	.debug_loc,"",%progbits
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+                             .bss:00000000 $d
+C:\Users\Robin\AppData\Local\Temp/ccebcj5T.s:11     .bss:00000000 i.1684
+C:\Users\Robin\AppData\Local\Temp/ccebcj5T.s:17     .rodata:00000000 C.0.1686
+C:\Users\Robin\AppData\Local\Temp/ccebcj5T.s:18     .rodata:00000000 $d
+C:\Users\Robin\AppData\Local\Temp/ccebcj5T.s:30     .text:00000000 timer1_isr
+C:\Users\Robin\AppData\Local\Temp/ccebcj5T.s:36     .text:00000000 $a
+C:\Users\Robin\AppData\Local\Temp/ccebcj5T.s:84     .text:00000090 $d
+C:\Users\Robin\AppData\Local\Temp/ccebcj5T.s:91     .text:00000098 main
+C:\Users\Robin\AppData\Local\Temp/ccebcj5T.s:96     .text:00000098 $a
+C:\Users\Robin\AppData\Local\Temp/ccebcj5T.s:145    .text:00000128 $d
+
+UNDEFINED SYMBOLS
+timer_ir_init

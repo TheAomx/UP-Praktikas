@@ -1,0 +1,209 @@
+   1              		.file	"main.c"
+   9              	.Ltext0:
+  10              		.bss
+  11              	i.1684:
+  12 0000 00       		.space	1
+  13              		.text
+  14              		.align	2
+  15              		.global	timer0_isr
+  17              	timer0_isr:
+  18              	.LFB2:
+  19              		.file 1 "main.c"
+   1:main.c        **** //********************************************************************
+   2:main.c        **** // ARM_T4A3										Version 02.04.2012 hpw
+   3:main.c        **** //********************************************************************
+   4:main.c        **** #include	"include/AT91SAM7S64.h"			// Definition von ARM7 typischen Registern etc.
+   5:main.c        **** #include	"include/interrupt.h"			// IR-Routinen
+   6:main.c        **** 
+   7:main.c        **** #define 	SPEAKER		AT91C_PIO_PA18
+   8:main.c        **** 
+   9:main.c        **** 
+  10:main.c        **** //**************************************************************
+  11:main.c        **** // Interrupt-Service-Routine Timer1
+  12:main.c        **** //**************************************************************
+  13:main.c        **** __attribute__ ((used)) void timer0_isr (void){
+  20              	s = 0, pretend = 0, frame = 4
+  21              		@ frame_needed = 1, uses_anonymous_args = 0
+  22              		mov	ip, sp
+  23 0000 0DC0A0E1 	.LCFI0:
+  24              		stmfd	sp!, {fp, ip, lr, pc}
+  25 0004 00D82DE9 	.LCFI1:
+  26              		sub	fp, ip, #4
+  27 0008 04B04CE2 	.LCFI2:
+  28              		sub	sp, sp, #4
+  29 000c 04D04DE2 	.LCFI3:
+  30              		.loc 1 20 0
+  14:main.c        **** ttribute__ ((used)) void timer0_isr (void){
+  15:main.c        **** 	volatile unsigned int dummy;			// Lokale dummy-Variable
+  16:main.c        **** 	static unsigned char i=0;				// Laufvariable
+  17:main.c        **** 
+  18:main.c        **** 
+  19:main.c        **** 
+  20:main.c        **** 	//	AT91C_BASE_TC1->TC_CCR=AT91C_TC_SWTRG;	// Manuelles zurücksetzen des Zählers
+  31              	1610612736
+  32 0010 0A32A0E3 		mov	r3, r3, asr #12
+  33 0014 4336A0E1 		ldr	r3, [r3, #32]
+  34 0018 203093E5 		str	r3, [fp, #-16]
+  35 001c 10300BE5 		.loc 1 21 0
+  21:main.c        **** // Manuelles zurücksetzen des Zählers
+  36              	d	sp, {r3, fp, sp, pc}
+  37 0020 08A89DE8 	.LFE2:
+  39              		.bss
+  40              	i.1691:
+  41              		.space	1
+  42 0001 00       		.text
+  43              		.align	2
+  44              		.global	timer1_isr
+  46              	timer1_isr:
+  47              	.LFB3:
+  48              		.loc 1 26 0
+  22:main.c        **** // Manuelles zurücksetzen des Zählers
+  23:main.c        **** 	dummy = AT91C_BASE_TC0->TC_SR;			// Bestätigung Interrupt Request
+  24:main.c        **** }
+  25:main.c        **** 
+  26:main.c        **** //**************************************************************
+  49              	pretend = 0, frame = 4
+  50              		@ frame_needed = 1, uses_anonymous_args = 0
+  51              		mov	ip, sp
+  52 0024 0DC0A0E1 	.LCFI4:
+  53              		stmfd	sp!, {fp, ip, lr, pc}
+  54 0028 00D82DE9 	.LCFI5:
+  55              		sub	fp, ip, #4
+  56 002c 04B04CE2 	.LCFI6:
+  57              		sub	sp, sp, #4
+  58 0030 04D04DE2 	.LCFI7:
+  59              		.loc 1 30 0
+  27:main.c        **** *********************************
+  28:main.c        **** // Interrupt-Service-Routine Timer1
+  29:main.c        **** //**************************************************************
+  30:main.c        **** __attribute__ ((used)) void timer1_isr (void){
+  60              	1610612736
+  61 0034 0A22A0E3 		mov	r2, r2, asr #19
+  62 0038 C229A0E1 		mov	r3, #-1610612736
+  63 003c 0A32A0E3 		mov	r3, r3, asr #19
+  64 0040 C339A0E1 		ldr	r3, [r3, #56]
+  65 0044 383093E5 		eor	r3, r3, #262144
+  66 0048 013723E2 		str	r3, [r2, #56]
+  67 004c 383082E5 		.loc 1 34 0
+  31:main.c        **** used)) void timer1_isr (void){
+  32:main.c        **** 	volatile unsigned int dummy;			// Lokale dummy-Variable
+  33:main.c        **** 	static unsigned char i=0;				// Laufvariable
+  34:main.c        **** 
+  68              	 #-16777216
+  69 0050 FF34A0E3 		add	r3, r3, #16384000
+  70 0054 FA3883E2 		add	r3, r3, #64
+  71 0058 403083E2 		ldr	r3, [r3, #32]
+  72 005c 203093E5 		str	r3, [fp, #-16]
+  73 0060 10300BE5 		.loc 1 35 0
+  35:main.c        **** ar i=0;				// Laufvariable
+  74              		sp, {r3, fp, sp, pc}
+  75 0064 08A89DE8 	.LFE3:
+  77              		.align	2
+  78              		.global	main
+  80              	main:
+  81              	.LFB4:
+  82              		.loc 1 40 0
+  36:main.c        **** char i=0;				// Laufvariable
+  37:main.c        **** 
+  38:main.c        **** 	AT91C_BASE_PIOA->PIO_ODSR ^= SPEAKER;
+  39:main.c        **** 
+  40:main.c        **** 
+  83              	 0, pretend = 0, frame = 0
+  84              		@ frame_needed = 1, uses_anonymous_args = 0
+  85              		mov	ip, sp
+  86 0068 0DC0A0E1 	.LCFI8:
+  87              		stmfd	sp!, {fp, ip, lr, pc}
+  88 006c 00D82DE9 	.LCFI9:
+  89              		sub	fp, ip, #4
+  90 0070 04B04CE2 	.LCFI10:
+  91              		.loc 1 41 0
+  41:main.c        **** ->PIO_ODSR ^= SPEAKER;
+  92              	#-1610612736
+  93 0074 0A32A0E3 		mov	r3, r3, asr #19
+  94 0078 C339A0E1 		mov	r2, #262144
+  95 007c 0127A0E3 		str	r2, [r3, #16]
+  96 0080 102083E5 		.loc 1 42 0
+  42:main.c        **** PIOA->PIO_ODSR ^= SPEAKER;
+  97              	r3, #-1610612736
+  98 0084 0A32A0E3 		mov	r3, r3, asr #19
+  99 0088 C339A0E1 		mov	r2, #262144
+ 100 008c 0127A0E3 		str	r2, [r3, #160]
+ 101 0090 A02083E5 		.loc 1 45 0
+  43:main.c        **** PIOA->PIO_ODSR ^= SPEAKER;
+  44:main.c        **** 
+  45:main.c        **** 
+ 102              	r3, #-1610612736
+ 103 0094 0A32A0E3 		mov	r3, r3, asr #19
+ 104 0098 C339A0E1 		mov	r2, #262144
+ 105 009c 0127A0E3 		str	r2, [r3, #96]
+ 106 00a0 602083E5 		.loc 1 49 0
+  46:main.c        **** ->PIO_ODSR ^= SPEAKER;
+  47:main.c        **** 
+  48:main.c        **** 
+  49:main.c        **** 	//	AT91C_BASE_TC1->TC_CCR=AT91C_TC_SWTRG;	// Manuelles zurücksetzen des Zählers
+ 107              	r0, #1
+ 108 00a4 0100A0E3 		mov	r1, #4
+ 109 00a8 0410A0E3 		mov	r2, #16384
+ 110 00ac 0129A0E3 		add	r2, r2, #1
+ 111 00b0 012082E2 		ldr	r3, .L8
+ 112 00b4 6C309FE5 		bl	timer_ir_init
+ 113 00b8 FEFFFFEB 		.loc 1 50 0
+  50:main.c        **** urücksetzen des Zählers
+ 114              	, #1
+ 115 00bc 0100A0E3 		mov	r1, #4
+ 116 00c0 0410A0E3 		mov	r2, #16384
+ 117 00c4 0129A0E3 		add	r2, r2, #1
+ 118 00c8 012082E2 		ldr	r3, .L8+4
+ 119 00cc 58309FE5 		bl	timer_ir_init
+ 120 00d0 FEFFFFEB 		.loc 1 51 0
+  51:main.c        **** urücksetzen des Zählers
+ 121              	, #-1610612736
+ 122 00d4 0A22A0E3 		mov	r2, r2, asr #12
+ 123 00d8 4226A0E1 		mov	r3, #2992
+ 124 00dc BB3EA0E3 		add	r3, r3, #8
+ 125 00e0 083083E2 		str	r3, [r2, #28]
+ 126 00e4 1C3082E5 		.loc 1 52 0
+  52:main.c        **** urücksetzen des Zählers
+ 127              	3, #-1610612736
+ 128 00e8 0A32A0E3 		mov	r3, r3, asr #12
+ 129 00ec 4336A0E1 		mov	r2, #4
+ 130 00f0 0420A0E3 		str	r2, [r3, #0]
+ 131 00f4 002083E5 		.loc 1 53 0
+  53:main.c        **** urücksetzen des Zählers
+ 132              	r2, #-16777216
+ 133 00f8 FF24A0E3 		add	r2, r2, #16384000
+ 134 00fc FA2882E2 		add	r2, r2, #64
+ 135 0100 402082E2 		mov	r3, #3408
+ 136 0104 D53EA0E3 		add	r3, r3, #1
+ 137 0108 013083E2 		str	r3, [r2, #28]
+ 138 010c 1C3082E5 		.loc 1 54 0
+  54:main.c        **** urücksetzen des Zählers
+ 139              	, #-16777216
+ 140 0110 FF34A0E3 		add	r3, r3, #16384000
+ 141 0114 FA3883E2 		add	r3, r3, #64
+ 142 0118 403083E2 		mov	r2, #4
+ 143 011c 0420A0E3 		str	r2, [r3, #0]
+ 144 0120 002083E5 	.L6:
+ 145              		b	.L6
+ 146 0124 FEFFFFEA 	.L9:
+ 147              		.align	2
+ 148              	.L8:
+ 149              		.word	timer0_isr
+ 150 0128 00000000 		.word	timer1_isr
+ 151 012c 00000000 	.LFE4:
+ 153              		.section	.debug_frame,"",%progbits
+ 245              		.section	.debug_loc,"",%progbits
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+                             .bss:00000000 $d
+C:\Users\Robin\AppData\Local\Temp/ccpf75lq.s:11     .bss:00000000 i.1684
+C:\Users\Robin\AppData\Local\Temp/ccpf75lq.s:17     .text:00000000 timer0_isr
+C:\Users\Robin\AppData\Local\Temp/ccpf75lq.s:23     .text:00000000 $a
+C:\Users\Robin\AppData\Local\Temp/ccpf75lq.s:13     .bss:00000001 $d
+C:\Users\Robin\AppData\Local\Temp/ccpf75lq.s:41     .bss:00000001 i.1691
+C:\Users\Robin\AppData\Local\Temp/ccpf75lq.s:47     .text:00000024 timer1_isr
+C:\Users\Robin\AppData\Local\Temp/ccpf75lq.s:81     .text:00000068 main
+C:\Users\Robin\AppData\Local\Temp/ccpf75lq.s:150    .text:00000128 $d
+
+UNDEFINED SYMBOLS
+timer_ir_init

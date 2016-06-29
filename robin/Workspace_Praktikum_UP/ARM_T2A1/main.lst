@@ -1,0 +1,155 @@
+   1              		.file	"main.c"
+   9              	.Ltext0:
+  10              		.align	2
+  11              		.global	delay5ms
+  13              	delay5ms:
+  14              	.LFB2:
+  15              		.file 1 "main.c"
+   1:main.c        **** //********************************************************************
+   2:main.c        **** // ARM_T2A1										Version 02.04.2012 hpw
+   3:main.c        **** //********************************************************************
+   4:main.c        **** #include	"include/AT91SAM7S64.h"			// Definition von ARM7 typischen Registern etc.
+   5:main.c        **** 
+   6:main.c        **** #define		LED1	AT91C_PIO_PA30			// Parallel Input Output Control Pin 30
+   7:main.c        **** 
+   8:main.c        **** //**************************************************************
+   9:main.c        **** // delay5ms(uiK) verzögert um ca. uiK * 5ms
+  10:main.c        **** //**************************************************************
+  11:main.c        **** __attribute__ ((naked)) void delay5ms(unsigned int uiK){
+  16              	 Naked Function: prologue and epilogue provided by programmer.
+  17              		@ args = 0, pretend = 0, frame = 4
+  18              		@ frame_needed = 1, uses_anonymous_args = 0
+  19              		str	r0, [fp, #0]
+  20 0000 00008BE5 		.loc 1 13 0
+  12:main.c        **** d delay5ms(unsigned int uiK){
+  13:main.c        **** 
+  21              	"main.c" 1
+  22              					mov	r3, #0		
+  23 0004 0030A0E3 	@ 0 "" 2
+  24              		.loc 1 14 0
+  14:main.c        **** delay5ms(unsigned int uiK){
+  25              	 "main.c" 1
+  26              					b	Label2		
+  27 0008 000000EA 	@ 0 "" 2
+  28              		.loc 1 15 0
+  15:main.c        **** d delay5ms(unsigned int uiK){
+  29              	 "main.c" 1
+  30              			Label1:	add	r3, r3, #1	
+  31 000c 013083E2 	@ 0 "" 2
+  32              		.loc 1 16 0
+  16:main.c        **** d delay5ms(unsigned int uiK){
+  33              	 "main.c" 1
+  34              			Label2:	mov	r1, #8192	
+  35 0010 021AA0E3 	@ 0 "" 2
+  36              		.loc 1 17 0
+  17:main.c        **** d delay5ms(unsigned int uiK){
+  37              	 "main.c" 1
+  38              					mul	r2, r0, r1  
+  39 0014 900102E0 	@ 0 "" 2
+  40              		.loc 1 18 0
+  18:main.c        **** d delay5ms(unsigned int uiK){
+  41              	 "main.c" 1
+  42              					cmp	r2, r3		
+  43 0018 030052E1 	@ 0 "" 2
+  44              		.loc 1 19 0
+  19:main.c        **** d delay5ms(unsigned int uiK){
+  45              	 "main.c" 1
+  46              					bhi	Label1		
+  47 001c FAFFFF8A 	@ 0 "" 2
+  48              		.loc 1 20 0
+  20:main.c        **** d delay5ms(unsigned int uiK){
+  49              	 "main.c" 1
+  50              					mov	pc, lr		
+  51 0020 0EF0A0E1 	@ 0 "" 2
+  52              		.loc 1 21 0
+  21:main.c        **** d delay5ms(unsigned int uiK){
+  53              	2:
+  55              		.align	2
+  56              		.global	main
+  58              	main:
+  59              	.LFB3:
+  60              		.loc 1 26 0
+  22:main.c        **** d delay5ms(unsigned int uiK){
+  23:main.c        **** 
+  24:main.c        **** 	asm("			mov	r3, #0		");
+  25:main.c        **** 	asm("			b	Label2		");
+  26:main.c        **** 	asm("	Label1:	add	r3, r3, #1	");
+  61              	= 0, pretend = 0, frame = 4
+  62              		@ frame_needed = 1, uses_anonymous_args = 0
+  63              		mov	ip, sp
+  64 0024 0DC0A0E1 	.LCFI0:
+  65              		stmfd	sp!, {fp, ip, lr, pc}
+  66 0028 00D82DE9 	.LCFI1:
+  67              		sub	fp, ip, #4
+  68 002c 04B04CE2 	.LCFI2:
+  69              		sub	sp, sp, #4
+  70 0030 04D04DE2 	.LCFI3:
+  71              		.loc 1 27 0
+  27:main.c        **** abel1:	add	r3, r3, #1	");
+  72              	0
+  73 0034 3C30A0E3 		strb	r3, [fp, #-13]
+  74 0038 0D304BE5 		.loc 1 29 0
+  28:main.c        **** abel1:	add	r3, r3, #1	");
+  29:main.c        **** 	asm("	Label2:	mov	r1, #8192	");
+  75              	v	r3, #-1610612736
+  76 003c 0A32A0E3 		mov	r3, r3, asr #19
+  77 0040 C339A0E1 		mov	r2, #1073741824
+  78 0044 0121A0E3 		str	r2, [r3, #16]
+  79 0048 102083E5 		.loc 1 30 0
+  30:main.c        **** abel2:	mov	r1, #8192	");
+  80              	r3, #-1610612736
+  81 004c 0A32A0E3 		mov	r3, r3, asr #19
+  82 0050 C339A0E1 		mov	r2, #1073741824
+  83 0054 0121A0E3 		str	r2, [r3, #96]
+  84 0058 602083E5 		b	.L4
+  85 005c 0B0000EA 	.L5:
+  86              		.loc 1 33 0
+  31:main.c        **** abel2:	mov	r1, #8192	");
+  32:main.c        **** 	asm("			mul	r2, r0, r1  ");
+  33:main.c        **** 	asm("			cmp	r2, r3		");
+  87              	, #-1610612736
+  88 0060 0A32A0E3 		mov	r3, r3, asr #19
+  89 0064 C339A0E1 		mov	r2, #1073741824
+  90 0068 0121A0E3 		str	r2, [r3, #48]
+  91 006c 302083E5 		.loc 1 34 0
+  34:main.c        **** sm("			cmp	r2, r3		");
+  92              	r0, #100
+  93 0070 6400A0E3 		bl	delay5ms
+  94 0074 FEFFFFEB 		.loc 1 35 0
+  35:main.c        **** sm("			cmp	r2, r3		");
+  95              	v	r3, #-1610612736
+  96 0078 0A32A0E3 		mov	r3, r3, asr #19
+  97 007c C339A0E1 		mov	r2, #1073741824
+  98 0080 0121A0E3 		str	r2, [r3, #52]
+  99 0084 342083E5 		.loc 1 36 0
+  36:main.c        **** sm("			cmp	r2, r3		");
+ 100              	r0, #100
+ 101 0088 6400A0E3 		bl	delay5ms
+ 102 008c FEFFFFEB 	.L4:
+ 103              		.loc 1 32 0
+ 104              		ldrb	r3, [fp, #-13]	@ zero_extendqisi2
+ 105 0090 0D305BE5 		cmp	r3, #0
+ 106 0094 000053E3 		moveq	r3, #0
+ 107 0098 0030A003 		movne	r3, #1
+ 108 009c 0130A013 		and	r2, r3, #255
+ 109 00a0 FF2003E2 		ldrb	r3, [fp, #-13]
+ 110 00a4 0D305BE5 		sub	r3, r3, #1
+ 111 00a8 013043E2 		strb	r3, [fp, #-13]
+ 112 00ac 0D304BE5 		cmp	r2, #0
+ 113 00b0 000052E3 		bne	.L5
+ 114 00b4 E9FFFF1A 	.L6:
+ 115              		b	.L6
+ 116 00b8 FEFFFFEA 	.LFE3:
+ 118              		.section	.debug_frame,"",%progbits
+ 168              		.section	.debug_loc,"",%progbits
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\Robin\AppData\Local\Temp/ccUKE1Bg.s:13     .text:00000000 delay5ms
+C:\Users\Robin\AppData\Local\Temp/ccUKE1Bg.s:20     .text:00000000 $a
+C:\Users\Robin\AppData\Local\Temp/ccUKE1Bg.s:35     .text:00000010 Label2
+C:\Users\Robin\AppData\Local\Temp/ccUKE1Bg.s:31     .text:0000000c Label1
+C:\Users\Robin\AppData\Local\Temp/ccUKE1Bg.s:59     .text:00000024 main
+C:\Users\Robin\AppData\Local\Temp/ccUKE1Bg.s:121    .debug_frame:00000000 $d
+C:\Users\Robin\AppData\Local\Temp/ccUKE1Bg.s:172    .debug_loc:00000000 $d
+
+NO UNDEFINED SYMBOLS

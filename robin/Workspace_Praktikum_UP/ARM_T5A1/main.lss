@@ -1,0 +1,601 @@
+
+main.elf:     file format elf32-littlearm
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000005d4  00000000  00000000  00008000  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .bss          00000002  00200000  000005d4  00010000  2**0
+                  ALLOC
+  2 .comment      00000036  00000000  00000000  000085d4  2**0
+                  CONTENTS, READONLY
+  3 .debug_aranges 00000080  00000000  00000000  00008610  2**3
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_pubnames 00000097  00000000  00000000  00008690  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000f82  00000000  00000000  00008727  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000245  00000000  00000000  000096a9  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000001ce  00000000  00000000  000098ee  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  000000f0  00000000  00000000  00009abc  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000421  00000000  00000000  00009bac  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    000000fc  00000000  00000000  00009fcd  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .ARM.attributes 00000010  00000000  00000000  0000a0c9  2**0
+                  CONTENTS, READONLY
+Disassembly of section .text:
+
+00000000 <_startup>:
+   0:	ea000010 	b	48 <InitReset>
+
+00000004 <undefvec>:
+   4:	eafffffe 	b	4 <undefvec>
+
+00000008 <swivec>:
+   8:	eafffffe 	b	8 <swivec>
+
+0000000c <pabtvec>:
+   c:	eafffffe 	b	c <pabtvec>
+
+00000010 <dabtvec>:
+  10:	eafffffe 	b	10 <dabtvec>
+
+00000014 <rsvdvec>:
+  14:	eafffffe 	b	14 <rsvdvec>
+
+00000018 <irqvec>:
+  18:	ea000027 	b	bc <IRQ_Handler_Entry>
+
+0000001c <FIQ_Handler_Entry>:
+  1c:	e1a09000 	mov	r9, r0
+  20:	e5980104 	ldr	r0, [r8, #260]
+  24:	e321f0d3 	msr	CPSR_c, #211	; 0xd3
+  28:	e92d500e 	push	{r1, r2, r3, ip, lr}
+  2c:	e1a0e00f 	mov	lr, pc
+  30:	e12fff10 	bx	r0
+  34:	e8bd500e 	pop	{r1, r2, r3, ip, lr}
+  38:	e321f0d1 	msr	CPSR_c, #209	; 0xd1
+  3c:	e1a00009 	mov	r0, r9
+  40:	e25ef004 	subs	pc, lr, #4	; 0x4
+
+00000044 <.RAM_TOP>:
+  44:	00204000 	.word	0x00204000
+
+00000048 <InitReset>:
+  48:	e51fd00c 	ldr	sp, [pc, #-12]	; 44 <.RAM_TOP>
+  4c:	e59f00c4 	ldr	r0, [pc, #196]	; 118 <AT91F_Spurious_handler+0x4>
+  50:	e1a0e00f 	mov	lr, pc
+  54:	e12fff10 	bx	r0
+  58:	e1a0000d 	mov	r0, sp
+  5c:	e321f0d1 	msr	CPSR_c, #209	; 0xd1
+  60:	e59f80b4 	ldr	r8, [pc, #180]	; 11c <AT91F_Spurious_handler+0x8>
+  64:	e321f0d2 	msr	CPSR_c, #210	; 0xd2
+  68:	e1a0d000 	mov	sp, r0
+  6c:	e2400060 	sub	r0, r0, #96	; 0x60
+  70:	e321f013 	msr	CPSR_c, #19	; 0x13
+  74:	e1a0d000 	mov	sp, r0
+  78:	e59f10a0 	ldr	r1, [pc, #160]	; 120 <AT91F_Spurious_handler+0xc>
+  7c:	e59f20a0 	ldr	r2, [pc, #160]	; 124 <AT91F_Spurious_handler+0x10>
+  80:	e59f30a0 	ldr	r3, [pc, #160]	; 128 <AT91F_Spurious_handler+0x14>
+
+00000084 <LoopRel>:
+  84:	e1520003 	cmp	r2, r3
+  88:	34910004 	ldrcc	r0, [r1], #4
+  8c:	34820004 	strcc	r0, [r2], #4
+  90:	3afffffb 	bcc	84 <LoopRel>
+  94:	e3a00000 	mov	r0, #0	; 0x0
+  98:	e59f108c 	ldr	r1, [pc, #140]	; 12c <AT91F_Spurious_handler+0x18>
+  9c:	e59f208c 	ldr	r2, [pc, #140]	; 130 <AIC_EOICR>
+
+000000a0 <LoopZI>:
+  a0:	e1510002 	cmp	r1, r2
+  a4:	34810004 	strcc	r0, [r1], #4
+  a8:	3afffffc 	bcc	a0 <LoopZI>
+  ac:	e59fe080 	ldr	lr, [pc, #128]	; 134 <AIC_EOICR+0x4>
+  b0:	e59f0080 	ldr	r0, [pc, #128]	; 138 <AIC_EOICR+0x8>
+  b4:	e12fff10 	bx	r0
+
+000000b8 <exit>:
+  b8:	eafffffe 	.word	0xeafffffe
+
+000000bc <IRQ_Handler_Entry>:
+  bc:	e24ee004 	.word	0xe24ee004
+  c0:	e92d4000 	.word	0xe92d4000
+  c4:	e14fe000 	.word	0xe14fe000
+  c8:	e92d4000 	.word	0xe92d4000
+  cc:	e92d0001 	.word	0xe92d0001
+  d0:	e59fe044 	.word	0xe59fe044
+  d4:	e59e0100 	.word	0xe59e0100
+  d8:	e58ee100 	.word	0xe58ee100
+  dc:	e321f013 	.word	0xe321f013
+  e0:	e92d500e 	.word	0xe92d500e
+  e4:	e1a0e00f 	.word	0xe1a0e00f
+  e8:	e12fff10 	.word	0xe12fff10
+  ec:	e8bd500e 	.word	0xe8bd500e
+  f0:	e321f092 	.word	0xe321f092
+  f4:	e59fe020 	.word	0xe59fe020
+  f8:	e58ee130 	.word	0xe58ee130
+  fc:	e8bd0001 	.word	0xe8bd0001
+ 100:	e8bd4000 	.word	0xe8bd4000
+ 104:	e16ff00e 	.word	0xe16ff00e
+ 108:	e8fd8000 	.word	0xe8fd8000
+
+0000010c <AT91F_Default_FIQ_handler>:
+ 10c:	eafffffe 	.word	0xeafffffe
+
+00000110 <AT91F_Default_IRQ_handler>:
+ 110:	eafffffe 	.word	0xeafffffe
+
+00000114 <AT91F_Spurious_handler>:
+ 114:	eafffffe 	.word	0xeafffffe
+ 118:	0000013c 	.word	0x0000013c
+ 11c:	fffff000 	.word	0xfffff000
+ 120:	000005d4 	.word	0x000005d4
+ 124:	00200000 	.word	0x00200000
+ 128:	00200000 	.word	0x00200000
+ 12c:	00200000 	.word	0x00200000
+ 130:	00200004 	.word	0x00200004
+ 134:	000000b8 	.word	0x000000b8
+ 138:	000002e4 	.word	0x000002e4
+
+0000013c <AT91F_LowLevelInit>:
+//* \brief This function performs very low level HW initialization
+//*        this function can be use a Stack, depending the compilation
+//*        optimization mode
+//*----------------------------------------------------------------------------
+void AT91F_LowLevelInit( void)
+{  int i;
+ 13c:	e1a0c00d 	mov	ip, sp
+ 140:	e92dd800 	push	{fp, ip, lr, pc}
+ 144:	e24cb004 	sub	fp, ip, #4	; 0x4
+ 148:	e24dd004 	sub	sp, sp, #4	; 0x4
+  // Disable Watchdog
+  AT91C_BASE_WDTC->WDTC_WDMR= AT91C_WDTC_WDDIS;
+ 14c:	e3a0332a 	mov	r3, #-1476395008	; 0xa8000000
+ 150:	e1a03ac3 	asr	r3, r3, #21
+ 154:	e3a02902 	mov	r2, #32768	; 0x8000
+ 158:	e5832004 	str	r2, [r3, #4]
+  // Set MCK at 24 MHz
+  // Enabling the Main Oscillator:
+  AT91C_BASE_PMC->PMC_MOR = ( (AT91C_CKGR_OSCOUNT) & (0x10 << 8)) | AT91C_CKGR_MOSCEN ;
+ 15c:	e3a02102 	mov	r2, #-2147483648	; 0x80000000
+ 160:	e1a02ac2 	asr	r2, r2, #21
+ 164:	e3a03a01 	mov	r3, #4096	; 0x1000
+ 168:	e2833001 	add	r3, r3, #1	; 0x1
+ 16c:	e5823020 	str	r3, [r2, #32]
+  // Wait the startup time
+  while(!(AT91C_BASE_PMC->PMC_SR & AT91C_PMC_MOSCS));
+ 170:	e3a03102 	mov	r3, #-2147483648	; 0x80000000
+ 174:	e1a03ac3 	asr	r3, r3, #21
+ 178:	e5933068 	ldr	r3, [r3, #104]
+ 17c:	e2033001 	and	r3, r3, #1	; 0x1
+ 180:	e3530000 	cmp	r3, #0	; 0x0
+ 184:	0afffff9 	beq	170 <AT91F_LowLevelInit+0x34>
+  // CPU-Clock: MAIN_CLK / 4 (3 MHz)
+  AT91C_BASE_PMC->PMC_MCKR = AT91C_PMC_CSS_MAIN_CLK | AT91C_PMC_PRES_CLK_4;
+ 188:	e3a03102 	mov	r3, #-2147483648	; 0x80000000
+ 18c:	e1a03ac3 	asr	r3, r3, #21
+ 190:	e3a02009 	mov	r2, #9	; 0x9
+ 194:	e5832030 	str	r2, [r3, #48]
+  // wait until MCKRDY in PMC_SR is set
+  while(!(AT91C_BASE_PMC->PMC_SR & AT91C_PMC_MCKRDY));
+ 198:	e3a03102 	mov	r3, #-2147483648	; 0x80000000
+ 19c:	e1a03ac3 	asr	r3, r3, #21
+ 1a0:	e5933068 	ldr	r3, [r3, #104]
+ 1a4:	e2033008 	and	r3, r3, #8	; 0x8
+ 1a8:	e3530000 	cmp	r3, #0	; 0x0
+ 1ac:	0afffff9 	beq	198 <AT91F_LowLevelInit+0x5c>
+  // setting PLL (96 MHz)
+  AT91C_BASE_PMC->PMC_PLLR = ((AT91C_CKGR_DIV      & 8) |
+ 1b0:	e3a02102 	mov	r2, #-2147483648	; 0x80000000
+ 1b4:	e1a02ac2 	asr	r2, r2, #21
+ 1b8:	e3a039fd 	mov	r3, #4145152	; 0x3f4000
+ 1bc:	e2433ffe 	sub	r3, r3, #1016	; 0x3f8
+ 1c0:	e582302c 	str	r3, [r2, #44]
+                              (AT91C_CKGR_PLLCOUNT & (60 << 8)) |
+                              (AT91C_CKGR_MUL      & (63 << 16)));
+  // Wait the startup time
+  while(!(AT91C_BASE_PMC->PMC_SR & AT91C_PMC_LOCK));
+ 1c4:	e3a03102 	mov	r3, #-2147483648	; 0x80000000
+ 1c8:	e1a03ac3 	asr	r3, r3, #21
+ 1cc:	e5933068 	ldr	r3, [r3, #104]
+ 1d0:	e2033004 	and	r3, r3, #4	; 0x4
+ 1d4:	e3530000 	cmp	r3, #0	; 0x0
+ 1d8:	0afffff9 	beq	1c4 <AT91F_LowLevelInit+0x88>
+  // CPU-Clock: PLL / 4 (24 MHz)
+  AT91C_BASE_PMC->PMC_MCKR = AT91C_PMC_CSS_PLL_CLK | AT91C_PMC_PRES_CLK_4;
+ 1dc:	e3a03102 	mov	r3, #-2147483648	; 0x80000000
+ 1e0:	e1a03ac3 	asr	r3, r3, #21
+ 1e4:	e3a0200b 	mov	r2, #11	; 0xb
+ 1e8:	e5832030 	str	r2, [r3, #48]
+  // wait until MCKRDY in PMC_SR is set
+  while(!(AT91C_BASE_PMC->PMC_SR & AT91C_PMC_MCKRDY));
+ 1ec:	e3a03102 	mov	r3, #-2147483648	; 0x80000000
+ 1f0:	e1a03ac3 	asr	r3, r3, #21
+ 1f4:	e5933068 	ldr	r3, [r3, #104]
+ 1f8:	e2033008 	and	r3, r3, #8	; 0x8
+ 1fc:	e3530000 	cmp	r3, #0	; 0x0
+ 200:	0afffff9 	beq	1ec <AT91F_LowLevelInit+0xb0>
+  //  Set Flash Waite state
+  //  if MCK = 24MHz I have 36 Cycle for 1.5 usecond ( flied MC_FMR->FMCN)
+  AT91C_BASE_MC->MC_FMR = ((AT91C_MC_FMCN)&(36<<16)) | AT91C_MC_FWS_0FWS ;
+ 204:	e3e020ff 	mvn	r2, #255	; 0xff
+ 208:	e3a03709 	mov	r3, #2359296	; 0x240000
+ 20c:	e5823060 	str	r3, [r2, #96]
+  // Set up the default interrupts handler vectors
+  AT91C_BASE_AIC->AIC_SVR[0] = (int) AT91F_Default_FIQ_handler ;
+ 210:	e3a03102 	mov	r3, #-2147483648	; 0x80000000
+ 214:	e1a039c3 	asr	r3, r3, #19
+ 218:	e59f2050 	ldr	r2, [pc, #80]	; 270 <AT91F_LowLevelInit+0x134>
+ 21c:	e5832080 	str	r2, [r3, #128]
+  for (i=1;i<31; i++)
+ 220:	e3a03001 	mov	r3, #1	; 0x1
+ 224:	e50b3010 	str	r3, [fp, #-16]
+ 228:	ea000008 	b	250 <AT91F_LowLevelInit+0x114>
+  {
+	  AT91C_BASE_AIC->AIC_SVR[i] = (int) AT91F_Default_IRQ_handler ;
+ 22c:	e3a02102 	mov	r2, #-2147483648	; 0x80000000
+ 230:	e1a029c2 	asr	r2, r2, #19
+ 234:	e51b3010 	ldr	r3, [fp, #-16]
+ 238:	e59f1034 	ldr	r1, [pc, #52]	; 274 <AT91F_LowLevelInit+0x138>
+ 23c:	e2833020 	add	r3, r3, #32	; 0x20
+ 240:	e7821103 	str	r1, [r2, r3, lsl #2]
+  //  Set Flash Waite state
+  //  if MCK = 24MHz I have 36 Cycle for 1.5 usecond ( flied MC_FMR->FMCN)
+  AT91C_BASE_MC->MC_FMR = ((AT91C_MC_FMCN)&(36<<16)) | AT91C_MC_FWS_0FWS ;
+  // Set up the default interrupts handler vectors
+  AT91C_BASE_AIC->AIC_SVR[0] = (int) AT91F_Default_FIQ_handler ;
+  for (i=1;i<31; i++)
+ 244:	e51b3010 	ldr	r3, [fp, #-16]
+ 248:	e2833001 	add	r3, r3, #1	; 0x1
+ 24c:	e50b3010 	str	r3, [fp, #-16]
+ 250:	e51b3010 	ldr	r3, [fp, #-16]
+ 254:	e353001e 	cmp	r3, #30	; 0x1e
+ 258:	dafffff3 	ble	22c <AT91F_LowLevelInit+0xf0>
+  {
+	  AT91C_BASE_AIC->AIC_SVR[i] = (int) AT91F_Default_IRQ_handler ;
+  }
+  AT91C_BASE_AIC->AIC_SPU  = (int) AT91F_Spurious_handler ;
+ 25c:	e3a03102 	mov	r3, #-2147483648	; 0x80000000
+ 260:	e1a039c3 	asr	r3, r3, #19
+ 264:	e59f200c 	ldr	r2, [pc, #12]	; 278 <AT91F_LowLevelInit+0x13c>
+ 268:	e5832134 	str	r2, [r3, #308]
+}
+ 26c:	e89da808 	ldm	sp, {r3, fp, sp, pc}
+ 270:	0000010c 	.word	0x0000010c
+ 274:	00000110 	.word	0x00000110
+ 278:	00000114 	.word	0x00000114
+
+0000027c <timer0_isr>:
+
+
+//**************************************************************
+// Interrupt-Service-Routine Timer1
+//**************************************************************
+__attribute__ ((used)) void timer0_isr (void){
+ 27c:	e1a0c00d 	mov	ip, sp
+ 280:	e92dd800 	push	{fp, ip, lr, pc}
+ 284:	e24cb004 	sub	fp, ip, #4	; 0x4
+ 288:	e24dd004 	sub	sp, sp, #4	; 0x4
+	static unsigned char i=0;				// Laufvariable
+
+
+
+	//	AT91C_BASE_TC1->TC_CCR=AT91C_TC_SWTRG;	// Manuelles zurücksetzen des Zählers
+	dummy = AT91C_BASE_TC0->TC_SR;			// Bestätigung Interrupt Request
+ 28c:	e3a0320a 	mov	r3, #-1610612736	; 0xa0000000
+ 290:	e1a03643 	asr	r3, r3, #12
+ 294:	e5933020 	ldr	r3, [r3, #32]
+ 298:	e50b3010 	str	r3, [fp, #-16]
+}
+ 29c:	e89da808 	ldm	sp, {r3, fp, sp, pc}
+
+000002a0 <timer1_isr>:
+
+//**************************************************************
+// Interrupt-Service-Routine Timer1
+//**************************************************************
+__attribute__ ((used)) void timer1_isr (void){
+ 2a0:	e1a0c00d 	mov	ip, sp
+ 2a4:	e92dd800 	push	{fp, ip, lr, pc}
+ 2a8:	e24cb004 	sub	fp, ip, #4	; 0x4
+ 2ac:	e24dd004 	sub	sp, sp, #4	; 0x4
+	volatile unsigned int dummy;			// Lokale dummy-Variable
+	static unsigned char i=0;				// Laufvariable
+
+	AT91C_BASE_PIOA->PIO_ODSR ^= SPEAKER;
+ 2b0:	e3a0220a 	mov	r2, #-1610612736	; 0xa0000000
+ 2b4:	e1a029c2 	asr	r2, r2, #19
+ 2b8:	e3a0320a 	mov	r3, #-1610612736	; 0xa0000000
+ 2bc:	e1a039c3 	asr	r3, r3, #19
+ 2c0:	e5933038 	ldr	r3, [r3, #56]
+ 2c4:	e2233701 	eor	r3, r3, #262144	; 0x40000
+ 2c8:	e5823038 	str	r3, [r2, #56]
+
+
+	//	AT91C_BASE_TC1->TC_CCR=AT91C_TC_SWTRG;	// Manuelles zurücksetzen des Zählers
+	dummy = AT91C_BASE_TC1->TC_SR;			// Bestätigung Interrupt Request
+ 2cc:	e3a034ff 	mov	r3, #-16777216	; 0xff000000
+ 2d0:	e28338fa 	add	r3, r3, #16384000	; 0xfa0000
+ 2d4:	e2833040 	add	r3, r3, #64	; 0x40
+ 2d8:	e5933020 	ldr	r3, [r3, #32]
+ 2dc:	e50b3010 	str	r3, [fp, #-16]
+}
+ 2e0:	e89da808 	ldm	sp, {r3, fp, sp, pc}
+
+000002e4 <main>:
+
+//**************************************************************
+// main initialisiert Timer 1 für Schrittmoterdrehungen
+//**************************************************************
+int main(){
+ 2e4:	e1a0c00d 	mov	ip, sp
+ 2e8:	e92dd800 	push	{fp, ip, lr, pc}
+ 2ec:	e24cb004 	sub	fp, ip, #4	; 0x4
+	AT91C_BASE_PIOA->PIO_OER = SPEAKER;	// Freigabe der Motor-Port-Pins
+ 2f0:	e3a0320a 	mov	r3, #-1610612736	; 0xa0000000
+ 2f4:	e1a039c3 	asr	r3, r3, #19
+ 2f8:	e3a02701 	mov	r2, #262144	; 0x40000
+ 2fc:	e5832010 	str	r2, [r3, #16]
+	AT91C_BASE_PIOA->PIO_OWER = SPEAKER;	// Freigabe des schreibenden/lesenden
+ 300:	e3a0320a 	mov	r3, #-1610612736	; 0xa0000000
+ 304:	e1a039c3 	asr	r3, r3, #19
+ 308:	e3a02701 	mov	r2, #262144	; 0x40000
+ 30c:	e58320a0 	str	r2, [r3, #160]
+											// Zugriffs auf Motor-Port-Pins über
+											// Register PIO_ODSR
+	AT91C_BASE_PIOA->PIO_PPUDR=SPEAKER;	// Ausschalten der Pull-up-Widerstände
+ 310:	e3a0320a 	mov	r3, #-1610612736	; 0xa0000000
+ 314:	e1a039c3 	asr	r3, r3, #19
+ 318:	e3a02701 	mov	r2, #262144	; 0x40000
+ 31c:	e5832060 	str	r2, [r3, #96]
+
+	//AT91C_TC_WAVESEL_UP_AUTO für selbstängides timerzurücksetzen
+	//timer_ir_init(1, 4, 1, timer0_isr); Timer manuell setzen
+	timer_ir_init(1, 4, 1 | AT91C_TC_WAVESEL_UP_AUTO, timer0_isr);
+ 320:	e3a00001 	mov	r0, #1	; 0x1
+ 324:	e3a01004 	mov	r1, #4	; 0x4
+ 328:	e3a02901 	mov	r2, #16384	; 0x4000
+ 32c:	e2822001 	add	r2, r2, #1	; 0x1
+ 330:	e59f306c 	ldr	r3, [pc, #108]	; 3a4 <main+0xc0>
+ 334:	eb000041 	bl	440 <timer_ir_init>
+	timer_ir_init(1, 4, 1 | AT91C_TC_WAVESEL_UP_AUTO, timer1_isr);		// Timer1-IR initialisieren
+ 338:	e3a00001 	mov	r0, #1	; 0x1
+ 33c:	e3a01004 	mov	r1, #4	; 0x4
+ 340:	e3a02901 	mov	r2, #16384	; 0x4000
+ 344:	e2822001 	add	r2, r2, #1	; 0x1
+ 348:	e59f3058 	ldr	r3, [pc, #88]	; 3a8 <main+0xc4>
+ 34c:	eb00003b 	bl	440 <timer_ir_init>
+	AT91C_BASE_TC0->TC_RC = 3000;		//Dauer Max. Zählwert TC_RC  (1ms * 3Mhz)
+ 350:	e3a0220a 	mov	r2, #-1610612736	; 0xa0000000
+ 354:	e1a02642 	asr	r2, r2, #12
+ 358:	e3a03ebb 	mov	r3, #2992	; 0xbb0
+ 35c:	e2833008 	add	r3, r3, #8	; 0x8
+ 360:	e582301c 	str	r3, [r2, #28]
+	AT91C_BASE_TC0->TC_CCR = AT91C_TC_SWTRG;
+ 364:	e3a0320a 	mov	r3, #-1610612736	; 0xa0000000
+ 368:	e1a03643 	asr	r3, r3, #12
+ 36c:	e3a02004 	mov	r2, #4	; 0x4
+ 370:	e5832000 	str	r2, [r3]
+	AT91C_BASE_TC1->TC_RC = 3409;		// Ton
+ 374:	e3a024ff 	mov	r2, #-16777216	; 0xff000000
+ 378:	e28228fa 	add	r2, r2, #16384000	; 0xfa0000
+ 37c:	e2822040 	add	r2, r2, #64	; 0x40
+ 380:	e3a03ed5 	mov	r3, #3408	; 0xd50
+ 384:	e2833001 	add	r3, r3, #1	; 0x1
+ 388:	e582301c 	str	r3, [r2, #28]
+	AT91C_BASE_TC1->TC_CCR = AT91C_TC_SWTRG;	// Zurücksetzen des Zählers
+ 38c:	e3a034ff 	mov	r3, #-16777216	; 0xff000000
+ 390:	e28338fa 	add	r3, r3, #16384000	; 0xfa0000
+ 394:	e2833040 	add	r3, r3, #64	; 0x40
+ 398:	e3a02004 	mov	r2, #4	; 0x4
+ 39c:	e5832000 	str	r2, [r3]
+ 3a0:	eafffffe 	b	3a0 <main+0xbc>
+ 3a4:	0000027c 	.word	0x0000027c
+ 3a8:	000002a0 	.word	0x000002a0
+
+000003ac <pioa_ir_init>:
+//                                          1  Fallende Flanke
+//                                          2  High-Level
+//                                          3  Steigende Flanke
+//                     ADR_ISR  Adresse der ISR-Routine
+//**************************************************************
+void pioa_ir_init (unsigned int PORT, unsigned int PRIOR, unsigned int SRCTYPE, void (*ADR_ISR) (void) ){
+ 3ac:	e1a0c00d 	mov	ip, sp
+ 3b0:	e92dd800 	push	{fp, ip, lr, pc}
+ 3b4:	e24cb004 	sub	fp, ip, #4	; 0x4
+ 3b8:	e24dd010 	sub	sp, sp, #16	; 0x10
+ 3bc:	e50b0010 	str	r0, [fp, #-16]
+ 3c0:	e50b1014 	str	r1, [fp, #-20]
+ 3c4:	e50b2018 	str	r2, [fp, #-24]
+ 3c8:	e50b301c 	str	r3, [fp, #-28]
+																// Konfiguration Advanced Interrupt Controllers (AIC):
+	AT91C_BASE_AIC->AIC_IDCR = (1<<AT91C_ID_PIOA);					// PIOA-Interrupts sperren
+ 3cc:	e3a03102 	mov	r3, #-2147483648	; 0x80000000
+ 3d0:	e1a039c3 	asr	r3, r3, #19
+ 3d4:	e3a02004 	mov	r2, #4	; 0x4
+ 3d8:	e5832124 	str	r2, [r3, #292]
+	AT91C_BASE_AIC->AIC_SVR[AT91C_ID_PIOA]= (unsigned int) ADR_ISR;	// Adresse der ISR zuweisen
+ 3dc:	e3a03102 	mov	r3, #-2147483648	; 0x80000000
+ 3e0:	e1a039c3 	asr	r3, r3, #19
+ 3e4:	e51b201c 	ldr	r2, [fp, #-28]
+ 3e8:	e5832088 	str	r2, [r3, #136]
+	AT91C_BASE_AIC->AIC_SMR[AT91C_ID_PIOA]= (SRCTYPE<<5)|PRIOR;		// Type und Priorität auswählen
+ 3ec:	e3a02102 	mov	r2, #-2147483648	; 0x80000000
+ 3f0:	e1a029c2 	asr	r2, r2, #19
+ 3f4:	e51b3018 	ldr	r3, [fp, #-24]
+ 3f8:	e1a01283 	lsl	r1, r3, #5
+ 3fc:	e51b3014 	ldr	r3, [fp, #-20]
+ 400:	e1813003 	orr	r3, r1, r3
+ 404:	e5823008 	str	r3, [r2, #8]
+	AT91C_BASE_AIC->AIC_ICCR = (1<<AT91C_ID_PIOA);					// ev. IR-Flag löschen
+ 408:	e3a03102 	mov	r3, #-2147483648	; 0x80000000
+ 40c:	e1a039c3 	asr	r3, r3, #19
+ 410:	e3a02004 	mov	r2, #4	; 0x4
+ 414:	e5832128 	str	r2, [r3, #296]
+	AT91C_BASE_AIC->AIC_IECR = (1<<AT91C_ID_PIOA);					// PIOA-Interrupts freigeben
+ 418:	e3a03102 	mov	r3, #-2147483648	; 0x80000000
+ 41c:	e1a039c3 	asr	r3, r3, #19
+ 420:	e3a02004 	mov	r2, #4	; 0x4
+ 424:	e5832120 	str	r2, [r3, #288]
+
+	AT91C_BASE_PIOA->PIO_IER = PORT;							// PIO-Pin(s) für Interrupts freigeben
+ 428:	e3a0320a 	mov	r3, #-1610612736	; 0xa0000000
+ 42c:	e1a039c3 	asr	r3, r3, #19
+ 430:	e51b2010 	ldr	r2, [fp, #-16]
+ 434:	e5832040 	str	r2, [r3, #64]
+}
+ 438:	e24bd00c 	sub	sp, fp, #12	; 0xc
+ 43c:	e89da800 	ldm	sp, {fp, sp, pc}
+
+00000440 <timer_ir_init>:
+//                                              2  TimerClock3 = MCK/32   => 750,0    kHz
+//                                              3  TimerClock4 = MCK/128  => 187,5    kHz
+//                                              4  TimerClock5 = MCK/1024 =>  23,4375 kHz
+//                     ADR_ISR  Adresse der ISR-Routine
+//**************************************************************
+void timer_ir_init (unsigned int TC_NR, unsigned int PRIOR, unsigned int TCCLKS, void (*ADR_ISR) (void) ){
+ 440:	e1a0c00d 	mov	ip, sp
+ 444:	e92dd800 	push	{fp, ip, lr, pc}
+ 448:	e24cb004 	sub	fp, ip, #4	; 0x4
+ 44c:	e24dd020 	sub	sp, sp, #32	; 0x20
+ 450:	e50b001c 	str	r0, [fp, #-28]
+ 454:	e50b1020 	str	r1, [fp, #-32]
+ 458:	e50b2024 	str	r2, [fp, #-36]
+ 45c:	e50b3028 	str	r3, [fp, #-40]
+	AT91S_TC *TC_POINTER;										// Pointer TimerCounter Channel
+	unsigned int IRQ_ID;										// Timer-IRQ-ID
+	volatile unsigned int dummy;								// Dummy-Variable
+
+	switch(TC_NR){												// Timer auswählen:
+ 460:	e51b301c 	ldr	r3, [fp, #-28]
+ 464:	e50b302c 	str	r3, [fp, #-44]
+ 468:	e51b302c 	ldr	r3, [fp, #-44]
+ 46c:	e3530001 	cmp	r3, #1	; 0x1
+ 470:	0a00000c 	beq	4a8 <timer_ir_init+0x68>
+ 474:	e51b302c 	ldr	r3, [fp, #-44]
+ 478:	e3530001 	cmp	r3, #1	; 0x1
+ 47c:	3a000003 	bcc	490 <timer_ir_init+0x50>
+ 480:	e51b302c 	ldr	r3, [fp, #-44]
+ 484:	e3530002 	cmp	r3, #2	; 0x2
+ 488:	0a00000d 	beq	4c4 <timer_ir_init+0x84>
+ 48c:	ea000013 	b	4e0 <timer_ir_init+0xa0>
+		case 0:
+			TC_POINTER = AT91C_BASE_TC0;							// Pointer für Timer0 zuweisen
+ 490:	e3a0320a 	mov	r3, #-1610612736	; 0xa0000000
+ 494:	e1a03643 	asr	r3, r3, #12
+ 498:	e50b3014 	str	r3, [fp, #-20]
+			IRQ_ID = AT91C_ID_TC0;									// IRQ_ID des Timers0 zuweisen
+ 49c:	e3a0300c 	mov	r3, #12	; 0xc
+ 4a0:	e50b3010 	str	r3, [fp, #-16]
+ 4a4:	ea000012 	b	4f4 <timer_ir_init+0xb4>
+			break;
+		case 1:
+			TC_POINTER = AT91C_BASE_TC1;							// Pointer für Timer0 zuweisen
+ 4a8:	e3a034ff 	mov	r3, #-16777216	; 0xff000000
+ 4ac:	e28338fa 	add	r3, r3, #16384000	; 0xfa0000
+ 4b0:	e2833040 	add	r3, r3, #64	; 0x40
+ 4b4:	e50b3014 	str	r3, [fp, #-20]
+			IRQ_ID = AT91C_ID_TC1;									// IRQ_ID des Timers0 zuweisen
+ 4b8:	e3a0300d 	mov	r3, #13	; 0xd
+ 4bc:	e50b3010 	str	r3, [fp, #-16]
+ 4c0:	ea00000b 	b	4f4 <timer_ir_init+0xb4>
+			break;
+		case 2:
+			TC_POINTER = AT91C_BASE_TC2;							// Pointer für Timer0 zuweisen
+ 4c4:	e3a034ff 	mov	r3, #-16777216	; 0xff000000
+ 4c8:	e28338fa 	add	r3, r3, #16384000	; 0xfa0000
+ 4cc:	e2833080 	add	r3, r3, #128	; 0x80
+ 4d0:	e50b3014 	str	r3, [fp, #-20]
+			IRQ_ID = AT91C_ID_TC2;									// IRQ_ID des Timers0 zuweisen
+ 4d4:	e3a0300e 	mov	r3, #14	; 0xe
+ 4d8:	e50b3010 	str	r3, [fp, #-16]
+ 4dc:	ea000004 	b	4f4 <timer_ir_init+0xb4>
+			break;
+		default:
+			TC_POINTER = AT91C_BASE_TC0;							// Pointer für Timer0 zuweisen
+ 4e0:	e3a0320a 	mov	r3, #-1610612736	; 0xa0000000
+ 4e4:	e1a03643 	asr	r3, r3, #12
+ 4e8:	e50b3014 	str	r3, [fp, #-20]
+			IRQ_ID = AT91C_ID_TC0;									// IRQ_ID des Timers0 zuweisen
+ 4ec:	e3a0300c 	mov	r3, #12	; 0xc
+ 4f0:	e50b3010 	str	r3, [fp, #-16]
+			break;}
+
+	AT91C_BASE_PMC->PMC_PCER = (1<<IRQ_ID);						// Clock für den Timer freigeben
+ 4f4:	e3a02102 	mov	r2, #-2147483648	; 0x80000000
+ 4f8:	e1a02ac2 	asr	r2, r2, #21
+ 4fc:	e51b1010 	ldr	r1, [fp, #-16]
+ 500:	e3a03001 	mov	r3, #1	; 0x1
+ 504:	e1a03113 	lsl	r3, r3, r1
+ 508:	e5823010 	str	r3, [r2, #16]
+
+																// Konfiguration Timer Counter (TC):
+	TC_POINTER->TC_CCR = AT91C_TC_CLKDIS;							// Clock des Timers sperren
+ 50c:	e51b2014 	ldr	r2, [fp, #-20]
+ 510:	e3a03002 	mov	r3, #2	; 0x2
+ 514:	e5823000 	str	r3, [r2]
+	TC_POINTER->TC_IDR = 0xFF;										// Alle Timer-Interrupts sperren
+ 518:	e51b2014 	ldr	r2, [fp, #-20]
+ 51c:	e3a030ff 	mov	r3, #255	; 0xff
+ 520:	e5823028 	str	r3, [r2, #40]
+	dummy = TC_POINTER->TC_SR;										// Status Bit löschen
+ 524:	e51b3014 	ldr	r3, [fp, #-20]
+ 528:	e5933020 	ldr	r3, [r3, #32]
+ 52c:	e50b3018 	str	r3, [fp, #-24]
+	TC_POINTER->TC_CMR = TCCLKS;									// Timer-Modus einstellen
+ 530:	e51b2014 	ldr	r2, [fp, #-20]
+ 534:	e51b3024 	ldr	r3, [fp, #-36]
+ 538:	e5823004 	str	r3, [r2, #4]
+	TC_POINTER->TC_CCR = AT91C_TC_CLKEN;							// Timer-Clock freigeben
+ 53c:	e51b2014 	ldr	r2, [fp, #-20]
+ 540:	e3a03001 	mov	r3, #1	; 0x1
+ 544:	e5823000 	str	r3, [r2]
+    TC_POINTER->TC_IER  = AT91C_TC_CPCS;							// Timer-Interrupts für 'RC Compare' freischalten
+ 548:	e51b2014 	ldr	r2, [fp, #-20]
+ 54c:	e3a03010 	mov	r3, #16	; 0x10
+ 550:	e5823024 	str	r3, [r2, #36]
+
+																// Konfiguration Advanced Interrupt Controllers (AIC):
+    AT91C_BASE_AIC->AIC_IDCR = (1<<IRQ_ID);							// TimerX-Interrupts sperren
+ 554:	e3a02102 	mov	r2, #-2147483648	; 0x80000000
+ 558:	e1a029c2 	asr	r2, r2, #19
+ 55c:	e51b1010 	ldr	r1, [fp, #-16]
+ 560:	e3a03001 	mov	r3, #1	; 0x1
+ 564:	e1a03113 	lsl	r3, r3, r1
+ 568:	e5823124 	str	r3, [r2, #292]
+    AT91C_BASE_AIC->AIC_SVR[IRQ_ID]=(unsigned int) ADR_ISR;			// Adresse der ISR zuweisen
+ 56c:	e3a02102 	mov	r2, #-2147483648	; 0x80000000
+ 570:	e1a029c2 	asr	r2, r2, #19
+ 574:	e51b3010 	ldr	r3, [fp, #-16]
+ 578:	e51b1028 	ldr	r1, [fp, #-40]
+ 57c:	e2833020 	add	r3, r3, #32	; 0x20
+ 580:	e7821103 	str	r1, [r2, r3, lsl #2]
+    AT91C_BASE_AIC->AIC_SMR[IRQ_ID]=AT91C_AIC_SRCTYPE_EXT_HIGH_LEVEL|PRIOR;	// Type und Priorität auswählen
+ 584:	e3a02102 	mov	r2, #-2147483648	; 0x80000000
+ 588:	e1a029c2 	asr	r2, r2, #19
+ 58c:	e51b1010 	ldr	r1, [fp, #-16]
+ 590:	e51b3020 	ldr	r3, [fp, #-32]
+ 594:	e3833040 	orr	r3, r3, #64	; 0x40
+ 598:	e7823101 	str	r3, [r2, r1, lsl #2]
+    AT91C_BASE_AIC->AIC_ICCR = (1<<IRQ_ID);							// ev. IR-Flag löschen
+ 59c:	e3a02102 	mov	r2, #-2147483648	; 0x80000000
+ 5a0:	e1a029c2 	asr	r2, r2, #19
+ 5a4:	e51b1010 	ldr	r1, [fp, #-16]
+ 5a8:	e3a03001 	mov	r3, #1	; 0x1
+ 5ac:	e1a03113 	lsl	r3, r3, r1
+ 5b0:	e5823128 	str	r3, [r2, #296]
+	AT91C_BASE_AIC->AIC_IECR = (1<<IRQ_ID);							// TimerX-Interrupts freigeben
+ 5b4:	e3a02102 	mov	r2, #-2147483648	; 0x80000000
+ 5b8:	e1a029c2 	asr	r2, r2, #19
+ 5bc:	e51b1010 	ldr	r1, [fp, #-16]
+ 5c0:	e3a03001 	mov	r3, #1	; 0x1
+ 5c4:	e1a03113 	lsl	r3, r3, r1
+ 5c8:	e5823120 	str	r3, [r2, #288]
+}
+ 5cc:	e24bd00c 	sub	sp, fp, #12	; 0xc
+ 5d0:	e89da800 	ldm	sp, {fp, sp, pc}

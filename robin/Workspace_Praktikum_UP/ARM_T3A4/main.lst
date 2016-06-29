@@ -1,0 +1,397 @@
+   1              		.file	"main.c"
+   9              	.Ltext0:
+  10              		.align	2
+  11              		.global	delay5ms
+  13              	delay5ms:
+  14              	.LFB2:
+  15              		.file 1 "main.c"
+   1:main.c        **** //********************************************************************
+   2:main.c        **** // ARM_T3A4										Version 02.04.2012 hpw
+   3:main.c        **** //********************************************************************
+   4:main.c        **** #include	"include/AT91SAM7S64.h"
+   5:main.c        **** #include	"include/display.h"
+   6:main.c        **** #include	"include/i2c_tools.h"
+   7:main.c        **** 
+   8:main.c        **** 
+   9:main.c        **** //**************************************************************
+  10:main.c        **** // delay5ms(uiK) verzögert um ca. uiK * 5ms
+  11:main.c        **** //**************************************************************
+  12:main.c        **** void delay5ms(unsigned int uiK){
+  16              	 args = 0, pretend = 0, frame = 8
+  17              		@ frame_needed = 1, uses_anonymous_args = 0
+  18              		mov	ip, sp
+  19 0000 0DC0A0E1 	.LCFI0:
+  20              		stmfd	sp!, {fp, ip, lr, pc}
+  21 0004 00D82DE9 	.LCFI1:
+  22              		sub	fp, ip, #4
+  23 0008 04B04CE2 	.LCFI2:
+  24              		sub	sp, sp, #8
+  25 000c 08D04DE2 	.LCFI3:
+  26              		str	r0, [fp, #-20]
+  27 0010 14000BE5 		b	.L2
+  28 0014 0A0000EA 	.L5:
+  29              		.loc 1 16 0
+  13:main.c        **** 	volatile unsigned int uiI;
+  14:main.c        **** 
+  15:main.c        **** 	while (uiK--)							// folgende for-Schleife wird uiK-mal aufgerufen
+  16:main.c        **** 		for (uiI=0; uiI<8192; uiI++);		//  for-Schleife wird 8192-mal durchlaufen. Dies
+  30              	tr	r3, [fp, #-16]
+  31 0018 0030A0E3 		b	.L3
+  32 001c 10300BE5 	.L4:
+  33 0020 020000EA 		ldr	r3, [fp, #-16]
+  34              		add	r3, r3, #1
+  35 0024 10301BE5 		str	r3, [fp, #-16]
+  36 0028 013083E2 	.L3:
+  37 002c 10300BE5 		ldr	r2, [fp, #-16]
+  38              		mov	r3, #8128
+  39 0030 10201BE5 		add	r3, r3, #63
+  40 0034 7F3DA0E3 		cmp	r2, r3
+  41 0038 3F3083E2 		bls	.L4
+  42 003c 030052E1 	.L2:
+  43 0040 F7FFFF9A 		.loc 1 15 0
+  44              		ldr	r3, [fp, #-20]
+  45              		cmp	r3, #0
+  46 0044 14301BE5 		moveq	r3, #0
+  47 0048 000053E3 		movne	r3, #1
+  48 004c 0030A003 		and	r2, r3, #255
+  49 0050 0130A013 		ldr	r3, [fp, #-20]
+  50 0054 FF2003E2 		sub	r3, r3, #1
+  51 0058 14301BE5 		str	r3, [fp, #-20]
+  52 005c 013043E2 		cmp	r2, #0
+  53 0060 14300BE5 		bne	.L5
+  54 0064 000052E3 		.loc 1 18 0
+  55 0068 EAFFFF1A 		sub	sp, fp, #12
+  17:main.c        **** 	//  verursacht eine Zeitverzögerung von ca. 5ms.
+  18:main.c        **** }
+  56              	FE2:
+  58 0070 00A89DE8 		.align	2
+  59              		.global	tempwert
+  61              	tempwert:
+  62              	.LFB3:
+  63              		.loc 1 31 0
+  64              		@ args = 0, pretend = 0, frame = 12
+  65              		@ frame_needed = 1, uses_anonymous_args = 0
+  19:main.c        **** 
+  20:main.c        **** //**************************************************************
+  21:main.c        **** // tempwert(MSByte,LSByte) gibt siTemp zurück
+  22:main.c        **** //**************************************************************
+  23:main.c        **** /** 1. Schiebt das MSByte an die letzten 8 Bit des 32 bit großen signed int
+  24:main.c        ****  *  2. Schiebt das LSByte an die vorletzten 8 Bit des signed int
+  25:main.c        ****  *  3. Schiebt um 23 Stellen nach rechts damit 9 Bits überbleiben
+  26:main.c        ****  *
+  27:main.c        ****  *  Die ersten 8Bits bestimmen die Vorkommastelle und das letzte Bit die Nachkomma-
+  28:main.c        ****  *  Stelle (0 oder 0.5) der Temperatur
+  29:main.c        ****  *
+  30:main.c        ****  */
+  31:main.c        **** signed int tempwert(unsigned char MSByte, unsigned char LSByte){
+  66              	p
+  67              	.LCFI4:
+  68              		stmfd	sp!, {fp, ip, lr, pc}
+  69 0074 0DC0A0E1 	.LCFI5:
+  70              		sub	fp, ip, #4
+  71 0078 00D82DE9 	.LCFI6:
+  72              		sub	sp, sp, #12
+  73 007c 04B04CE2 	.LCFI7:
+  74              		mov	r3, r0
+  75 0080 0CD04DE2 		mov	r2, r1
+  76              		strb	r3, [fp, #-20]
+  77 0084 0030A0E1 		mov	r3, r2
+  78 0088 0120A0E1 		strb	r3, [fp, #-24]
+  79 008c 14304BE5 		.loc 1 34 0
+  80 0090 0230A0E1 		ldrb	r3, [fp, #-20]	@ zero_extendqisi2
+  81 0094 18304BE5 		mov	r2, r3, asl #24
+  32:main.c        **** 	signed int siTemp;
+  33:main.c        **** 
+  34:main.c        **** 	siTemp = ((MSByte<<24)+(LSByte<<16))>>23;
+  82              	-24]	@ zero_extendqisi2
+  83 0098 14305BE5 		mov	r3, r3, asl #16
+  84 009c 032CA0E1 		add	r3, r2, r3
+  85 00a0 18305BE5 		mov	r3, r3, asr #23
+  86 00a4 0338A0E1 		str	r3, [fp, #-16]
+  87 00a8 033082E0 		.loc 1 35 0
+  88 00ac C33BA0E1 		ldr	r3, [fp, #-16]
+  89 00b0 10300BE5 		.loc 1 36 0
+  35:main.c        **** 	return siTemp;
+  90              	 r3
+  91 00b4 10301BE5 		sub	sp, fp, #12
+  36:main.c        **** }
+  92              	dmfd	sp, {fp, sp, pc}
+  93 00b8 0300A0E1 	.LFE3:
+  95 00c0 00A89DE8 		.section	.rodata
+  96              		.align	2
+  97              	.LC0:
+  98              		.ascii	"%d\000"
+  99              		.text
+ 100              		.align	2
+ 101 0000 256400   		.global	print_temp
+ 103              	print_temp:
+ 104              	.LFB4:
+ 105              		.loc 1 63 0
+ 106              		@ args = 0, pretend = 0, frame = 8
+ 107              		@ frame_needed = 1, uses_anonymous_args = 0
+  37:main.c        **** 
+  38:main.c        **** /** Union stellt ein gemeinsamen Speicherbeich dar.
+  39:main.c        ****  *  Der Speicherplatz bedarf einer Union wird über die größte
+  40:main.c        ****  *  Komponente bestimmt. In diesem Falle 32Bit für das signed int.
+  41:main.c        ****  *
+  42:main.c        ****  *  Dementspreched werden über DATA.uc[2] und DATA.uc[3] die letzten
+  43:main.c        ****  *  und vorletzten 8 Bit der Union addressiert. Wenn nun DATA.si um
+  44:main.c        ****  *  23 Stellen nach rechts geschoben wird, werden dabei die zuvor beschriebenen
+  45:main.c        ****  *  32bit des Unions verschoben. Sodass am Ende eine 9 Bit Große Zahl zurückgegenen wird
+  46:main.c        ****  *  wie bei tempwert
+  47:main.c        ****  *
+  48:main.c        ****  */
+  49:main.c        **** //*Alternativ
+  50:main.c        **** //	union{
+  51:main.c        **** //		signed int si;
+  52:main.c        **** //		unsigned char uc[4];
+  53:main.c        **** //	} DATA;
+  54:main.c        **** //
+  55:main.c        **** //	DATA.uc[2] = LSByte;
+  56:main.c        **** //	DATA.uc[3] = MSByte;
+  57:main.c        **** //	return (DATA.si>>23);
+  58:main.c        **** //}
+  59:main.c        **** 
+  60:main.c        **** //**************************************************************
+  61:main.c        **** // print_tempwert(cTemp) gibt Übergabewert auf LCD aus
+  62:main.c        **** //**************************************************************
+  63:main.c        **** void print_temp(signed int cTemp){			// Funktion zur Ausgabe des Temperaturwertes
+ 108              	I8:
+ 109              		stmfd	sp!, {fp, ip, lr, pc}
+ 110              	.LCFI9:
+ 111 00c4 0DC0A0E1 		sub	fp, ip, #4
+ 112              	.LCFI10:
+ 113 00c8 00D82DE9 		sub	sp, sp, #8
+ 114              	.LCFI11:
+ 115 00cc 04B04CE2 		str	r0, [fp, #-20]
+ 116              		.loc 1 66 0
+ 117 00d0 08D04DE2 		ldr	r3, [fp, #-20]
+ 118              		cmp	r3, #0
+ 119 00d4 14000BE5 		bge	.L10
+  64:main.c        **** 	unsigned int ucL;
+  65:main.c        **** 
+  66:main.c        **** 	if(cTemp < 0){							// Fallunterscheidung cTemp=negativ?
+ 120              	
+ 121 00d8 14301BE5 		mov	r0, #45
+ 122 00dc 000053E3 		bl	display_putchar
+ 123 00e0 050000AA 		.loc 1 68 0
+  67:main.c        **** 		display_putchar('-');
+ 124              	r	r3, [fp, #-20]
+ 125 00e4 2D00A0E3 		rsb	r3, r3, #0
+ 126 00e8 FEFFFFEB 		str	r3, [fp, #-16]
+  68:main.c        **** 		ucL = (unsigned int) -cTemp;}
+ 127              	.L11
+ 128 00ec 14301BE5 	.L10:
+ 129 00f0 003063E2 		.loc 1 70 0
+ 130 00f4 10300BE5 		mov	r0, #43
+ 131 00f8 030000EA 		bl	display_putchar
+ 132              		.loc 1 71 0
+  69:main.c        **** 	else{
+  70:main.c        **** 		display_putchar('+');
+ 133              	3, [fp, #-20]
+ 134 00fc 2B00A0E3 		str	r3, [fp, #-16]
+ 135 0100 FEFFFFEB 	.L11:
+  71:main.c        **** 		ucL = (unsigned int) cTemp;}
+ 136              	oc 1 73 0
+ 137 0104 14301BE5 		ldr	r3, [fp, #-16]
+ 138 0108 10300BE5 		mov	r3, r3, lsr #1
+ 139              		cmp	r3, #9
+  72:main.c        **** 
+  73:main.c        **** 	if((ucL>>1)<10)display_putchar(' ');	// Formartierte Ausgabe
+ 140              		.L12
+ 141 010c 10301BE5 		mov	r0, #32
+ 142 0110 A330A0E1 		bl	display_putchar
+ 143 0114 090053E3 	.L12:
+ 144 0118 0100008A 		.loc 1 74 0
+ 145 011c 2000A0E3 		ldr	r3, [fp, #-16]
+ 146 0120 FEFFFFEB 		mov	r3, r3, lsr #1
+ 147              		ldr	r0, .L16
+  74:main.c        **** 	display_printf("%d",ucL>>1);			// Ausgabe als unsigned int
+ 148              	 r3
+ 149 0124 10301BE5 		bl	display_printf
+ 150 0128 A330A0E1 		.loc 1 75 0
+ 151 012c 4C009FE5 		mov	r0, #44
+ 152 0130 0310A0E1 		bl	display_putchar
+ 153 0134 FEFFFFEB 		.loc 1 76 0
+  75:main.c        **** 	display_putchar(',');
+ 154              	3, [fp, #-20]
+ 155 0138 2C00A0E3 		and	r3, r3, #1
+ 156 013c FEFFFFEB 		and	r3, r3, #255
+  76:main.c        **** 	if (cTemp & 1) display_putchar('5');	// Ausgabe der Nachkommastelle
+ 157              	p	r3, #0
+ 158 0140 14301BE5 		beq	.L13
+ 159 0144 013003E2 		mov	r0, #53
+ 160 0148 FF3003E2 		bl	display_putchar
+ 161 014c 000053E3 		b	.L14
+ 162 0150 0200000A 	.L13:
+ 163 0154 3500A0E3 		.loc 1 77 0
+ 164 0158 FEFFFFEB 		mov	r0, #48
+ 165 015c 010000EA 		bl	display_putchar
+ 166              	.L14:
+  77:main.c        **** 	else display_putchar('0');
+ 167              	 0
+ 168 0160 3000A0E3 		mov	r0, #223
+ 169 0164 FEFFFFEB 		bl	display_putchar
+ 170              		.loc 1 79 0
+  78:main.c        **** 	display_putchar(0xDF);					// Ausgabe der Massangabe
+ 171              		r0, #67
+ 172 0168 DF00A0E3 		bl	display_putchar
+ 173 016c FEFFFFEB 		.loc 1 80 0
+  79:main.c        **** 	display_putchar('C');
+ 174              	b	sp, fp, #12
+ 175 0170 4300A0E3 		ldmfd	sp, {fp, sp, pc}
+ 176 0174 FEFFFFEB 	.L17:
+  80:main.c        **** }
+ 177              	lign	2
+ 178 0178 0CD04BE2 	.L16:
+ 179 017c 00A89DE8 		.word	.LC0
+ 180              	.LFE4:
+ 182              		.align	2
+ 183 0180 00000000 		.global	main
+ 185              	main:
+ 186              	.LFB5:
+ 187              		.loc 1 87 0
+ 188              		@ args = 0, pretend = 0, frame = 12
+ 189              		@ frame_needed = 1, uses_anonymous_args = 0
+ 190              		mov	ip, sp
+  81:main.c        **** 
+  82:main.c        **** 
+  83:main.c        **** 
+  84:main.c        **** //**************************************************************
+  85:main.c        **** // main()
+  86:main.c        **** //**************************************************************
+  87:main.c        **** int main(){
+ 191              	d	sp!, {fp, ip, lr, pc}
+ 192              	.LCFI13:
+ 193              		sub	fp, ip, #4
+ 194 0184 0DC0A0E1 	.LCFI14:
+ 195              		sub	sp, sp, #12
+ 196 0188 00D82DE9 	.LCFI15:
+ 197              		.loc 1 93 0
+ 198 018c 04B04CE2 		bl	display_init
+ 199              	.L21:
+ 200 0190 0CD04DE2 	.LBB2:
+ 201              		.loc 1 97 0
+  88:main.c        **** #define Adresse 0x9E			// evtl 9F für schreiben?
+  89:main.c        **** #define	Read	1
+  90:main.c        **** #define Write	0
+  91:main.c        **** 	unsigned char ucTemp1,ucTemp2;			// Deklaration der Variablen
+  92:main.c        **** 
+  93:main.c        **** 	display_init();							// Initialisiere Display
+ 202              	
+ 203 0194 FEFFFFEB 		str	r3, [fp, #-16]
+ 204              		.loc 1 98 0
+ 205              		mov	r3, #0
+  94:main.c        **** 
+  95:main.c        **** 	int i;
+  96:main.c        **** 	while(1) {
+  97:main.c        **** 		signed int avg = 0;
+ 206              	r	r3, [fp, #-20]
+ 207 0198 0030A0E3 		b	.L19
+ 208 019c 10300BE5 	.L20:
+  98:main.c        **** 		for(i = 0; i < 64; i++) {
+ 209              	oc 1 100 0
+ 210 01a0 0030A0E3 		mov	r0, #159
+ 211 01a4 14300BE5 		bl	i2c_start
+ 212 01a8 260000EA 		mov	r3, r0
+ 213              		cmp	r3, #0
+  99:main.c        **** 			// Setzen der Startbedingung und warten bis slave antwortet mit ACK0
+ 100:main.c        **** 			while(i2c_start(Adresse+Read));
+ 214              	.L20
+ 215 01ac 9F00A0E3 		.loc 1 101 0
+ 216 01b0 FEFFFFEB 		mov	r0, #0
+ 217 01b4 0030A0E1 		bl	i2c_rbyte
+ 218 01b8 000053E3 		mov	r3, r0
+ 219 01bc FAFFFF1A 		strb	r3, [fp, #-22]
+ 101:main.c        **** 			ucTemp1 = i2c_rbyte(0);					// Erstes Byte einlesen
+ 220              	1 102 0
+ 221 01c0 0000A0E3 		mov	r0, #1
+ 222 01c4 FEFFFFEB 		bl	i2c_rbyte
+ 223 01c8 0030A0E1 		mov	r3, r0
+ 224 01cc 16304BE5 		strb	r3, [fp, #-21]
+ 102:main.c        **** 			ucTemp2 = i2c_rbyte(1);					// Zweites Byte einlesen
+ 225              	 1 103 0
+ 226 01d0 0100A0E3 		bl	i2c_stop
+ 227 01d4 FEFFFFEB 		.loc 1 107 0
+ 228 01d8 0030A0E1 		mov	r0, #0
+ 229 01dc 15304BE5 		mov	r1, #0
+ 103:main.c        **** 			i2c_stop();								// I2C wieder freigeben
+ 230              	isplay_set_cursor
+ 231 01e0 FEFFFFEB 		.loc 1 108 0
+ 104:main.c        **** 
+ 105:main.c        **** 			// Ausgabe der gelesenen Werte
+ 106:main.c        **** 
+ 107:main.c        **** 			display_set_cursor(0, 0);
+ 232              	drb	r3, [fp, #-22]	@ zero_extendqisi2
+ 233 01e4 0000A0E3 		ldrb	r2, [fp, #-21]	@ zero_extendqisi2
+ 234 01e8 0010A0E3 		mov	r0, r3
+ 235 01ec FEFFFFEB 		mov	r1, r2
+ 108:main.c        **** 			print_temp(tempwert(ucTemp1, ucTemp2));
+ 236              	tempwert
+ 237 01f0 16305BE5 		mov	r3, r0
+ 238 01f4 15205BE5 		mov	r0, r3
+ 239 01f8 0300A0E1 		bl	print_temp
+ 240 01fc 0210A0E1 		.loc 1 109 0
+ 241 0200 FEFFFFEB 		ldrb	r3, [fp, #-22]	@ zero_extendqisi2
+ 242 0204 0030A0E1 		ldrb	r2, [fp, #-21]	@ zero_extendqisi2
+ 243 0208 0300A0E1 		mov	r0, r3
+ 244 020c FEFFFFEB 		mov	r1, r2
+ 109:main.c        **** 			avg += tempwert(ucTemp1, ucTemp2);
+ 245              	ert
+ 246 0210 16305BE5 		mov	r2, r0
+ 247 0214 15205BE5 		ldr	r3, [fp, #-16]
+ 248 0218 0300A0E1 		add	r3, r3, r2
+ 249 021c 0210A0E1 		str	r3, [fp, #-16]
+ 250 0220 FEFFFFEB 		.loc 1 110 0
+ 251 0224 0020A0E1 		mov	r0, #100
+ 252 0228 10301BE5 		bl	delay5ms
+ 253 022c 023083E0 		.loc 1 98 0
+ 254 0230 10300BE5 		ldr	r3, [fp, #-20]
+ 110:main.c        **** 			delay5ms(100);							// Verzögerung 100 ms
+ 255              	3, #1
+ 256 0234 6400A0E3 		str	r3, [fp, #-20]
+ 257 0238 FEFFFFEB 	.L19:
+ 258              		ldr	r3, [fp, #-20]
+ 259 023c 14301BE5 		cmp	r3, #63
+ 260 0240 013083E2 		ble	.L20
+ 261 0244 14300BE5 		.loc 1 112 0
+ 262              		mov	r0, #0
+ 263 0248 14301BE5 		mov	r1, #1
+ 264 024c 3F0053E3 		bl	display_set_cursor
+ 265 0250 D5FFFFDA 		.loc 1 113 0
+ 111:main.c        **** 		}
+ 112:main.c        **** 		display_set_cursor(0, 1);
+ 266              	p, #-16]
+ 267 0254 0000A0E3 		mov	r3, r3, asr #6
+ 268 0258 0110A0E3 		mov	r0, r3
+ 269 025c FEFFFFEB 		bl	print_temp
+ 113:main.c        **** 		print_temp(avg >> 6);
+ 270              	L21
+ 271 0260 10301BE5 	.LBE2:
+ 272 0264 4333A0E1 	.LFE5:
+ 274 026c FEFFFFEB 		.section	.debug_frame,"",%progbits
+ 275 0270 C8FFFFEA 	.Lframe0:
+ 276              		.4byte	.LECIE0-.LSCIE0
+ 277              	.LSCIE0:
+ 278              		.4byte	0xffffffff
+ 395              		.4byte	.LCFI0-.Ltext0
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\Robin\AppData\Local\Temp/cci3mwKZ.s:13     .text:00000000 delay5ms
+C:\Users\Robin\AppData\Local\Temp/cci3mwKZ.s:19     .text:00000000 $a
+C:\Users\Robin\AppData\Local\Temp/cci3mwKZ.s:64     .text:00000074 tempwert
+C:\Users\Robin\AppData\Local\Temp/cci3mwKZ.s:106    .text:000000c4 print_temp
+C:\Users\Robin\AppData\Local\Temp/cci3mwKZ.s:183    .text:00000180 $d
+C:\Users\Robin\AppData\Local\Temp/cci3mwKZ.s:189    .text:00000184 main
+C:\Users\Robin\AppData\Local\Temp/cci3mwKZ.s:194    .text:00000184 $a
+C:\Users\Robin\AppData\Local\Temp/cci3mwKZ.s:281    .debug_frame:00000000 $d
+C:\Users\Robin\AppData\Local\Temp/cci3mwKZ.s:399    .debug_loc:00000000 $d
+
+UNDEFINED SYMBOLS
+display_putchar
+display_printf
+display_init
+i2c_start
+i2c_rbyte
+i2c_stop
+display_set_cursor

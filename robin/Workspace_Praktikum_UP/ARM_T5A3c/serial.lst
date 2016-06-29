@@ -1,0 +1,336 @@
+   1              		.file	"serial.c"
+   9              	.Ltext0:
+  10              		.global	pUSART
+  11              		.data
+  12              		.align	2
+  15              	pUSART:
+  16 0000 0000FCFF 		.word	-262144
+  17              		.text
+  18              		.align	2
+  19              		.global	usart0_init
+  21              	usart0_init:
+  22              	.LFB2:
+  23              		.file 1 "serial.c"
+   1:serial.c      **** /******************************************************************************/
+   2:serial.c      **** /*  This file has been a part of the uVision/ARM development tools            */
+   3:serial.c      **** /*  Copyright KEIL ELEKTRONIK GmbH 2002-2004                                  */
+   4:serial.c      **** /******************************************************************************/
+   5:serial.c      **** /*                                                                            */
+   6:serial.c      **** /*  SERIAL.C:  Low Level Serial Routines                                      */
+   7:serial.c      **** /*                                                                            */
+   8:serial.c      **** /******************************************************************************/
+   9:serial.c      **** 
+  10:serial.c      **** //	Martin Thomas :
+  11:serial.c      **** //	- slightly modified for the WinARM example
+  12:serial.c      **** //	- changed function names to avoid conflict with "stdio"
+  13:serial.c      **** //	  (so far no syscalls for the newlib in this example)
+  14:serial.c      **** //	- Keil seems to "reject" the AT91lib*.h. Don't know
+  15:serial.c      **** //	  why since the layer is "thin". Maybe will change this to
+  16:serial.c      **** //	"lib Style" in later version...
+  17:serial.c      **** 
+  18:serial.c      **** //	Hans-Peter Wiesmath :
+  19:serial.c      **** //	- modified for ARM7-Board used in our Lab
+  20:serial.c      **** 
+  21:serial.c      **** #include "include/AT91SAM7S64.h"				/* AT91SAMT7S64 definitions */
+  22:serial.c      **** 												// hpw: modified the path
+  23:serial.c      **** 
+  24:serial.c      **** #define	MCK	24000000							// hpw: clockrate used on ARM7-Board
+  25:serial.c      **** #define BR	115200								/* Baud Rate */
+  26:serial.c      **** #define BRD	(MCK/16/BR)							/* Baud Rate Divisor */
+  27:serial.c      **** 
+  28:serial.c      **** AT91S_USART * pUSART = AT91C_BASE_US0;			/* Global Pointer to USART0 */
+  29:serial.c      **** 
+  30:serial.c      **** void usart0_init (void){						/* Initialize Serial Interface */
+  24              	0, pretend = 0, frame = 0
+  25              		@ frame_needed = 1, uses_anonymous_args = 0
+  26              		mov	ip, sp
+  27 0000 0DC0A0E1 	.LCFI0:
+  28              		stmfd	sp!, {fp, ip, lr, pc}
+  29 0004 00D82DE9 	.LCFI1:
+  30              		sub	fp, ip, #4
+  31 0008 04B04CE2 	.LCFI2:
+  32              		.loc 1 31 0
+  31:serial.c      **** 	AT91C_BASE_PMC->PMC_PCER=(1<<AT91C_ID_US0);	// hpw: enable USART0-clock
+  33              	#-2147483648
+  34 000c 0231A0E3 		mov	r3, r3, asr #21
+  35 0010 C33AA0E1 		mov	r2, #64
+  36 0014 4020A0E3 		str	r2, [r3, #16]
+  37 0018 102083E5 		.loc 1 33 0
+  32:serial.c      **** 
+  33:serial.c      **** 	*AT91C_PIOA_PDR =	AT91C_PA5_RXD0 |		/* Enable RxD0 Pin */
+  38              	r3, #3056
+  39 001c BF3EE0E3 		sub	r3, r3, #11
+  40 0020 0B3043E2 		mov	r2, #96
+  41 0024 6020A0E3 		str	r2, [r3, #0]
+  42 0028 002083E5 		.loc 1 36 0
+  34:serial.c      **** 						AT91C_PA6_TXD0;			/* Enalbe TxD0 Pin */
+  35:serial.c      **** 
+  36:serial.c      **** 	pUSART->US_CR = AT91C_US_RSTRX |			/* Reset Receiver      */
+  43              	r3, .L3
+  44 002c 3C309FE5 		ldr	r2, [r3, #0]
+  45 0030 002093E5 		mov	r3, #172
+  46 0034 AC30A0E3 		str	r3, [r2, #0]
+  47 0038 003082E5 		.loc 1 41 0
+  37:serial.c      **** 					AT91C_US_RSTTX |			/* Reset Transmitter   */
+  38:serial.c      **** 					AT91C_US_RXDIS |			/* Receiver Disable    */
+  39:serial.c      **** 					AT91C_US_TXDIS;				/* Transmitter Disable */
+  40:serial.c      **** 
+  41:serial.c      **** 	pUSART->US_MR = AT91C_US_USMODE_NORMAL |	/* Normal Mode */
+  48              	r3, .L3
+  49 003c 2C309FE5 		ldr	r2, [r3, #0]
+  50 0040 002093E5 		mov	r3, #2240
+  51 0044 233DA0E3 		str	r3, [r2, #4]
+  52 0048 043082E5 		.loc 1 47 0
+  42:serial.c      **** 					AT91C_US_CLKS_CLOCK    |	/* Clock = MCK */
+  43:serial.c      **** 					AT91C_US_CHRL_8_BITS   |	/* 8-bit Data  */
+  44:serial.c      **** 					AT91C_US_PAR_NONE      |	/* No Parity   */
+  45:serial.c      **** 					AT91C_US_NBSTOP_1_BIT;		/* 1 Stop Bit  */
+  46:serial.c      **** 
+  47:serial.c      **** 	pUSART->US_BRGR = BRD;						/* Baud Rate Divisor */
+  53              	r3, .L3
+  54 004c 1C309FE5 		ldr	r2, [r3, #0]
+  55 0050 002093E5 		mov	r3, #13
+  56 0054 0D30A0E3 		str	r3, [r2, #32]
+  57 0058 203082E5 		.loc 1 49 0
+  48:serial.c      **** 
+  49:serial.c      **** 	pUSART->US_CR = AT91C_US_RXEN  |			/* Receiver Enable     */
+  58              	r3, .L3
+  59 005c 0C309FE5 		ldr	r2, [r3, #0]
+  60 0060 002093E5 		mov	r3, #80
+  61 0064 5030A0E3 		str	r3, [r2, #0]
+  62 0068 003082E5 		.loc 1 51 0
+  50:serial.c      **** 					AT91C_US_TXEN;				/* Transmitter Enable  */
+  51:serial.c      **** }
+  63              	d	sp, {fp, sp, pc}
+  64 006c 00A89DE8 	.L4:
+  65              		.align	2
+  66              	.L3:
+  67              		.word	pUSART
+  68 0070 00000000 	.LFE2:
+  70              		.align	2
+  71              		.global	usart0_putc
+  73              	usart0_putc:
+  74              	.LFB3:
+  75              		.loc 1 53 0
+  52:serial.c      **** 
+  53:serial.c      **** int usart0_putc(int ch){
+  76              	pretend = 0, frame = 4
+  77              		@ frame_needed = 1, uses_anonymous_args = 0
+  78              		mov	ip, sp
+  79 0074 0DC0A0E1 	.LCFI3:
+  80              		stmfd	sp!, {fp, ip, lr, pc}
+  81 0078 00D82DE9 	.LCFI4:
+  82              		sub	fp, ip, #4
+  83 007c 04B04CE2 	.LCFI5:
+  84              		sub	sp, sp, #4
+  85 0080 04D04DE2 	.LCFI6:
+  86              		str	r0, [fp, #-16]
+  87 0084 10000BE5 	.L6:
+  88              		.loc 1 54 0
+  54:serial.c      **** 	while (!(pUSART->US_CSR & AT91C_US_TXRDY));	/* Wait for Empty Tx Buffer */
+  89              		ldr	r3, [r3, #0]
+  90 0088 2C309FE5 		ldr	r3, [r3, #20]
+  91 008c 003093E5 		and	r3, r3, #2
+  92 0090 143093E5 		cmp	r3, #0
+  93 0094 023003E2 		beq	.L6
+  94 0098 000053E3 		.loc 1 55 0
+  95 009c F9FFFF0A 		ldr	r3, .L8
+  55:serial.c      **** 	return (pUSART->US_THR = ch);				/* Transmit Character */
+  96              	, [r3, #0]
+  97 00a0 14309FE5 		ldr	r3, [fp, #-16]
+  98 00a4 002093E5 		str	r3, [r2, #28]
+  99 00a8 10301BE5 		ldr	r3, [r2, #28]
+ 100 00ac 1C3082E5 		.loc 1 56 0
+ 101 00b0 1C3092E5 		mov	r0, r3
+  56:serial.c      **** }
+ 102              		sp, {r3, fp, sp, pc}
+ 103 00b4 0300A0E1 	.L9:
+ 104 00b8 08A89DE8 		.align	2
+ 105              	.L8:
+ 106              		.word	pUSART
+ 107              	.LFE3:
+ 109              		.align	2
+ 110              		.global	usart0_putchar
+ 112              	usart0_putchar:
+ 113              	.LFB4:
+ 114              		.loc 1 58 0
+ 115              		@ args = 0, pretend = 0, frame = 4
+  57:serial.c      **** 
+  58:serial.c      **** int usart0_putchar (int ch){					/* Write Character to Serial Port */
+ 116              	d = 1, uses_anonymous_args = 0
+ 117              		mov	ip, sp
+ 118              	.LCFI7:
+ 119 00c0 0DC0A0E1 		stmfd	sp!, {fp, ip, lr, pc}
+ 120              	.LCFI8:
+ 121 00c4 00D82DE9 		sub	fp, ip, #4
+ 122              	.LCFI9:
+ 123 00c8 04B04CE2 		sub	sp, sp, #4
+ 124              	.LCFI10:
+ 125 00cc 04D04DE2 		str	r0, [fp, #-16]
+ 126              		.loc 1 59 0
+ 127 00d0 10000BE5 		ldr	r3, [fp, #-16]
+  59:serial.c      **** 	if (ch == '\n') usart0_putc( '\r' );		/* Check for LF, Output CR */
+ 128              	
+ 129 00d4 10301BE5 		bne	.L11
+ 130 00d8 0A0053E3 		mov	r0, #13
+ 131 00dc 0100001A 		bl	usart0_putc
+ 132 00e0 0D00A0E3 	.L11:
+ 133 00e4 FEFFFFEB 		.loc 1 60 0
+ 134              		ldr	r0, [fp, #-16]
+  60:serial.c      **** 	return usart0_putc( ch );					/* Transmit Character */
+ 135              	art0_putc
+ 136 00e8 10001BE5 		mov	r3, r0
+ 137 00ec FEFFFFEB 		.loc 1 61 0
+ 138 00f0 0030A0E1 		mov	r0, r3
+  61:serial.c      **** }
+ 139              	fd	sp, {r3, fp, sp, pc}
+ 140 00f4 0300A0E1 	.LFE4:
+ 142              		.align	2
+ 143              		.global	usart0_puts
+ 145              	usart0_puts:
+ 146              	.LFB5:
+ 147              		.loc 1 63 0
+ 148              		@ args = 0, pretend = 0, frame = 4
+  62:serial.c      **** 
+  63:serial.c      **** int usart0_puts ( char* s ){
+ 149              	eeded = 1, uses_anonymous_args = 0
+ 150              		mov	ip, sp
+ 151              	.LCFI11:
+ 152 00fc 0DC0A0E1 		stmfd	sp!, {fp, ip, lr, pc}
+ 153              	.LCFI12:
+ 154 0100 00D82DE9 		sub	fp, ip, #4
+ 155              	.LCFI13:
+ 156 0104 04B04CE2 		sub	sp, sp, #4
+ 157              	.LCFI14:
+ 158 0108 04D04DE2 		str	r0, [fp, #-16]
+ 159              		b	.L14
+ 160 010c 10000BE5 	.L15:
+ 161 0110 070000EA 		.loc 1 64 0
+ 162              		ldr	r3, [fp, #-16]
+  64:serial.c      **** 	while ( *s ) usart0_putchar( *s++ );
+ 163              	 #0]	@ zero_extendqisi2
+ 164 0114 10301BE5 		mov	r2, r3
+ 165 0118 0030D3E5 		ldr	r3, [fp, #-16]
+ 166 011c 0320A0E1 		add	r3, r3, #1
+ 167 0120 10301BE5 		str	r3, [fp, #-16]
+ 168 0124 013083E2 		mov	r0, r2
+ 169 0128 10300BE5 		bl	usart0_putchar
+ 170 012c 0200A0E1 	.L14:
+ 171 0130 FEFFFFEB 		ldr	r3, [fp, #-16]
+ 172              		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 173 0134 10301BE5 		cmp	r3, #0
+ 174 0138 0030D3E5 		bne	.L15
+ 175 013c 000053E3 		.loc 1 65 0
+ 176 0140 F3FFFF1A 		mov	r3, #0
+  65:serial.c      **** 	return 0;
+ 177              	mov	r0, r3
+ 178 0144 0030A0E3 		ldmfd	sp, {r3, fp, sp, pc}
+  66:serial.c      **** }
+ 179              	FE5:
+ 181 014c 08A89DE8 		.align	2
+ 182              		.global	usart0_kbhit
+ 184              	usart0_kbhit:
+ 185              	.LFB6:
+ 186              		.loc 1 68 0
+ 187              		@ args = 0, pretend = 0, frame = 4
+ 188              		@ frame_needed = 1, uses_anonymous_args = 0
+  67:serial.c      **** 
+  68:serial.c      **** int usart0_kbhit( void ){						/* returns true if character in receive buffer */
+ 189              	p
+ 190              	.LCFI15:
+ 191              		stmfd	sp!, {fp, ip, lr, pc}
+ 192 0150 0DC0A0E1 	.LCFI16:
+ 193              		sub	fp, ip, #4
+ 194 0154 00D82DE9 	.LCFI17:
+ 195              		sub	sp, sp, #4
+ 196 0158 04B04CE2 	.LCFI18:
+ 197              		.loc 1 69 0
+ 198 015c 04D04DE2 		ldr	r3, .L21
+ 199              		ldr	r3, [r3, #0]
+  69:serial.c      **** 	if ( pUSART->US_CSR & AT91C_US_RXRDY) return 1;
+ 200              	3, #20]
+ 201 0160 34309FE5 		and	r3, r3, #1
+ 202 0164 003093E5 		and	r3, r3, #255
+ 203 0168 143093E5 		cmp	r3, #0
+ 204 016c 013003E2 		beq	.L18
+ 205 0170 FF3003E2 		mov	r3, #1
+ 206 0174 000053E3 		str	r3, [fp, #-16]
+ 207 0178 0200000A 		b	.L19
+ 208 017c 0130A0E3 	.L18:
+ 209 0180 10300BE5 		.loc 1 70 0
+ 210 0184 010000EA 		mov	r3, #0
+ 211              		str	r3, [fp, #-16]
+  70:serial.c      **** 	else return 0;
+ 212              	3, [fp, #-16]
+ 213 0188 0030A0E3 		.loc 1 71 0
+ 214 018c 10300BE5 		mov	r0, r3
+ 215              		ldmfd	sp, {r3, fp, sp, pc}
+ 216 0190 10301BE5 	.L22:
+  71:serial.c      **** }
+ 217              	gn	2
+ 218 0194 0300A0E1 	.L21:
+ 219 0198 08A89DE8 		.word	pUSART
+ 220              	.LFE6:
+ 222              		.align	2
+ 223 019c 00000000 		.global	usart0_getc
+ 225              	usart0_getc:
+ 226              	.LFB7:
+ 227              		.loc 1 73 0
+ 228              		@ args = 0, pretend = 0, frame = 0
+ 229              		@ frame_needed = 1, uses_anonymous_args = 0
+ 230              		mov	ip, sp
+  72:serial.c      **** 
+  73:serial.c      **** int usart0_getc ( void ){						/* Read Character from Serial Port */
+ 231              	d	sp!, {fp, ip, lr, pc}
+ 232              	.LCFI20:
+ 233              		sub	fp, ip, #4
+ 234 01a0 0DC0A0E1 	.LCFI21:
+ 235              	.L24:
+ 236 01a4 00D82DE9 		.loc 1 74 0
+ 237              		ldr	r3, .L26
+ 238 01a8 04B04CE2 		ldr	r3, [r3, #0]
+ 239              		ldr	r3, [r3, #20]
+ 240              		and	r3, r3, #1
+  74:serial.c      **** 	while (!(pUSART->US_CSR & AT91C_US_RXRDY));	/* Wait for Full Rx Buffer */
+ 241              	0
+ 242 01ac 24309FE5 		beq	.L24
+ 243 01b0 003093E5 		.loc 1 75 0
+ 244 01b4 143093E5 		ldr	r3, .L26
+ 245 01b8 013003E2 		ldr	r3, [r3, #0]
+ 246 01bc 000053E3 		ldr	r3, [r3, #24]
+ 247 01c0 F9FFFF0A 		.loc 1 76 0
+  75:serial.c      **** 	return (pUSART->US_RHR);					/* Read Character */
+ 248              	, r3
+ 249 01c4 0C309FE5 		ldmfd	sp, {fp, sp, pc}
+ 250 01c8 003093E5 	.L27:
+ 251 01cc 183093E5 		.align	2
+  76:serial.c      **** }
+ 252              	:
+ 253 01d0 0300A0E1 		.word	pUSART
+ 254 01d4 00A89DE8 	.LFE7:
+ 256              		.section	.debug_frame,"",%progbits
+ 257              	.Lframe0:
+ 258 01d8 00000000 		.4byte	.LECIE0-.LSCIE0
+ 259              	.LSCIE0:
+ 260              		.4byte	0xffffffff
+ 427              		.4byte	.LCFI0-.Ltext0
+DEFINED SYMBOLS
+                            *ABS*:00000000 serial.c
+C:\Users\Robin\AppData\Local\Temp/ccbKMI6X.s:15     .data:00000000 pUSART
+C:\Users\Robin\AppData\Local\Temp/ccbKMI6X.s:16     .data:00000000 $d
+C:\Users\Robin\AppData\Local\Temp/ccbKMI6X.s:21     .text:00000000 usart0_init
+C:\Users\Robin\AppData\Local\Temp/ccbKMI6X.s:27     .text:00000000 $a
+C:\Users\Robin\AppData\Local\Temp/ccbKMI6X.s:68     .text:00000070 $d
+C:\Users\Robin\AppData\Local\Temp/ccbKMI6X.s:74     .text:00000074 usart0_putc
+C:\Users\Robin\AppData\Local\Temp/ccbKMI6X.s:79     .text:00000074 $a
+C:\Users\Robin\AppData\Local\Temp/ccbKMI6X.s:108    .text:000000bc $d
+C:\Users\Robin\AppData\Local\Temp/ccbKMI6X.s:114    .text:000000c0 usart0_putchar
+C:\Users\Robin\AppData\Local\Temp/ccbKMI6X.s:119    .text:000000c0 $a
+C:\Users\Robin\AppData\Local\Temp/ccbKMI6X.s:147    .text:000000fc usart0_puts
+C:\Users\Robin\AppData\Local\Temp/ccbKMI6X.s:187    .text:00000150 usart0_kbhit
+C:\Users\Robin\AppData\Local\Temp/ccbKMI6X.s:223    .text:0000019c $d
+C:\Users\Robin\AppData\Local\Temp/ccbKMI6X.s:229    .text:000001a0 usart0_getc
+C:\Users\Robin\AppData\Local\Temp/ccbKMI6X.s:234    .text:000001a0 $a
+C:\Users\Robin\AppData\Local\Temp/ccbKMI6X.s:258    .text:000001d8 $d
+
+NO UNDEFINED SYMBOLS

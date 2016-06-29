@@ -1,0 +1,1083 @@
+   1              		.file	"display.c"
+   9              	.Ltext0:
+  10              		.align	2
+  11              		.global	delay1us
+  13              	delay1us:
+  14              	.LFB2:
+  15              		.file 1 "display.c"
+   1:display.c     **** //********************************************************************
+   2:display.c     **** // display.c									Version 02.04.2012 hpw
+   3:display.c     **** //********************************************************************
+   4:display.c     **** #define 	FULL_PRINTF	0
+   5:display.c     **** 
+   6:display.c     **** #include	"include/AT91SAM7S64.h"
+   7:display.c     **** #include	"include/display.h"
+   8:display.c     **** #include	"include/stdarg.h"
+   9:display.c     **** #if FULL_PRINTF == 1
+  10:display.c     **** 	#include "include/stdio.h"						// Definiton I/O
+  11:display.c     **** #endif
+  12:display.c     **** 
+  13:display.c     **** //**************************************************************
+  14:display.c     **** // delay1us(uiK) verzögert um uiK * 1us bei MCK=24Hz
+  15:display.c     **** // uiK <= 1.073.741.823 us = 17,8957 sec
+  16:display.c     **** //**************************************************************
+  17:display.c     **** __attribute__ ((naked)) void delay1us(unsigned int uiK){
+  16              	 Naked Function: prologue and epilogue provided by programmer.
+  17              		@ args = 0, pretend = 0, frame = 4
+  18              		@ frame_needed = 1, uses_anonymous_args = 0
+  19              		str	r0, [fp, #0]
+  20 0000 00008BE5 		.loc 1 19 0
+  18:display.c     **** 
+  19:display.c     **** 	asm("			lsl	r3, r0, #2		\n\t"		// Multiplikation *4
+  21              	"display.c" 1
+  22              					lsl	r3, r0, #2		
+  23 0004 0031A0E1 		Label:		cmp	r3, #0			
+  24 0008 000053E3 					beq	Ende			
+  25 000c 0100000A 					sub	r3, r3, #1		
+  26 0010 013043E2 					b	Label			
+  27 0014 FBFFFFEA 		Ende:		mov	pc, lr			
+  28 0018 0EF0A0E1 		
+  29              	@ 0 "" 2
+  30              		.loc 1 25 0
+  20:display.c     **** 		"Label:		cmp	r3, #0			\n\t"		// 1
+  21:display.c     **** 		"			beq	Ende			\n\t"		// 2
+  22:display.c     **** 		"			sub	r3, r3, #1		\n\t"		// 1
+  23:display.c     **** 		"			b	Label			\n\t"		// 2
+  24:display.c     **** 		"Ende:		mov	pc, lr			\n\t");
+  25:display.c     **** }
+  31              	ize	delay1us, .-delay1us
+  32              		.align	2
+  33              		.global	lcd_write
+  35              	lcd_write:
+  36              	.LFB3:
+  37              		.loc 1 33 0
+  38              		@ args = 0, pretend = 0, frame = 8
+  26:display.c     **** 
+  27:display.c     **** //**************************************************************
+  28:display.c     **** // UP-Name:			display_write(data,RS)
+  29:display.c     **** // Beschreibung:	Schreibt auf das LCD mit
+  30:display.c     **** // 					RS=0	Kommando
+  31:display.c     **** // 					RS=1	Zeichenausgabe
+  32:display.c     **** //**************************************************************
+  33:display.c     **** void lcd_write(unsigned char data, unsigned char rs){
+  39              	_needed = 1, uses_anonymous_args = 0
+  40              		mov	ip, sp
+  41              	.LCFI0:
+  42 001c 0DC0A0E1 		stmfd	sp!, {fp, ip, lr, pc}
+  43              	.LCFI1:
+  44 0020 00D82DE9 		sub	fp, ip, #4
+  45              	.LCFI2:
+  46 0024 04B04CE2 		sub	sp, sp, #8
+  47              	.LCFI3:
+  48 0028 08D04DE2 		mov	r3, r0
+  49              		mov	r2, r1
+  50 002c 0030A0E1 		strb	r3, [fp, #-16]
+  51 0030 0120A0E1 		mov	r3, r2
+  52 0034 10304BE5 		strb	r3, [fp, #-20]
+  53 0038 0230A0E1 		.loc 1 34 0
+  54 003c 14304BE5 		mov	r3, #-1610612736
+  34:display.c     **** 	LCD_PORT->PIO_CODR = LCD_RW;					// Schreibzugriff
+  55              	 #19
+  56 0040 0A32A0E3 		mov	r2, #134217728
+  57 0044 C339A0E1 		str	r2, [r3, #52]
+  58 0048 0223A0E3 		.loc 1 35 0
+  59 004c 342083E5 		ldrb	r3, [fp, #-20]	@ zero_extendqisi2
+  35:display.c     **** 	if(rs)	LCD_PORT->PIO_SODR = LCD_RS;			// Register-Select
+  60              	r3, #0
+  61 0050 14305BE5 		beq	.L4
+  62 0054 000053E3 		mov	r3, #-1610612736
+  63 0058 0400000A 		mov	r3, r3, asr #19
+  64 005c 0A32A0E3 		mov	r2, #536870912
+  65 0060 C339A0E1 		str	r2, [r3, #48]
+  66 0064 0222A0E3 		b	.L5
+  67 0068 302083E5 	.L4:
+  68 006c 030000EA 		.loc 1 36 0
+  69              		mov	r3, #-1610612736
+  36:display.c     **** 	else	LCD_PORT->PIO_CODR = LCD_RS;
+  70              	3, asr #19
+  71 0070 0A32A0E3 		mov	r2, #536870912
+  72 0074 C339A0E1 		str	r2, [r3, #52]
+  73 0078 0222A0E3 	.L5:
+  74 007c 342083E5 		.loc 1 37 0
+  75              		mov	r2, #-1610612736
+  37:display.c     **** 	LCD_PORT->PIO_CODR = LCD_DBUS;					// Datenleitungen löschen
+  76              	2, r2, asr #19
+  77 0080 0A22A0E3 		mov	r3, #117440512
+  78 0084 C229A0E1 		add	r3, r3, #7936
+  79 0088 0734A0E3 		str	r3, [r2, #52]
+  80 008c 1F3C83E2 		.loc 1 38 0
+  81 0090 343082E5 		ldrb	r3, [fp, #-16]	@ zero_extendqisi2
+  38:display.c     **** 	if(data & 0x01)	LCD_PORT->PIO_SODR = LCD_D0;	// Datenbits setzen, wenn notwendig
+  82              	3, r3, #1
+  83 0094 10305BE5 		and	r3, r3, #255
+  84 0098 013003E2 		cmp	r3, #0
+  85 009c FF3003E2 		beq	.L6
+  86 00a0 000053E3 		mov	r3, #-1610612736
+  87 00a4 0300000A 		mov	r3, r3, asr #19
+  88 00a8 0A32A0E3 		mov	r2, #256
+  89 00ac C339A0E1 		str	r2, [r3, #48]
+  90 00b0 012CA0E3 	.L6:
+  91 00b4 302083E5 		.loc 1 39 0
+  92              		ldrb	r3, [fp, #-16]	@ zero_extendqisi2
+  39:display.c     **** 	if(data & 0x02)	LCD_PORT->PIO_SODR = LCD_D1;
+  93              	, #2
+  94 00b8 10305BE5 		cmp	r3, #0
+  95 00bc 023003E2 		beq	.L7
+  96 00c0 000053E3 		mov	r3, #-1610612736
+  97 00c4 0300000A 		mov	r3, r3, asr #19
+  98 00c8 0A32A0E3 		mov	r2, #512
+  99 00cc C339A0E1 		str	r2, [r3, #48]
+ 100 00d0 022CA0E3 	.L7:
+ 101 00d4 302083E5 		.loc 1 40 0
+ 102              		ldrb	r3, [fp, #-16]	@ zero_extendqisi2
+  40:display.c     **** 	if(data & 0x04)	LCD_PORT->PIO_SODR = LCD_D2;
+ 103              	3, #4
+ 104 00d8 10305BE5 		cmp	r3, #0
+ 105 00dc 043003E2 		beq	.L8
+ 106 00e0 000053E3 		mov	r3, #-1610612736
+ 107 00e4 0300000A 		mov	r3, r3, asr #19
+ 108 00e8 0A32A0E3 		mov	r2, #1024
+ 109 00ec C339A0E1 		str	r2, [r3, #48]
+ 110 00f0 012BA0E3 	.L8:
+ 111 00f4 302083E5 		.loc 1 41 0
+ 112              		ldrb	r3, [fp, #-16]	@ zero_extendqisi2
+  41:display.c     **** 	if(data & 0x08)	LCD_PORT->PIO_SODR = LCD_D3;
+ 113              	3, #8
+ 114 00f8 10305BE5 		cmp	r3, #0
+ 115 00fc 083003E2 		beq	.L9
+ 116 0100 000053E3 		mov	r3, #-1610612736
+ 117 0104 0300000A 		mov	r3, r3, asr #19
+ 118 0108 0A32A0E3 		mov	r2, #2048
+ 119 010c C339A0E1 		str	r2, [r3, #48]
+ 120 0110 022BA0E3 	.L9:
+ 121 0114 302083E5 		.loc 1 42 0
+ 122              		ldrb	r3, [fp, #-16]	@ zero_extendqisi2
+  42:display.c     **** 	if(data & 0x10)	LCD_PORT->PIO_SODR = LCD_D4;
+ 123              	3, #16
+ 124 0118 10305BE5 		cmp	r3, #0
+ 125 011c 103003E2 		beq	.L10
+ 126 0120 000053E3 		mov	r3, #-1610612736
+ 127 0124 0300000A 		mov	r3, r3, asr #19
+ 128 0128 0A32A0E3 		mov	r2, #4096
+ 129 012c C339A0E1 		str	r2, [r3, #48]
+ 130 0130 012AA0E3 	.L10:
+ 131 0134 302083E5 		.loc 1 43 0
+ 132              		ldrb	r3, [fp, #-16]	@ zero_extendqisi2
+  43:display.c     **** 	if(data & 0x20)	LCD_PORT->PIO_SODR = LCD_D5;
+ 133              	3, #32
+ 134 0138 10305BE5 		cmp	r3, #0
+ 135 013c 203003E2 		beq	.L11
+ 136 0140 000053E3 		mov	r3, #-1610612736
+ 137 0144 0300000A 		mov	r3, r3, asr #19
+ 138 0148 0A32A0E3 		mov	r2, #67108864
+ 139 014c C339A0E1 		str	r2, [r3, #48]
+ 140 0150 0123A0E3 	.L11:
+ 141 0154 302083E5 		.loc 1 44 0
+ 142              		ldrb	r3, [fp, #-16]	@ zero_extendqisi2
+  44:display.c     **** 	if(data & 0x40)	LCD_PORT->PIO_SODR = LCD_D6;
+ 143              	3, #64
+ 144 0158 10305BE5 		cmp	r3, #0
+ 145 015c 403003E2 		beq	.L12
+ 146 0160 000053E3 		mov	r3, #-1610612736
+ 147 0164 0300000A 		mov	r3, r3, asr #19
+ 148 0168 0A32A0E3 		mov	r2, #33554432
+ 149 016c C339A0E1 		str	r2, [r3, #48]
+ 150 0170 0224A0E3 	.L12:
+ 151 0174 302083E5 		.loc 1 45 0
+ 152              		ldrb	r3, [fp, #-16]	@ zero_extendqisi2
+  45:display.c     **** 	if(data & 0x80)	LCD_PORT->PIO_SODR = LCD_D7;
+ 153              	3, asl #24
+ 154 0178 10305BE5 		mov	r3, r3, asr #24
+ 155 017c 033CA0E1 		cmp	r3, #0
+ 156 0180 433CA0E1 		bge	.L13
+ 157 0184 000053E3 		mov	r3, #-1610612736
+ 158 0188 030000AA 		mov	r3, r3, asr #19
+ 159 018c 0A32A0E3 		mov	r2, #16777216
+ 160 0190 C339A0E1 		str	r2, [r3, #48]
+ 161 0194 0124A0E3 	.L13:
+ 162 0198 302083E5 		.loc 1 46 0
+ 163              		mov	r0, #1
+  46:display.c     **** 	delay1us(1);									// kurz warten
+ 164              	s
+ 165 019c 0100A0E3 		.loc 1 47 0
+ 166 01a0 FEFFFFEB 		mov	r3, #-1610612736
+  47:display.c     **** 	LCD_PORT->PIO_SODR = LCD_E;						// Enable setzen
+ 167              	v	r3, r3, asr #19
+ 168 01a4 0A32A0E3 		mov	r2, #128
+ 169 01a8 C339A0E1 		str	r2, [r3, #48]
+ 170 01ac 8020A0E3 		.loc 1 48 0
+ 171 01b0 302083E5 		mov	r0, #50
+  48:display.c     **** 	delay1us(50);									// 50 us warten
+ 172              	elay1us
+ 173 01b4 3200A0E3 		.loc 1 49 0
+ 174 01b8 FEFFFFEB 		mov	r3, #-1610612736
+  49:display.c     **** 	LCD_PORT->PIO_CODR = LCD_E;						// Enable zurücksetzen
+ 175              	v	r3, r3, asr #19
+ 176 01bc 0A32A0E3 		mov	r2, #128
+ 177 01c0 C339A0E1 		str	r2, [r3, #52]
+ 178 01c4 8020A0E3 		.loc 1 50 0
+ 179 01c8 342083E5 		sub	sp, fp, #12
+  50:display.c     **** }
+ 180              	d	sp, {fp, sp, pc}
+ 181 01cc 0CD04BE2 	.LFE3:
+ 183              		.align	2
+ 184              		.global	display_init
+ 186              	display_init:
+ 187              	.LFB4:
+ 188              		.loc 1 56 0
+ 189              		@ args = 0, pretend = 0, frame = 0
+  51:display.c     **** 
+  52:display.c     **** //**************************************************************
+  53:display.c     **** // UP_Name:			display_init()
+  54:display.c     **** // Beschreibung:	Initialisiert das Display im 8-Bit-Modus
+  55:display.c     **** //**************************************************************
+  56:display.c     **** void display_init(void){
+ 190              	eeded = 1, uses_anonymous_args = 0
+ 191              		mov	ip, sp
+ 192              	.LCFI4:
+ 193 01d4 0DC0A0E1 		stmfd	sp!, {fp, ip, lr, pc}
+ 194              	.LCFI5:
+ 195 01d8 00D82DE9 		sub	fp, ip, #4
+ 196              	.LCFI6:
+ 197 01dc 04B04CE2 		.loc 1 57 0
+ 198              		mov	r2, #-1610612736
+  57:display.c     **** 	LCD_PORT->PIO_PPUDR = LCD_BUS;					// Pullups aus
+ 199              	r2, asr #19
+ 200 01e0 0A22A0E3 		mov	r3, #788529152
+ 201 01e4 C229A0E1 		add	r3, r3, #8064
+ 202 01e8 2F34A0E3 		str	r3, [r2, #96]
+ 203 01ec 7E3D83E2 		.loc 1 58 0
+ 204 01f0 603082E5 		mov	r2, #-1610612736
+  58:display.c     **** 	LCD_PORT->PIO_OER = LCD_BUS;					// Port-Pins als Ausgang
+ 205              	2, r2, asr #19
+ 206 01f4 0A22A0E3 		mov	r3, #788529152
+ 207 01f8 C229A0E1 		add	r3, r3, #8064
+ 208 01fc 2F34A0E3 		str	r3, [r2, #16]
+ 209 0200 7E3D83E2 		.loc 1 59 0
+ 210 0204 103082E5 		mov	r2, #-1610612736
+  59:display.c     **** 	LCD_PORT->PIO_CODR = LCD_BUS;					// Port-Pins auf '0'
+ 211              	2, r2, asr #19
+ 212 0208 0A22A0E3 		mov	r3, #788529152
+ 213 020c C229A0E1 		add	r3, r3, #8064
+ 214 0210 2F34A0E3 		str	r3, [r2, #52]
+ 215 0214 7E3D83E2 		.loc 1 60 0
+ 216 0218 343082E5 		mov	r0, #14976
+  60:display.c     **** 	delay1us(15000);								// 15ms warten
+ 217              	0, r0, #24
+ 218 021c EA0DA0E3 		bl	delay1us
+ 219 0220 180080E2 		.loc 1 61 0
+ 220 0224 FEFFFFEB 		mov	r0, #48
+  61:display.c     **** 	lcd_write(0x30,0);								// Initialisierung 1. Mal
+ 221              		r1, #0
+ 222 0228 3000A0E3 		bl	lcd_write
+ 223 022c 0010A0E3 		.loc 1 62 0
+ 224 0230 FEFFFFEB 		mov	r0, #4096
+  62:display.c     **** 	delay1us(4100);									// 4.1ms warten
+ 225              		r0, r0, #4
+ 226 0234 010AA0E3 		bl	delay1us
+ 227 0238 040080E2 		.loc 1 63 0
+ 228 023c FEFFFFEB 		mov	r0, #48
+  63:display.c     **** 	lcd_write(0x30,0);								// Initialisierung 2. Mal
+ 229              		r1, #0
+ 230 0240 3000A0E3 		bl	lcd_write
+ 231 0244 0010A0E3 		.loc 1 64 0
+ 232 0248 FEFFFFEB 		mov	r0, #100
+  64:display.c     **** 	delay1us(100);									// 100us warten
+ 233              	delay1us
+ 234 024c 6400A0E3 		.loc 1 65 0
+ 235 0250 FEFFFFEB 		mov	r0, #48
+  65:display.c     **** 	lcd_write(0x30,0);								// Initialisierung 3. Mal
+ 236              	v	r1, #0
+ 237 0254 3000A0E3 		bl	lcd_write
+ 238 0258 0010A0E3 		.loc 1 66 0
+ 239 025c FEFFFFEB 		mov	r0, #56
+  66:display.c     **** 	lcd_write(0x38,0);								// 8-Bit-Modus, 2/4-zeiliges Display, 5x7 Font
+ 240              		r1, #0
+ 241 0260 3800A0E3 		bl	lcd_write
+ 242 0264 0010A0E3 		.loc 1 67 0
+ 243 0268 FEFFFFEB 		mov	r0, #12
+  67:display.c     **** 	lcd_write(0x0C,0);								// Display an, Cursor aus
+ 244              		r1, #0
+ 245 026c 0C00A0E3 		bl	lcd_write
+ 246 0270 0010A0E3 		.loc 1 68 0
+ 247 0274 FEFFFFEB 		mov	r0, #6
+  68:display.c     **** 	lcd_write(0x06,0);								// Cursor inkrementieren und Scrollen ausschalten
+ 248              		r1, #0
+ 249 0278 0600A0E3 		bl	lcd_write
+ 250 027c 0010A0E3 		.loc 1 69 0
+ 251 0280 FEFFFFEB 		mov	r0, #1
+  69:display.c     **** 	lcd_write(0x01,0);								// Display löschen
+ 252              		r1, #0
+ 253 0284 0100A0E3 		bl	lcd_write
+ 254 0288 0010A0E3 		.loc 1 70 0
+ 255 028c FEFFFFEB 		mov	r0, #4992
+  70:display.c     **** 	delay1us(5000);									// 5ms warten
+ 256              		r0, r0, #8
+ 257 0290 4E0DA0E3 		bl	delay1us
+ 258 0294 080080E2 		.loc 1 71 0
+ 259 0298 FEFFFFEB 		ldmfd	sp, {fp, sp, pc}
+  71:display.c     **** }
+ 260              	4:
+ 262              		.align	2
+ 263              		.global	display_putchar
+ 265              	display_putchar:
+ 266              	.LFB5:
+ 267              		.loc 1 78 0
+ 268              		@ args = 0, pretend = 0, frame = 4
+  72:display.c     **** 
+  73:display.c     **** //**************************************************************
+  74:display.c     **** // UP-Name:			display_putchar(data)
+  75:display.c     **** // Übergabewert:	auszugebenes Zeichen
+  76:display.c     **** // Beschreibung:	gibt ein Zeichen auf dem LCD aus
+  77:display.c     **** //**************************************************************
+  78:display.c     **** void display_putchar(unsigned char data){
+ 269              	needed = 1, uses_anonymous_args = 0
+ 270              		mov	ip, sp
+ 271              	.LCFI7:
+ 272 02a0 0DC0A0E1 		stmfd	sp!, {fp, ip, lr, pc}
+ 273              	.LCFI8:
+ 274 02a4 00D82DE9 		sub	fp, ip, #4
+ 275              	.LCFI9:
+ 276 02a8 04B04CE2 		sub	sp, sp, #4
+ 277              	.LCFI10:
+ 278 02ac 04D04DE2 		mov	r3, r0
+ 279              		strb	r3, [fp, #-16]
+ 280 02b0 0030A0E1 		.loc 1 79 0
+ 281 02b4 10304BE5 		ldrb	r3, [fp, #-16]	@ zero_extendqisi2
+  79:display.c     **** 	lcd_write(data,1);
+ 282              	mov	r1, #1
+ 283 02b8 10305BE5 		bl	lcd_write
+ 284 02bc 0300A0E1 		.loc 1 80 0
+ 285 02c0 0110A0E3 		ldmfd	sp, {r3, fp, sp, pc}
+ 286 02c4 FEFFFFEB 	.LFE5:
+  80:display.c     **** }
+ 287              	e	display_putchar, .-display_putchar
+ 288 02c8 08A89DE8 		.align	2
+ 289              		.global	display_putstr
+ 291              	display_putstr:
+ 292              	.LFB6:
+ 293              		.loc 1 87 0
+ 294              		@ args = 0, pretend = 0, frame = 4
+ 295              		@ frame_needed = 1, uses_anonymous_args = 0
+  81:display.c     **** 
+  82:display.c     **** //**************************************************************
+  83:display.c     **** // UP-Name:			display_putstr(*p)
+  84:display.c     **** // Übergabewert:	Die auszugebene Zeichenkette
+  85:display.c     **** // Beschreibung:	gibt einen String auf dem LCD aus
+  86:display.c     **** //**************************************************************
+  87:display.c     **** void display_putstr(char *p){
+ 296              	sp
+ 297              	.LCFI11:
+ 298              		stmfd	sp!, {fp, ip, lr, pc}
+ 299 02cc 0DC0A0E1 	.LCFI12:
+ 300              		sub	fp, ip, #4
+ 301 02d0 00D82DE9 	.LCFI13:
+ 302              		sub	sp, sp, #4
+ 303 02d4 04B04CE2 	.LCFI14:
+ 304              		str	r0, [fp, #-16]
+ 305 02d8 04D04DE2 		b	.L20
+ 306              	.L21:
+ 307 02dc 10000BE5 		.loc 1 89 0
+ 308 02e0 060000EA 		ldr	r3, [fp, #-16]
+ 309              		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+  88:display.c     **** 	while(*p){
+  89:display.c     **** 		display_putchar(*p);
+ 310              	l	display_putchar
+ 311 02e4 10301BE5 		.loc 1 90 0
+ 312 02e8 0030D3E5 		ldr	r3, [fp, #-16]
+ 313 02ec 0300A0E1 		add	r3, r3, #1
+ 314 02f0 FEFFFFEB 		str	r3, [fp, #-16]
+  90:display.c     **** 		p++;
+ 315              	
+ 316 02f4 10301BE5 		.loc 1 88 0
+ 317 02f8 013083E2 		ldr	r3, [fp, #-16]
+ 318 02fc 10300BE5 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 319              		cmp	r3, #0
+ 320              		bne	.L21
+ 321 0300 10301BE5 		.loc 1 92 0
+ 322 0304 0030D3E5 		ldmfd	sp, {r3, fp, sp, pc}
+ 323 0308 000053E3 	.LFE6:
+  91:display.c     **** 	}
+  92:display.c     **** }
+ 325              	
+ 326 0310 08A89DE8 		.global	display_set_cursor
+ 328              	display_set_cursor:
+ 329              	.LFB7:
+ 330              		.loc 1 101 0
+ 331              		@ args = 0, pretend = 0, frame = 8
+ 332              		@ frame_needed = 1, uses_anonymous_args = 0
+ 333              		mov	ip, sp
+  93:display.c     **** 
+  94:display.c     **** //**************************************************************
+  95:display.c     **** // UP-Name:			display_set_cursor()
+  96:display.c     **** // Übergabewert:	x-Position, y-Position
+  97:display.c     **** // Beschreibung:	stellt Cursor an Position x,y (Spalte,Zeile)
+  98:display.c     **** // 					Für x ist Wert zwischen 0 und 15 erlaubt.
+  99:display.c     **** // 					Für y ist 0 (1.Zeile) + 1 (2.Zeile) erlaubt.
+ 100:display.c     **** //**************************************************************
+ 101:display.c     **** void display_set_cursor(unsigned char x, unsigned char y){
+ 334              	
+ 335              		stmfd	sp!, {fp, ip, lr, pc}
+ 336              	.LCFI16:
+ 337 0314 0DC0A0E1 		sub	fp, ip, #4
+ 338              	.LCFI17:
+ 339 0318 00D82DE9 		sub	sp, sp, #8
+ 340              	.LCFI18:
+ 341 031c 04B04CE2 		mov	r3, r0
+ 342              		mov	r2, r1
+ 343 0320 08D04DE2 		strb	r3, [fp, #-16]
+ 344              		mov	r3, r2
+ 345 0324 0030A0E1 		strb	r3, [fp, #-20]
+ 346 0328 0120A0E1 		.loc 1 102 0
+ 347 032c 10304BE5 		ldrb	r3, [fp, #-20]	@ zero_extendqisi2
+ 348 0330 0230A0E1 		add	r3, r3, #2
+ 349 0334 14304BE5 		mov	r3, r3, asl #6
+ 102:display.c     ****   lcd_write((0x80 + y*0x40 + x),0);
+ 350              	55
+ 351 0338 14305BE5 		ldrb	r3, [fp, #-16]
+ 352 033c 023083E2 		add	r3, r2, r3
+ 353 0340 0333A0E1 		and	r3, r3, #255
+ 354 0344 FF2003E2 		mov	r0, r3
+ 355 0348 10305BE5 		mov	r1, #0
+ 356 034c 033082E0 		bl	lcd_write
+ 357 0350 FF3003E2 		.loc 1 103 0
+ 358 0354 0300A0E1 		sub	sp, fp, #12
+ 359 0358 0010A0E3 		ldmfd	sp, {fp, sp, pc}
+ 360 035c FEFFFFEB 	.LFE7:
+ 103:display.c     **** }
+ 361              	lay_set_cursor, .-display_set_cursor
+ 362 0360 0CD04BE2 		.section	.rodata
+ 363 0364 00A89DE8 		.align	2
+ 364              	.LC0:
+ 365              		.ascii	"0123456789abcdef\000"
+ 366              		.text
+ 367              		.align	2
+ 368              		.global	display_printf
+ 370 0011 000000   	display_printf:
+ 371              	.LFB8:
+ 372              		.loc 1 115 0
+ 373              		@ args = 4, pretend = 16, frame = 68
+ 374              		@ frame_needed = 1, uses_anonymous_args = 1
+ 375              		mov	ip, sp
+ 104:display.c     **** 
+ 105:display.c     **** //**************************************************************
+ 106:display.c     **** // Up-Name:			display_printf()
+ 107:display.c     **** // Beschreibung:	schreibt einen String ins LCD-Display. Die
+ 108:display.c     **** //					Anzahl der Argumente ist beliebig.
+ 109:display.c     **** //					display_printf() interpretiert in der
+ 110:display.c     **** //					eingeschränkten Funktionalität aber nur
+ 111:display.c     **** //					Variablen des Types Int: '%d' und Hex: '%x'
+ 112:display.c     **** //					Für volle Funktionalität muss der Ausdruck
+ 113:display.c     **** //					FULL_PRINTF == 1 in angegeben sein.
+ 114:display.c     **** //**************************************************************
+ 115:display.c     **** void display_printf(char *string,...){
+ 376              		sp!, {r0, r1, r2, r3}
+ 377              	.LCFI20:
+ 378              		stmfd	sp!, {r4, fp, ip, lr, pc}
+ 379 0368 0DC0A0E1 	.LCFI21:
+ 380              		sub	fp, ip, #20
+ 381 036c 0F002DE9 	.LCFI22:
+ 382              		sub	sp, sp, #68
+ 383 0370 10D82DE9 	.LCFI23:
+ 384              		.loc 1 121 0
+ 385 0374 14B04CE2 		ldr	r3, .L51
+ 386              		sub	r2, fp, #74
+ 387 0378 44D04DE2 		mov	ip, #17
+ 388              		mov	r0, r2
+ 116:display.c     **** 	char buffer1[20];								// Puffer für Formatstring
+ 117:display.c     **** 	unsigned char i;								// Laufvariable
+ 118:display.c     **** #if FULL_PRINTF == 1
+ 119:display.c     **** 	char buffer2[17];								// Puffer für sprintf
+ 120:display.c     **** #else
+ 121:display.c     **** 	char Tabelle[]="0123456789abcdef";				// Tabelle für Konvertierung
+ 389              	mov	r2, ip
+ 390 037c 6C369FE5 		bl	memcpy
+ 391 0380 4A204BE2 		.loc 1 129 0
+ 392 0384 11C0A0E3 		add	r3, fp, #8
+ 393 0388 0200A0E1 		str	r3, [fp, #-80]
+ 394 038c 0310A0E1 		.loc 1 130 0
+ 395 0390 0C20A0E1 		ldr	r3, [fp, #4]
+ 396 0394 FEFFFFEB 		str	r3, [fp, #-20]
+ 122:display.c     **** 	unsigned int ui;								// Vorzeichenlose Variable
+ 123:display.c     **** 	signed int si;									// Vorzeichenbehaftete Variable
+ 124:display.c     **** 	double d;										// Variable Typ 'double'
+ 125:display.c     **** #endif
+ 126:display.c     **** 	va_list	ap;										// Argumentenpointer
+ 127:display.c     **** 	char *p;										// Pointer auf String
+ 128:display.c     **** 
+ 129:display.c     **** 	va_start(ap,string);							// Start variable Argumentenliste
+ 397              	.L49:
+ 398 0398 08308BE2 		.loc 1 131 0
+ 399 039c 50300BE5 		ldr	r3, [fp, #-20]
+ 130:display.c     **** 	for (p=string; *p; p++){						// Umwandlungsangaben suchen
+ 400              	rb	r3, [r3, #0]	@ zero_extendqisi2
+ 401 03a0 04309BE5 		cmp	r3, #37
+ 402 03a4 14300BE5 		bne	.L27
+ 403 03a8 8A0100EA 		.loc 1 132 0
+ 404              		mov	r3, #0
+ 131:display.c     **** 		if (*p == '%'){								// Beginn der Umwandlungsangabe
+ 405              		r3, [fp, #-37]
+ 406 03ac 14301BE5 	.L29:
+ 407 03b0 0030D3E5 		.loc 1 134 0
+ 408 03b4 250053E3 		ldrb	r1, [fp, #-37]	@ zero_extendqisi2
+ 409 03b8 7F01001A 		ldr	r3, [fp, #-20]
+ 132:display.c     **** 			i=0;									// Startwert
+ 410              		r0, [r3, #0]	@ zero_extendqisi2
+ 411 03bc 0030A0E3 		mvn	r2, #40
+ 412 03c0 25304BE5 		sub	ip, fp, #16
+ 413              		add	r3, ip, r1
+ 133:display.c     **** 			do {									// Ende der Umwandlungsangabe; Umwandlung in:
+ 134:display.c     **** 				buffer1[i++] = *p++;				// Umwandlungsstring wird im Puffer abgelegt
+ 414              		r2, r3, r2
+ 415 03c4 25105BE5 		mov	r3, r0
+ 416 03c8 14301BE5 		strb	r3, [r2, #0]
+ 417 03cc 0000D3E5 		ldrb	r3, [fp, #-37]
+ 418 03d0 2820E0E3 		add	r3, r3, #1
+ 419 03d4 10C04BE2 		strb	r3, [fp, #-37]
+ 420 03d8 01308CE0 		ldr	r3, [fp, #-20]
+ 421 03dc 022083E0 		add	r3, r3, #1
+ 422 03e0 0030A0E1 		str	r3, [fp, #-20]
+ 423 03e4 0030C2E5 		.loc 1 135 0
+ 424 03e8 25305BE5 		ldrb	r3, [fp, #-37]	@ zero_extendqisi2
+ 425 03ec 013083E2 		cmp	r3, #18
+ 426 03f0 25304BE5 		bls	.L28
+ 427 03f4 14301BE5 		mov	r3, #18
+ 428 03f8 013083E2 		strb	r3, [fp, #-37]
+ 429 03fc 14300BE5 	.L28:
+ 135:display.c     **** 				if (i>18) i=18;						// Damit es keinen Bufferoverflow gibt
+ 430              	dr	r3, [fp, #-20]
+ 431 0400 25305BE5 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 432 0404 120053E3 		cmp	r3, #100
+ 433 0408 0100009A 		movne	r3, #0
+ 434 040c 1230A0E3 		moveq	r3, #1
+ 435 0410 25304BE5 		and	r2, r3, #255
+ 436              		ldr	r3, [fp, #-20]
+ 136:display.c     **** 				}while(!((*p=='d')|(*p=='i')|		// dezimal mit Vorzeichen
+ 437              	3, [r3, #0]	@ zero_extendqisi2
+ 438 0414 14301BE5 		cmp	r3, #105
+ 439 0418 0030D3E5 		movne	r3, #0
+ 440 041c 640053E3 		moveq	r3, #1
+ 441 0420 0030A013 		and	r3, r3, #255
+ 442 0424 0130A003 		orr	r3, r2, r3
+ 443 0428 FF2003E2 		and	r3, r3, #255
+ 444 042c 14301BE5 		mov	r2, r3
+ 445 0430 0030D3E5 		ldr	r3, [fp, #-20]
+ 446 0434 690053E3 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 447 0438 0030A013 		cmp	r3, #111
+ 448 043c 0130A003 		movne	r3, #0
+ 449 0440 FF3003E2 		moveq	r3, #1
+ 450 0444 033082E1 		orr	r2, r2, r3
+ 451 0448 FF3003E2 		ldr	r3, [fp, #-20]
+ 452 044c 0320A0E1 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 453 0450 14301BE5 		cmp	r3, #120
+ 454 0454 0030D3E5 		movne	r3, #0
+ 455 0458 6F0053E3 		moveq	r3, #1
+ 456 045c 0030A013 		orr	r2, r2, r3
+ 457 0460 0130A003 		ldr	r3, [fp, #-20]
+ 458 0464 032082E1 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 459 0468 14301BE5 		cmp	r3, #88
+ 460 046c 0030D3E5 		movne	r3, #0
+ 461 0470 780053E3 		moveq	r3, #1
+ 462 0474 0030A013 		orr	r2, r2, r3
+ 463 0478 0130A003 		ldr	r3, [fp, #-20]
+ 464 047c 032082E1 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 465 0480 14301BE5 		cmp	r3, #117
+ 466 0484 0030D3E5 		movne	r3, #0
+ 467 0488 580053E3 		moveq	r3, #1
+ 468 048c 0030A013 		orr	r2, r2, r3
+ 469 0490 0130A003 		ldr	r3, [fp, #-20]
+ 470 0494 032082E1 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 471 0498 14301BE5 		cmp	r3, #99
+ 472 049c 0030D3E5 		movne	r3, #0
+ 473 04a0 750053E3 		moveq	r3, #1
+ 474 04a4 0030A013 		orr	r2, r2, r3
+ 475 04a8 0130A003 		ldr	r3, [fp, #-20]
+ 476 04ac 032082E1 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 477 04b0 14301BE5 		cmp	r3, #115
+ 478 04b4 0030D3E5 		movne	r3, #0
+ 479 04b8 630053E3 		moveq	r3, #1
+ 480 04bc 0030A013 		orr	r2, r2, r3
+ 481 04c0 0130A003 		ldr	r3, [fp, #-20]
+ 482 04c4 032082E1 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 483 04c8 14301BE5 		cmp	r3, #102
+ 484 04cc 0030D3E5 		movne	r3, #0
+ 485 04d0 730053E3 		moveq	r3, #1
+ 486 04d4 0030A013 		orr	r2, r2, r3
+ 487 04d8 0130A003 		ldr	r3, [fp, #-20]
+ 488 04dc 032082E1 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 489 04e0 14301BE5 		cmp	r3, #101
+ 490 04e4 0030D3E5 		movne	r3, #0
+ 491 04e8 660053E3 		moveq	r3, #1
+ 492 04ec 0030A013 		orr	r2, r2, r3
+ 493 04f0 0130A003 		ldr	r3, [fp, #-20]
+ 494 04f4 032082E1 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 495 04f8 14301BE5 		cmp	r3, #69
+ 496 04fc 0030D3E5 		movne	r3, #0
+ 497 0500 650053E3 		moveq	r3, #1
+ 498 0504 0030A013 		orr	r2, r2, r3
+ 499 0508 0130A003 		ldr	r3, [fp, #-20]
+ 500 050c 032082E1 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 501 0510 14301BE5 		cmp	r3, #103
+ 502 0514 0030D3E5 		movne	r3, #0
+ 503 0518 450053E3 		moveq	r3, #1
+ 504 051c 0030A013 		orr	r2, r2, r3
+ 505 0520 0130A003 		ldr	r3, [fp, #-20]
+ 506 0524 032082E1 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 507 0528 14301BE5 		cmp	r3, #71
+ 508 052c 0030D3E5 		movne	r3, #0
+ 509 0530 670053E3 		moveq	r3, #1
+ 510 0534 0030A013 		orr	r2, r2, r3
+ 511 0538 0130A003 		ldr	r3, [fp, #-20]
+ 512 053c 032082E1 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 513 0540 14301BE5 		cmp	r3, #37
+ 514 0544 0030D3E5 		movne	r3, #0
+ 515 0548 470053E3 		moveq	r3, #1
+ 516 054c 0030A013 		orr	r3, r2, r3
+ 517 0550 0130A003 		.loc 1 145 0
+ 518 0554 032082E1 		cmp	r3, #0
+ 519 0558 14301BE5 		beq	.L29
+ 520 055c 0030D3E5 		.loc 1 146 0
+ 521 0560 250053E3 		ldrb	r1, [fp, #-37]	@ zero_extendqisi2
+ 522 0564 0030A013 		ldr	r3, [fp, #-20]
+ 523 0568 0130A003 		ldrb	r0, [r3, #0]	@ zero_extendqisi2
+ 524 056c 033082E1 		mvn	r2, #40
+ 137:display.c     **** 						 (*p=='o')|					// oktal
+ 138:display.c     **** 						 (*p=='x')|(*p=='X')|		// hexadezimal
+ 139:display.c     **** 						 (*p=='u')|					// dezimal ohne Vorzeichen
+ 140:display.c     **** 						 (*p=='c')|					// einzelnes Zeichen
+ 141:display.c     **** 						 (*p=='s')|					// string
+ 142:display.c     **** 						 (*p=='f')|					// float
+ 143:display.c     **** 						 (*p=='e')|(*p=='E')|		// Gleitpunktzahl
+ 144:display.c     **** 						 (*p=='g')|(*p=='G')|		// Gleitpunktzahl
+ 145:display.c     **** 						 (*p=='%')));				// '%'
+ 525              	, [fp, #-37]
+ 526 0570 000053E3 		add	r3, r3, #1
+ 527 0574 92FFFF0A 		strb	r3, [fp, #-37]
+ 146:display.c     **** 			buffer1[i++] = *p;						// nun noch die Angabe des Umwandlungswertes
+ 528              	oc 1 147 0
+ 529 0578 25105BE5 		ldrb	r3, [fp, #-37]	@ zero_extendqisi2
+ 530 057c 14301BE5 		mvn	r2, #40
+ 531 0580 0000D3E5 		sub	r1, fp, #16
+ 532 0584 2820E0E3 		add	r3, r1, r3
+ 533 0588 10C04BE2 		add	r2, r3, r2
+ 534 058c 01308CE0 		mov	r3, #0
+ 535 0590 022083E0 		strb	r3, [r2, #0]
+ 536 0594 0030A0E1 		.loc 1 167 0
+ 537 0598 0030C2E5 		ldr	r3, [fp, #-20]
+ 538 059c 25305BE5 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 539 05a0 013083E2 		cmp	r3, #100
+ 540 05a4 25304BE5 		movne	r3, #0
+ 147:display.c     **** 			buffer1[i] = 0;							// hiermit ist der Puffer abgeschlossen
+ 541              	
+ 542 05a8 25305BE5 		and	r2, r3, #255
+ 543 05ac 2820E0E3 		ldr	r3, [fp, #-20]
+ 544 05b0 10104BE2 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 545 05b4 033081E0 		cmp	r3, #105
+ 546 05b8 022083E0 		movne	r3, #0
+ 547 05bc 0030A0E3 		moveq	r3, #1
+ 548 05c0 0030C2E5 		and	r3, r3, #255
+ 148:display.c     **** // Ab hier: wahlweise mit voller PRINTF-Funktionalität
+ 149:display.c     **** #if FULL_PRINTF == 1
+ 150:display.c     **** 			if ((*p=='d')|(*p == 'i') |				// Argument ist Typ 'int'
+ 151:display.c     **** 				(*p=='o')|
+ 152:display.c     **** 				(*p=='x')|(*p == 'X') |
+ 153:display.c     **** 				(*p=='u')|
+ 154:display.c     **** 				(*p=='c')|
+ 155:display.c     **** 				(*p=='s')){
+ 156:display.c     **** 				snprintf(buffer2,17,buffer1,va_arg(ap,int));
+ 157:display.c     **** 				display_putstr(buffer2);
+ 158:display.c     **** 			}
+ 159:display.c     **** 			if ((*p=='f')|							// Argument ist Typ 'double'
+ 160:display.c     **** 				(*p=='e')|(*p=='E')|
+ 161:display.c     **** 				(*p=='g')|(*p=='G')){
+ 162:display.c     **** 				snprintf(buffer2,17,buffer1,va_arg(ap,double));
+ 163:display.c     **** 				display_putstr(buffer2);
+ 164:display.c     **** 				}
+ 165:display.c     **** // Ab hier: ... oder mit eingeschränkter PRINTF-Funktionalität
+ 166:display.c     **** #else
+ 167:display.c     **** 			if ((*p=='d')|(*p == 'i')){				// Ausgabe als vorzeichenbehaftete Zahl
+ 549              	, r2, r3
+ 550 05c4 14301BE5 		and	r3, r3, #255
+ 551 05c8 0030D3E5 		cmp	r3, #0
+ 552 05cc 640053E3 		beq	.L30
+ 553 05d0 0030A013 		.loc 1 168 0
+ 554 05d4 0130A003 		ldr	r2, [fp, #-80]
+ 555 05d8 FF2003E2 		add	r3, r2, #4
+ 556 05dc 14301BE5 		str	r3, [fp, #-80]
+ 557 05e0 0030D3E5 		mov	r3, r2
+ 558 05e4 690053E3 		ldr	r3, [r3, #0]
+ 559 05e8 0030A013 		str	r3, [fp, #-32]
+ 560 05ec 0130A003 		.loc 1 169 0
+ 561 05f0 FF3003E2 		ldr	r3, [fp, #-32]
+ 562 05f4 033082E1 		cmp	r3, #0
+ 563 05f8 FF3003E2 		bge	.L31
+ 564 05fc 000053E3 		.loc 1 170 0
+ 565 0600 4F00000A 		mov	r0, #45
+ 168:display.c     **** 				si = va_arg(ap,int);
+ 566              	ar
+ 567 0604 50201BE5 		.loc 1 171 0
+ 568 0608 043082E2 		ldr	r3, [fp, #-32]
+ 569 060c 50300BE5 		rsb	r3, r3, #0
+ 570 0610 0230A0E1 		str	r3, [fp, #-32]
+ 571 0614 003093E5 	.L31:
+ 572 0618 20300BE5 		.loc 1 173 0
+ 169:display.c     **** 				if (si < 0){
+ 573              	, [fp, #-32]
+ 574 061c 20301BE5 		cmp	r3, #0
+ 575 0620 000053E3 		bne	.L32
+ 576 0624 040000AA 		.loc 1 174 0
+ 170:display.c     **** 					display_putchar('-');
+ 577              		r0, #48
+ 578 0628 2D00A0E3 		bl	display_putchar
+ 579 062c FEFFFFEB 		b	.L30
+ 171:display.c     **** 					si=-si;
+ 580              	2:
+ 581 0630 20301BE5 		.loc 1 177 0
+ 582 0634 003063E2 		mov	r3, #15
+ 583 0638 20300BE5 		strb	r3, [fp, #-37]
+ 584              		b	.L33
+ 172:display.c     **** 				}
+ 173:display.c     **** 				if (si==0){
+ 585              	
+ 586 063c 20301BE5 		.loc 1 178 0
+ 587 0640 000053E3 		ldrb	r0, [fp, #-37]	@ zero_extendqisi2
+ 588 0644 0200001A 		ldr	r1, [fp, #-32]
+ 174:display.c     **** 					display_putchar('0');
+ 589              	r	r3, .L51+4
+ 590 0648 3000A0E3 		smull	r2, r3, r1, r3
+ 591 064c FEFFFFEB 		mov	r2, r3, asr #2
+ 592 0650 3B0000EA 		mov	r3, r1, asr #31
+ 593              		rsb	r3, r3, r2
+ 175:display.c     **** 				}
+ 176:display.c     **** 				else{
+ 177:display.c     **** 					for (i = 15; i && si; --i){
+ 594              	r3, [fp, #-84]
+ 595 0654 0F30A0E3 		ldr	r3, [fp, #-84]
+ 596 0658 25304BE5 		mov	r3, r3, asl #1
+ 597 065c 230000EA 		mov	r2, r3, asl #2
+ 598              		add	r3, r3, r2
+ 178:display.c     **** 						buffer1[i] = Tabelle[(si%10)];
+ 599              	r3, r3, r1
+ 600 0660 25005BE5 		str	r3, [fp, #-84]
+ 601 0664 20101BE5 		mvn	r2, #57
+ 602 0668 84339FE5 		sub	ip, fp, #16
+ 603 066c 9123C3E0 		ldr	r1, [fp, #-84]
+ 604 0670 4321A0E1 		add	r3, ip, r1
+ 605 0674 C13FA0E1 		add	r3, r3, r2
+ 606 0678 023063E0 		ldrb	r1, [r3, #0]	@ zero_extendqisi2
+ 607 067c 54300BE5 		mvn	r2, #40
+ 608 0680 54301BE5 		sub	ip, fp, #16
+ 609 0684 8330A0E1 		add	r3, ip, r0
+ 610 0688 0321A0E1 		add	r2, r3, r2
+ 611 068c 023083E0 		mov	r3, r1
+ 612 0690 013063E0 		strb	r3, [r2, #0]
+ 613 0694 54300BE5 		.loc 1 179 0
+ 614 0698 3920E0E3 		ldr	r1, [fp, #-32]
+ 615 069c 10C04BE2 		ldr	r3, .L51+4
+ 616 06a0 54101BE5 		smull	r2, r3, r1, r3
+ 617 06a4 01308CE0 		mov	r2, r3, asr #2
+ 618 06a8 023083E0 		mov	r3, r1, asr #31
+ 619 06ac 0010D3E5 		rsb	r3, r3, r2
+ 620 06b0 2820E0E3 		str	r3, [fp, #-32]
+ 621 06b4 10C04BE2 		.loc 1 177 0
+ 622 06b8 00308CE0 		ldrb	r3, [fp, #-37]
+ 623 06bc 022083E0 		sub	r3, r3, #1
+ 624 06c0 0130A0E1 		strb	r3, [fp, #-37]
+ 625 06c4 0030C2E5 	.L33:
+ 179:display.c     **** 						si /= 10;
+ 626              	_extendqisi2
+ 627 06c8 20101BE5 		cmp	r3, #0
+ 628 06cc 20339FE5 		beq	.L36
+ 629 06d0 9123C3E0 		ldr	r3, [fp, #-32]
+ 630 06d4 4321A0E1 		cmp	r3, #0
+ 631 06d8 C13FA0E1 		bne	.L35
+ 632 06dc 023063E0 		b	.L36
+ 633 06e0 20300BE5 	.L37:
+ 634              		.loc 1 181 0
+ 635 06e4 25305BE5 		ldrb	r3, [fp, #-37]
+ 636 06e8 013043E2 		add	r3, r3, #1
+ 637 06ec 25304BE5 		strb	r3, [fp, #-37]
+ 638              		ldrb	r3, [fp, #-37]	@ zero_extendqisi2
+ 639 06f0 25305BE5 		mvn	r2, #40
+ 640 06f4 000053E3 		sub	ip, fp, #16
+ 641 06f8 0E00000A 		add	r3, ip, r3
+ 642 06fc 20301BE5 		add	r3, r3, r2
+ 643 0700 000053E3 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 644 0704 D5FFFF1A 		mov	r0, r3
+ 645 0708 0A0000EA 		bl	display_putchar
+ 646              	.L36:
+ 180:display.c     **** 					}
+ 181:display.c     **** 					for (; i < 15; display_putchar(buffer1[++i]));
+ 647              	@ zero_extendqisi2
+ 648 070c 25305BE5 		cmp	r3, #14
+ 649 0710 013083E2 		bls	.L37
+ 650 0714 25304BE5 	.L30:
+ 651 0718 25305BE5 		.loc 1 184 0
+ 652 071c 2820E0E3 		ldr	r3, [fp, #-20]
+ 653 0720 10C04BE2 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 654 0724 03308CE0 		cmp	r3, #120
+ 655 0728 023083E0 		movne	r3, #0
+ 656 072c 0030D3E5 		moveq	r3, #1
+ 657 0730 0300A0E1 		and	r2, r3, #255
+ 658 0734 FEFFFFEB 		ldr	r3, [fp, #-20]
+ 659              		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 660 0738 25305BE5 		cmp	r3, #88
+ 661 073c 0E0053E3 		movne	r3, #0
+ 662 0740 F1FFFF9A 		moveq	r3, #1
+ 663              		and	r3, r3, #255
+ 182:display.c     **** 				}
+ 183:display.c     **** 			}
+ 184:display.c     **** 			if ((*p=='x')|(*p == 'X')){				// Ausgabe als hexadezimale Zahl
+ 664              	and	r3, r3, #255
+ 665 0744 14301BE5 		cmp	r3, #0
+ 666 0748 0030D3E5 		beq	.L38
+ 667 074c 780053E3 		.loc 1 185 0
+ 668 0750 0030A013 		ldr	r2, [fp, #-80]
+ 669 0754 0130A003 		add	r3, r2, #4
+ 670 0758 FF2003E2 		str	r3, [fp, #-80]
+ 671 075c 14301BE5 		mov	r3, r2
+ 672 0760 0030D3E5 		ldr	r3, [r3, #0]
+ 673 0764 580053E3 		str	r3, [fp, #-36]
+ 674 0768 0030A013 		.loc 1 186 0
+ 675 076c 0130A003 		ldr	r3, [fp, #-36]
+ 676 0770 FF3003E2 		cmp	r3, #0
+ 677 0774 033082E1 		bne	.L39
+ 678 0778 FF3003E2 		.loc 1 187 0
+ 679 077c 000053E3 		mov	r0, #48
+ 680 0780 3700000A 		bl	display_putchar
+ 185:display.c     **** 				ui = va_arg(ap,unsigned int);
+ 681              	oc 1 190 0
+ 682 0784 50201BE5 		mov	r3, #15
+ 683 0788 043082E2 		strb	r3, [fp, #-37]
+ 684 078c 50300BE5 		b	.L40
+ 685 0790 0230A0E1 	.L42:
+ 686 0794 003093E5 		.loc 1 191 0
+ 687 0798 24300BE5 		ldrb	r0, [fp, #-37]	@ zero_extendqisi2
+ 186:display.c     **** 				if (ui==0){
+ 688              	, [fp, #-36]
+ 689 079c 24301BE5 		and	r3, r3, #15
+ 690 07a0 000053E3 		mvn	r2, #57
+ 691 07a4 0200001A 		sub	r1, fp, #16
+ 187:display.c     **** 					display_putchar('0');
+ 692              		r3, r1, r3
+ 693 07a8 3000A0E3 		add	r3, r3, r2
+ 694 07ac FEFFFFEB 		ldrb	r1, [r3, #0]	@ zero_extendqisi2
+ 695 07b0 2B0000EA 		mvn	r2, #40
+ 696              		sub	ip, fp, #16
+ 188:display.c     **** 				}
+ 189:display.c     **** 				else{
+ 190:display.c     **** 					for (i = 15; i && ui; --i){
+ 697              	r3, ip, r0
+ 698 07b4 0F30A0E3 		add	r2, r3, r2
+ 699 07b8 25304BE5 		mov	r3, r1
+ 700 07bc 130000EA 		strb	r3, [r2, #0]
+ 701              		.loc 1 192 0
+ 191:display.c     **** 						buffer1[i] = Tabelle[(ui%16)];
+ 702              	r3, [fp, #-36]
+ 703 07c0 25005BE5 		mov	r3, r3, lsr #4
+ 704 07c4 24301BE5 		str	r3, [fp, #-36]
+ 705 07c8 0F3003E2 		.loc 1 190 0
+ 706 07cc 3920E0E3 		ldrb	r3, [fp, #-37]
+ 707 07d0 10104BE2 		sub	r3, r3, #1
+ 708 07d4 033081E0 		strb	r3, [fp, #-37]
+ 709 07d8 023083E0 	.L40:
+ 710 07dc 0010D3E5 		ldrb	r3, [fp, #-37]	@ zero_extendqisi2
+ 711 07e0 2820E0E3 		cmp	r3, #0
+ 712 07e4 10C04BE2 		beq	.L43
+ 713 07e8 00308CE0 		ldr	r3, [fp, #-36]
+ 714 07ec 022083E0 		cmp	r3, #0
+ 715 07f0 0130A0E1 		bne	.L42
+ 716 07f4 0030C2E5 		b	.L43
+ 192:display.c     **** 						ui /= 16;
+ 717              	94 0
+ 718 07f8 24301BE5 		ldrb	r3, [fp, #-37]
+ 719 07fc 2332A0E1 		add	r3, r3, #1
+ 720 0800 24300BE5 		strb	r3, [fp, #-37]
+ 721              		ldrb	r3, [fp, #-37]	@ zero_extendqisi2
+ 722 0804 25305BE5 		mvn	r2, #40
+ 723 0808 013043E2 		sub	r1, fp, #16
+ 724 080c 25304BE5 		add	r3, r1, r3
+ 725              		add	r3, r3, r2
+ 726 0810 25305BE5 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 727 0814 000053E3 		mov	r0, r3
+ 728 0818 0E00000A 		bl	display_putchar
+ 729 081c 24301BE5 	.L43:
+ 730 0820 000053E3 		ldrb	r3, [fp, #-37]	@ zero_extendqisi2
+ 731 0824 E5FFFF1A 		cmp	r3, #14
+ 732 0828 0A0000EA 		bls	.L44
+ 733              	.L38:
+ 193:display.c     **** 					}
+ 194:display.c     **** 					for (; i < 15; display_putchar(buffer1[++i]));
+ 734              	r	r3, [fp, #-20]
+ 735 082c 25305BE5 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 736 0830 013083E2 		cmp	r3, #111
+ 737 0834 25304BE5 		movne	r3, #0
+ 738 0838 25305BE5 		moveq	r3, #1
+ 739 083c 2820E0E3 		and	r2, r3, #255
+ 740 0840 10104BE2 		ldr	r3, [fp, #-20]
+ 741 0844 033081E0 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 742 0848 023083E0 		cmp	r3, #117
+ 743 084c 0030D3E5 		movne	r3, #0
+ 744 0850 0300A0E1 		moveq	r3, #1
+ 745 0854 FEFFFFEB 		and	r3, r3, #255
+ 746              		orr	r3, r2, r3
+ 747 0858 25305BE5 		and	r3, r3, #255
+ 748 085c 0E0053E3 		mov	r2, r3
+ 749 0860 F1FFFF9A 		ldr	r3, [fp, #-20]
+ 750              		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 195:display.c     **** 				}
+ 196:display.c     **** 			}
+ 197:display.c     **** 			if ((*p=='o')|							// Unbekannter Typ; Ausgabe wird übersprungen
+ 751              	ne	r3, #0
+ 752 0864 14301BE5 		moveq	r3, #1
+ 753 0868 0030D3E5 		orr	r2, r2, r3
+ 754 086c 6F0053E3 		ldr	r3, [fp, #-20]
+ 755 0870 0030A013 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 756 0874 0130A003 		cmp	r3, #115
+ 757 0878 FF2003E2 		movne	r3, #0
+ 758 087c 14301BE5 		moveq	r3, #1
+ 759 0880 0030D3E5 		orr	r3, r2, r3
+ 760 0884 750053E3 		cmp	r3, #0
+ 761 0888 0030A013 		beq	.L45
+ 762 088c 0130A003 		.loc 1 201 0
+ 763 0890 FF3003E2 		ldr	r2, [fp, #-80]
+ 764 0894 033082E1 		add	r3, r2, #4
+ 765 0898 FF3003E2 		str	r3, [fp, #-80]
+ 766 089c 0320A0E1 		mov	r3, r2
+ 767 08a0 14301BE5 		ldr	r3, [r3, #0]
+ 768 08a4 0030D3E5 		str	r3, [fp, #-36]
+ 769 08a8 630053E3 	.L45:
+ 770 08ac 0030A013 		.loc 1 203 0
+ 771 08b0 0130A003 		ldr	r3, [fp, #-20]
+ 772 08b4 032082E1 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 773 08b8 14301BE5 		cmp	r3, #102
+ 774 08bc 0030D3E5 		movne	r3, #0
+ 775 08c0 730053E3 		moveq	r3, #1
+ 776 08c4 0030A013 		and	r2, r3, #255
+ 777 08c8 0130A003 		ldr	r3, [fp, #-20]
+ 778 08cc 033082E1 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 779 08d0 000053E3 		cmp	r3, #101
+ 780 08d4 0500000A 		movne	r3, #0
+ 198:display.c     **** 				(*p=='u')|
+ 199:display.c     **** 				(*p=='c')|
+ 200:display.c     **** 				(*p=='s')){
+ 201:display.c     **** 				ui = va_arg(ap,unsigned int);
+ 781              	5
+ 782 08d8 50201BE5 		orr	r3, r2, r3
+ 783 08dc 043082E2 		and	r3, r3, #255
+ 784 08e0 50300BE5 		mov	r2, r3
+ 785 08e4 0230A0E1 		ldr	r3, [fp, #-20]
+ 786 08e8 003093E5 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 787 08ec 24300BE5 		cmp	r3, #69
+ 788              		movne	r3, #0
+ 202:display.c     **** 			}
+ 203:display.c     **** 			if ((*p=='f')|							// Unbekannter Typ; Ausgabe wird übersprungen
+ 789              	3, #1
+ 790 08f0 14301BE5 		orr	r2, r2, r3
+ 791 08f4 0030D3E5 		ldr	r3, [fp, #-20]
+ 792 08f8 660053E3 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 793 08fc 0030A013 		cmp	r3, #103
+ 794 0900 0130A003 		movne	r3, #0
+ 795 0904 FF2003E2 		moveq	r3, #1
+ 796 0908 14301BE5 		orr	r2, r2, r3
+ 797 090c 0030D3E5 		ldr	r3, [fp, #-20]
+ 798 0910 650053E3 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 799 0914 0030A013 		cmp	r3, #71
+ 800 0918 0130A003 		movne	r3, #0
+ 801 091c FF3003E2 		moveq	r3, #1
+ 802 0920 033082E1 		orr	r3, r2, r3
+ 803 0924 FF3003E2 		cmp	r3, #0
+ 804 0928 0320A0E1 		beq	.L46
+ 805 092c 14301BE5 		.loc 1 206 0
+ 806 0930 0030D3E5 		ldr	r2, [fp, #-80]
+ 807 0934 450053E3 		add	r3, r2, #8
+ 808 0938 0030A013 		str	r3, [fp, #-80]
+ 809 093c 0130A003 		mov	r3, r2
+ 810 0940 032082E1 		ldmia	r3, {r3-r4}
+ 811 0944 14301BE5 		str	r3, [fp, #-28]
+ 812 0948 0030D3E5 		str	r4, [fp, #-24]
+ 813 094c 670053E3 	.L46:
+ 814 0950 0030A013 		.loc 1 210 0
+ 815 0954 0130A003 		ldr	r3, [fp, #-20]
+ 816 0958 032082E1 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 817 095c 14301BE5 		cmp	r3, #37
+ 818 0960 0030D3E5 		bne	.L48
+ 819 0964 470053E3 		ldr	r3, [fp, #-20]
+ 820 0968 0030A013 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 821 096c 0130A003 		mov	r0, r3
+ 822 0970 033082E1 		bl	display_putchar
+ 823 0974 000053E3 		b	.L48
+ 824 0978 0600000A 	.L27:
+ 204:display.c     **** 				(*p=='e')|(*p=='E')|
+ 205:display.c     **** 				(*p=='g')|(*p=='G')){
+ 206:display.c     **** 				d = va_arg(ap,double);
+ 825              	drb	r3, [r3, #0]	@ zero_extendqisi2
+ 826 097c 50201BE5 		mov	r0, r3
+ 827 0980 083082E2 		bl	display_putchar
+ 828 0984 50300BE5 	.L48:
+ 829 0988 0230A0E1 		.loc 1 130 0
+ 830 098c 180093E8 		ldr	r3, [fp, #-20]
+ 831 0990 1C300BE5 		add	r3, r3, #1
+ 832 0994 18400BE5 		str	r3, [fp, #-20]
+ 833              	.L26:
+ 207:display.c     **** 			}
+ 208:display.c     **** // Ab hier: wieder für beide Versionen
+ 209:display.c     **** #endif
+ 210:display.c     **** 			if ((*p == '%')) display_putchar(*p);	// Argument ist '%'
+ 834              	[fp, #-20]
+ 835 0998 14301BE5 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 836 099c 0030D3E5 		cmp	r3, #0
+ 837 09a0 250053E3 		bne	.L49
+ 838 09a4 0800001A 		.loc 1 215 0
+ 839 09a8 14301BE5 		sub	sp, fp, #16
+ 840 09ac 0030D3E5 		ldmfd	sp, {r4, fp, sp, pc}
+ 841 09b0 0300A0E1 	.L52:
+ 842 09b4 FEFFFFEB 		.align	2
+ 843 09b8 030000EA 	.L51:
+ 844              		.word	.LC0
+ 211:display.c     **** 		}
+ 212:display.c     **** 		else display_putchar(*p);					// kein Steuerzeichen gefunden
+ 845              	986919
+ 846 09bc 14301BE5 	.LFE8:
+ 848 09c4 0300A0E1 		.section	.debug_frame,"",%progbits
+ 849 09c8 FEFFFFEB 	.Lframe0:
+ 850              		.4byte	.LECIE0-.LSCIE0
+ 851              	.LSCIE0:
+ 852 09cc 14301BE5 		.4byte	0xffffffff
+ 853 09d0 013083E2 		.byte	0x1
+ 854 09d4 14300BE5 		.ascii	"\000"
+ 855              		.uleb128 0x1
+ 856 09d8 14301BE5 		.sleb128 -4
+ 857 09dc 0030D3E5 		.byte	0xe
+ 858 09e0 000053E3 		.byte	0xc
+ 859 09e4 70FEFF1A 		.uleb128 0xd
+ 213:display.c     **** 	}
+ 214:display.c     **** 	va_end(ap);										// Ende variable Argumentenliste
+ 215:display.c     **** }
+ 860              	.align	2
+ 861 09e8 10D04BE2 	.LECIE0:
+ 862 09ec 10A89DE8 	.LSFDE0:
+ 863              		.4byte	.LEFDE0-.LASFDE0
+ 864              	.LASFDE0:
+ 865              		.4byte	.Lframe0
+ 866 09f0 00000000 		.4byte	.LFB2
+ 867 09f4 67666666 		.4byte	.LFE2-.LFB2
+ 868              		.align	2
+ 869              	.LEFDE0:
+ 1054              		.byte	0x5d
+DEFINED SYMBOLS
+                            *ABS*:00000000 display.c
+C:\Users\Robin\AppData\Local\Temp/ccIBYuXf.s:13     .text:00000000 delay1us
+C:\Users\Robin\AppData\Local\Temp/ccIBYuXf.s:20     .text:00000000 $a
+C:\Users\Robin\AppData\Local\Temp/ccIBYuXf.s:24     .text:00000008 Label
+C:\Users\Robin\AppData\Local\Temp/ccIBYuXf.s:28     .text:00000018 Ende
+C:\Users\Robin\AppData\Local\Temp/ccIBYuXf.s:37     .text:0000001c lcd_write
+C:\Users\Robin\AppData\Local\Temp/ccIBYuXf.s:188    .text:000001d4 display_init
+C:\Users\Robin\AppData\Local\Temp/ccIBYuXf.s:267    .text:000002a0 display_putchar
+C:\Users\Robin\AppData\Local\Temp/ccIBYuXf.s:294    .text:000002cc display_putstr
+C:\Users\Robin\AppData\Local\Temp/ccIBYuXf.s:332    .text:00000314 display_set_cursor
+C:\Users\Robin\AppData\Local\Temp/ccIBYuXf.s:374    .text:00000368 display_printf
+C:\Users\Robin\AppData\Local\Temp/ccIBYuXf.s:866    .text:000009f0 $d
+
+UNDEFINED SYMBOLS
+memcpy

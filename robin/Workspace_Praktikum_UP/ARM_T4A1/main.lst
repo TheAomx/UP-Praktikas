@@ -1,0 +1,332 @@
+   1              		.file	"main.c"
+   9              	.Ltext0:
+  10              		.align	2
+  11              		.global	delay2ms
+  13              	delay2ms:
+  14              	.LFB2:
+  15              		.file 1 "main.c"
+   1:main.c        **** //********************************************************************
+   2:main.c        **** // ARM_T4A1										Version 02.04.2012 hpw
+   3:main.c        **** //********************************************************************
+   4:main.c        **** #include	"include/AT91SAM7S64.h"					// Definition von ARM7 typischen Registern etc.
+   5:main.c        **** #include 	"include/cToolMod.h"
+   6:main.c        **** #include 	"include/display.h"
+   7:main.c        **** 
+   8:main.c        **** #define		PH2			AT91C_PIO_PA23				// Alle Ports die für den Motor verwendet werden
+   9:main.c        **** #define		PH1			AT91C_PIO_PA13
+  10:main.c        **** #define		I21			AT91C_PIO_PA20
+  11:main.c        **** #define		I11			AT91C_PIO_PA14
+  12:main.c        **** #define		I20			AT91C_PIO_PA16
+  13:main.c        **** #define		I10			AT91C_PIO_PA15
+  14:main.c        **** #define		MOTOR_MASK	(PH2|PH1|I21|I11|I20|I10)
+  15:main.c        **** 
+  16:main.c        **** //**************************************************************
+  17:main.c        **** // delay2ms(uiK) verzögert um ca. uiK * 2ms
+  18:main.c        **** //**************************************************************
+  19:main.c        **** void delay2ms(unsigned int uiK){
+  16              	 args = 0, pretend = 0, frame = 8
+  17              		@ frame_needed = 1, uses_anonymous_args = 0
+  18              		mov	ip, sp
+  19 0000 0DC0A0E1 	.LCFI0:
+  20              		stmfd	sp!, {fp, ip, lr, pc}
+  21 0004 00D82DE9 	.LCFI1:
+  22              		sub	fp, ip, #4
+  23 0008 04B04CE2 	.LCFI2:
+  24              		sub	sp, sp, #8
+  25 000c 08D04DE2 	.LCFI3:
+  26              		str	r0, [fp, #-20]
+  27 0010 14000BE5 		b	.L2
+  28 0014 0A0000EA 	.L5:
+  29              		.loc 1 23 0
+  20:main.c        **** *****************************************
+  21:main.c        **** void delay2ms(unsigned int uiK){
+  22:main.c        **** 	volatile unsigned int uiI;
+  23:main.c        **** 
+  30              	tr	r3, [fp, #-16]
+  31 0018 0030A0E3 		b	.L3
+  32 001c 10300BE5 	.L4:
+  33 0020 020000EA 		ldr	r3, [fp, #-16]
+  34              		add	r3, r3, #1
+  35 0024 10301BE5 		str	r3, [fp, #-16]
+  36 0028 013083E2 	.L3:
+  37 002c 10300BE5 		ldr	r2, [fp, #-16]
+  38              		mov	r3, #3184
+  39 0030 10201BE5 		add	r3, r3, #15
+  40 0034 C73EA0E3 		cmp	r2, r3
+  41 0038 0F3083E2 		bls	.L4
+  42 003c 030052E1 	.L2:
+  43 0040 F7FFFF9A 		.loc 1 22 0
+  44              		ldr	r3, [fp, #-20]
+  45              		cmp	r3, #0
+  46 0044 14301BE5 		moveq	r3, #0
+  47 0048 000053E3 		movne	r3, #1
+  48 004c 0030A003 		and	r2, r3, #255
+  49 0050 0130A013 		ldr	r3, [fp, #-20]
+  50 0054 FF2003E2 		sub	r3, r3, #1
+  51 0058 14301BE5 		str	r3, [fp, #-20]
+  52 005c 013043E2 		cmp	r2, #0
+  53 0060 14300BE5 		bne	.L5
+  54 0064 000052E3 		.loc 1 25 0
+  55 0068 EAFFFF1A 		sub	sp, fp, #12
+  24:main.c        **** **********
+  25:main.c        **** void delay2ms(unsigned int uiK){
+  56              	FE2:
+  58 0070 00A89DE8 		.section	.rodata
+  59              		.align	2
+  62              	C.3.1713:
+  63              		.word	8437760
+  64              		.word	8388608
+  65              		.word	1114112
+  66 0000 00C08000 		.word	0
+  67 0004 00008000 		.word	57344
+  68 0008 00001100 		.word	8192
+  69 000c 00000000 		.word	9510912
+  70 0010 00E00000 		.word	8396800
+  71 0014 00200000 		.align	2
+  72 0018 00209100 	.LC0:
+  73 001c 00208000 		.ascii	"%d\000"
+  74              		.text
+  75              		.align	2
+  76 0020 256400   		.global	main
+  78              	main:
+  79              	.LFB3:
+  80              		.loc 1 30 0
+  81              		@ args = 0, pretend = 0, frame = 40
+  82              		@ frame_needed = 1, uses_anonymous_args = 0
+  26:main.c        **** *****************************************
+  27:main.c        **** void delay2ms(unsigned int uiK){
+  28:main.c        **** 	volatile unsigned int uiI;
+  29:main.c        **** 
+  30:main.c        **** 	while (uiK--)							// folgende for-Schleife wird uiK-mal aufgerufen
+  83              	sp!, {fp, ip, lr, pc}
+  84              	.LCFI5:
+  85              		sub	fp, ip, #4
+  86 0074 0DC0A0E1 	.LCFI6:
+  87              		sub	sp, sp, #40
+  88 0078 00D82DE9 	.LCFI7:
+  89              		.loc 1 51 0
+  90 007c 04B04CE2 		ldr	r3, .L23
+  91              		sub	lr, fp, #52
+  92 0080 28D04DE2 		mov	ip, r3
+  93              		ldmia	ip!, {r0, r1, r2, r3}
+  31:main.c        **** 
+  32:main.c        **** 
+  33:main.c        **** 	while (uiK--)							// folgende for-Schleife wird uiK-mal aufgerufen
+  34:main.c        **** 		for (uiI=0; uiI<3200; uiI++);		//  for-Schleife wird 3200-mal durchlaufen. Dies
+  35:main.c        **** 											//  verursacht eine Zeitverzögerung von ca. 2ms.
+  36:main.c        **** }
+  37:main.c        **** 
+  38:main.c        **** //**************************************************************
+  39:main.c        **** // main läßt den Schrittmotor durchgehend nach rechts laufen
+  40:main.c        **** //**************************************************************
+  41:main.c        **** int main(){
+  42:main.c        **** //	unsigned int cRECHTS[8]={		// Tabelle für Halbschrittbetrieb
+  43:main.c        **** //			0x0080C000,				// Schritt 1
+  44:main.c        **** //			0x00800000,				// Schritt 2
+  45:main.c        **** //			0x00110000,				// Schritt 3
+  46:main.c        **** //			0x00000000,				// Schritt 4
+  47:main.c        **** //			0x0000E000,				// Schritt 5
+  48:main.c        **** //			0x00002000,				// Schritt 6
+  49:main.c        **** //			0x00912000,				// Schritt 7
+  50:main.c        **** //			0x00802000				// Schritt 8
+  51:main.c        **** //	};
+  94              	 {r0, r1, r2, r3}
+  95 0084 A8319FE5 		ldmia	ip, {r0, r1, r2, r3}
+  96 0088 34E04BE2 		stmia	lr, {r0, r1, r2, r3}
+  97 008c 03C0A0E1 		.loc 1 52 0
+  98 0090 0F00BCE8 		bl	display_init
+  99 0094 0F00AEE8 		.loc 1 53 0
+ 100 0098 0F009CE8 		mov	r3, #-2147483648
+ 101 009c 0F008EE8 		mov	r3, r3, asr #21
+  52:main.c        **** 			// Schritt 7
+ 102              	 #4
+ 103 00a0 FEFFFFEB 		str	r2, [r3, #16]
+  53:main.c        **** 02000,				// Schritt 6
+ 104              	loc 1 54 0
+ 105 00a4 0231A0E3 		mov	r2, #-1610612736
+ 106 00a8 C33AA0E1 		mov	r2, r2, asr #19
+ 107 00ac 0420A0E3 		mov	r3, #9502720
+ 108 00b0 102083E5 		add	r3, r3, #57344
+  54:main.c        **** 00E000,				// Schritt 5
+ 109              	r3, [r2, #16]
+ 110 00b4 0A22A0E3 		.loc 1 55 0
+ 111 00b8 C229A0E1 		mov	r2, #-1610612736
+ 112 00bc 9138A0E3 		mov	r2, r2, asr #19
+ 113 00c0 0E3A83E2 		mov	r3, #9502720
+ 114 00c4 103082E5 		add	r3, r3, #57344
+  55:main.c        **** 0000000,				// Schritt 4
+ 115              	3, [r2, #160]
+ 116 00c8 0A22A0E3 		.loc 1 58 0
+ 117 00cc C229A0E1 		mov	r2, #-1610612736
+ 118 00d0 9138A0E3 		mov	r2, r2, asr #19
+ 119 00d4 0E3A83E2 		mov	r3, #9502720
+ 120 00d8 A03082E5 		add	r3, r3, #57344
+  56:main.c        **** 00110000,				// Schritt 3
+  57:main.c        **** //			0x00000000,				// Schritt 4
+  58:main.c        **** //			0x0000E000,				// Schritt 5
+ 121              	3, [r2, #96]
+ 122 00dc 0A22A0E3 		.loc 1 59 0
+ 123 00e0 C229A0E1 		mov	r3, #0
+ 124 00e4 9138A0E3 		strb	r3, [fp, #-19]
+ 125 00e8 0E3A83E2 		.loc 1 60 0
+ 126 00ec 603082E5 		mvn	r3, #0
+  59:main.c        **** 0000000,				// Schritt 4
+ 127              	r3, [fp, #-18]
+ 128 00f0 0030A0E3 		.loc 1 61 0
+ 129 00f4 13304BE5 		mov	r3, #1
+  60:main.c        **** 00110000,				// Schritt 3
+ 130              	rb	r3, [fp, #-17]
+ 131 00f8 0030E0E3 		.loc 1 62 0
+ 132 00fc 12304BE5 		mov	r3, #1
+  61:main.c        **** x00800000,				// Schritt 2
+ 133              	r	r3, [fp, #-16]
+ 134 0100 0130A0E3 	.L21:
+ 135 0104 11304BE5 		.loc 1 65 0
+  62:main.c        **** 0x0080C000,				// Schritt 1
+ 136              	v	r2, #-1610612736
+ 137 0108 0130A0E3 		mov	r2, r2, asr #19
+ 138 010c 10300BE5 		ldrb	r3, [fp, #-19]	@ zero_extendqisi2
+ 139              		and	r3, r3, #7
+  63:main.c        **** belle für Halbschrittbetrieb
+  64:main.c        **** //			0x0080C000,				// Schritt 1
+  65:main.c        **** //			0x00800000,				// Schritt 2
+ 140              		r1, #39
+ 141 0110 0A22A0E3 		mov	r3, r3, asl #2
+ 142 0114 C229A0E1 		sub	r0, fp, #12
+ 143 0118 13305BE5 		add	r3, r0, r3
+ 144 011c 073003E2 		add	r3, r3, r1
+ 145 0120 2710E0E3 		ldr	r3, [r3, #0]
+ 146 0124 0331A0E1 		str	r3, [r2, #56]
+ 147 0128 0C004BE2 		.loc 1 66 0
+ 148 012c 033080E0 		ldrsb	r2, [fp, #-18]
+ 149 0130 013083E0 		ldrb	r3, [fp, #-17]	@ zero_extendqisi2
+ 150 0134 003093E5 		mul	r3, r2, r3
+ 151 0138 383082E5 		and	r2, r3, #255
+  66:main.c        **** 0x0080C000,				// Schritt 1
+ 152              	p, #-19]
+ 153 013c D2215BE1 		add	r3, r2, r3
+ 154 0140 11305BE5 		strb	r3, [fp, #-19]
+ 155 0144 920303E0 		.loc 1 67 0
+ 156 0148 FF2003E2 		bl	getTaste
+ 157 014c 13305BE5 		mov	r3, r0
+ 158 0150 033082E0 		sub	r3, r3, #1
+ 159 0154 13304BE5 		cmp	r3, #5
+  67:main.c        **** belle für Halbschrittbetrieb
+ 160              	c, [pc, r3, asl #2]
+ 161 0158 FEFFFFEB 		b	.L8
+ 162 015c 0030A0E1 	.L14:
+ 163 0160 013043E2 		.word	.L9
+ 164 0164 050053E3 		.word	.L10
+ 165 0168 03F19F97 		.word	.L11
+ 166 016c 270000EA 		.word	.L12
+ 167              		.word	.L8
+ 168 0170 AC010000 		.word	.L13
+ 169 0174 88010000 	.L10:
+ 170 0178 FC010000 		.loc 1 69 0
+ 171 017c D4010000 		ldrb	r3, [fp, #-17]	@ zero_extendqisi2
+ 172 0180 10020000 		cmp	r3, #0
+ 173 0184 08020000 		bne	.L15
+ 174              		mov	r3, #1
+  68:main.c        **** /	unsigned int cRECHTS[8]={		// Tabelle für Halbschrittbetrieb
+  69:main.c        **** //			0x0080C000,				// Schritt 1
+ 175              	#-17]
+ 176 0188 11305BE5 		b	.L8
+ 177 018c 000053E3 	.L15:
+ 178 0190 0200001A 		mov	r3, #0
+ 179 0194 0130A0E3 		strb	r3, [fp, #-17]
+ 180 0198 11304BE5 		b	.L8
+ 181 019c 1B0000EA 	.L9:
+ 182              		.loc 1 72 0
+ 183 01a0 0030A0E3 		ldr	r3, [fp, #-16]
+ 184 01a4 11304BE5 		cmp	r3, #49
+ 185 01a8 180000EA 		bhi	.L17
+ 186              		ldr	r3, [fp, #-16]
+  70:main.c        **** belle für Halbschrittbetrieb
+  71:main.c        **** //			0x0080C000,				// Schritt 1
+  72:main.c        **** //			0x00800000,				// Schritt 2
+ 187              	 #1
+ 188 01ac 10301BE5 		str	r3, [fp, #-16]
+ 189 01b0 310053E3 		b	.L8
+ 190 01b4 0300008A 	.L17:
+ 191 01b8 10301BE5 		mov	r3, #50
+ 192 01bc 013083E2 		str	r3, [fp, #-16]
+ 193 01c0 10300BE5 		b	.L8
+ 194 01c4 110000EA 	.L12:
+ 195              		.loc 1 75 0
+ 196 01c8 3230A0E3 		ldr	r3, [fp, #-16]
+ 197 01cc 10300BE5 		cmp	r3, #0
+ 198 01d0 0E0000EA 		beq	.L19
+ 199              		ldr	r3, [fp, #-16]
+  73:main.c        **** 0x0080C000,				// Schritt 1
+  74:main.c        **** //			0x00800000,				// Schritt 2
+  75:main.c        **** //			0x00110000,				// Schritt 3
+ 200              	#1
+ 201 01d4 10301BE5 		str	r3, [fp, #-16]
+ 202 01d8 000053E3 		b	.L8
+ 203 01dc 0300000A 	.L19:
+ 204 01e0 10301BE5 		mov	r3, #1
+ 205 01e4 013043E2 		str	r3, [fp, #-16]
+ 206 01e8 10300BE5 		b	.L8
+ 207 01ec 070000EA 	.L11:
+ 208              		.loc 1 78 0
+ 209 01f0 0130A0E3 		mov	r3, #1
+ 210 01f4 10300BE5 		strb	r3, [fp, #-18]
+ 211 01f8 040000EA 		b	.L8
+ 212              	.L13:
+  76:main.c        **** x00800000,				// Schritt 2
+  77:main.c        **** //			0x00110000,				// Schritt 3
+  78:main.c        **** //			0x00000000,				// Schritt 4
+ 213              		mvn	r3, #0
+ 214 01fc 0130A0E3 		strb	r3, [fp, #-18]
+ 215 0200 12304BE5 	.L8:
+ 216 0204 010000EA 		.loc 1 86 0
+ 217              		mov	r0, #0
+  79:main.c        **** 00110000,				// Schritt 3
+  80:main.c        **** //			0x00000000,				// Schritt 4
+  81:main.c        **** //			0x0000E000,				// Schritt 5
+ 218              	r1, #0
+ 219 0208 0030E0E3 		bl	display_set_cursor
+ 220 020c 12304BE5 		.loc 1 87 0
+ 221              		ldr	r0, .L23+4
+  82:main.c        **** 0000000,				// Schritt 4
+  83:main.c        **** //			0x0000E000,				// Schritt 5
+  84:main.c        **** //			0x00002000,				// Schritt 6
+  85:main.c        **** //			0x00912000,				// Schritt 7
+  86:main.c        **** //			0x00802000				// Schritt 8
+ 222              		r1, [fp, #-16]
+ 223 0210 0000A0E3 		bl	display_printf
+ 224 0214 0010A0E3 		.loc 1 88 0
+ 225 0218 FEFFFFEB 		ldr	r0, [fp, #-16]
+  87:main.c        **** 12000,				// Schritt 7
+ 226              	delay2ms
+ 227 021c 14009FE5 		b	.L21
+ 228 0220 10101BE5 	.L24:
+ 229 0224 FEFFFFEB 		.align	2
+  88:main.c        **** 02000,				// Schritt 6
+ 230              	:
+ 231 0228 10001BE5 		.word	C.3.1713
+ 232 022c FEFFFFEB 		.word	.LC0
+ 233 0230 B6FFFFEA 	.LFE3:
+ 235              		.section	.debug_frame,"",%progbits
+ 236              	.Lframe0:
+ 237 0234 00000000 		.4byte	.LECIE0-.LSCIE0
+ 238 0238 20000000 	.LSCIE0:
+ 239              		.4byte	0xffffffff
+ 240              		.byte	0x1
+ 307              		.2byte	0x1
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\Robin\AppData\Local\Temp/cczGdlRg.s:13     .text:00000000 delay2ms
+C:\Users\Robin\AppData\Local\Temp/cczGdlRg.s:19     .text:00000000 $a
+C:\Users\Robin\AppData\Local\Temp/cczGdlRg.s:65     .rodata:00000000 C.3.1713
+C:\Users\Robin\AppData\Local\Temp/cczGdlRg.s:66     .rodata:00000000 $d
+C:\Users\Robin\AppData\Local\Temp/cczGdlRg.s:81     .text:00000074 main
+C:\Users\Robin\AppData\Local\Temp/cczGdlRg.s:168    .text:00000170 $d
+C:\Users\Robin\AppData\Local\Temp/cczGdlRg.s:176    .text:00000188 $a
+C:\Users\Robin\AppData\Local\Temp/cczGdlRg.s:237    .text:00000234 $d
+
+UNDEFINED SYMBOLS
+display_init
+getTaste
+display_set_cursor
+display_printf

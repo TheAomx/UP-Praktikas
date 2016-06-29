@@ -1,0 +1,82 @@
+   1              		.file	"main.c"
+   9              	.Ltext0:
+  10              		.section	.rodata
+  11              		.align	2
+  12              	.LC0:
+  13 0000 256400   		.ascii	"%d\000"
+  14 0003 00       		.text
+  15              		.align	2
+  16              		.global	main
+  18              	main:
+  19              	.LFB2:
+  20              		.file 1 "main.c"
+   1:main.c        **** /*
+   2:main.c        ****  * main.c
+   3:main.c        ****  *
+   4:main.c        ****  *  Created on: 27.04.2016
+   5:main.c        ****  *      Author: Robin
+   6:main.c        ****  */
+   7:main.c        **** 
+   8:main.c        **** #include	"include/AT91SAM7S64.h"
+   9:main.c        **** #include 	"include/cToolMod.h"
+  10:main.c        **** #include 	"include/display.h"
+  11:main.c        **** 
+  12:main.c        **** 
+  13:main.c        **** int main(){
+  21              	 = 0, pretend = 0, frame = 4
+  22              		@ frame_needed = 1, uses_anonymous_args = 0
+  23              		mov	ip, sp
+  24 0000 0DC0A0E1 	.LCFI0:
+  25              		stmfd	sp!, {fp, ip, lr, pc}
+  26 0004 00D82DE9 	.LCFI1:
+  27              		sub	fp, ip, #4
+  28 0008 04B04CE2 	.LCFI2:
+  29              		sub	sp, sp, #4
+  30 000c 04D04DE2 	.LCFI3:
+  31              		.loc 1 14 0
+  14:main.c        **** 	AT91C_BASE_PMC->PMC_PCER = (1<<AT91C_ID_PIOA);
+  32              	2147483648
+  33 0010 0231A0E3 		mov	r3, r3, asr #21
+  34 0014 C33AA0E1 		mov	r2, #4
+  35 0018 0420A0E3 		str	r2, [r3, #16]
+  36 001c 102083E5 		.loc 1 15 0
+  15:main.c        **** 	display_init();
+  37              	isplay_init
+  38 0020 FEFFFFEB 	.L2:
+  39              	.LBB2:
+  40              		.loc 1 17 0
+  16:main.c        **** 	while(1) {
+  17:main.c        **** 		unsigned int a = getTaste();
+  41              	getTaste
+  42 0024 FEFFFFEB 		mov	r3, r0
+  43 0028 0030A0E1 		str	r3, [fp, #-16]
+  44 002c 10300BE5 		.loc 1 18 0
+  18:main.c        **** 		display_set_cursor(0, 0);
+  45              		r0, #0
+  46 0030 0000A0E3 		mov	r1, #0
+  47 0034 0010A0E3 		bl	display_set_cursor
+  48 0038 FEFFFFEB 		.loc 1 19 0
+  19:main.c        **** 		display_printf("%d", a);
+  49              		r0, .L4
+  50 003c 08009FE5 		ldr	r1, [fp, #-16]
+  51 0040 10101BE5 		bl	display_printf
+  52 0044 FEFFFFEB 		b	.L2
+  53 0048 F5FFFFEA 	.L5:
+  54              		.align	2
+  55              	.L4:
+  56              		.word	.LC0
+  57 004c 00000000 	.LBE2:
+  58              	.LFE2:
+  60              		.section	.debug_frame,"",%progbits
+ 102              		.section	.debug_loc,"",%progbits
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\Robin\AppData\Local\Temp/ccACk4kc.s:18     .text:00000000 main
+C:\Users\Robin\AppData\Local\Temp/ccACk4kc.s:24     .text:00000000 $a
+C:\Users\Robin\AppData\Local\Temp/ccACk4kc.s:57     .text:0000004c $d
+
+UNDEFINED SYMBOLS
+display_init
+getTaste
+display_set_cursor
+display_printf

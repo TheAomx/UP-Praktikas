@@ -1,0 +1,115 @@
+   1              		.file	"main.c"
+   9              	.Ltext0:
+  10              		.align	2
+  11              		.global	delay
+  13              	delay:
+  14              	.LFB2:
+  15              		.file 1 "main.c"
+   1:main.c        **** #include "include/AT91SAM7S64.h"							// Register-Deklarationen
+   2:main.c        **** 
+   3:main.c        **** #define TYPICAL
+   4:main.c        **** // #define POINTER
+   5:main.c        **** // #define DIRECT
+   6:main.c        **** 
+   7:main.c        **** #define LED1 AT91C_PIO_PA30	// LED1 angeschlossen an Port-Pin 30
+   8:main.c        **** #define LED2 AT91C_PIO_PA28 // LED2?
+   9:main.c        **** 
+  10:main.c        **** // delay: Funktion, die eine Verzögerung verursacht
+  11:main.c        **** void delay(){
+  16              	 args = 0, pretend = 0, frame = 4
+  17              		@ frame_needed = 1, uses_anonymous_args = 0
+  18              		mov	ip, sp
+  19 0000 0DC0A0E1 	.LCFI0:
+  20              		stmfd	sp!, {fp, ip, lr, pc}
+  21 0004 00D82DE9 	.LCFI1:
+  22              		sub	fp, ip, #4
+  23 0008 04B04CE2 	.LCFI2:
+  24              		sub	sp, sp, #4
+  25 000c 04D04DE2 	.LCFI3:
+  26              		.loc 1 13 0
+  12:main.c        **** 	unsigned int i;
+  13:main.c        **** 	for (i=0;i<800000u;i++);
+  27              	
+  28 0010 0030A0E3 		str	r3, [fp, #-16]
+  29 0014 10300BE5 		b	.L2
+  30 0018 020000EA 	.L3:
+  31              		ldr	r3, [fp, #-16]
+  32 001c 10301BE5 		add	r3, r3, #1
+  33 0020 013083E2 		str	r3, [fp, #-16]
+  34 0024 10300BE5 	.L2:
+  35              		ldr	r2, [fp, #-16]
+  36 0028 10201BE5 		mov	r3, #798720
+  37 002c C33AA0E3 		add	r3, r3, #1264
+  38 0030 4F3E83E2 		add	r3, r3, #15
+  39 0034 0F3083E2 		cmp	r2, r3
+  40 0038 030052E1 		bls	.L3
+  41 003c F6FFFF9A 		.loc 1 14 0
+  14:main.c        **** }
+  42              	, fp, sp, pc}
+  43 0040 08A89DE8 	.LFE2:
+  45              		.align	2
+  46              		.global	main
+  48              	main:
+  49              	.LFB3:
+  50              		.loc 1 17 0
+  15:main.c        **** 
+  16:main.c        **** // main: Hauptprogramm
+  17:main.c        **** int main(void){
+  51              	 0, pretend = 0, frame = 0
+  52              		@ frame_needed = 1, uses_anonymous_args = 0
+  53              		mov	ip, sp
+  54 0044 0DC0A0E1 	.LCFI4:
+  55              		stmfd	sp!, {fp, ip, lr, pc}
+  56 0048 00D82DE9 	.LCFI5:
+  57              		sub	fp, ip, #4
+  58 004c 04B04CE2 	.LCFI6:
+  59              		.loc 1 19 0
+  18:main.c        **** 
+  19:main.c        **** 	AT91C_BASE_PIOA->PIO_OER = LED1 | LED2;							// Ausgang freigeben
+  60              	#-1610612736
+  61 0050 0A32A0E3 		mov	r3, r3, asr #19
+  62 0054 C339A0E1 		mov	r2, #1342177280
+  63 0058 0522A0E3 		str	r2, [r3, #16]
+  64 005c 102083E5 		.loc 1 20 0
+  20:main.c        **** 	AT91C_BASE_PIOA->PIO_PPUDR = LED1 | LED2;							// Pull-Up ausschalten
+  65              	r3, #-1610612736
+  66 0060 0A32A0E3 		mov	r3, r3, asr #19
+  67 0064 C339A0E1 		mov	r2, #1342177280
+  68 0068 0522A0E3 		str	r2, [r3, #96]
+  69 006c 602083E5 	.L6:
+  70              		.loc 1 26 0
+  21:main.c        **** 
+  22:main.c        **** 	while (1){													// ab hier: Endlosschleife
+  23:main.c        **** #ifdef	TYPICAL
+  24:main.c        **** 		// Zur Beschreibung von Peripheriemodulen werden typischerweise
+  25:main.c        **** 		// Registerdefinitionen einer Header-Datei eingebunden (hier: 'AT91SAM7S64.h')
+  26:main.c        **** 		AT91C_BASE_PIOA->PIO_CODR = LED1 | LED2;							// LED aus
+  71              	3, #-1610612736
+  72 0070 0A32A0E3 		mov	r3, r3, asr #19
+  73 0074 C339A0E1 		mov	r2, #1342177280
+  74 0078 0522A0E3 		str	r2, [r3, #52]
+  75 007c 342083E5 		.loc 1 27 0
+  27:main.c        **** 		delay();													// Pause
+  76              	elay
+  77 0080 FEFFFFEB 		.loc 1 28 0
+  28:main.c        **** 		AT91C_BASE_PIOA->PIO_SODR = LED1 | LED2;							// LED an
+  78              	ov	r3, #-1610612736
+  79 0084 0A32A0E3 		mov	r3, r3, asr #19
+  80 0088 C339A0E1 		mov	r2, #1342177280
+  81 008c 0522A0E3 		str	r2, [r3, #48]
+  82 0090 302083E5 		.loc 1 29 0
+  29:main.c        **** 		delay();													// Pause
+  83              	elay
+  84 0094 FEFFFFEB 		b	.L6
+  85 0098 F4FFFFEA 	.LFE3:
+  87              		.section	.debug_frame,"",%progbits
+ 154              		.section	.debug_loc,"",%progbits
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\Robin\AppData\Local\Temp/ccYNgG6h.s:13     .text:00000000 delay
+C:\Users\Robin\AppData\Local\Temp/ccYNgG6h.s:19     .text:00000000 $a
+C:\Users\Robin\AppData\Local\Temp/ccYNgG6h.s:49     .text:00000044 main
+C:\Users\Robin\AppData\Local\Temp/ccYNgG6h.s:90     .debug_frame:00000000 $d
+C:\Users\Robin\AppData\Local\Temp/ccYNgG6h.s:158    .debug_loc:00000000 $d
+
+NO UNDEFINED SYMBOLS

@@ -1,0 +1,187 @@
+   1              		.file	"main.c"
+   9              	.Ltext0:
+  10              		.section	.rodata
+  11              		.align	2
+  12              	.LC0:
+  13 0000 54617374 		.ascii	"Taste 1\000"
+  13      65203100 
+  14              		.align	2
+  15              	.LC1:
+  16 0008 54617374 		.ascii	"Taste 2\000"
+  16      65203200 
+  17              		.align	2
+  18              	.LC2:
+  19 0010 54617374 		.ascii	"Taste 3\000"
+  19      65203300 
+  20              		.align	2
+  21              	.LC3:
+  22 0018 256400   		.ascii	"%d\000"
+  23 001b 00       		.text
+  24              		.align	2
+  25              		.global	pioa_isr
+  27              	pioa_isr:
+  28              	.LFB2:
+  29              		.file 1 "main.c"
+   1:main.c        **** //********************************************************************
+   2:main.c        **** // ARM_T5A3c									Version 02.04.2012 hpw
+   3:main.c        **** //********************************************************************
+   4:main.c        **** #include	"include/AT91SAM7S64.h"			// Definition von ARM7 typischen Registern etc.
+   5:main.c        **** #include	"include/serial.h"
+   6:main.c        **** #include	"include/display.h"
+   7:main.c        **** #include 	"include/interrupt.h"
+   8:main.c        **** #include 	"include/cToolMod.h"
+   9:main.c        **** 
+  10:main.c        **** #define		Taste1	AT91C_PIO_PA1
+  11:main.c        **** #define		Taste2	AT91C_PIO_PA0
+  12:main.c        **** #define		Taste3	AT91C_PIO_PA31
+  13:main.c        **** 
+  14:main.c        **** 
+  15:main.c        **** __attribute__ ((used)) void pioa_isr (void){
+  30              	tend = 0, frame = 8
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		mov	ip, sp
+  33 0000 0DC0A0E1 	.LCFI0:
+  34              		stmfd	sp!, {fp, ip, lr, pc}
+  35 0004 00D82DE9 	.LCFI1:
+  36              		sub	fp, ip, #4
+  37 0008 04B04CE2 	.LCFI2:
+  38              		sub	sp, sp, #8
+  39 000c 08D04DE2 	.LCFI3:
+  40              		.loc 1 19 0
+  16:main.c        **** ute__ ((used)) void pioa_isr (void){
+  17:main.c        **** 
+  18:main.c        **** 	volatile unsigned int dummy;			// Lokale dummy-Variable als volatile deklariert
+  19:main.c        **** 
+  41              	e
+  42 0010 FEFFFFEB 		str	r0, [fp, #-20]
+  43 0014 14000BE5 		ldr	r3, [fp, #-20]
+  44 0018 14301BE5 		cmp	r3, #2
+  45 001c 020053E3 		beq	.L4
+  46 0020 0800000A 		ldr	r3, [fp, #-20]
+  47 0024 14301BE5 		cmp	r3, #4
+  48 0028 040053E3 		beq	.L5
+  49 002c 0800000A 		ldr	r3, [fp, #-20]
+  50 0030 14301BE5 		cmp	r3, #1
+  51 0034 010053E3 		bne	.L2
+  52 0038 0700001A 	.L3:
+  53              		.loc 1 21 0
+  20:main.c        **** Variable als volatile deklariert
+  21:main.c        **** 
+  54              		bl	usart0_puts
+  55 003c 58009FE5 		b	.L2
+  56 0040 FEFFFFEB 	.L4:
+  57 0044 040000EA 		.loc 1 24 0
+  58              		ldr	r0, .L7+4
+  22:main.c        **** Variable als volatile deklariert
+  23:main.c        **** 
+  24:main.c        **** 	switch(getTaste()) {
+  59              	sart0_puts
+  60 0048 50009FE5 		b	.L2
+  61 004c FEFFFFEB 	.L5:
+  62 0050 010000EA 		.loc 1 27 0
+  63              		ldr	r0, .L7+8
+  25:main.c        **** eklariert
+  26:main.c        **** 
+  27:main.c        **** 	switch(getTaste()) {
+  64              	sart0_puts
+  65 0054 48009FE5 	.L2:
+  66 0058 FEFFFFEB 		.loc 1 30 0
+  67              		mov	r0, #0
+  28:main.c        **** eklariert
+  29:main.c        **** 
+  30:main.c        **** 	switch(getTaste()) {
+  68              		r1, #0
+  69 005c 0000A0E3 		bl	display_set_cursor
+  70 0060 0010A0E3 		.loc 1 31 0
+  71 0064 FEFFFFEB 		bl	getTaste
+  31:main.c        **** eklariert
+  72              		r3, r0
+  73 0068 FEFFFFEB 		ldr	r0, .L7+12
+  74 006c 0030A0E1 		mov	r1, r3
+  75 0070 30009FE5 		bl	display_printf
+  76 0074 0310A0E1 		.loc 1 32 0
+  77 0078 FEFFFFEB 		mov	r0, #50
+  32:main.c        **** y-Variable als volatile deklariert
+  78              	lay5ms
+  79 007c 3200A0E3 		.loc 1 33 0
+  80 0080 FEFFFFEB 		mov	r3, #-1610612736
+  33:main.c        **** y-Variable als volatile deklariert
+  81              	v	r3, r3, asr #19
+  82 0084 0A32A0E3 		ldr	r3, [r3, #76]
+  83 0088 C339A0E1 		str	r3, [fp, #-16]
+  84 008c 4C3093E5 		.loc 1 34 0
+  85 0090 10300BE5 		sub	sp, fp, #12
+  34:main.c        **** y-Variable als volatile deklariert
+  86              	d	sp, {fp, sp, pc}
+  87 0094 0CD04BE2 	.L8:
+  88 0098 00A89DE8 		.align	2
+  89              	.L7:
+  90              		.word	.LC0
+  91              		.word	.LC1
+  92 009c 00000000 		.word	.LC2
+  93 00a0 08000000 		.word	.LC3
+  94 00a4 10000000 	.LFE2:
+  96              		.align	2
+  97              		.global	main
+  99              	main:
+ 100              	.LFB3:
+ 101              		.loc 1 38 0
+ 102              		@ args = 0, pretend = 0, frame = 0
+  35:main.c        **** y-Variable als volatile deklariert
+  36:main.c        **** 
+  37:main.c        **** 	switch(getTaste()) {
+  38:main.c        **** 		case 1:
+ 103              	 1, uses_anonymous_args = 0
+ 104              		mov	ip, sp
+ 105              	.LCFI4:
+ 106 00ac 0DC0A0E1 		stmfd	sp!, {fp, ip, lr, pc}
+ 107              	.LCFI5:
+ 108 00b0 00D82DE9 		sub	fp, ip, #4
+ 109              	.LCFI6:
+ 110 00b4 04B04CE2 		.loc 1 39 0
+ 111              		mov	r3, #-2147483648
+  39:main.c        **** 	switch(getTaste()) {
+ 112              	r3, asr #21
+ 113 00b8 0231A0E3 		mov	r2, #4
+ 114 00bc C33AA0E1 		str	r2, [r3, #16]
+ 115 00c0 0420A0E3 		.loc 1 40 0
+ 116 00c4 102083E5 		bl	display_init
+  40:main.c        **** eklariert
+ 117              	 1 41 0
+ 118 00c8 FEFFFFEB 		bl	usart0_init
+  41:main.c        **** y-Variable als volatile deklariert
+ 119              	loc 1 42 0
+ 120 00cc FEFFFFEB 		mov	r0, #-2147483645
+  42:main.c        **** y-Variable als volatile deklariert
+ 121              	ov	r1, #4
+ 122 00d0 0E01A0E3 		mov	r2, #3
+ 123 00d4 0410A0E3 		ldr	r3, .L12
+ 124 00d8 0320A0E3 		bl	pioa_ir_init
+ 125 00dc 04309FE5 	.L10:
+ 126 00e0 FEFFFFEB 		b	.L10
+ 127              	.L13:
+ 128 00e4 FEFFFFEA 		.align	2
+ 129              	.L12:
+ 130              		.word	pioa_isr
+ 131              	.LFE3:
+ 133              		.section	.debug_frame,"",%progbits
+ 134              	.Lframe0:
+ 201              	.Ldebug_loc0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\Robin\AppData\Local\Temp/ccrhRnFu.s:27     .text:00000000 pioa_isr
+C:\Users\Robin\AppData\Local\Temp/ccrhRnFu.s:33     .text:00000000 $a
+C:\Users\Robin\AppData\Local\Temp/ccrhRnFu.s:92     .text:0000009c $d
+C:\Users\Robin\AppData\Local\Temp/ccrhRnFu.s:101    .text:000000ac main
+C:\Users\Robin\AppData\Local\Temp/ccrhRnFu.s:106    .text:000000ac $a
+C:\Users\Robin\AppData\Local\Temp/ccrhRnFu.s:132    .text:000000e8 $d
+
+UNDEFINED SYMBOLS
+getTaste
+usart0_puts
+display_set_cursor
+display_printf
+delay5ms
+display_init
+usart0_init
+pioa_ir_init

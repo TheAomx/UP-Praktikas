@@ -1,0 +1,140 @@
+   1              		.file	"main.c"
+   9              	.Ltext0:
+  10              		.section	.rodata
+  11              		.align	2
+  12              	.LC0:
+  13 0000 44617461 		.ascii	"Data %d\000"
+  13      20256400 
+  14              		.text
+  15              		.align	2
+  16              		.global	main
+  18              	main:
+  19              	.LFB2:
+  20              		.file 1 "main.c"
+   1:main.c        **** //********************************************************************
+   2:main.c        **** // ARM_T5A3a									Version 02.04.2012 hpw
+   3:main.c        **** //********************************************************************
+   4:main.c        **** #include "include/AT91SAM7S64.h"
+   5:main.c        **** #include "include/display.h"
+   6:main.c        **** #include "include/cToolMod.h"
+   7:main.c        **** 
+   8:main.c        **** //#define 	CONTROL_REGISTER 			AT91C_ADC_CR
+   9:main.c        **** //#define 	CHANNEL_ENABLE_REGISTER		AT91C_ADC_CHER
+  10:main.c        **** //#define		STATUS_REGISTER				AT91C_ADC_SR
+  11:main.c        **** //#define		CH4							AT91C_ADC_CDR4
+  12:main.c        **** 
+  13:main.c        **** 
+  14:main.c        **** //**************************************************************
+  15:main.c        **** // main()
+  16:main.c        **** //**************************************************************
+  17:main.c        **** int main(){
+  21              	 = 0, pretend = 0, frame = 8
+  22              		@ frame_needed = 1, uses_anonymous_args = 0
+  23              		mov	ip, sp
+  24 0000 0DC0A0E1 	.LCFI0:
+  25              		stmfd	sp!, {fp, ip, lr, pc}
+  26 0004 00D82DE9 	.LCFI1:
+  27              		sub	fp, ip, #4
+  28 0008 04B04CE2 	.LCFI2:
+  29              		sub	sp, sp, #8
+  30 000c 08D04DE2 	.LCFI3:
+  31              		.loc 1 18 0
+  18:main.c        **** *************
+  32              	_init
+  33 0010 FEFFFFEB 		.loc 1 22 0
+  19:main.c        **** **************************
+  20:main.c        **** int main(){
+  21:main.c        **** 	display_init();
+  22:main.c        **** 
+  34              	ov	r2, #-1342177280
+  35 0014 0B22A0E3 		mov	r2, r2, asr #13
+  36 0018 C226A0E1 		mov	r3, #-1342177280
+  37 001c 0B32A0E3 		mov	r3, r3, asr #13
+  38 0020 C336A0E1 		ldr	r3, [r3, #16]
+  39 0024 103093E5 		orr	r3, r3, #16
+  40 0028 103083E3 		str	r3, [r2, #16]
+  41 002c 103082E5 	.L3:
+  42              		.loc 1 26 0
+  23:main.c        **** in(){
+  24:main.c        **** 	display_init();
+  25:main.c        **** 
+  26:main.c        **** 	//Enables the 4th channel
+  43              	#-1342177280
+  44 0030 0B22A0E3 		mov	r2, r2, asr #13
+  45 0034 C226A0E1 		mov	r3, #-1342177280
+  46 0038 0B32A0E3 		mov	r3, r3, asr #13
+  47 003c C336A0E1 		ldr	r3, [r3, #0]
+  48 0040 003093E5 		orr	r3, r3, #2
+  49 0044 023083E3 		str	r3, [r2, #0]
+  50 0048 003082E5 		.loc 1 29 0
+  27:main.c        **** nables the 4th channel
+  28:main.c        **** 	//AT91C_BASE_ADC->ADC_CHER |= (1 << 4);
+  29:main.c        **** 	AT91C_BASE_ADC->ADC_CHER |= AT91C_ADC_CH4;
+  51              	 #-1342177280
+  52 004c 0B32A0E3 		mov	r3, r3, asr #13
+  53 0050 C336A0E1 		ldr	r3, [r3, #28]
+  54 0054 1C3093E5 		and	r3, r3, #65536
+  55 0058 013803E2 		cmp	r3, #0
+  56 005c 000053E3 		beq	.L2
+  57 0060 1300000A 	.LBB2:
+  58              		.loc 1 32 0
+  30:main.c        **** ER |= AT91C_ADC_CH4;
+  31:main.c        **** 	while (1) {
+  32:main.c        **** 
+  59              	 #-1342177280
+  60 0064 0B32A0E3 		mov	r3, r3, asr #13
+  61 0068 C336A0E1 		ldr	r3, [r3, #64]
+  62 006c 403093E5 		str	r3, [fp, #-20]
+  63 0070 14300BE5 		.loc 1 33 0
+  33:main.c        **** CH4;
+  64              	r0, #0
+  65 0074 0000A0E3 		mov	r1, #0
+  66 0078 0010A0E3 		bl	display_set_cursor
+  67 007c FEFFFFEB 		.loc 1 34 0
+  34:main.c        **** ER |= AT91C_ADC_CH4;
+  68              		r0, .L5
+  69 0080 38009FE5 		ldr	r1, [fp, #-20]
+  70 0084 14101BE5 		bl	display_printf
+  71 0088 FEFFFFEB 		.loc 1 35 0
+  35:main.c        **** ER |= AT91C_ADC_CH4;
+  72              		r3, #-1342177280
+  73 008c 0B32A0E3 		mov	r3, r3, asr #13
+  74 0090 C336A0E1 		ldr	r3, [r3, #32]
+  75 0094 203093E5 		str	r3, [fp, #-16]
+  76 0098 10300BE5 		.loc 1 36 0
+  36:main.c        **** ER |= AT91C_ADC_CH4;
+  77              	r0, #0
+  78 009c 0000A0E3 		mov	r1, #1
+  79 00a0 0110A0E3 		bl	display_set_cursor
+  80 00a4 FEFFFFEB 		.loc 1 37 0
+  37:main.c        **** ER |= AT91C_ADC_CH4;
+  81              		r0, .L5
+  82 00a8 10009FE5 		ldr	r1, [fp, #-16]
+  83 00ac 10101BE5 		bl	display_printf
+  84 00b0 FEFFFFEB 	.L2:
+  85              	.LBE2:
+  86              		.loc 1 40 0
+  38:main.c        **** ER |= AT91C_ADC_CH4;
+  39:main.c        **** 	while (1) {
+  40:main.c        **** 
+  87              	0, #100
+  88 00b4 6400A0E3 		bl	delay5ms
+  89 00b8 FEFFFFEB 		b	.L3
+  90 00bc DBFFFFEA 	.L6:
+  91              		.align	2
+  92              	.L5:
+  93              		.word	.LC0
+  94 00c0 00000000 	.LFE2:
+  96              		.section	.debug_frame,"",%progbits
+ 138              		.section	.debug_loc,"",%progbits
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\Robin\AppData\Local\Temp/cc5YoSUS.s:18     .text:00000000 main
+C:\Users\Robin\AppData\Local\Temp/cc5YoSUS.s:24     .text:00000000 $a
+C:\Users\Robin\AppData\Local\Temp/cc5YoSUS.s:94     .text:000000c0 $d
+
+UNDEFINED SYMBOLS
+display_init
+display_set_cursor
+display_printf
+delay5ms

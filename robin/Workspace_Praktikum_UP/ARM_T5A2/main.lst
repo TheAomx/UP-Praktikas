@@ -1,0 +1,562 @@
+   1              		.file	"main.c"
+   9              	.Ltext0:
+  10              		.align	2
+  11              		.global	timer0_isr
+  13              	timer0_isr:
+  14              	.LFB2:
+  15              		.file 1 "main.c"
+   1:main.c        **** //********************************************************************
+   2:main.c        **** // ARM_T5A2										Version 02.04.2012 hpw
+   3:main.c        **** //********************************************************************
+   4:main.c        **** #include "include/interrupt.h"				// IR-Routinen
+   5:main.c        **** #include "include/AT91SAM7S64.h"			// Definition von ARM7 typischen Registern etc.
+   6:main.c        **** 
+   7:main.c        **** #define 	SPEAKER		AT91C_PIO_PA18
+   8:main.c        **** 
+   9:main.c        **** unsigned int uiDauer, uiFrequenz;			// Globale Variable für Tondauer und Frequenz
+  10:main.c        **** 
+  11:main.c        **** //**************************************************************
+  12:main.c        **** // Interrupt-Service-Routine Timer0 (Tondauer)
+  13:main.c        **** //**************************************************************
+  14:main.c        **** __attribute__ ((used)) void timer0_isr (void){
+  16              	 args = 0, pretend = 0, frame = 4
+  17              		@ frame_needed = 1, uses_anonymous_args = 0
+  18              		mov	ip, sp
+  19 0000 0DC0A0E1 	.LCFI0:
+  20              		stmfd	sp!, {fp, ip, lr, pc}
+  21 0004 00D82DE9 	.LCFI1:
+  22              		sub	fp, ip, #4
+  23 0008 04B04CE2 	.LCFI2:
+  24              		sub	sp, sp, #4
+  25 000c 04D04DE2 	.LCFI3:
+  26              		.loc 1 17 0
+  15:main.c        **** gned int dummy;			// Lokale dummy-Variable
+  16:main.c        **** 
+  17:main.c        **** 	if(uiDauer != 0) {
+  27              	4
+  28 0010 30309FE5 		ldr	r3, [r3, #0]
+  29 0014 003093E5 		cmp	r3, #0
+  30 0018 000053E3 		beq	.L2
+  31 001c 0400000A 		.loc 1 18 0
+  18:main.c        **** iDauer--;
+  32              	r3, .L4
+  33 0020 20309FE5 		ldr	r3, [r3, #0]
+  34 0024 003093E5 		sub	r2, r3, #1
+  35 0028 012043E2 		ldr	r3, .L4
+  36 002c 14309FE5 		str	r2, [r3, #0]
+  37 0030 002083E5 	.L2:
+  38              		.loc 1 22 0
+  19:main.c        **** }
+  20:main.c        **** 
+  21:main.c        **** 	//AT91C_BASE_TC0->TC_CCR=AT91C_TC_SWTRG;	// Zurücksetzen des Zählers
+  22:main.c        **** 	dummy = AT91C_BASE_TC0->TC_SR;			// Bestätigung Interrupt Request
+  39              	, #-1610612736
+  40 0034 0A32A0E3 		mov	r3, r3, asr #12
+  41 0038 4336A0E1 		ldr	r3, [r3, #32]
+  42 003c 203093E5 		str	r3, [fp, #-16]
+  43 0040 10300BE5 		.loc 1 23 0
+  23:main.c        **** /**************************************************************
+  44              	d	sp, {r3, fp, sp, pc}
+  45 0044 08A89DE8 	.L5:
+  46              		.align	2
+  47              	.L4:
+  48              		.word	uiDauer
+  49 0048 00000000 	.LFE2:
+  51              		.align	2
+  52              		.global	timer1_isr
+  54              	timer1_isr:
+  55              	.LFB3:
+  56              		.loc 1 28 0
+  24:main.c        **** / Interrupt-Service-Routine Timer1 (Tonhöhe)
+  25:main.c        **** //**************************************************************
+  26:main.c        **** __attribute__ ((used)) void timer1_isr (void){
+  27:main.c        **** 	volatile unsigned int dummy;			// Lokale dummy-Variable
+  28:main.c        **** 
+  57              	pretend = 0, frame = 4
+  58              		@ frame_needed = 1, uses_anonymous_args = 0
+  59              		mov	ip, sp
+  60 004c 0DC0A0E1 	.LCFI4:
+  61              		stmfd	sp!, {fp, ip, lr, pc}
+  62 0050 00D82DE9 	.LCFI5:
+  63              		sub	fp, ip, #4
+  64 0054 04B04CE2 	.LCFI6:
+  65              		sub	sp, sp, #4
+  66 0058 04D04DE2 	.LCFI7:
+  67              		.loc 1 31 0
+  29:main.c        **** iFrequenz != 0) {
+  30:main.c        **** 		AT91C_BASE_PIOA->PIO_ODSR ^= SPEAKER;
+  31:main.c        **** 	}
+  68              	9
+  69 005c 3C309FE5 		ldr	r3, [r3, #0]
+  70 0060 003093E5 		cmp	r3, #0
+  71 0064 000053E3 		beq	.L7
+  72 0068 0600000A 		.loc 1 32 0
+  32:main.c        **** /AT91C_BASE_TC1->TC_CCR=AT91C_TC_SWTRG;	// Zurücksetzen des Zählers
+  73              	r2, #-1610612736
+  74 006c 0A22A0E3 		mov	r2, r2, asr #19
+  75 0070 C229A0E1 		mov	r3, #-1610612736
+  76 0074 0A32A0E3 		mov	r3, r3, asr #19
+  77 0078 C339A0E1 		ldr	r3, [r3, #56]
+  78 007c 383093E5 		eor	r3, r3, #262144
+  79 0080 013723E2 		str	r3, [r2, #56]
+  80 0084 383082E5 	.L7:
+  81              		.loc 1 36 0
+  33:main.c        **** dummy = AT91C_BASE_TC1->TC_SR;			// Bestätigung Interrupt Request
+  34:main.c        **** }
+  35:main.c        **** 
+  36:main.c        **** //**************************************************************
+  82              	#-16777216
+  83 0088 FF34A0E3 		add	r3, r3, #16384000
+  84 008c FA3883E2 		add	r3, r3, #64
+  85 0090 403083E2 		ldr	r3, [r3, #32]
+  86 0094 203093E5 		str	r3, [fp, #-16]
+  87 0098 10300BE5 		.loc 1 37 0
+  37:main.c        **** main()
+  88              		sp, {r3, fp, sp, pc}
+  89 009c 08A89DE8 	.L10:
+  90              		.align	2
+  91              	.L9:
+  92              		.word	uiFrequenz
+  93 00a0 00000000 	.LFE3:
+  95              		.section	.rodata
+  96              		.align	2
+  99              	lied_d.1709:
+ 100              		.word	300
+ 101 0000 2C010000 		.word	600
+ 102 0004 58020000 		.word	300
+ 103 0008 2C010000 		.word	300
+ 104 000c 2C010000 		.word	150
+ 105 0010 96000000 		.word	150
+ 106 0014 96000000 		.word	300
+ 107 0018 2C010000 		.word	600
+ 108 001c 58020000 		.word	300
+ 109 0020 2C010000 		.word	300
+ 110 0024 2C010000 		.word	150
+ 111 0028 96000000 		.word	150
+ 112 002c 96000000 		.word	300
+ 113 0030 2C010000 		.word	600
+ 114 0034 58020000 		.word	300
+ 115 0038 2C010000 		.word	300
+ 116 003c 2C010000 		.word	150
+ 117 0040 96000000 		.word	150
+ 118 0044 96000000 		.word	300
+ 119 0048 2C010000 		.word	600
+ 120 004c 58020000 		.word	300
+ 121 0050 2C010000 		.word	600
+ 122 0054 58020000 		.word	300
+ 123 0058 2C010000 		.word	600
+ 124 005c 58020000 		.word	300
+ 125 0060 2C010000 		.word	300
+ 126 0064 2C010000 		.word	150
+ 127 0068 96000000 		.word	150
+ 128 006c 96000000 		.word	300
+ 129 0070 2C010000 		.word	600
+ 130 0074 58020000 		.word	300
+ 131 0078 2C010000 		.word	300
+ 132 007c 2C010000 		.word	150
+ 133 0080 96000000 		.word	150
+ 134 0084 96000000 		.word	300
+ 135 0088 2C010000 		.word	300
+ 136 008c 2C010000 		.word	150
+ 137 0090 96000000 		.word	150
+ 138 0094 96000000 		.word	300
+ 139 0098 2C010000 		.word	300
+ 140 009c 2C010000 		.word	150
+ 141 00a0 96000000 		.word	150
+ 142 00a4 96000000 		.word	300
+ 143 00a8 2C010000 		.word	600
+ 144 00ac 58020000 		.word	300
+ 145 00b0 2C010000 		.word	600
+ 146 00b4 58020000 		.word	300
+ 147 00b8 2C010000 		.word	600
+ 148 00bc 58020000 		.word	300
+ 149 00c0 2C010000 		.word	300
+ 150 00c4 2C010000 		.word	150
+ 151 00c8 96000000 		.word	150
+ 152 00cc 96000000 		.word	300
+ 153 00d0 2C010000 		.word	600
+ 154 00d4 58020000 		.word	300
+ 155 00d8 2C010000 		.word	300
+ 156 00dc 2C010000 		.word	150
+ 157 00e0 96000000 		.word	150
+ 158 00e4 96000000 		.word	300
+ 159 00e8 2C010000 		.word	600
+ 160 00ec 58020000 		.word	300
+ 161 00f0 2C010000 		.word	300
+ 162 00f4 2C010000 		.word	150
+ 163 00f8 96000000 		.word	150
+ 164 00fc 96000000 		.word	300
+ 165 0100 2C010000 		.word	600
+ 166 0104 58020000 		.word	300
+ 167 0108 2C010000 		.word	600
+ 168 010c 58020000 		.word	300
+ 169 0110 2C010000 		.word	600
+ 170 0114 58020000 		.word	300
+ 171 0118 2C010000 		.word	300
+ 172 011c 2C010000 		.word	150
+ 173 0120 96000000 		.word	150
+ 174 0124 96000000 		.word	300
+ 175 0128 2C010000 		.word	600
+ 176 012c 58020000 		.word	300
+ 177 0130 2C010000 		.word	300
+ 178 0134 2C010000 		.word	150
+ 179 0138 96000000 		.word	150
+ 180 013c 96000000 		.word	300
+ 181 0140 2C010000 		.word	300
+ 182 0144 2C010000 		.word	150
+ 183 0148 96000000 		.word	150
+ 184 014c 96000000 		.word	300
+ 185 0150 2C010000 		.word	300
+ 186 0154 2C010000 		.word	150
+ 187 0158 96000000 		.word	150
+ 188 015c 96000000 		.word	300
+ 189 0160 2C010000 		.word	600
+ 190 0164 58020000 		.word	300
+ 191 0168 2C010000 		.word	600
+ 192 016c 58020000 		.word	0
+ 193 0170 00000000 		.align	2
+ 196              	lied_f.1708:
+ 197              		.word	3409
+ 198 0174 510D0000 		.word	2867
+ 199 0178 330B0000 		.word	2554
+ 200 017c FA090000 		.word	2275
+ 201 0180 E3080000 		.word	2275
+ 202 0184 E3080000 		.word	2148
+ 203 0188 64080000 		.word	2275
+ 204 018c E3080000 		.word	2554
+ 205 0190 FA090000 		.word	3037
+ 206 0194 DD0B0000 		.word	3827
+ 207 0198 F30E0000 		.word	3827
+ 208 019c F30E0000 		.word	3409
+ 209 01a0 510D0000 		.word	3037
+ 210 01a4 DD0B0000 		.word	2867
+ 211 01a8 330B0000 		.word	3409
+ 212 01ac 510D0000 		.word	3409
+ 213 01b0 510D0000 		.word	3409
+ 214 01b4 510D0000 		.word	3612
+ 215 01b8 1C0E0000 		.word	3409
+ 216 01bc 510D0000 		.word	3037
+ 217 01c0 DD0B0000 		.word	3612
+ 218 01c4 1C0E0000 		.word	4551
+ 219 01c8 C7110000 		.word	3409
+ 220 01cc 510D0000 		.word	2867
+ 221 01d0 330B0000 		.word	2554
+ 222 01d4 FA090000 		.word	2275
+ 223 01d8 E3080000 		.word	2275
+ 224 01dc E3080000 		.word	2148
+ 225 01e0 64080000 		.word	2275
+ 226 01e4 E3080000 		.word	2554
+ 227 01e8 FA090000 		.word	3037
+ 228 01ec DD0B0000 		.word	3827
+ 229 01f0 F30E0000 		.word	3827
+ 230 01f4 F30E0000 		.word	3409
+ 231 01f8 510D0000 		.word	3037
+ 232 01fc DD0B0000 		.word	2867
+ 233 0200 330B0000 		.word	2867
+ 234 0204 330B0000 		.word	3037
+ 235 0208 DD0B0000 		.word	3409
+ 236 020c 510D0000 		.word	3612
+ 237 0210 1C0E0000 		.word	3612
+ 238 0214 1C0E0000 		.word	4054
+ 239 0218 D60F0000 		.word	3612
+ 240 021c 1C0E0000 		.word	3409
+ 241 0220 510D0000 		.word	3409
+ 242 0224 510D0000 		.word	3409
+ 243 0228 510D0000 		.word	3409
+ 244 022c 510D0000 		.word	1913
+ 245 0230 79070000 		.word	1913
+ 246 0234 79070000 		.word	1913
+ 247 0238 79070000 		.word	1913
+ 248 023c 79070000 		.word	2027
+ 249 0240 EB070000 		.word	2275
+ 250 0244 E3080000 		.word	2554
+ 251 0248 FA090000 		.word	3037
+ 252 024c DD0B0000 		.word	3827
+ 253 0250 F30E0000 		.word	3827
+ 254 0254 F30E0000 		.word	3409
+ 255 0258 510D0000 		.word	3037
+ 256 025c DD0B0000 		.word	2867
+ 257 0260 330B0000 		.word	3409
+ 258 0264 510D0000 		.word	3409
+ 259 0268 510D0000 		.word	3409
+ 260 026c 510D0000 		.word	3612
+ 261 0270 1C0E0000 		.word	3409
+ 262 0274 510D0000 		.word	3037
+ 263 0278 DD0B0000 		.word	3612
+ 264 027c 1C0E0000 		.word	4551
+ 265 0280 C7110000 		.word	4551
+ 266 0284 C7110000 		.word	1913
+ 267 0288 79070000 		.word	1913
+ 268 028c 79070000 		.word	1913
+ 269 0290 79070000 		.word	1913
+ 270 0294 79070000 		.word	2027
+ 271 0298 EB070000 		.word	2275
+ 272 029c E3080000 		.word	2554
+ 273 02a0 FA090000 		.word	3037
+ 274 02a4 DD0B0000 		.word	3827
+ 275 02a8 F30E0000 		.word	3827
+ 276 02ac F30E0000 		.word	3409
+ 277 02b0 510D0000 		.word	3037
+ 278 02b4 DD0B0000 		.word	2867
+ 279 02b8 330B0000 		.word	2867
+ 280 02bc 330B0000 		.word	3037
+ 281 02c0 DD0B0000 		.word	3409
+ 282 02c4 510D0000 		.word	3612
+ 283 02c8 1C0E0000 		.word	3612
+ 284 02cc 1C0E0000 		.word	4054
+ 285 02d0 D60F0000 		.word	3612
+ 286 02d4 1C0E0000 		.word	3409
+ 287 02d8 510D0000 		.word	3409
+ 288 02dc 510D0000 		.word	3409
+ 289 02e0 510D0000 		.word	3409
+ 290 02e4 510D0000 		.text
+ 291              		.align	2
+ 292              		.global	main
+ 294              	main:
+ 295              	.LFB4:
+ 296              		.loc 1 42 0
+  38:main.c        **** /**************************************************************
+  39:main.c        **** int main(){
+  40:main.c        **** 
+  41:main.c        **** //	// "Rondo alla Turca", Mozart
+  42:main.c        **** //	#define	BPM	120
+ 297              	r3, .L17
+ 298              		str	r3, [fp, #-24]
+ 299              		.loc 1 101 0
+ 300 00a4 0DC0A0E1 		ldr	r3, .L17+4
+ 301              		str	r3, [fp, #-20]
+ 302 00a8 00D82DE9 		.loc 1 103 0
+ 303              		mov	r3, #-1610612736
+ 304 00ac 04B04CE2 		mov	r3, r3, asr #19
+ 305              		mov	r2, #262144
+ 306 00b0 0CD04DE2 		str	r2, [r3, #16]
+ 307              		.loc 1 104 0
+  43:main.c        **** nclude "include/melodie.h"			// Deklaration der Tonfrequenz und Tondauer
+  44:main.c        **** //	const unsigned int lied_f[]  = {f_h1, f_a1, f_gis1, f_a1, f_c2, f_pause, f_d2, f_c2, f_h1, f_c2,
+  45:main.c        **** //	const unsigned int lied_d[]  = {d_n16, d_n16, d_n16, d_n16, d_n8, d_n8, d_n16, d_n16, d_n16, d_n
+  46:main.c        **** 
+  47:main.c        **** //	// "Alle meine Entchen"
+  48:main.c        **** //	#define	BPM	240
+  49:main.c        **** //	#include "include/melodie.h"			// Deklaration der Tonfrequenz und Tondauer
+  50:main.c        **** //	const unsigned int lied_f[]  = {f_d1, f_e1, f_fis1, f_g1, f_a1, f_pause, f_a1, f_h1, f_pause, f_
+  51:main.c        **** //	const unsigned int lied_d[]  = {d_n4, d_n4, d_n4, d_n4, d_n2, d_n32, d_n2, d_n4, d_n32, d_n4, d_
+  52:main.c        **** 
+  53:main.c        **** //	// "Fuchs, Du hast die Gans gestohlen...."
+  54:main.c        **** //	#define	BPM	240
+  55:main.c        **** //	#include "include/melodie.h"			// Deklaration der Tonfrequenz und Tondauer
+  56:main.c        **** //	const unsigned int lied_f[]  = {f_d1, f_e1, f_fis1, f_g1, f_a1, f_a1, f_a1, f_a1, f_h1, f_g1, f_
+  57:main.c        **** //	const unsigned int lied_d[]  = {d_n4, d_n4, d_n4, d_n4, d_n4, d_n4, d_n4, d_n4, d_n4, d_n4, d_n4
+  58:main.c        **** 
+  59:main.c        **** //	// "GREENSLEEVES"
+  60:main.c        **** 	#define	BPM	200
+  61:main.c        **** 	#include "include/melodie.h"			// Deklaration der Tonfrequenz und Tondauer
+  62:main.c        **** 	const unsigned int lied_f[]  = {f_a1, f_c2, f_d2, f_e2, f_e2, f_f2, f_e2, f_d2, f_h1, f_g1, f_g1, 
+  63:main.c        **** 	const unsigned int lied_d[]  = {d_n4, d_n2, d_n4, d_n4, d_n8, d_n8, d_n4, d_n2, d_n4, d_n4, d_n8, 
+  64:main.c        **** 
+  65:main.c        **** //	// "hopp, hopp, hopp, ..."
+  66:main.c        **** //	#define	BPM	240
+  67:main.c        **** //	#include "include/melodie.h"			// Deklaration der Tonfrequenz und Tondauer
+  68:main.c        **** //	const unsigned int lied_f[] = {f_g1, f_h1, f_d2, f_pause, f_d2, f_c2, f_h1, f_a1, f_g1, f_pause,
+  69:main.c        **** //	const unsigned int lied_d[] = {d_n2, d_n2, d_n2, d_n2, d_n4, d_n4, d_n4, d_n4, d_n4, d_n4, d_n2,
+  70:main.c        **** 
+  71:main.c        **** // 	// "Lasst uns froh und munter sein ..."
+  72:main.c        **** //	#define	BPM	120
+  73:main.c        **** //	#include "include/melodie.h"			// Deklaration der Tonfrequenz und Tondauer
+  74:main.c        **** //	const unsigned int lied_f[] = {f_c2, f_c2, f_c2, f_d2, f_c2, f_b1, f_a1, f_a1, f_a1, f_b1, f_b1,
+  75:main.c        **** //	const unsigned int lied_d[] = {d_n4, d_n4, d_n8, d_n8, d_n8, d_n8, d_n4, d_n4, d_n2, d_n4, d_n4,
+  76:main.c        **** 
+  77:main.c        **** //	// "Ein Männlein steht im Walde ..."
+  78:main.c        **** //	#define	BPM	120
+  79:main.c        **** //	#include "include/melodie.h"			// Deklaration der Tonfrequenz und Tondauer
+  80:main.c        **** //	const unsigned int lied_f[] = {f_c1, f_f1, f_g1, f_a1, f_b1, f_c2, f_d2, f_b1, f_a1, f_g1, f_f1,
+  81:main.c        **** //	const unsigned int lied_d[] = {d_n4, d_n4, d_n4, d_n4, d_n4, d_n2, d_n4, d_n4, d_n2, d_n2, d_n2p
+  82:main.c        **** 
+  83:main.c        **** //	// "Etüde aus OP.No.3", Frederic Chopin
+  84:main.c        **** //	#define	BPM	120
+  85:main.c        **** //	#include "include/melodie.h"			// Deklaration der Tonfrequenz und Tondauer
+  86:main.c        **** //	const unsigned int lied_f[] = {f_pause, f_dis2, f_e2, f_h2, f_dis2, f_e2, f_h1, f_h1, f_h1, f_di
+  87:main.c        **** //	const unsigned int lied_d[] = {d_n8, d_n8, d_n8, d_n4, d_n8, d_n8, d_n4, d_n2, d_n2, d_n8, d_n8,
+  88:main.c        **** 
+  89:main.c        **** //	// "Es tanzt ein Bibabutzelmann ..."
+  90:main.c        **** //	#define	BPM	120
+  91:main.c        **** //	#include "include/melodie.h"			// Deklaration der Tonfrequenz und Tondauer
+  92:main.c        **** //	const unsigned int lied_f[] = {f_d1, f_g1, f_g1, f_d2, f_d2, f_h1, f_h1, f_g1, f_g1, f_a1, f_a1,
+  93:main.c        **** //	const unsigned int lied_d[] = {d_n4, d_n4, d_n4, d_n4, d_n4, d_n4, d_n4, d_n4, d_n4, d_n4, d_n4,
+  94:main.c        **** 
+  95:main.c        **** 	unsigned int *p_freq, *p_dauer;			// Deklaration Zeiger
+  96:main.c        **** 
+  97:main.c        **** 	p_freq=(unsigned int *)&lied_f;			// Zeiger auf Frequenz
+  98:main.c        **** 	p_dauer=(unsigned int *)&lied_d;		// Zeiger auf Dauer
+  99:main.c        **** 
+ 100:main.c        **** 	AT91C_BASE_PIOA->PIO_OER = AT91C_PIO_PA18;	// Freigabe des Lautsprecher-Port-Pins
+ 308              	1610612736
+ 309 00b4 50319FE5 		mov	r3, r3, asr #19
+ 310 00b8 18300BE5 		mov	r2, #262144
+ 101:main.c        **** igabe des Lautsprecher-Port-Pins
+ 311              	r	r2, [r3, #160]
+ 312 00bc 4C319FE5 		.loc 1 105 0
+ 313 00c0 14300BE5 		mov	r3, #-1610612736
+ 102:main.c        **** igabe des Lautsprecher-Port-Pins
+ 103:main.c        **** 	AT91C_BASE_PIOA->PIO_OWER = AT91C_PIO_PA18;	// Freigabe des schreibenden/lesenden Zugriffs
+ 314              	v	r3, r3, asr #19
+ 315 00c4 0A32A0E3 		mov	r2, #262144
+ 316 00c8 C339A0E1 		str	r2, [r3, #96]
+ 317 00cc 0127A0E3 		.loc 1 107 0
+ 318 00d0 102083E5 		mov	r0, #0
+ 104:main.c        ****  schreibenden/lesenden Zugriffs
+ 319              	r1, #4
+ 320 00d4 0A32A0E3 		mov	r2, #16384
+ 321 00d8 C339A0E1 		add	r2, r2, #1
+ 322 00dc 0127A0E3 		ldr	r3, .L17+8
+ 323 00e0 A02083E5 		bl	timer_ir_init
+ 105:main.c        ****  schreibenden/lesenden Zugriffs
+ 324              	 1 108 0
+ 325 00e4 0A32A0E3 		mov	r0, #1
+ 326 00e8 C339A0E1 		mov	r1, #4
+ 327 00ec 0127A0E3 		mov	r2, #16384
+ 328 00f0 602083E5 		add	r2, r2, #1
+ 106:main.c        ****  schreibenden/lesenden Zugriffs
+ 107:main.c        **** 	AT91C_BASE_PIOA->PIO_PPUDR = AT91C_PIO_PA18;	// Ausschalten des Pull-up-Widerstands
+ 329              	r3, .L17+12
+ 330 00f4 0000A0E3 		bl	timer_ir_init
+ 331 00f8 0410A0E3 		.loc 1 110 0
+ 332 00fc 0129A0E3 		mov	r2, #-1610612736
+ 333 0100 012082E2 		mov	r2, r2, asr #12
+ 334 0104 08319FE5 		mov	r3, #2992
+ 335 0108 FEFFFFEB 		add	r3, r3, #8
+ 108:main.c        **** halten des Pull-up-Widerstands
+ 336              	, [r2, #28]
+ 337 010c 0100A0E3 		.loc 1 111 0
+ 338 0110 0410A0E3 		mov	r3, #-1610612736
+ 339 0114 0129A0E3 		mov	r3, r3, asr #12
+ 340 0118 012082E2 		mov	r2, #4
+ 341 011c F4309FE5 		str	r2, [r3, #0]
+ 342 0120 FEFFFFEB 		.loc 1 115 0
+ 109:main.c        **** halten des Pull-up-Widerstands
+ 110:main.c        **** 
+ 343              	, #0
+ 344 0124 0A22A0E3 		str	r3, [fp, #-16]
+ 345 0128 4226A0E1 	.L15:
+ 346 012c BB3EA0E3 		.loc 1 117 0
+ 347 0130 083083E2 		ldr	r3, [fp, #-24]
+ 348 0134 1C3082E5 		ldr	r2, [r3, #0]
+ 111:main.c        **** lten des Pull-up-Widerstands
+ 349              	3, .L17+16
+ 350 0138 0A32A0E3 		str	r2, [r3, #0]
+ 351 013c 4336A0E1 		ldr	r3, [fp, #-24]
+ 352 0140 0420A0E3 		add	r3, r3, #4
+ 353 0144 002083E5 		str	r3, [fp, #-24]
+ 112:main.c        **** halten des Pull-up-Widerstands
+ 113:main.c        **** 
+ 114:main.c        **** 	timer_ir_init(0, 4, 1 | AT91C_TC_WAVESEL_UP_AUTO, timer0_isr);		// Timer0-IR initialisieren (Tonda
+ 115:main.c        **** 	timer_ir_init(1, 4, 1 | AT91C_TC_WAVESEL_UP_AUTO, timer1_isr);		// Timer1-IR initialisieren	(Tonhö
+ 354              	 1 118 0
+ 355 0148 0030A0E3 		ldr	r3, [fp, #-20]
+ 356 014c 10300BE5 		ldr	r2, [r3, #0]
+ 357              		ldr	r3, .L17+20
+ 116:main.c        **** IR initialisieren	(Tonhöhe)
+ 117:main.c        **** 
+ 358              		r2, [r3, #0]
+ 359 0150 18301BE5 		ldr	r3, [fp, #-20]
+ 360 0154 002093E5 		add	r3, r3, #4
+ 361 0158 BC309FE5 		str	r3, [fp, #-20]
+ 362 015c 002083E5 		.loc 1 120 0
+ 363 0160 18301BE5 		ldr	r3, [fp, #-16]
+ 364 0164 043083E2 		add	r3, r3, #1
+ 365 0168 18300BE5 		str	r3, [fp, #-16]
+ 118:main.c        ****  initialisieren	(Tonhöhe)
+ 366              	121 0
+ 367 016c 14301BE5 		ldr	r3, .L17+20
+ 368 0170 002093E5 		ldr	r3, [r3, #0]
+ 369 0174 A4309FE5 		cmp	r3, #0
+ 370 0178 002083E5 		bne	.L12
+ 371 017c 14301BE5 		.loc 1 123 0
+ 372 0180 043083E2 		mov	r3, #-1610612736
+ 373 0184 14300BE5 		mov	r3, r3, asr #12
+ 119:main.c        **** IR initialisieren	(Tonhöhe)
+ 120:main.c        **** 
+ 374              	 #2
+ 375 0188 10301BE5 		str	r2, [r3, #0]
+ 376 018c 013083E2 		.loc 1 124 0
+ 377 0190 10300BE5 		mov	r3, #-16777216
+ 121:main.c        ****  initialisieren	(Tonhöhe)
+ 378              		r3, r3, #16384000
+ 379 0194 84309FE5 		add	r3, r3, #64
+ 380 0198 003093E5 		mov	r2, #2
+ 381 019c 000053E3 		str	r2, [r3, #0]
+ 382 01a0 0900001A 	.L13:
+ 122:main.c        **** IR initialisieren	(Tonhöhe)
+ 123:main.c        **** 
+ 383              	13
+ 384 01a4 0A32A0E3 	.L12:
+ 385 01a8 4336A0E1 		.loc 1 127 0
+ 386 01ac 0220A0E3 		mov	r3, #-16777216
+ 387 01b0 002083E5 		add	r3, r3, #16384000
+ 124:main.c        ****  initialisieren	(Tonhöhe)
+ 388              	r3, r3, #64
+ 389 01b4 FF34A0E3 		ldr	r2, .L17+16
+ 390 01b8 FA3883E2 		ldr	r2, [r2, #0]
+ 391 01bc 403083E2 		str	r2, [r3, #28]
+ 392 01c0 0220A0E3 		.loc 1 128 0
+ 393 01c4 002083E5 		mov	r3, #-16777216
+ 394              		add	r3, r3, #16384000
+ 395 01c8 FEFFFFEA 		add	r3, r3, #64
+ 396              		mov	r2, #4
+ 125:main.c        **** IR initialisieren	(Tonhöhe)
+ 126:main.c        **** 
+ 127:main.c        **** 	AT91C_BASE_TC0->TC_RC = 3000;				// max. Zählerwert für TC0
+ 397              	[r3, #0]
+ 398 01cc FF34A0E3 	.L14:
+ 399 01d0 FA3883E2 		.loc 1 130 0
+ 400 01d4 403083E2 		ldr	r3, .L17+20
+ 401 01d8 3C209FE5 		ldr	r3, [r3, #0]
+ 402 01dc 002092E5 		cmp	r3, #0
+ 403 01e0 1C2083E5 		bne	.L14
+ 128:main.c        **** / max. Zählerwert für TC0
+ 404              	
+ 405 01e4 FF34A0E3 	.L18:
+ 406 01e8 FA3883E2 		.align	2
+ 407 01ec 403083E2 	.L17:
+ 408 01f0 0420A0E3 		.word	lied_f.1708
+ 409 01f4 002083E5 		.word	lied_d.1709
+ 410              		.word	timer0_isr
+ 129:main.c        **** / max. Zählerwert für TC0
+ 130:main.c        **** 	AT91C_BASE_TC0->TC_CCR = AT91C_TC_SWTRG;		// Zurücksetzen des Zählers Timer0
+ 411              		timer1_isr
+ 412 01f8 20309FE5 		.word	uiFrequenz
+ 413 01fc 003093E5 		.word	uiDauer
+ 414 0200 000053E3 	.LFE4:
+ 416 0208 D0FFFFEA 		.comm	uiDauer,4,4
+ 417              		.comm	uiFrequenz,4,4
+ 418              		.section	.debug_frame,"",%progbits
+ 419              	.Lframe0:
+ 420 020c 74010000 		.4byte	.LECIE0-.LSCIE0
+ 421 0210 00000000 	.LSCIE0:
+ 422 0214 00000000 		.4byte	0xffffffff
+ 423 0218 00000000 		.byte	0x1
+ 424 021c 00000000 		.ascii	"\000"
+ 425 0220 00000000 		.uleb128 0x1
+ 426              		.sleb128 -4
+ 427              		.byte	0xe
+ 428              		.byte	0xc
+ 429              		.uleb128 0xd
+ 521              		.4byte	.LCFI2-.Ltext0
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\Robin\AppData\Local\Temp/cciTAe1R.s:13     .text:00000000 timer0_isr
+C:\Users\Robin\AppData\Local\Temp/cciTAe1R.s:19     .text:00000000 $a
+C:\Users\Robin\AppData\Local\Temp/cciTAe1R.s:49     .text:00000048 $d
+                            *COM*:00000004 uiDauer
+C:\Users\Robin\AppData\Local\Temp/cciTAe1R.s:55     .text:0000004c timer1_isr
+C:\Users\Robin\AppData\Local\Temp/cciTAe1R.s:60     .text:0000004c $a
+C:\Users\Robin\AppData\Local\Temp/cciTAe1R.s:93     .text:000000a0 $d
+                            *COM*:00000004 uiFrequenz
+C:\Users\Robin\AppData\Local\Temp/cciTAe1R.s:100    .rodata:00000000 lied_d.1709
+C:\Users\Robin\AppData\Local\Temp/cciTAe1R.s:101    .rodata:00000000 $d
+C:\Users\Robin\AppData\Local\Temp/cciTAe1R.s:197    .rodata:00000174 lied_f.1708
+C:\Users\Robin\AppData\Local\Temp/cciTAe1R.s:295    .text:000000a4 main
+C:\Users\Robin\AppData\Local\Temp/cciTAe1R.s:300    .text:000000a4 $a
+C:\Users\Robin\AppData\Local\Temp/cciTAe1R.s:420    .text:0000020c $d
+
+UNDEFINED SYMBOLS
+timer_ir_init

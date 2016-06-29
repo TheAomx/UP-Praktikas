@@ -1,0 +1,498 @@
+   1              		.file	"i2c_tools.c"
+   9              	.Ltext0:
+  10              		.align	2
+  11              		.global	i2c_stop
+  13              	i2c_stop:
+  14              	.LFB2:
+  15              		.file 1 "i2c_tools.c"
+   1:i2c_tools.c   **** //********************************************************************
+   2:i2c_tools.c   **** // i2c_tools.c								Version 15.05.2014_std hpw
+   3:i2c_tools.c   **** //********************************************************************
+   4:i2c_tools.c   **** #include	"include/AT91SAM7S64.h"
+   5:i2c_tools.c   **** 
+   6:i2c_tools.c   **** #define		SDA		AT91C_PIO_PA3					// SDA auf PA3
+   7:i2c_tools.c   **** #define		SCL		AT91C_PIO_PA4					// SCL auf PA4
+   8:i2c_tools.c   **** 
+   9:i2c_tools.c   **** //**************************************************************
+  10:i2c_tools.c   **** // i2c_stop
+  11:i2c_tools.c   **** // Generiert eine Stoppbedingung auf dem I2C Bus
+  12:i2c_tools.c   **** //**************************************************************
+  13:i2c_tools.c   **** void i2c_stop(void){
+  16              	 args = 0, pretend = 0, frame = 0
+  17              		@ frame_needed = 1, uses_anonymous_args = 0
+  18              		mov	ip, sp
+  19 0000 0DC0A0E1 	.LCFI0:
+  20              		stmfd	sp!, {fp, ip, lr, pc}
+  21 0004 00D82DE9 	.LCFI1:
+  22              		sub	fp, ip, #4
+  23 0008 04B04CE2 	.LCFI2:
+  24              		.loc 1 14 0
+  14:i2c_tools.c   **** IOA->PIO_CODR = SDA;				// SDA -> 0
+  25              	#-1610612736
+  26 000c 0A32A0E3 		mov	r3, r3, asr #19
+  27 0010 C339A0E1 		mov	r2, #8
+  28 0014 0820A0E3 		str	r2, [r3, #52]
+  29 0018 342083E5 		.loc 1 15 0
+  15:i2c_tools.c   **** ***************************
+  30              	r3, #-1610612736
+  31 001c 0A32A0E3 		mov	r3, r3, asr #19
+  32 0020 C339A0E1 		mov	r2, #16
+  33 0024 1020A0E3 		str	r2, [r3, #48]
+  34 0028 302083E5 		.loc 1 16 0
+  16:i2c_tools.c   **** ine Stoppbedingung auf dem I2C Bus
+  35              	r3, #-1610612736
+  36 002c 0A32A0E3 		mov	r3, r3, asr #19
+  37 0030 C339A0E1 		mov	r2, #8
+  38 0034 0820A0E3 		str	r2, [r3, #48]
+  39 0038 302083E5 		.loc 1 17 0
+  17:i2c_tools.c   **** ***************************************
+  40              	d	sp, {fp, sp, pc}
+  41 003c 00A89DE8 	.LFE2:
+  43              		.align	2
+  44              		.global	i2c_rbit
+  46              	i2c_rbit:
+  47              	.LFB3:
+  48              		.loc 1 23 0
+  18:i2c_tools.c   **** CL		AT91C_PIO_PA4					// SCL auf PA4
+  19:i2c_tools.c   **** 
+  20:i2c_tools.c   **** //**************************************************************
+  21:i2c_tools.c   **** // i2c_stop
+  22:i2c_tools.c   **** // Generiert eine Stoppbedingung auf dem I2C Bus
+  23:i2c_tools.c   **** //**************************************************************
+  49              	 0, pretend = 0, frame = 4
+  50              		@ frame_needed = 1, uses_anonymous_args = 0
+  51              		mov	ip, sp
+  52 0040 0DC0A0E1 	.LCFI3:
+  53              		stmfd	sp!, {fp, ip, lr, pc}
+  54 0044 00D82DE9 	.LCFI4:
+  55              		sub	fp, ip, #4
+  56 0048 04B04CE2 	.LCFI5:
+  57              		sub	sp, sp, #4
+  58 004c 04D04DE2 	.LCFI6:
+  59              		.loc 1 26 0
+  24:i2c_tools.c   **** ine Stoppbedingung auf dem I2C Bus
+  25:i2c_tools.c   **** //**************************************************************
+  26:i2c_tools.c   **** void i2c_stop(void){
+  60              	1610612736
+  61 0050 0A32A0E3 		mov	r3, r3, asr #19
+  62 0054 C339A0E1 		mov	r2, #16
+  63 0058 1020A0E3 		str	r2, [r3, #48]
+  64 005c 302083E5 		.loc 1 27 0
+  27:i2c_tools.c   ****  dem I2C Bus
+  65              	r3, #-1610612736
+  66 0060 0A32A0E3 		mov	r3, r3, asr #19
+  67 0064 C339A0E1 		ldr	r3, [r3, #60]
+  68 0068 3C3093E5 		and	r3, r3, #8
+  69 006c 083003E2 		cmp	r3, #0
+  70 0070 000053E3 		beq	.L4
+  71 0074 0200000A 		mov	r3, #1
+  72 0078 0130A0E3 		strb	r3, [fp, #-13]
+  73 007c 0D304BE5 		b	.L5
+  74 0080 010000EA 	.L4:
+  75              		.loc 1 28 0
+  28:i2c_tools.c   **** ***************************************
+  76              	
+  77 0084 0030A0E3 		strb	r3, [fp, #-13]
+  78 0088 0D304BE5 	.L5:
+  79              		.loc 1 29 0
+  29:i2c_tools.c   **** CL		AT91C_PIO_PA4					// SCL auf PA4
+  80              	v	r3, #-1610612736
+  81 008c 0A32A0E3 		mov	r3, r3, asr #19
+  82 0090 C339A0E1 		mov	r2, #16
+  83 0094 1020A0E3 		str	r2, [r3, #52]
+  84 0098 342083E5 		.loc 1 30 0
+  30:i2c_tools.c   **** AM7S64.h"
+  85              		r3, [fp, #-13]	@ zero_extendqisi2
+  86 009c 0D305BE5 		.loc 1 31 0
+  31:i2c_tools.c   **** hpw
+  87              	ov	r0, r3
+  88 00a0 0300A0E1 		ldmfd	sp, {r3, fp, sp, pc}
+  89 00a4 08A89DE8 	.LFE3:
+  91              		.align	2
+  92              		.global	i2c_wbit
+  94              	i2c_wbit:
+  95              	.LFB4:
+  96              		.loc 1 37 0
+  32:i2c_tools.c   **** /********************************************************************
+  33:i2c_tools.c   **** #include	"include/AT91SAM7S64.h"
+  34:i2c_tools.c   **** 
+  35:i2c_tools.c   **** #define		SDA		AT91C_PIO_PA3					// SDA auf PA3
+  36:i2c_tools.c   **** #define		SCL		AT91C_PIO_PA4					// SCL auf PA4
+  37:i2c_tools.c   **** 
+  97              	0, pretend = 0, frame = 4
+  98              		@ frame_needed = 1, uses_anonymous_args = 0
+  99              		mov	ip, sp
+ 100 00a8 0DC0A0E1 	.LCFI7:
+ 101              		stmfd	sp!, {fp, ip, lr, pc}
+ 102 00ac 00D82DE9 	.LCFI8:
+ 103              		sub	fp, ip, #4
+ 104 00b0 04B04CE2 	.LCFI9:
+ 105              		sub	sp, sp, #4
+ 106 00b4 04D04DE2 	.LCFI10:
+ 107              		mov	r3, r0
+ 108 00b8 0030A0E1 		strb	r3, [fp, #-16]
+ 109 00bc 10304BE5 		.loc 1 38 0
+  38:i2c_tools.c   **** **********************************************************
+ 110              	, #-16]	@ zero_extendqisi2
+ 111 00c0 10305BE5 		cmp	r3, #0
+ 112 00c4 000053E3 		beq	.L8
+ 113 00c8 0400000A 		mov	r3, #-1610612736
+ 114 00cc 0A32A0E3 		mov	r3, r3, asr #19
+ 115 00d0 C339A0E1 		mov	r2, #8
+ 116 00d4 0820A0E3 		str	r2, [r3, #48]
+ 117 00d8 302083E5 		b	.L9
+ 118 00dc 030000EA 	.L8:
+ 119              		.loc 1 39 0
+  39:i2c_tools.c   **** CL		AT91C_PIO_PA4					// SCL auf PA4
+ 120              	-1610612736
+ 121 00e0 0A32A0E3 		mov	r3, r3, asr #19
+ 122 00e4 C339A0E1 		mov	r2, #8
+ 123 00e8 0820A0E3 		str	r2, [r3, #52]
+ 124 00ec 342083E5 	.L9:
+ 125              		.loc 1 40 0
+  40:i2c_tools.c   **** AM7S64.h"
+ 126              	3, #-1610612736
+ 127 00f0 0A32A0E3 		mov	r3, r3, asr #19
+ 128 00f4 C339A0E1 		mov	r2, #16
+ 129 00f8 1020A0E3 		str	r2, [r3, #48]
+ 130 00fc 302083E5 		.loc 1 41 0
+  41:i2c_tools.c   **** hpw
+ 131              	"i2c_tools.c" 1
+ 132              		NOP
+ 133 0100 0000A0E1 	@ 0 "" 2
+ 134              	@ 41 "i2c_tools.c" 1
+ 135              		NOP
+ 136 0104 0000A0E1 	@ 0 "" 2
+ 137              	@ 41 "i2c_tools.c" 1
+ 138              		NOP
+ 139 0108 0000A0E1 	@ 0 "" 2
+ 140              		.loc 1 42 0
+  42:i2c_tools.c   **** /********************************************************************
+ 141              	tools.c" 1
+ 142              		NOP
+ 143 010c 0000A0E1 	@ 0 "" 2
+ 144              	@ 42 "i2c_tools.c" 1
+ 145              		NOP
+ 146 0110 0000A0E1 	@ 0 "" 2
+ 147              	@ 42 "i2c_tools.c" 1
+ 148              		NOP
+ 149 0114 0000A0E1 	@ 0 "" 2
+ 150              		.loc 1 43 0
+  43:i2c_tools.c   **** include	"include/AT91SAM7S64.h"
+ 151              	tools.c" 1
+ 152              		NOP
+ 153 0118 0000A0E1 	@ 0 "" 2
+ 154              	@ 43 "i2c_tools.c" 1
+ 155              		NOP
+ 156 011c 0000A0E1 	@ 0 "" 2
+ 157              	@ 43 "i2c_tools.c" 1
+ 158              		NOP
+ 159 0120 0000A0E1 	@ 0 "" 2
+ 160              		.loc 1 44 0
+  44:i2c_tools.c   **** hpw
+ 161              	tools.c" 1
+ 162              		NOP
+ 163 0124 0000A0E1 	@ 0 "" 2
+ 164              	@ 44 "i2c_tools.c" 1
+ 165              		NOP
+ 166 0128 0000A0E1 	@ 0 "" 2
+ 167              	@ 44 "i2c_tools.c" 1
+ 168              		NOP
+ 169 012c 0000A0E1 	@ 0 "" 2
+ 170              		.loc 1 45 0
+  45:i2c_tools.c   **** /********************************************************************
+ 171              	tools.c" 1
+ 172              		NOP
+ 173 0130 0000A0E1 	@ 0 "" 2
+ 174              	@ 45 "i2c_tools.c" 1
+ 175              		NOP
+ 176 0134 0000A0E1 	@ 0 "" 2
+ 177              		.loc 1 47 0
+  46:i2c_tools.c   **** include	"include/AT91SAM7S64.h"
+  47:i2c_tools.c   **** 
+ 178              	, #-1610612736
+ 179 0138 0A32A0E3 		mov	r3, r3, asr #19
+ 180 013c C339A0E1 		mov	r2, #16
+ 181 0140 1020A0E3 		str	r2, [r3, #52]
+ 182 0144 342083E5 		.loc 1 48 0
+  48:i2c_tools.c   **** w
+ 183              	d	sp, {r3, fp, sp, pc}
+ 184 0148 08A89DE8 	.LFE4:
+ 186              		.align	2
+ 187              		.global	i2c_wbyte
+ 189              	i2c_wbyte:
+ 190              	.LFB5:
+ 191              		.loc 1 56 0
+  49:i2c_tools.c   **** /********************************************************************
+  50:i2c_tools.c   **** #include	"include/AT91SAM7S64.h"
+  51:i2c_tools.c   **** 
+  52:i2c_tools.c   **** #define		SDA		AT91C_PIO_PA3					// SDA auf PA3
+  53:i2c_tools.c   **** #define		SCL		AT91C_PIO_PA4					// SCL auf PA4
+  54:i2c_tools.c   **** 
+  55:i2c_tools.c   **** //**************************************************************
+  56:i2c_tools.c   **** // i2c_stop
+ 192              	 0, pretend = 0, frame = 12
+ 193              		@ frame_needed = 1, uses_anonymous_args = 0
+ 194              		mov	ip, sp
+ 195 014c 0DC0A0E1 	.LCFI11:
+ 196              		stmfd	sp!, {fp, ip, lr, pc}
+ 197 0150 00D82DE9 	.LCFI12:
+ 198              		sub	fp, ip, #4
+ 199 0154 04B04CE2 	.LCFI13:
+ 200              		sub	sp, sp, #12
+ 201 0158 0CD04DE2 	.LCFI14:
+ 202              		mov	r3, r0
+ 203 015c 0030A0E1 		strb	r3, [fp, #-20]
+ 204 0160 14304BE5 		.loc 1 59 0
+  57:i2c_tools.c   **** iert eine Stoppbedingung auf dem I2C Bus
+  58:i2c_tools.c   **** //**************************************************************
+  59:i2c_tools.c   **** void i2c_stop(void){
+ 205              	strb	r3, [fp, #-13]
+ 206 0164 0730A0E3 		b	.L12
+ 207 0168 0D304BE5 	.L13:
+ 208 016c 0C0000EA 		.loc 1 60 0
+ 209              		ldrsb	r2, [fp, #-13]
+  60:i2c_tools.c   ****  dem I2C Bus
+ 210              	r3, #1
+ 211 0170 DD205BE1 		mov	r2, r3, asl r2
+ 212 0174 0130A0E3 		ldrb	r3, [fp, #-20]	@ zero_extendqisi2
+ 213 0178 1322A0E1 		and	r2, r2, r3
+ 214 017c 14305BE5 		ldrsb	r3, [fp, #-13]
+ 215 0180 032002E0 		mov	r3, r2, asr r3
+ 216 0184 DD305BE1 		and	r3, r3, #255
+ 217 0188 5233A0E1 		mov	r0, r3
+ 218 018c FF3003E2 		bl	i2c_wbit
+ 219 0190 0300A0E1 		.loc 1 59 0
+ 220 0194 FEFFFFEB 		ldrb	r3, [fp, #-13]
+ 221              		sub	r3, r3, #1
+ 222 0198 0D305BE5 		strb	r3, [fp, #-13]
+ 223 019c 013043E2 	.L12:
+ 224 01a0 0D304BE5 		ldrsb	r3, [fp, #-13]
+ 225              		cmp	r3, #0
+ 226 01a4 DD305BE1 		bge	.L13
+ 227 01a8 000053E3 		.loc 1 62 0
+ 228 01ac EFFFFFAA 		bl	i2c_rbit
+  61:i2c_tools.c   **** ***************************************
+  62:i2c_tools.c   **** // i2c_stop
+ 229              	, #0
+ 230 01b0 FEFFFFEB 		beq	.L14
+ 231 01b4 0030A0E1 		.loc 1 63 0
+ 232 01b8 000053E3 		bl	i2c_stop
+ 233 01bc 0300000A 		.loc 1 64 0
+  63:i2c_tools.c   **** _PA4					// SCL auf PA4
+ 234              	r3, #1
+ 235 01c0 FEFFFFEB 		str	r3, [fp, #-24]
+  64:i2c_tools.c   **** AM7S64.h"
+ 236              		.L15
+ 237 01c4 0130A0E3 	.L14:
+ 238 01c8 18300BE5 		.loc 1 66 0
+ 239 01cc 010000EA 		mov	r3, #0
+ 240              		str	r3, [fp, #-24]
+  65:i2c_tools.c   **** hpw
+  66:i2c_tools.c   **** //********************************************************************
+ 241              	
+ 242 01d0 0030A0E3 		ldr	r3, [fp, #-24]
+ 243 01d4 18300BE5 		.loc 1 67 0
+ 244              		mov	r0, r3
+ 245 01d8 18301BE5 		sub	sp, fp, #12
+  67:i2c_tools.c   **** nclude	"include/AT91SAM7S64.h"
+ 246              	fd	sp, {fp, sp, pc}
+ 247 01dc 0300A0E1 	.LFE5:
+ 249 01e4 00A89DE8 		.align	2
+ 250              		.global	i2c_start
+ 252              	i2c_start:
+ 253              	.LFB6:
+ 254              		.loc 1 80 0
+ 255              		@ args = 0, pretend = 0, frame = 8
+ 256              		@ frame_needed = 1, uses_anonymous_args = 0
+  68:i2c_tools.c   **** hpw
+  69:i2c_tools.c   **** //********************************************************************
+  70:i2c_tools.c   **** #include	"include/AT91SAM7S64.h"
+  71:i2c_tools.c   **** 
+  72:i2c_tools.c   **** #define		SDA		AT91C_PIO_PA3					// SDA auf PA3
+  73:i2c_tools.c   **** #define		SCL		AT91C_PIO_PA4					// SCL auf PA4
+  74:i2c_tools.c   **** 
+  75:i2c_tools.c   **** //**************************************************************
+  76:i2c_tools.c   **** // i2c_stop
+  77:i2c_tools.c   **** // Generiert eine Stoppbedingung auf dem I2C Bus
+  78:i2c_tools.c   **** //**************************************************************
+  79:i2c_tools.c   **** void i2c_stop(void){
+  80:i2c_tools.c   **** 	AT91C_BASE_PIOA->PIO_CODR = SDA;				// SDA -> 0
+ 257              	
+ 258              	.LCFI15:
+ 259              		stmfd	sp!, {fp, ip, lr, pc}
+ 260 01e8 0DC0A0E1 	.LCFI16:
+ 261              		sub	fp, ip, #4
+ 262 01ec 00D82DE9 	.LCFI17:
+ 263              		sub	sp, sp, #8
+ 264 01f0 04B04CE2 	.LCFI18:
+ 265              		mov	r3, r0
+ 266 01f4 08D04DE2 		strb	r3, [fp, #-16]
+ 267              		.loc 1 81 0
+ 268 01f8 0030A0E1 		mov	r3, #-2147483648
+ 269 01fc 10304BE5 		mov	r3, r3, asr #21
+  81:i2c_tools.c   **** IOA->PIO_SODR = SCL;				// SCL -> 1
+ 270              		str	r2, [r3, #16]
+ 271 0200 0231A0E3 		.loc 1 82 0
+ 272 0204 C33AA0E1 		mov	r3, #-1610612736
+ 273 0208 0420A0E3 		mov	r3, r3, asr #19
+ 274 020c 102083E5 		mov	r2, #24
+  82:i2c_tools.c   **** AT91C_BASE_PIOA->PIO_CODR = SDA;				// SDA -> 0
+ 275              	r2, [r3, #80]
+ 276 0210 0A32A0E3 		.loc 1 83 0
+ 277 0214 C339A0E1 		mov	r3, #-1610612736
+ 278 0218 1820A0E3 		mov	r3, r3, asr #19
+ 279 021c 502083E5 		mov	r2, #24
+  83:i2c_tools.c   **** ***************************
+ 280              	r2, [r3, #96]
+ 281 0220 0A32A0E3 		.loc 1 84 0
+ 282 0224 C339A0E1 		mov	r3, #-1610612736
+ 283 0228 1820A0E3 		mov	r3, r3, asr #19
+ 284 022c 602083E5 		mov	r2, #24
+  84:i2c_tools.c   **** ine Stoppbedingung auf dem I2C Bus
+ 285              	r2, [r3, #48]
+ 286 0230 0A32A0E3 		.loc 1 85 0
+ 287 0234 C339A0E1 		mov	r3, #-1610612736
+ 288 0238 1820A0E3 		mov	r3, r3, asr #19
+ 289 023c 302083E5 		mov	r2, #24
+  85:i2c_tools.c   **** ***************************************
+ 290              	r2, [r3, #16]
+ 291 0240 0A32A0E3 		.loc 1 86 0
+ 292 0244 C339A0E1 		mov	r3, #-1610612736
+ 293 0248 1820A0E3 		mov	r3, r3, asr #19
+ 294 024c 102083E5 		mov	r2, #8
+  86:i2c_tools.c   **** CL		AT91C_PIO_PA4					// SCL auf PA4
+ 295              	r2, [r3, #52]
+ 296 0250 0A32A0E3 		.loc 1 87 0
+ 297 0254 C339A0E1 		mov	r3, #-1610612736
+ 298 0258 0820A0E3 		mov	r3, r3, asr #19
+ 299 025c 342083E5 		mov	r2, #16
+  87:i2c_tools.c   **** AM7S64.h"
+ 300              	r2, [r3, #52]
+ 301 0260 0A32A0E3 		.loc 1 88 0
+ 302 0264 C339A0E1 		ldrb	r3, [fp, #-16]	@ zero_extendqisi2
+ 303 0268 1020A0E3 		mov	r0, r3
+ 304 026c 342083E5 		bl	i2c_wbyte
+  88:i2c_tools.c   **** hpw
+ 305              	r3, r0
+ 306 0270 10305BE5 		cmp	r3, #0
+ 307 0274 0300A0E1 		bne	.L18
+ 308 0278 FEFFFFEB 		mov	r3, #0
+ 309 027c 0030A0E1 		str	r3, [fp, #-20]
+ 310 0280 000053E3 		b	.L19
+ 311 0284 0200001A 	.L18:
+ 312 0288 0030A0E3 		.loc 1 89 0
+ 313 028c 14300BE5 		mov	r3, #1
+ 314 0290 010000EA 		str	r3, [fp, #-20]
+ 315              	.L19:
+  89:i2c_tools.c   **** /********************************************************************
+ 316              	p, #-20]
+ 317 0294 0130A0E3 		.loc 1 90 0
+ 318 0298 14300BE5 		mov	r0, r3
+ 319              		sub	sp, fp, #12
+ 320 029c 14301BE5 		ldmfd	sp, {fp, sp, pc}
+  90:i2c_tools.c   **** include	"include/AT91SAM7S64.h"
+ 321              	:
+ 323 02a4 0CD04BE2 		.align	2
+ 324 02a8 00A89DE8 		.global	i2c_rbyte
+ 326              	i2c_rbyte:
+ 327              	.LFB7:
+ 328              		.loc 1 99 0
+ 329              		@ args = 0, pretend = 0, frame = 8
+ 330              		@ frame_needed = 1, uses_anonymous_args = 0
+ 331              		mov	ip, sp
+  91:i2c_tools.c   **** hpw
+  92:i2c_tools.c   **** //********************************************************************
+  93:i2c_tools.c   **** #include	"include/AT91SAM7S64.h"
+  94:i2c_tools.c   **** 
+  95:i2c_tools.c   **** #define		SDA		AT91C_PIO_PA3					// SDA auf PA3
+  96:i2c_tools.c   **** #define		SCL		AT91C_PIO_PA4					// SCL auf PA4
+  97:i2c_tools.c   **** 
+  98:i2c_tools.c   **** //**************************************************************
+  99:i2c_tools.c   **** // i2c_stop
+ 332              	tmfd	sp!, {fp, ip, lr, pc}
+ 333              	.LCFI20:
+ 334              		sub	fp, ip, #4
+ 335 02ac 0DC0A0E1 	.LCFI21:
+ 336              		sub	sp, sp, #8
+ 337 02b0 00D82DE9 	.LCFI22:
+ 338              		mov	r3, r0
+ 339 02b4 04B04CE2 		strb	r3, [fp, #-20]
+ 340              		.loc 1 101 0
+ 341 02b8 08D04DE2 		mov	r3, #0
+ 342              		strb	r3, [fp, #-13]
+ 343 02bc 0030A0E1 		.loc 1 103 0
+ 344 02c0 14304BE5 		mov	r3, #7
+ 100:i2c_tools.c   **** ert eine Stoppbedingung auf dem I2C Bus
+ 101:i2c_tools.c   **** //**************************************************************
+ 345              	, #-14]
+ 346 02c4 0030A0E3 		b	.L22
+ 347 02c8 0D304BE5 	.L23:
+ 102:i2c_tools.c   **** ine Stoppbedingung auf dem I2C Bus
+ 103:i2c_tools.c   **** //**************************************************************
+ 348              	oc 1 104 0
+ 349 02cc 0730A0E3 		bl	i2c_rbit
+ 350 02d0 0E304BE5 		mov	r3, r0
+ 351 02d4 0E0000EA 		mov	r2, r3
+ 352              		ldrsb	r3, [fp, #-14]
+ 104:i2c_tools.c   **** ine Stoppbedingung auf dem I2C Bus
+ 353              	r3, r2, asl r3
+ 354 02d8 FEFFFFEB 		and	r3, r3, #255
+ 355 02dc 0030A0E1 		ldrb	r2, [fp, #-13]	@ zero_extendqisi2
+ 356 02e0 0320A0E1 		mov	r1, r3
+ 357 02e4 DE305BE1 		mov	r3, r2
+ 358 02e8 1233A0E1 		orr	r3, r1, r3
+ 359 02ec FF3003E2 		and	r3, r3, #255
+ 360 02f0 0D205BE5 		strb	r3, [fp, #-13]
+ 361 02f4 0310A0E1 		.loc 1 103 0
+ 362 02f8 0230A0E1 		ldrb	r3, [fp, #-14]
+ 363 02fc 033081E1 		sub	r3, r3, #1
+ 364 0300 FF3003E2 		strb	r3, [fp, #-14]
+ 365 0304 0D304BE5 	.L22:
+ 366              		ldrsb	r3, [fp, #-14]
+ 367 0308 0E305BE5 		cmp	r3, #0
+ 368 030c 013043E2 		bge	.L23
+ 369 0310 0E304BE5 		.loc 1 108 0
+ 370              		ldrb	r3, [fp, #-20]	@ zero_extendqisi2
+ 371 0314 DE305BE1 		mov	r0, r3
+ 372 0318 000053E3 		bl	i2c_wbit
+ 373 031c EDFFFFAA 		.loc 1 109 0
+ 105:i2c_tools.c   **** ***************************************
+ 106:i2c_tools.c   **** // i2c_stop
+ 107:i2c_tools.c   **** // Generiert eine Stoppbedingung auf dem I2C Bus
+ 108:i2c_tools.c   **** //**************************************************************
+ 374              	
+ 375 0320 14305BE5 		mov	r3, r3, asr #19
+ 376 0324 0300A0E1 		mov	r2, #8
+ 377 0328 FEFFFFEB 		str	r2, [r3, #48]
+ 109:i2c_tools.c   **** ine Stoppbedingung auf dem I2C Bus
+ 378              	oc 1 111 0
+ 379 032c 0A32A0E3 		ldrb	r3, [fp, #-13]	@ zero_extendqisi2
+ 380 0330 C339A0E1 		.loc 1 112 0
+ 381 0334 0820A0E3 		mov	r0, r3
+ 382 0338 302083E5 		sub	sp, fp, #12
+ 110:i2c_tools.c   **** ***************************************
+ 111:i2c_tools.c   **** // i2c_stop
+ 383              	d	sp, {fp, sp, pc}
+ 384 033c 0D305BE5 	.LFE7:
+ 112:i2c_tools.c   **** _PA4					// SCL auf PA4
+ 385              	size	i2c_rbyte, .-i2c_rbyte
+ 386 0340 0300A0E1 		.section	.debug_frame,"",%progbits
+ 387 0344 0CD04BE2 	.Lframe0:
+ 388 0348 00A89DE8 		.4byte	.LECIE0-.LSCIE0
+ 389              	.LSCIE0:
+ 390              		.4byte	0xffffffff
+ 557              		.4byte	.LCFI0-.Ltext0
+DEFINED SYMBOLS
+                            *ABS*:00000000 i2c_tools.c
+C:\Users\Robin\AppData\Local\Temp/ccbMsBTV.s:13     .text:00000000 i2c_stop
+C:\Users\Robin\AppData\Local\Temp/ccbMsBTV.s:19     .text:00000000 $a
+C:\Users\Robin\AppData\Local\Temp/ccbMsBTV.s:47     .text:00000040 i2c_rbit
+C:\Users\Robin\AppData\Local\Temp/ccbMsBTV.s:95     .text:000000a8 i2c_wbit
+C:\Users\Robin\AppData\Local\Temp/ccbMsBTV.s:190    .text:0000014c i2c_wbyte
+C:\Users\Robin\AppData\Local\Temp/ccbMsBTV.s:255    .text:000001e8 i2c_start
+C:\Users\Robin\AppData\Local\Temp/ccbMsBTV.s:330    .text:000002ac i2c_rbyte
+C:\Users\Robin\AppData\Local\Temp/ccbMsBTV.s:393    .debug_frame:00000000 $d
+C:\Users\Robin\AppData\Local\Temp/ccbMsBTV.s:561    .debug_loc:00000000 $d
+
+NO UNDEFINED SYMBOLS

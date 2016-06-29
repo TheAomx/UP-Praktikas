@@ -1,0 +1,103 @@
+   1              		.file	"main.c"
+   9              	.Ltext0:
+  10              		.section	.rodata
+  11              		.align	2
+  12              	.LC0:
+  13 0000 257800   		.ascii	"%x\000"
+  14 0003 00       		.text
+  15              		.align	2
+  16              		.global	main
+  18              	main:
+  19              	.LFB2:
+  20              		.file 1 "main.c"
+   1:main.c        **** /*
+   2:main.c        ****  * main.c
+   3:main.c        ****  *
+   4:main.c        ****  *  Created on: 27.04.2016
+   5:main.c        ****  *      Author: Robin
+   6:main.c        ****  */
+   7:main.c        **** 
+   8:main.c        **** #include	"include/AT91SAM7S64.h"
+   9:main.c        **** #include 	"include/display.h"
+  10:main.c        **** #include 	"include/cToolMod.h"
+  11:main.c        **** 
+  12:main.c        **** 
+  13:main.c        **** int main(){
+  21              	 = 0, pretend = 0, frame = 4
+  22              		@ frame_needed = 1, uses_anonymous_args = 0
+  23              		mov	ip, sp
+  24 0000 0DC0A0E1 	.LCFI0:
+  25              		stmfd	sp!, {fp, ip, lr, pc}
+  26 0004 00D82DE9 	.LCFI1:
+  27              		sub	fp, ip, #4
+  28 0008 04B04CE2 	.LCFI2:
+  29              		sub	sp, sp, #4
+  30 000c 04D04DE2 	.LCFI3:
+  31              		.loc 1 14 0
+  14:main.c        **** 	unsigned char ucJ = 0;
+  32              	
+  33 0010 0030A0E3 		strb	r3, [fp, #-13]
+  34 0014 0D304BE5 		.loc 1 16 0
+  15:main.c        **** 
+  16:main.c        **** 	display_init();
+  35              	 1 "main.c"
+  36 0018 FEFFFFEB 		.loc 1 13 0
+  37              		@ args = 0, pretend = 0, frame = 4
+  17:main.c        **** 	do {
+  18:main.c        **** 		display_set_cursor(0, 0);
+  38              	frame_needed = 1, uses_anonymous_args = 0
+  39 001c 0000A0E3 		mov	ip, sp
+  40 0020 0010A0E3 	.LCFI0:
+  41 0024 FEFFFFEB 		stmfd	sp!, {fp, ip, lr, pc}
+  19:main.c        **** 		display_printf("%x", ucJ);
+  42              	I1:
+  43 0028 0D305BE5 		sub	fp, ip, #4
+  44 002c 44009FE5 	.LCFI2:
+  45 0030 0310A0E1 		sub	sp, sp, #4
+  46 0034 FEFFFFEB 	.LCFI3:
+  20:main.c        **** 
+  21:main.c        **** 		display_set_cursor(0, 1);
+  47              	 1 14 0
+  48 0038 0000A0E3 		mov	r3, #0
+  49 003c 0110A0E3 		strb	r3, [fp, #-13]
+  50 0040 FEFFFFEB 		.loc 1 16 0
+  22:main.c        **** 		display_putchar(ucJ);
+  51              	 1 "main.c"
+  52 0044 0D305BE5 		.loc 1 13 0
+  53 0048 0300A0E1 		@ args = 0, pretend = 0, frame = 4
+  54 004c FEFFFFEB 		@ frame_needed = 1, uses_anonymous_args = 0
+  23:main.c        **** 
+  24:main.c        **** 		delay1us(50000);
+  55              		ip, sp
+  56 0050 C30CA0E3 	.LCFI0:
+  57 0054 500080E2 		stmfd	sp!, {fp, ip, lr, pc}
+  58 0058 FEFFFFEB 	.LCFI1:
+  25:main.c        **** 	}while(++ucJ != 0);
+  59              		fp, ip, #4
+  60 005c 0D305BE5 	.LCFI2:
+  61 0060 013083E2 		sub	sp, sp, #4
+  62 0064 0D304BE5 	.LCFI3:
+  63 0068 0D305BE5 		.loc 1 14 0
+  64 006c 000053E3 		mov	r3, #0
+  65 0070 E9FFFF1A 		strb	r3, [fp, #-13]
+  66              		.loc 1 16 0
+  67 0074 FEFFFFEA 		bl	display_init
+  68              	.L2:
+  69              		.loc 1 18 0
+  70              		mov	r0, #0
+  71 0078 00000000 		mov	r1, #0
+  72              		bl	display_set_cursor
+  73              		.loc 1 19 0
+ 115              		.byte	0xc
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\Robin\AppData\Local\Temp/cc3DLWlN.s:18     .text:00000000 main
+C:\Users\Robin\AppData\Local\Temp/cc3DLWlN.s:24     .text:00000000 $a
+C:\Users\Robin\AppData\Local\Temp/cc3DLWlN.s:71     .text:00000078 $d
+
+UNDEFINED SYMBOLS
+display_init
+display_set_cursor
+display_printf
+display_putchar
+delay1us

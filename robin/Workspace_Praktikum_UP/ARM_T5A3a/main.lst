@@ -1,0 +1,59 @@
+   1              		.file	"main.c"
+   9              	.Ltext0:
+  10              		.align	2
+  11              		.global	main
+  13              	main:
+  14              	.LFB2:
+  15              		.file 1 "main.c"
+   1:main.c        **** //********************************************************************
+   2:main.c        **** // ARM_T5A3a									Version 02.04.2012 hpw
+   3:main.c        **** //********************************************************************
+   4:main.c        **** #include "include/AT91SAM7S64.h"
+   5:main.c        **** #include "include/pwm.h"
+   6:main.c        **** 
+   7:main.c        **** #define		LED2	AT91C_PIO_PA2			// Parallel Input Output Control Pin 2
+   8:main.c        **** 
+   9:main.c        **** 
+  10:main.c        **** #define 	PWM_CHANNEL 2
+  11:main.c        **** //**************************************************************
+  12:main.c        **** // main()
+  13:main.c        **** //**************************************************************
+  14:main.c        **** int main(){
+  16              	v,"",%progbits
+  17              	.Ldebug_abbrev0:
+  18              		.section	.debug_info,"",%progbits
+  19 0000 0DC0A0E1 	.Ldebug_info0:
+  20              		.section	.debug_line,"",%progbits
+  21 0004 00D82DE9 	.Ldebug_line0:
+  22              		.text
+  23 0008 04B04CE2 	.Ltext0:
+  24              		.align	2
+  15:main.c        **** ain(){
+  16:main.c        **** 
+  25              		.file	"main.c"
+  26 000c 0200A0E3 		.section	.debug_abbrev,"",%progbits
+  27 0010 0410A0E3 	.Ldebug_abbrev0:
+  28 0014 10209FE5 		.section	.debug_info,"",%progbits
+  29 0018 FEFFFFEB 	.Ldebug_info0:
+  17:main.c        **** n(){
+  30              		.file	"main.c"
+  31 001c 0200A0E3 		.section	.debug_abbrev,"",%progbits
+  32 0020 1910A0E3 	.Ldebug_abbrev0:
+  33 0024 FEFFFFEB 		.section	.debug_info,"",%progbits
+  34              	.Ldebug_info0:
+  35 0028 FEFFFFEA 		.section	.debug_line,"",%progbits
+  36              	.Ldebug_line0:
+  37              		.text
+  38              	.Ltext0:
+  39 002c 00000040 		.align	2
+  40              		.global	main
+  83              		.uleb128 0x0
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\Robin\AppData\Local\Temp/ccSSix1X.s:13     .text:00000000 main
+C:\Users\Robin\AppData\Local\Temp/ccSSix1X.s:19     .text:00000000 $a
+C:\Users\Robin\AppData\Local\Temp/ccSSix1X.s:39     .text:0000002c $d
+
+UNDEFINED SYMBOLS
+pwm_init
+pwm_set_duty
