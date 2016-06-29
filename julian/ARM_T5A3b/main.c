@@ -73,16 +73,18 @@ int main(){
 
 	display_init();
 
-	AT91C_BASE_ADC->ADC_CR = 0x0000000003;
-	AT91C_BASE_ADC->ADC_CHER = 1 << 5;
+
+	AT91C_BASE_ADC->ADC_CHER |= 1 << 4;
+	AT91C_BASE_ADC->ADC_MR = AT91C_ADC_PRESCAL | AT91C_ADC_STARTUP | AT91C_ADC_SHTIM;
 
 	while (1) {
-		if ((AT91C_BASE_ADC->ADC_SR & (1 << 17))>0) {
+		AT91C_BASE_ADC->ADC_CR |= 1 << 1;
+		if ((AT91C_BASE_ADC->ADC_SR & (1 << 16))>0) {
 			// daten ready
 			uint_t data = AT91C_BASE_ADC->ADC_CDR4;
 			display_printf("%d", data);
 		}
-#if 0
+#if 1
 		else {
 			display_putstr("daten not ready");
 		}

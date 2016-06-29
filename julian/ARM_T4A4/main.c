@@ -30,7 +30,7 @@ enum Direction {
 	LEFT = -1, RIGHT = 1
 };
 
-uint_t const MOTOR_STEPS[8] = {
+uint_t const MOTOR_STEPS_HALF_STEP_MODE[8] = {
 	// Tabelle für Halbschrittbetrieb
 	0x0080C000,										// Schritt 1
 	0x00800000,										// Schritt 2
@@ -49,6 +49,8 @@ uint_t const MOTOR_STEPS_FULL_STEP_MODE[] = {
 	0x00802000,										// Schritt 3
 	0x00002000,										// Schritt 4
 };
+
+#define MOTOR_MODE MOTOR_STEPS_HALF_STEP_MODE
 
 enum Direction direction = RIGHT;
 
@@ -143,8 +145,8 @@ void motor_move(enum Direction motor_direction) {
 	int tmp;
 	tmp = index + motor_direction;
 	if (tmp < 0) {
-		index = ARRAY_LENGTH(MOTOR_STEPS) - 1;
-	} else if (tmp >= ARRAY_LENGTH(MOTOR_STEPS)) {
+		index = ARRAY_LENGTH(MOTOR_MODE) - 1;
+	} else if (tmp >= ARRAY_LENGTH(MOTOR_MODE)) {
 		index = 0;
 	} else {
 		index = tmp;
@@ -154,7 +156,7 @@ void motor_move(enum Direction motor_direction) {
 
 	uint_t not_mask = ~MOTOR_MASK;
 	uint_t next_state = current_state & not_mask;
-	next_state |= MOTOR_STEPS[index];
+	next_state |= MOTOR_MODE[index];
 	AT91C_BASE_PIOA->PIO_ODSR = next_state;
 }
 
