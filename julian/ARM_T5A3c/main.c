@@ -71,10 +71,10 @@ __attribute__ ((used)) void pioa_isr (void){
 int main(void){
 	AT91C_BASE_PMC->PMC_PCER=(1<<AT91C_ID_PIOA);	// PIO-Takt einschalten
 
-#if 1
 	usart0_init();
 	display_init();
 
+#if 0
 	pioa_ir_init(BUTTON1, 4, 3, pioa_isr);
 	pioa_ir_init(BUTTON2, 4, 3, pioa_isr);
 	pioa_ir_init(BUTTON3, 4, 3, pioa_isr);
@@ -83,7 +83,7 @@ int main(void){
 
 	}
 #endif
-#if 0
+#if 1
 	while (1) {
 		if (usart0_kbhit()) {
 			unsigned char read_char = usart0_getc();
