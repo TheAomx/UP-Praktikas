@@ -5,7 +5,7 @@
 #include	"include/interrupt.h"			// IR-Routinen
 #include "display.h"
 
-#define		PH2			AT91C_PIO_PA23		// Alle Ports die für den Motor verwendet werden
+#define		PH2			AT91C_PIO_PA23		// Alle Ports die fÃ¼r den Motor verwendet werden
 #define		PH1			AT91C_PIO_PA13
 #define		I21			AT91C_PIO_PA20
 #define		I11			AT91C_PIO_PA14
@@ -31,7 +31,7 @@ enum Direction {
 };
 
 uint_t const MOTOR_STEPS[8] = {
-	// Tabelle für Halbschrittbetrieb
+	// Tabelle fÃ¼r Halbschrittbetrieb
 	0x0080C000,										// Schritt 1
 	0x00800000,										// Schritt 2
 	0x00110000,										// Schritt 3
@@ -42,13 +42,21 @@ uint_t const MOTOR_STEPS[8] = {
 	0x00802000,										// Schritt 8
 };
 
+uint_t const MOTOR_STEPS_FULL_STEP_MODE[] = {
+	// Tabelle fÃ¼r Halbschrittbetrieb
+	0x00000000,										// Schritt 1
+	0x00800000,										// Schritt 2
+	0x00802000,										// Schritt 3
+	0x00002000,										// Schritt 4
+};
+
 enum Direction direction = RIGHT;
 
 #define ARRAY_LENGTH(X) (sizeof(X)/sizeof(X[0]))
 
 
 //**************************************************************
-// delay5ms(uiK) verzögert um ca. uiK * 5ms
+// delay5ms(uiK) verzÃ¶gert um ca. uiK * 5ms
 //**************************************************************
 void delay_ms(unsigned int uiK) {
 	volatile unsigned int uiI;
@@ -56,7 +64,7 @@ void delay_ms(unsigned int uiK) {
 	while (uiK--)				// folgende for-Schleife wird uiK-mal aufgerufen
 		for (uiI = 0; uiI < 1600; uiI++)
 			;		//  for-Schleife wird 1600-mal durchlaufen. Dies
-					//  verursacht eine Zeitverzögerung von ca. 1ms.
+					//  verursacht eine ZeitverzÃ¶gerung von ca. 1ms.
 }
 
 int get_motor_speed(int adjustment) {
@@ -113,7 +121,7 @@ __attribute__ ((used)) void pioa_isr (void){
 			on = 0;
 		}else {									// Motor an
 			AT91C_BASE_TC1->TC_CCR = AT91C_TC_CLKEN;	// CLK ein
-			AT91C_BASE_TC1->TC_CCR = AT91C_TC_SWTRG;// Zurücksetzen des Zählers
+			AT91C_BASE_TC1->TC_CCR = AT91C_TC_SWTRG;// ZurÃ¼cksetzen des ZÃ¤hlers
 			on = 1;
 		}									// Start/Stop auf 1
 		break;
@@ -127,7 +135,7 @@ __attribute__ ((used)) void pioa_isr (void){
 		direction = RIGHT;
 	}
 
-	dummy = AT91C_BASE_PIOA->PIO_ISR;		// Bestätigung Interrupt Request
+	dummy = AT91C_BASE_PIOA->PIO_ISR;		// BestÃ¤tigung Interrupt Request
 }
 
 void motor_move(enum Direction motor_direction) {
@@ -159,8 +167,8 @@ __attribute__ ((used)) void timer1_isr (void){
 
 	motor_move(direction);
 
-	AT91C_BASE_TC1->TC_CCR=AT91C_TC_SWTRG;	// Zurücksetzen des Zählers
-	dummy = AT91C_BASE_TC1->TC_SR;			// Bestätigung Interrupt Request
+	AT91C_BASE_TC1->TC_CCR=AT91C_TC_SWTRG;	// ZurÃ¼cksetzen des ZÃ¤hlers
+	dummy = AT91C_BASE_TC1->TC_SR;			// BestÃ¤tigung Interrupt Request
 }
 
 //**************************************************************
@@ -170,13 +178,13 @@ int main(){
 	AT91C_BASE_PMC->PMC_PCER=(1<<AT91C_ID_PIOA);	// PIO-Takt einschalten
 	AT91C_BASE_PIOA->PIO_OER=MOTOR_MASK;	// Freigabe der Motor-Port-Pins
 	AT91C_BASE_PIOA->PIO_OWER=MOTOR_MASK;	// Freigabe des schreibenden/lesenden
-											// Zugriffs auf Motor-Port-Pins über
+											// Zugriffs auf Motor-Port-Pins Ã¼ber
 											// Register PIO_ODSR
-	AT91C_BASE_PIOA->PIO_PPUDR=MOTOR_MASK;	// Ausschalten der Pull-up-Widerstände
+	AT91C_BASE_PIOA->PIO_PPUDR=MOTOR_MASK;	// Ausschalten der Pull-up-WiderstÃ¤nde
 
 	timer_ir_init(1, 4, 3, timer1_isr);		// Timer1-IR initialisieren
-	AT91C_BASE_TC1->TC_RC = get_motor_speed(0);		// Max. Zählwert TC_RC
-	AT91C_BASE_TC1->TC_CCR=AT91C_TC_SWTRG;	// Zurücksetzen des Zählers
+	AT91C_BASE_TC1->TC_RC = get_motor_speed(0);		// Max. ZÃ¤hlwert TC_RC
+	AT91C_BASE_TC1->TC_CCR=AT91C_TC_SWTRG;	// ZurÃ¼cksetzen des ZÃ¤hlers
 
 	pioa_ir_init(BUTTON1, 4, 3, pioa_isr);		// Port-IR initialisieren
 	pioa_ir_init(BUTTON2, 4, 3, pioa_isr);
