@@ -29,5 +29,6 @@ extern void display_putchar(unsigned char c);
 extern void display_putstr(char *p);
 extern void display_set_cursor(unsigned char x, unsigned char y);
 extern void display_printf(char *s, ...);
+extern void display_clear();
 
 #endif /*DISPLAY_H_*/

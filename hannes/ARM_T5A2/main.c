@@ -127,7 +127,7 @@ int main() {
 	timer_ir_init(0, 1, 1, timer0_isr);	// Timer0-IR initialisieren (Tondauer)
 	timer_ir_init(1, 4, 1, timer1_isr);	// Timer1-IR initialisieren	(Tonhöhe)
 
-	AT91C_BASE_TC0->TC_RC = 3000;			// max. Zählerwert für TC0
+	AT91C_BASE_TC0->TC_RC = 3000;		// 3000 000	// max. Zählerwert für TC0
 	AT91C_BASE_TC0->TC_CCR = AT91C_TC_SWTRG;// Zurücksetzen des Zählers Timer0
 
 	do {
@@ -136,10 +136,8 @@ int main() {
 		if (uiDauer == 0)
 			break;
 		AT91C_BASE_TC1->TC_RC = uiFrequenz;
-		AT91C_BASE_TC1->TC_CCR = AT91C_TC_SWTRG;// Zurücksetzen des Zählers Timer0
+		AT91C_BASE_TC1->TC_CCR = AT91C_TC_SWTRG;// Zurücksetzen des Zählers Timer1
 		AT91C_BASE_TC0->TC_CCR = AT91C_TC_SWTRG;// Zurücksetzen des Zählers Timer0
-		while (uiDauer != 0)
-			;
-
+		while (uiDauer != 0);
 	} while (1);
 }

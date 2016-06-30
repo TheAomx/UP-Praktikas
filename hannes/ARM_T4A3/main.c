@@ -26,7 +26,7 @@
 #define TIME_FRRQ 187.5
 #define ROUND_TIME 10.0
 
-#define T_STEP(step_min, frequ, t_round) (unsigned int) ((t_round / step_min) * 1000) / (1 / frequ);
+#define T_STEP(time_per_round, steps_per_round, frequ) (unsigned int) ((time_per_round / steps_per_round) * 1000) / (1 / frequ);
 enum {
 	LEFT, RIGHT
 };
@@ -35,14 +35,16 @@ enum {
 // Interrupt-Service-Routine Timer1
 //**************************************************************
 __attribute__ ((used)) void timer1_isr(void) {
-	volatile unsigned int dummy;			// Lokale dummy-Variable
+	volatile unsigned int dummy;										// Lokale dummy-Variable
 	static volatile unsigned int current_state = 0, direction = RIGHT;// Laufvariable
-	const unsigned  int transition[4] = { 	// Tabelle für Halbschrittbetrieb
+
+	const unsigned int transition[4] = { 	// Tabelle für Halbschrittbetrieb
 			I10 | I11, 			// Schritt 1|2,  5|6
 			I21 | I20 | PH2,	// Schritt 2|3, 6|7
 			I21 | I20,			// Schritt 3|4,  7|8
-			I10 | I11 | PH1, 	// Schritt 4|5,  8|1
+			I10 | I11 | PH1  	// Schritt 4|5,  8|1
 	};
+
 	if (direction == LEFT && --current_state < 0)
 		current_state = STATE_MAX;
 
@@ -52,10 +54,8 @@ __attribute__ ((used)) void timer1_isr(void) {
 		current_state = 0;
 
 	AT91C_BASE_TC1->TC_CCR = AT91C_TC_SWTRG;	// Zurücksetzen des Zählers
-	dummy = AT91C_BASE_TC1->TC_SR;			// Bestätigung Interrupt Request
+	dummy = AT91C_BASE_TC1->TC_SR;				// Bestätigung Interrupt Request
 }
-
-
 
 //**************************************************************
 // main initialisiert Timer 1 für Schrittmoterdrehungen
@@ -71,10 +71,11 @@ int main() {
 	AT91C_BASE_PIOA->PIO_CODR = I10 | I11 | PH2;
 	AT91C_BASE_PIOA->PIO_SODR = PH1 | I21 | I20;
 
-	timer_ir_init(1, 4, 3, timer1_isr);		// Timer1-IR initialisieren
-	AT91C_BASE_TC1->TC_RC =  T_STEP(STEPS_360, TIME_FRRQ,	ROUND_TIME);		// Max. Zählwert TC_RC
+	timer_ir_init(1, 4, 3, timer1_isr);			// Timer1-IR initialisieren
+
+	AT91C_BASE_TC1->TC_RC = T_STEP(ROUND_TIME, STEPS_360, TIME_FRRQ)
+
 	AT91C_BASE_TC1->TC_CCR = AT91C_TC_SWTRG;	// Zurücksetzen des Zählers
 
-	while (1)
-		;								// Endlosschleife
+	while (1);
 }

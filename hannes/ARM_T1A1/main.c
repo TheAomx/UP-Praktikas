@@ -27,7 +27,7 @@
 // main: Hauptprogramm
 int main(void) {
 	unsigned int leds[] = { LED1, LED2, LED3, LED4, LED5 };
-	AT91C_BASE_PIOA->PIO_OER = LED_ALL;	// Ausgang freigeben
+	AT91C_BASE_PIOA->PIO_OER = LED_ALL;		// Ausgang freigeben
 	AT91C_BASE_PIOA->PIO_PPUDR = LED_ALL;	// Pull-Up ausschalten
 	AT91C_BASE_PIOA->PIO_CODR = LED_ALL;	// Alle LED aus// Alle LED aus
 

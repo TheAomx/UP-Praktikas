@@ -62,7 +62,7 @@ TARGET = main
 
 # List C source files here. (C dependencies are automatically generated.)
 # use file-extension c for "c-only"-files
-SRC = $(TARGET).c pwm.c
+SRC = $(TARGET).c pwm.c interrupt.c
 
 # List C source files here which must be compiled in ARM-Mode.
 # use file-extension c for "c-only"-files

@@ -62,7 +62,7 @@ TARGET = main
 
 # List C source files here. (C dependencies are automatically generated.)
 # use file-extension c for "c-only"-files
-SRC = $(TARGET).c twi_tools.c
+SRC = $(TARGET).c twi_tools.c display.c
 
 # List C source files here which must be compiled in ARM-Mode.
 # use file-extension c for "c-only"-files

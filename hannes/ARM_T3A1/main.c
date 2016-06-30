@@ -37,7 +37,6 @@ signed int tempwert(unsigned char MSByte, unsigned char LSByte) {
 //	DATA.uc[3] = MSByte;
 //	return (DATA.si>>23);
 //}
-
 //**************************************************************
 // print_tempwert(cTemp) gibt Übergabewert auf LCD aus
 //**************************************************************
@@ -81,7 +80,6 @@ int main() {
 		display_printf("M:0x%x L:0x%x", ucTemp1, ucTemp2);
 		display_set_cursor(0, 1);
 		print_temp(tempwert(ucTemp1, ucTemp2));
-
 		delay5ms(200);
 
 	}

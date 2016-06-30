@@ -70,6 +70,15 @@ void display_init(void){
 	delay1us(5000);									// 5ms warten
 }
 
+void display_clear() {
+	char *clear = "                ";
+	display_set_cursor(0,0);
+	display_putstr(clear);
+	display_set_cursor(0,1);
+	display_putstr(clear);
+	display_set_cursor(0,0);
+}
+
 //**************************************************************
 // UP-Name:			display_putchar(data)
 // Übergabewert:	auszugebenes Zeichen
