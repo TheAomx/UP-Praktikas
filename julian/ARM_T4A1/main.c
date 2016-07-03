@@ -4,7 +4,7 @@
 #include	"include/AT91SAM7S64.h"					// Definition von ARM7 typischen Registern etc.
 #include "display.h"
 
-#define		PH2			AT91C_PIO_PA23				// Alle Ports die für den Motor verwendet werden
+#define		PH2			AT91C_PIO_PA23				// Alle Ports die fÃ¼r den Motor verwendet werden
 #define		PH1			AT91C_PIO_PA13
 #define		I21			AT91C_PIO_PA20
 #define		I11			AT91C_PIO_PA14
@@ -20,7 +20,7 @@ enum Direction {
 typedef unsigned int uint_t;
 
 //**************************************************************
-// delay2ms(uiK) verzögert um ca. uiK * 2ms
+// delay2ms(uiK) verzÃ¶gert um ca. uiK * 2ms
 //**************************************************************
 void delay_ms(unsigned int uiK) {
 	volatile unsigned int uiI;
@@ -28,17 +28,17 @@ void delay_ms(unsigned int uiK) {
 	while (uiK--)				// folgende for-Schleife wird uiK-mal aufgerufen
 		for (uiI = 0; uiI < 1600; uiI++)
 			;		//  for-Schleife wird 1600-mal durchlaufen. Dies
-					//  verursacht eine Zeitverzögerung von ca. 1ms.
+					//  verursacht eine ZeitverzÃ¶gerung von ca. 1ms.
 }
 
 //**************************************************************
-// main läßt den Schrittmotor durchgehend nach rechts laufen
+// main lÃ¤ÃŸt den Schrittmotor durchgehend nach rechts laufen
 
 #define BUTTON1 AT91C_PIO_PA1
 #define BUTTON2 AT91C_PIO_PA0
 #define BUTTON3 AT91C_PIO_PA31
 
-unsigned int const MOTOR_STEPS[8] = {		// Tabelle für Halbschrittbetrieb
+unsigned int const MOTOR_STEPS[8] = {		// Tabelle fÃ¼r Halbschrittbetrieb
 		0x0080C000,										// Schritt 1
 				0x00800000,										// Schritt 2
 				0x00110000,										// Schritt 3
@@ -48,6 +48,18 @@ unsigned int const MOTOR_STEPS[8] = {		// Tabelle für Halbschrittbetrieb
 				0x00912000,										// Schritt 7
 				0x00802000,										// Schritt 8
 		};
+		
+unsigned int cRECHTS[8]={				// Tabelle fÃ¼r Halbschrittbetrieb
+		I10|I11|PH2,							// Schritt 1
+		PH2,									// Schritt 2
+		I21|I20,								// Schritt 3
+		0,										// Schritt 4
+		I10|I11|PH1,							// Schritt 5
+		PH1,									// Schritt 6
+		PH1|PH2|I21|I20,						// Schritt 7
+		PH1|PH2									// Schritt 8
+	};
+
 
 unsigned char is_button_pressed(unsigned int button) {
 	return !(AT91C_BASE_PIOA->PIO_PDSR & button);
@@ -101,10 +113,10 @@ int get_motor_speed(int adjustment) {
 int main() {
 	AT91C_BASE_PIOA->PIO_OER = MOTOR_MASK;	// Freigabe der Motor-Port-Pins
 	AT91C_BASE_PIOA->PIO_OWER = MOTOR_MASK;	// Freigabe des schreibenden/lesenden
-											// Zugriffs auf Motor-Port-Pins über
+											// Zugriffs auf Motor-Port-Pins Ã¼ber
 											// Register PIO_ODSR
 	AT91C_BASE_PMC->PMC_PCER = (1 << AT91C_ID_PIOA);
-	AT91C_BASE_PIOA->PIO_PPUDR = MOTOR_MASK;// Ausschalten der Pull-up-Widerstände
+	AT91C_BASE_PIOA->PIO_PPUDR = MOTOR_MASK;// Ausschalten der Pull-up-WiderstÃ¤nde
 
 	// Ab hier: Schrittausgabe an die Ports
 	int running = 1;
