@@ -59,24 +59,82 @@ void print_temp(signed int cTemp){			// Funktion zur Ausgabe des Temperaturwerte
 	display_putchar('C');
 }
 
+void set_tos_temperature () {
+	unsigned char WRITE_ADDRESS = 0x9E;			// slave adresse binär: 1001 1111
+	unsigned char SET_TOS   = 0x03;
+	// temperature binär: 0001 0100 00000000
+	unsigned char byte_1 = 0x14;
+	unsigned char byte_2 = 0x00;
+
+	i2c_start(WRITE_ADDRESS);						// Führt die Startbedingung aus
+	i2c_wbyte(SET_TOS);
+	i2c_wbyte(byte_1);
+	i2c_wbyte(byte_2);
+	i2c_stop();
+}
+
+void set_thyst_temperature () {
+	unsigned char WRITE_ADDRESS = 0x9E;			// slave adresse binär: 1001 1111
+	unsigned char SET_THYST = 0x02;
+	// temperature binär: 0001 1001 00000000
+	unsigned char byte_1 = 0x14;
+	unsigned char byte_2 = 0x00;
+
+	i2c_start(WRITE_ADDRESS);						// Führt die Startbedingung aus
+	i2c_wbyte(SET_THYST);
+	i2c_wbyte(byte_1);
+	i2c_wbyte(byte_2);
+	i2c_stop();
+}
+
+void setup_configuration_register () {
+	unsigned char WRITE_ADDRESS = 0x9E;			// slave adresse binär: 1001 1111
+	unsigned char pointer_byte = 0x01;
+	unsigned char configuration = 0x04;			// 0000 0100
+
+	i2c_start(WRITE_ADDRESS);						// Führt die Startbedingung aus
+	i2c_wbyte(pointer_byte);
+	i2c_wbyte(configuration);
+	i2c_stop();
+
+}
+
+void setup_temperature_read_mode() {
+	unsigned char WRITE_ADDRESS = 0x9E;			// slave adresse binär: 1001 1111
+	unsigned char pointer_byte = 0x00;
+
+	i2c_start(WRITE_ADDRESS);						// Führt die Startbedingung aus
+	i2c_wbyte(pointer_byte);
+	i2c_stop();
+}
+
 //**************************************************************
 // main()
 //**************************************************************
 int main(){
-	unsigned char ucTemp1,ucTemp2;			// Deklaration der Variablen
-	unsigned char Adresse = ;
+	unsigned char ucTemp1, ucTemp2;			// Deklaration der Variablen
+	unsigned char READ_ADDRESS = 0x9F;			// slave adresse binär: 1001 1111
 
 	display_init();							// Initialisiere Display
 
-	i2c_start(Adresse);						// Führt die Startbedingung aus
-											// Erstes Byte einlesen
-											// Zweites Byte einlesen
-	i2c_stop();								// I2C wieder freigeben
+	setup_configuration_register();
+	set_thyst_temperature();
+	set_tos_temperature();
 
-											// Programm zur Verarbeitung der
-											// eingelesenen Werte
+	setup_temperature_read_mode();
 
-	delay5ms(20);							// Verzögerung 100 ms
+	while (1) {
+		i2c_start(READ_ADDRESS);				// Führt die Startbedingung aus
+		ucTemp1 = i2c_rbyte(1);					// Erstes Byte einlesen
+		ucTemp2 = i2c_rbyte(0);					// Zweites Byte einlesen
+		i2c_stop();								// I2C wieder freigeben
+
+		signed int temp = tempwert(ucTemp1, ucTemp2);
+		print_temp(temp);
+
+		delay5ms(20);							// Verzögerung 100 ms
+		display_clear();
+	}
 
 	while(1);								// Endlosschleife
 }
